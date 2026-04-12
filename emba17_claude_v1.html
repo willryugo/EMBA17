@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMBA 17기 2026년 1학기 학술운영보드</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{
+  --ink:#172033;--navy:#203864;--navy2:#162748;--sky:#d9e8f6;
+  --gold:#C9A84C;--gold2:#f0bf5a;--goldbg:#fffbef;
+  --eco:#ea580c;--ana:#2563eb;--mpo:#16a34a;--eth:#9b1c1c;
+  --msc:#65a30d;--mkt:#7c3aed;--fin:#92400e;
+  --bg1:#f7f4ee;--bg2:#efe6d8;
+  --panel:rgba(255,255,255,0.92);
+  --border:#e0d9cb;--r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Noto Sans KR","Segoe UI","Apple SD Gothic Neo",sans-serif;
+  color:var(--ink);
+  background:radial-gradient(circle at top left,rgba(240,191,90,.28),transparent 28%),
+    radial-gradient(circle at top right,rgba(32,56,100,.12),transparent 22%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  min-height:100vh;-webkit-font-smoothing:antialiased;
+}
+.page{max-width:1480px;margin:0 auto;padding:22px 28px 60px}
+
+/* ─── HERO ─── */
+.hero{
+  background:linear-gradient(135deg,rgba(22,39,72,.97),rgba(50,78,130,.94));
+  color:#fff;border-radius:28px;padding:28px 34px;
+  box-shadow:0 20px 50px rgba(32,56,100,.22);
+  position:sticky;top:10px;z-index:50;
+}
+.hero-inner{display:grid;grid-template-columns:1.4fr .65fr;gap:22px;align-items:center}
+.hero h1{font-size:clamp(20px,2.8vw,34px);font-weight:900;line-height:1.2;margin-bottom:8px}
+.hero-desc{font-size:clamp(12px,1.3vw,15px);opacity:.88;line-height:1.6}
+.contact-strip{margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.16);font-size:13px;opacity:.88;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px;position:relative}
+.stat strong{display:block;font-size:clamp(18px,2.2vw,28px);font-weight:900;margin-bottom:3px}
+.stat-label{display:block;font-size:12px;font-weight:700;margin-bottom:8px;opacity:.85}
+.stat-bar{width:100%;height:7px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden;margin-bottom:6px}
+.stat-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold2),#ffe49d)}
+.stat-sub{display:block;font-size:11px;opacity:.8;line-height:1.4}
+.stat-pct{position:absolute;top:11px;right:13px;font-size:14px;font-weight:900;color:var(--gold2);letter-spacing:-.02em}
+
+/* ─── UPCOMING BANNER ─── */
+.upcoming-banner{
+  margin-top:18px;
+  background:linear-gradient(110deg,#1e3560,#2d5098);
+  border-radius:var(--r);padding:18px 26px;color:#fff;
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
+  box-shadow:0 8px 28px rgba(32,56,100,.18);
+}
+.ub-eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:5px}
+.ub-title{font-size:clamp(16px,2vw,21px);font-weight:900;margin-bottom:5px}
+.ub-sub{font-size:13px;opacity:.8}
+.ub-right{text-align:center;flex-shrink:0}
+.ub-days{font-size:clamp(28px,3.8vw,42px);font-weight:900;color:var(--gold2);line-height:1;letter-spacing:-.02em}
+.ub-days-label{font-size:11px;opacity:.65;margin-top:3px}
+.ub-hours{font-size:clamp(12px,1.4vw,14px);color:var(--gold2);opacity:.8;font-weight:700;margin-top:2px}
+
+/* ─── HIGHLIGHTS ROW ─── */
+.highlights-row{
+  margin-top:16px;
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.hl-box{
+  border-radius:var(--r);padding:20px 22px;
+  border:1px solid;
+}
+.hl-box.tasks-box{
+  background:linear-gradient(160deg,#fff8f0,#fff3e8);
+  border-color:#f0d5b0;
+}
+.hl-box.events-box{
+  background:linear-gradient(160deg,#f0f6ff,#e6f0ff);
+  border-color:#c0d4ef;
+}
+.hl-header{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.hl-icon{font-size:22px}
+.hl-title{font-size:15px;font-weight:900;color:var(--navy)}
+.hl-week-tag{margin-left:auto;background:var(--navy);color:#fff;border-radius:999px;padding:3px 11px;font-size:11px;font-weight:700}
+.hl-items{display:grid;gap:9px}
+.hl-item{
+  background:#fff;border-radius:13px;padding:12px 14px;
+  border-left:4px solid;
+  display:flex;gap:11px;align-items:flex-start;
+  cursor:default;transition:box-shadow .15s;
+  position:relative;
+}
+.hl-item:hover{box-shadow:0 4px 16px rgba(32,56,100,.14)}
+.hl-item-body{flex:1}
+.hl-type{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.hl-name{font-size:14px;font-weight:800;line-height:1.3;margin-bottom:4px}
+.hl-meta{font-size:12.5px;color:#2d3e5f;font-weight:700}
+.hl-due{font-size:11.5px;font-weight:700;color:var(--gold);margin-left:auto;white-space:nowrap;padding-top:2px}
+.hl-empty{color:#7d8896;font-size:13.5px;font-style:italic}
+/* accordion */
+.hl-toggle{background:none;border:none;cursor:pointer;font-size:11px;color:#7d8896;padding:4px 0 0;display:flex;align-items:center;gap:4px;font-weight:700}
+.hl-toggle svg{transition:transform .2s}
+.hl-item.open .hl-toggle svg{transform:rotate(180deg)}
+.hl-detail{max-height:0;overflow:hidden;transition:max-height .28s ease,opacity .2s;opacity:0;margin-top:0}
+.hl-item.open .hl-detail{max-height:200px;opacity:1;margin-top:7px}
+.hl-detail-inner{background:#f7f9ff;border-radius:10px;padding:10px 13px;font-size:12px;line-height:1.7;color:#3a4a6b;border-left:3px solid currentColor}
+
+/* event card in highlights */
+.ev-hl-item{
+  background:#fff;border-radius:13px;padding:12px 14px;
+  border-left:4px solid var(--gold);
+  display:flex;align-items:center;gap:10px;
+  cursor:default;transition:box-shadow .15s;position:relative;
+}
+.ev-hl-item:hover{box-shadow:0 4px 16px rgba(32,56,100,.14)}
+.ev-hl-icon{font-size:22px;flex-shrink:0}
+.ev-hl-name{font-size:14px;font-weight:800;color:var(--navy)}
+.ev-hl-time{font-size:12px;color:#52617f;margin-top:2px}
+
+/* ─── WEEK SCHEDULE ─── */
+.week-schedule-wrap{
+  margin-top:18px;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--r);
+  padding:22px 24px;box-shadow:0 6px 20px rgba(23,32,51,.07);
+}
+.ws-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.ws-title{font-size:16px;font-weight:900;color:var(--navy)}
+.ws-nav{display:flex;align-items:center;gap:8px}
+.ws-nav-btn{
+  background:var(--navy);color:#fff;border:none;border-radius:999px;
+  width:34px;height:34px;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 10px rgba(32,56,100,.2);
+}
+.ws-dots{display:flex;gap:6px;align-items:center}
+.ws-dot{width:8px;height:8px;border-radius:999px;border:none;background:#d2d7e2;padding:0;cursor:pointer;transition:all .15s}
+.ws-dot.active{width:22px;background:var(--navy)}
+.ws-week-label{font-size:13px;font-weight:700;color:var(--navy);min-width:50px}
+
+.ws-day-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ws-day-card{background:#fffdf9;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.ws-day-head{
+  background:linear-gradient(110deg,var(--navy2),var(--navy));
+  color:#fff;padding:10px 15px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ws-day-head h4{font-size:13.5px;font-weight:800}
+.ws-day-head span{font-size:11.5px;opacity:.7}
+.slot-list{padding:9px}
+.slot-item{
+  display:flex;border-radius:11px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.06);margin-bottom:7px;
+  cursor:default;transition:box-shadow .12s;position:relative;
+}
+.slot-item:last-child{margin-bottom:0}
+.slot-item:hover{box-shadow:0 3px 12px rgba(32,56,100,.14)}
+.slot-time-col{
+  background:#f0f4fa;padding:9px 8px;
+  font-size:9.5px;font-weight:700;color:#52617f;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:56px;text-align:center;line-height:1.4;
+  border-right:1px solid rgba(0,0,0,.05);
+}
+.slot-time-col .per{font-size:10px;font-weight:800;color:var(--navy);margin-bottom:1px}
+.slot-body-col{padding:9px 12px;flex:1;display:flex;align-items:center;gap:9px}
+.slot-swatch{width:3px;height:32px;border-radius:2px;flex-shrink:0}
+.slot-name{font-size:13px;font-weight:700;line-height:1.3}
+.slot-prof{font-size:11px;color:#61708c;margin-top:1px}
+.slot-tag{margin-left:auto;border-radius:999px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.tg{background:#dcfce7;color:#15803d}.tr{background:#fee2e2;color:#b91c1c}
+.tb{background:#dbeafe;color:#1d4ed8}.tg2{background:#f3e8ff;color:#6d28d9}
+
+/* ─── TABS ─── */
+.tabs-wrap{margin-top:18px}
+.tab-nav{
+  display:flex;gap:3px;background:rgba(255,255,255,.6);
+  border-radius:14px 14px 0 0;padding:5px 5px 0;
+  border:1px solid var(--border);border-bottom:none;flex-wrap:wrap;
+}
+.tab-btn{
+  background:none;border:none;
+  padding:9px clamp(12px,2vw,22px);
+  font-family:inherit;font-size:clamp(12px,1.3vw,14px);font-weight:700;
+  color:#5d6882;cursor:pointer;border-radius:10px 10px 0 0;
+  border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .15s;
+}
+.tab-btn:hover{color:var(--navy);background:rgba(255,255,255,.7)}
+.tab-btn.active{color:var(--navy);background:#fff;border-bottom-color:var(--gold)}
+.tab-panel{
+  display:none;background:var(--panel);
+  border:1px solid var(--border);border-radius:0 0 var(--r) var(--r);
+  padding:clamp(16px,2.5vw,26px);box-shadow:0 10px 24px rgba(23,32,51,.07);
+}
+.tab-panel.active{display:block}
+
+/* assign table */
+.assign-filter{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.af-btn{background:#f0f4fa;border:1px solid var(--border);border-radius:999px;padding:5px 15px;font-family:inherit;font-size:12.5px;font-weight:700;color:#52617f;cursor:pointer;transition:all .15s}
+.af-btn.active,.af-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.assign-table{width:100%;border-collapse:collapse;font-size:13px}
+.assign-table th{background:linear-gradient(180deg,var(--navy2),var(--navy));color:#fff;padding:10px 12px;text-align:left;font-size:11.5px;font-weight:700;white-space:nowrap}
+.assign-table td{padding:9px 12px;border-bottom:1px solid #ece5d7;vertical-align:top;line-height:1.45}
+.assign-table tr:nth-child(even) td{background:#faf6ee}
+.assign-table tr:hover td{background:#f0f4fa}
+.assign-table tr:last-child td{border-bottom:none}
+.assign-table tr.hidden-row{display:none}
+.badge{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700}
+.b-red{background:#ffe0da;color:#aa3428}.b-green{background:#dff5e3;color:#197145}
+.b-blue{background:#dce8ff;color:#224f95}.b-purple{background:#ede9fe;color:#5b21b6}
+.b-gold{background:#fef3c7;color:#854d0e}
+.past-item td{opacity:.5}
+
+/* events tab */
+.event-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:13px}
+.event-card{background:linear-gradient(180deg,#f2f8ff,#e8f1fb);border:1px solid #cfddee;border-radius:18px;padding:18px;cursor:default;transition:box-shadow .15s;position:relative}
+.event-card:hover{box-shadow:0 6px 20px rgba(32,56,100,.14)}
+.event-card-icon{font-size:30px;margin-bottom:10px}
+.event-card-name{font-size:15px;font-weight:900;color:var(--navy);margin-bottom:4px}
+.event-card-date{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:7px}
+.event-card-desc{font-size:12.5px;color:#4a5876;line-height:1.55}
+/* calendar carousel nav (hidden on desktop) */
+.cal-carousel-nav{display:none;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 4px}
+.cal-car-btn{background:var(--navy);color:#fff;border:none;border-radius:999px;width:40px;height:40px;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(32,56,100,.2);line-height:1;flex-shrink:0}
+.cal-car-btn:disabled{opacity:.35;cursor:default}
+.cal-car-label{font-size:17px;font-weight:900;color:var(--navy);text-align:center}
+
+/* courses tab */
+.course-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
+.course-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:17px;box-shadow:0 2px 8px rgba(32,56,100,.05)}
+.cc-bar{height:5px;border-radius:3px;margin-bottom:13px}
+.cc-name{font-size:15px;font-weight:900;color:var(--navy);margin-bottom:3px}
+.cc-prof{font-size:12.5px;color:#52617f;font-weight:600;margin-bottom:9px}
+.cc-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.cc-chip{background:#f0f4fa;border-radius:7px;padding:3px 9px;font-size:11.5px;font-weight:600;color:var(--navy)}
+.cc-eval{font-size:12px;color:#374151;line-height:1.55;border-top:1px solid var(--border);padding-top:8px}
+
+/* ─── CALENDAR SECTION ─── */
+.cal-section{margin-top:24px}
+.cal-section-head{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.cal-section-head h2{font-size:clamp(17px,2vw,22px);font-weight:900;color:var(--navy)}
+.cal-section-head::before{content:'';display:inline-block;width:5px;height:22px;border-radius:3px;background:var(--gold);flex-shrink:0}
+.cal-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding:0 2px}
+.cal-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#5d6882;font-weight:600}
+.cal-legend-dot{width:9px;height:9px;border-radius:3px;flex-shrink:0}
+.cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:1100px){.cal-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.cal-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.cal-grid{grid-template-columns:1fr}}
+
+.cal-month-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:visible;box-shadow:0 2px 8px rgba(32,56,100,.05)}
+.cal-month-head{background:linear-gradient(110deg,var(--navy2),var(--navy));color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-radius:14px 14px 0 0}
+.cal-month-head h3{font-size:14px;font-weight:800}
+.cal-month-head span{font-size:10.5px;opacity:.6}
+.cal-table{width:100%;border-collapse:separate;border-spacing:3px;padding:4px}
+.cal-table th{text-align:center;font-size:10px;font-weight:800;color:var(--navy);padding:5px 1px 3px}
+.cal-table th:first-child{color:#c0392b}
+.cal-table th:last-child{color:#2563eb}
+.cal-cell{
+  vertical-align:top;height:62px;background:#fffdf9;
+  border:1px solid #e8e0d0;border-radius:10px;
+  padding:5px 4px 3px;cursor:default;
+  transition:background .1s,transform .1s,box-shadow .1s;
+  position:relative;overflow:hidden;
+}
+.cal-cell.has-ev{cursor:pointer}
+.cal-cell.has-ev:hover{background:#eef3ff!important;transform:scale(1.1);box-shadow:0 5px 16px rgba(32,56,100,.18);z-index:10;border-radius:11px}
+.cal-cell.empty{opacity:0;pointer-events:none}
+.cal-cell.today{background:#e8f1fd;border-color:rgba(32,56,100,.35)}
+.cal-cell.past{background:linear-gradient(180deg,#f0ece4,#e5dece);border-color:#d0c8b8;opacity:.6}
+.cal-cell.class-day{background:#f4f8ff;border-color:rgba(32,56,100,.2)}
+.cal-cell.gsp-day{background:#fff8e8;border-color:var(--gold)!important}
+.cal-cell.event-day{background:linear-gradient(160deg,#fffbef,#fff4d0);border-color:var(--gold)!important;box-shadow:0 0 0 1px rgba(201,168,76,.3)}
+.cal-cell.event-day .cal-day-num{color:#92620a}
+.cal-day-num{font-size:12px;font-weight:800;color:var(--navy);line-height:1;margin-bottom:2px}
+.cal-day-sun .cal-day-num{color:#c0392b}
+.cal-day-sat .cal-day-num{color:#2563eb}
+.cal-cell.past .cal-day-num{color:#8a9aa8}
+.cal-markers{display:flex;gap:2px;flex-wrap:wrap;margin-top:2px}
+.cal-pill{display:inline-block;font-size:6.5px;font-weight:800;border-radius:2px;padding:1px 3px;line-height:1.4;white-space:nowrap;color:#fff;max-width:54px;overflow:hidden;text-overflow:ellipsis;margin:0}
+
+/* ─── HOVER POPUP ─── */
+.hpop{
+  position:fixed;z-index:99999;
+  max-width:280px;min-width:180px;
+  background:rgba(18,28,50,.96);color:#fff;
+  border-radius:14px;padding:12px 15px;
+  font-size:12.5px;line-height:1.55;
+  box-shadow:0 12px 32px rgba(10,18,34,.3);
+  pointer-events:none;opacity:0;
+  transition:opacity .12s;
+  white-space:normal;
+}
+.hpop.show{opacity:1}
+.hpop-title{font-weight:800;font-size:13.5px;color:#f0bf5a;margin-bottom:5px}
+.hpop-row{display:flex;gap:6px;align-items:flex-start;margin-top:3px;opacity:.9}
+.hpop-row .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px}
+
+/* ─── DAY MODAL ─── */
+.day-modal{position:fixed;inset:0;background:rgba(23,32,51,.5);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;z-index:99998}
+.day-modal.open{opacity:1;pointer-events:auto}
+.day-modal-sheet{width:min(700px,100%);max-height:80vh;overflow-y:auto;background:#fffdf9;border-radius:22px 22px 0 0;padding:0 0 24px;box-shadow:0 -8px 36px rgba(23,32,51,.2);transform:translateY(30px);transition:transform .25s}
+.day-modal.open .day-modal-sheet{transform:translateY(0)}
+.modal-handle{width:40px;height:4px;border-radius:999px;background:#d9dbe2;margin:12px auto 0}
+.modal-header{padding:14px 20px 12px;border-bottom:1px solid #ece5d7;display:flex;align-items:center;justify-content:space-between}
+.modal-date{font-size:19px;font-weight:900;color:var(--navy)}
+.modal-close{border:none;background:#eff2f8;color:var(--navy);border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-body{padding:16px 20px}
+.modal-group{margin-bottom:14px}
+.modal-group-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#61708c;margin-bottom:8px}
+.modal-items{display:grid;gap:8px}
+.modal-item{background:#f7f4ed;border:1px solid #e5dece;border-radius:12px;padding:11px 13px;border-left:4px solid #ccc}
+.modal-item-name{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:2px}
+.modal-item-meta{font-size:12px;color:#52617f}
+.modal-item-time{font-size:11px;font-weight:700;color:var(--gold);margin-top:3px}
+.modal-item-detail{font-size:12px;color:#40506d;margin-top:4px;line-height:1.5}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(3,1fr)}
+  .highlights-row{grid-template-columns:1fr}
+  .ws-day-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .upcoming-banner{grid-template-columns:1fr}.ub-right{display:none}
+}
+@media(max-width:640px){
+  .page{padding:10px 10px 56px}.hero{padding:16px 16px 18px;position:static;border-radius:18px}
+  .hero h1{font-size:19px;margin-bottom:5px}.hero-desc{font-size:12px}
+  .contact-strip{font-size:11.5px}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:6px}
+  .stat{padding:10px 10px 10px 10px;border-radius:12px}
+  .stat strong{font-size:17px}
+  .stat-label{font-size:10.5px;margin-bottom:5px}
+  .stat-pct{font-size:12px;top:8px;right:8px}
+  .stat-sub{font-size:10px}
+  .upcoming-banner{padding:14px 16px;border-radius:16px;margin-top:12px}
+  .ub-title{font-size:16px}
+  .highlights-row{margin-top:12px;gap:10px}
+  .hl-box{padding:16px}
+  .hl-name{font-size:13px}
+  .tab-nav{overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .tab-btn{font-size:11.5px;padding:7px 10px;white-space:nowrap}
+  .tabs-wrap{border-radius:16px}
+  .assign-table th:nth-child(6),.assign-table td:nth-child(6){display:none}
+  .ws-week-label{display:none}
+  .ws-dot{width:7px;height:7px}
+  /* event card: compact horizontal row */
+  .event-cards{grid-template-columns:1fr;gap:8px}
+  .event-card{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:14px}
+  .event-card-icon{font-size:24px;margin-bottom:0;flex-shrink:0}
+  .event-card-name{font-size:13px;margin-bottom:1px}
+  .event-card-date{font-size:11.5px;margin-bottom:2px}
+  .event-card-desc{font-size:11px;line-height:1.4}
+  /* calendar carousel */
+  .cal-carousel-nav{display:flex}
+  .cal-grid{display:block}
+  .cal-month-card{display:none}
+  .cal-month-card.mob-active{display:block}
+  .course-cards{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .stat:last-child{grid-column:1/-1}
+  .hero h1{font-size:17px}
+  .ub-title{font-size:15px}
+  .hl-item{flex-wrap:wrap}
+  .hl-due{margin-left:0;margin-top:4px;font-size:11px}
+  .assign-table th:nth-child(5),.assign-table td:nth-child(5){font-size:11px}
+  .cal-cell{min-height:60px}
+  .ws-dot{width:6px;height:6px}
+  .ws-dots{gap:5px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>EMBA 17기 2026년 1학기 학술운영보드</h1>
+      <p class="hero-desc">17기 원우 대상 수업·과제·발표·시험·주요행사를 한 화면에서 관리하고 공유할 수 있는 학술 운영 대시보드입니다.</p>
+      <div class="contact-strip">학술국장 류인식 010-4119-7704 &nbsp;|&nbsp; 부국장 이형헌 010-7260-5073</div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-pct" id="stat-days-pct">—%</span>
+        <strong id="stat-days">—</strong><span class="stat-label">총 수업일</span>
+        <div class="stat-bar"><div class="stat-fill" id="stat-days-bar" style="width:0%"></div></div>
+        <span class="stat-sub" id="stat-days-sub">계산 중...</span>
+      </div>
+      <div class="stat">
+        <span class="stat-pct" id="stat-courses-pct">71%</span>
+        <strong id="stat-courses">5/7</strong><span class="stat-label">운영 과목 수</span>
+        <div class="stat-bar"><div class="stat-fill" id="stat-courses-bar" style="width:71%"></div></div>
+        <span class="stat-sub" id="stat-courses-sub">개강 5개 · 종강 1개</span>
+      </div>
+      <div class="stat">
+        <span class="stat-pct" id="stat-tasks-pct">37%</span>
+        <strong id="stat-tasks">7/19</strong><span class="stat-label">과제 진척도</span>
+        <div class="stat-bar"><div class="stat-fill" id="stat-tasks-bar" style="width:37%"></div></div>
+        <span class="stat-sub" id="stat-tasks-sub">완료 7건 · 남은 12건</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPCOMING BANNER -->
+<div class="upcoming-banner">
+  <div>
+    <div class="ub-eyebrow" id="ub-eyebrow">다음 수업</div>
+    <div class="ub-title" id="ub-title">로딩 중...</div>
+    <div class="ub-sub" id="ub-sub"></div>
+  </div>
+  <div class="ub-right">
+    <div class="ub-days" id="ub-days">—</div>
+    <div class="ub-days-label" id="ub-days-label">일 후</div>
+    <div class="ub-hours" id="ub-hours"></div>
+  </div>
+</div>
+
+<!-- HIGHLIGHTS ROW: 이번주 과제 + 행사 -->
+<div class="highlights-row">
+  <div class="hl-box tasks-box">
+    <div class="hl-header">
+      <span class="hl-icon">📋</span>
+      <span class="hl-title">이번 주 과제 & 발표</span>
+      <span class="hl-week-tag" id="hl-week-tag">—</span>
+    </div>
+    <div class="hl-items" id="hl-tasks"></div>
+  </div>
+  <div class="hl-box events-box">
+    <div class="hl-header">
+      <span class="hl-icon">🎯</span>
+      <span class="hl-title">Upcoming Events</span>
+    </div>
+    <div class="hl-items" id="hl-events"></div>
+  </div>
+</div>
+
+<!-- WEEK SCHEDULE -->
+<div class="week-schedule-wrap">
+  <div class="ws-header">
+    <div class="ws-title" id="ws-title">수업 시간표</div>
+    <div class="ws-nav">
+      <button class="ws-nav-btn" onclick="moveWeek(-1)">‹</button>
+      <div class="ws-dots" id="ws-dots"></div>
+      <span class="ws-week-label" id="ws-week-label"></span>
+      <button class="ws-nav-btn" onclick="moveWeek(1)">›</button>
+    </div>
+  </div>
+  <div id="ws-panels"></div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab(event,'events')">🎯 주요행사</button>
+    <button class="tab-btn" onclick="switchTab(event,'tasks')">📋 전체 과제</button>
+    <button class="tab-btn" onclick="switchTab(event,'courses')">📚 과목안내</button>
+  </div>
+
+  <div class="tab-panel" id="tab-tasks">
+    <div class="assign-filter">
+      <button class="af-btn active" onclick="filterAssign(event,'all')">전체</button>
+      <button class="af-btn" onclick="filterAssign(event,'발표')">발표</button>
+      <button class="af-btn" onclick="filterAssign(event,'과제')">과제</button>
+      <button class="af-btn" onclick="filterAssign(event,'시험')">시험</button>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="assign-table" id="assign-table">
+      <thead><tr><th>주차</th><th>과목</th><th>구분</th><th>과제/발표명</th><th>일시</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr data-type="과제" class="past-item"><td>2주</td><td>Business Analytics</td><td><span class="badge b-blue">개인과제</span></td><td>BA 개인과제 1</td><td>3/20(금)</td><td>지도학습 vs 비지도학습 정리 + 실무사례 각 1개</td></tr>
+        <tr data-type="과제" class="past-item"><td>2주</td><td>Management Science</td><td><span class="badge b-blue">개인과제</span></td><td>MS 에세이 제출</td><td>3/21(토)</td><td>자기소개 에세이 (평가 20%)</td></tr>
+        <tr data-type="과제" class="past-item"><td>3주</td><td>Business Analytics</td><td><span class="badge b-purple">팀과제</span></td><td>BA 팀과제 1 — 머신러닝 경영사례 제안</td><td>3/27(금)</td><td>ML 실제 경영사례 적용 제안서</td></tr>
+        <tr data-type="과제" class="past-item"><td>3주</td><td>Management Science</td><td><span class="badge b-purple">팀과제</span></td><td>MS HW/사례 1</td><td>3/28(토)</td><td>사례분석 제출 1회차</td></tr>
+        <tr data-type="발표" class="past-item"><td>4주</td><td>Business Analytics</td><td><span class="badge b-green">발표</span></td><td>생성형 AI 활용 발표 (4주 종강)</td><td>4/11(토) 09:30</td><td>15~20분, PPT 업로드, 팀 대표 1인 발표 — BA 수업 종료</td></tr>
+        <tr data-type="발표" class="past-item"><td>4주</td><td>Business Ethics</td><td><span class="badge b-red">발표</span></td><td>ETH 조별 윤리이슈발표 1</td><td>4/11(토) 13:00</td><td>1차 조별발표 (총 2회, 30%) · 윤리 위반 케이스스터디</td></tr>
+        <tr data-type="과제" class="past-item"><td>4주</td><td>Management Science</td><td><span class="badge b-purple">팀과제</span></td><td>MS HW/사례 2</td><td>4/10(금)</td><td>사례분석 제출 2회차</td></tr>
+<tr data-type="발표"><td>5주</td><td>Managing People & Org</td><td><span class="badge b-green">팀발표</span></td><td>MPO 팀사례발표 1 — Rob Parson</td><td>4/24(금) 3교시</td><td>Rob Parson at Morgan Stanley · 30분 발표+30분 토론 · 개인사례분석1 (2p) 별도</td></tr>
+        <tr data-type="과제"><td>5주</td><td>Management Science</td><td><span class="badge b-purple">팀과제</span></td><td>MS HW/사례 3 — Case 6.4 New Frontiers</td><td>4/24(금) 13:00</td><td>Excel + Word Zip 파일 업로드 · 사례분석 30%</td></tr>
+        <tr data-type="발표"><td>6주</td><td>Managing People & Org</td><td><span class="badge b-green">팀발표</span></td><td>MPO 팀사례발표 2 — Recruitment of a Star</td><td>5/8(금) 3교시</td><td>Recruitment of a Star · 30분+30분 토론 · 개인사례분석2 (2p) 별도</td></tr>
+        <tr data-type="발표"><td>7주</td><td>Managing People & Org</td><td><span class="badge b-green">팀발표</span></td><td>MPO 팀사례발표 3 — TerraCog GPS</td><td>5/22(금) 3교시</td><td>TerraCog Global Positioning Systems · 30분+30분 · 개인사례분석3 (2p) 별도</td></tr>
+        <tr data-type="발표"><td>7주</td><td>Business Ethics</td><td><span class="badge b-red">발표</span></td><td>ETH 조별 윤리이슈발표 2</td><td>5/23(토)</td><td>2차 조별발표 (총 2회 30%) · 기업윤리위반 케이스스터디</td></tr>
+        <tr data-type="과제"><td>7주</td><td>Management Science</td><td><span class="badge b-blue">개인과제</span></td><td>MS 개인과제 2 Essay Part 2</td><td>5/23(토)</td><td>개인에세이 2회차 제출 (평가 20%)</td></tr>
+        <tr data-type="발표"><td>8주</td><td>Managing People & Org</td><td><span class="badge b-green">최종발표</span></td><td>MPO 팀사례발표 4 — Martha Rinaldi</td><td>5/29(금) 3교시</td><td>Martha Rinaldi: Should She Stay or Should She Go? · 개인사례분석4 (2p) · ✅ MPO 발표 완료</td></tr>
+        <tr data-type="발표"><td>8주</td><td>Management Science</td><td><span class="badge b-purple">최종발표</span></td><td>MS 조별프로젝트 최종보고서 & 발표</td><td>5/30(토) 3교시</td><td>최종보고서 제출 + 수업 내 발표 · 조별프로젝트 40% · 시험 없음</td></tr>
+        <tr data-type="시험"><td>9주</td><td>Business Economics</td><td><span class="badge b-red">시험</span></td><td>Business Economics 시험</td><td>6/12(금) TBD</td><td>어준경 교수 공지 확인 예정</td></tr>
+        <tr data-type="시험"><td>10주</td><td>Business Ethics</td><td><span class="badge b-red">기말시험</span></td><td>Business Ethics 기말시험</td><td>6/20(토) TBD</td><td>4지선다 25문제 · 기말 60% · 교수님 공지 예정</td></tr>
+        <tr data-type="과제"><td>10주</td><td>Managing People & Org</td><td><span class="badge b-blue">기말보고서</span></td><td>MPO 개인기말보고서</td><td>6/20(토)</td><td>이론→본인회사 실사례 분석 · 3페이지 · 기말보고서 35%</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="tab-panel active" id="tab-events">
+    <div class="event-cards">
+      <div class="event-card" data-pop="17기 개강파티|3/28(토) 수업 후|3주차 토요일 수업 종료 후 진행 — 완료">
+        <div class="event-card-icon">🎊</div><div class="event-card-name">17기 개강파티</div>
+        <div class="event-card-date">3/28(토) 수업 후</div><div class="event-card-desc">3주차 토요일 수업 종료 후 진행 — 완료</div>
+      </div>
+      <div class="event-card" data-pop="16·17기 상견례|4/25(토) 18:00|5주차 토요일 수업 후 선배기수와 만남 행사">
+        <div class="event-card-icon">🤝</div><div class="event-card-name">16·17기 상견례</div>
+        <div class="event-card-date">4/25(토) 18:00</div><div class="event-card-desc">5주차 토요일 수업 후 선배기수와 만남</div>
+      </div>
+      <div class="event-card" data-pop="춘계 체육대회|5/10(일) 11:30~15:30|전체 EMBA 원우 대상 춘계 체육행사. 적극 참여 권장">
+        <div class="event-card-icon">⚽</div><div class="event-card-name">춘계 체육대회</div>
+        <div class="event-card-date">5/10(일) 11:30~15:30</div><div class="event-card-desc">전체 EMBA 원우 대상 춘계 체육행사</div>
+      </div>
+      <div class="event-card" data-pop="17기 종강파티|6/20(토) 수업 후|10주차 마지막 수업 후 1학기 마무리 행사">
+        <div class="event-card-icon">🎓</div><div class="event-card-name">17기 종강파티</div>
+        <div class="event-card-date">6/20(토) 수업 후</div><div class="event-card-desc">10주차 마지막 수업 후 · 1학기 마무리</div>
+      </div>
+      <div class="event-card" data-pop="GSP 해외연수 — 시애틀 UW|7/22(수)~24(금)|University of Washington. 종강 후 진행. 참가신청 및 세부일정 별도 공지 예정.">
+        <div class="event-card-icon">✈️</div><div class="event-card-name">GSP 해외연수 — 시애틀 UW</div>
+        <div class="event-card-date">7/22(수)~24(금)</div><div class="event-card-desc">University of Washington · 종강 후 · 참가신청 별도</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-courses">
+    <div class="course-cards">
+      <div class="course-card"><div class="cc-bar" style="background:var(--eco)"></div><div class="cc-name">Business Economics</div><div class="cc-prof">어준경 교수</div><div class="cc-chips"><span class="cc-chip">1~10주 전체</span><span class="cc-chip">금 1교시</span><span class="cc-chip">13:00–15:40</span></div><div class="cc-eval"><b>평가:</b> 출석 + 기말시험 (9주차 예정)</div></div>
+      <div class="course-card" style="opacity:.75"><div class="cc-bar" style="background:var(--ana)"></div><div class="cc-name">Business Analytics <span style="font-size:11px;color:#dc2626;font-weight:700">✓ 종강</span></div><div class="cc-prof">정승환 교수</div><div class="cc-chips"><span class="cc-chip">1~4주</span><span class="cc-chip">금 2교시+토 1교시</span><span class="cc-chip" style="background:#fde8e8;color:#c0392b">4/11 종강</span></div><div class="cc-eval"><b>평가:</b> 개인과제 2회, 팀과제 2회, 시험 없음 — 4주차로 종강 완료</div></div>
+      <div class="course-card"><div class="cc-bar" style="background:var(--mpo)"></div><div class="cc-name">Managing People & Org</div><div class="cc-prof">오홍석 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 3교시</span><span class="cc-chip">19:20–22:00</span></div><div class="cc-eval"><b>평가:</b> 출석·토론 20%, 팀사례발표 25% (4회), 개인분석 20%, Reflection 35%</div></div>
+      <div class="course-card"><div class="cc-bar" style="background:var(--eth)"></div><div class="cc-name">Business Ethics</div><div class="cc-prof">최순규 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 2교시</span><span class="cc-chip">13:00–15:40</span></div><div class="cc-eval"><b>평가:</b> 조별 발표 포함, 세부 기준 별도 공지</div></div>
+      <div class="course-card"><div class="cc-bar" style="background:var(--msc)"></div><div class="cc-name">Management Science</div><div class="cc-prof">김성문 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 3교시</span><span class="cc-chip">15:55–18:35</span></div><div class="cc-eval"><b>평가:</b> 출석 10%, 에세이 20%, 사례분석 30%, 조별 프로젝트 40%</div></div>
+      <div class="course-card"><div class="cc-bar" style="background:var(--mkt)"></div><div class="cc-name">Marketing Management <span style="font-size:11px;color:#7c3aed;font-weight:700">🆕 5주차 개강</span></div><div class="cc-prof">김동훈 교수</div><div class="cc-chips"><span class="cc-chip">5~10주</span><span class="cc-chip">금 2교시</span><span class="cc-chip">15:55–18:35</span><span class="cc-chip" style="background:#f3e8ff;color:#7c3aed">4/24 시작</span></div><div class="cc-eval"><b>평가:</b> 첫 수업(4/24) 때 안내 예정</div></div>
+      <div class="course-card"><div class="cc-bar" style="background:var(--fin)"></div><div class="cc-name">Financial Accounting</div><div class="cc-prof">최현욱 교수</div><div class="cc-chips"><span class="cc-chip">6~10주</span><span class="cc-chip">토 1교시+</span><span class="cc-chip">5/9 개강</span></div><div class="cc-eval"><b>평가:</b> 추후 공지 예정</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR SECTION (3월~7월) -->
+<div class="cal-section">
+  <div class="cal-section-head"><h2>학기 전체 캘린더</h2></div>
+  <div class="cal-legend">
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#c7d8ff"></div>수업일</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--eco)"></div>Economics</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--ana)"></div>Analytics</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--mpo)"></div>MPO</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--eth)"></div>Ethics</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--msc)"></div>Sci</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--mkt)"></div>Marketing</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--fin)"></div>Accounting</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#1d4ed8"></div>과제/발표</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--gold)"></div>행사</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#dc2626"></div>시험</div>
+  </div>
+  <div class="cal-carousel-nav" id="cal-carousel-nav">
+    <button class="cal-car-btn" id="cal-car-prev" onclick="moveCalMonth(-1)">‹</button>
+    <span class="cal-car-label" id="cal-car-label"></span>
+    <button class="cal-car-btn" id="cal-car-next" onclick="moveCalMonth(1)">›</button>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+</div>
+
+</div><!-- /page -->
+
+<!-- DAY MODAL -->
+<div class="day-modal" id="dayModal" onclick="if(event.target===this)closeModal()">
+  <div class="day-modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-date" id="modalDate"></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- HOVER POPUP -->
+<div class="hpop" id="hpop"></div>
+
+<script>
+// ═══ DATA ═══
+const CMAP={eco:'#ea580c',ana:'#2563eb',mpo:'#16a34a',eth:'#9b1c1c',msc:'#65a30d',mkt:'#7c3aed',fin:'#92400e'};
+const CABBR={eco:'경제',ana:'BA',mpo:'MPO',eth:'윤리',msc:'MS',mkt:'MKT',fin:'FA'};
+const CNAMES={eco:'Business Economics',ana:'Business Analytics',mpo:'Managing People & Org',eth:'Business Ethics',msc:'Management Science',mkt:'Marketing Management',fin:'Financial Accounting'};
+const CPROFS={eco:'어준경',ana:'정승환',mpo:'오홍석',eth:'최순규',msc:'김성문',mkt:'김동훈',fin:'최현욱'};
+
+const WEEKS=[
+  {n:1,label:"1주차",fri:{d:"2026-03-06",label:"3/6(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'ana',p:'2교시',t:'15:55–18:35'},{c:'mpo',p:'3교시',t:'19:20–22:00'}]},sat:{d:"2026-03-07",label:"3/7(토)",slots:[{c:'ana',p:'1교시',t:'09:30–12:10'},{c:'eth',p:'2교시',t:'13:00–15:40'},{c:'msc',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:2,label:"2주차",fri:{d:"2026-03-20",label:"3/20(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'ana',p:'2교시',t:'15:55–18:35',tag:'개인과제',tc:'tb'},{c:'mpo',p:'3교시',t:'19:20–22:00'}]},sat:{d:"2026-03-21",label:"3/21(토)",slots:[{c:'ana',p:'1교시',t:'09:30–12:10'},{c:'eth',p:'2교시',t:'13:00–15:40'},{c:'msc',p:'3교시',t:'15:55–18:35',tag:'에세이',tc:'tb'}]},tasks:[{type:'과제',badge:'b-blue',color:'#2563eb',name:'BA 개인과제 1 제출',meta:'정승환 · Business Analytics',detail:'지도학습 vs 비지도학습 정리 + 실무사례',due:'3/20(금)'},{type:'과제',badge:'b-blue',color:'#2563eb',name:'MS 에세이 제출',meta:'김성문 · Management Science',detail:'자기소개 에세이 (평가 20%)',due:'3/21(토)'}],events:[]},
+  {n:3,label:"3주차",fri:{d:"2026-03-27",label:"3/27(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'ana',p:'2교시',t:'15:55–18:35',tag:'팀과제',tc:'tg2'},{c:'mpo',p:'3교시',t:'19:20–22:00'}]},sat:{d:"2026-03-28",label:"3/28(토)",slots:[{c:'ana',p:'1교시',t:'09:30–12:10'},{c:'eth',p:'2교시',t:'13:00–15:40'},{c:'msc',p:'3교시',t:'15:55–18:35',tag:'팀과제',tc:'tg2'}]},tasks:[{type:'과제',badge:'b-purple',color:'#7c3aed',name:'BA 팀과제 1 — 머신러닝 경영사례 제안',meta:'정승환 · Business Analytics',detail:'ML 실제 경영사례 적용 제안서',due:'3/27(금)'},{type:'과제',badge:'b-purple',color:'#7c3aed',name:'MS 팀과제 HW/사례 1',meta:'김성문 · Management Science',detail:'',due:'3/28(토)'}],events:[{icon:'🎊',name:'17기 개강파티',time:'3/28(토) 수업 후',detail:'3주차 토요일 수업 종료 후 진행'}]},
+  {n:4,label:"4주차",fri:{d:"2026-04-10",label:"4/10(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'ana',p:'2교시',t:'15:55–18:35'},{c:'mpo',p:'3교시',t:'19:20–22:00'}]},sat:{d:"2026-04-11",label:"4/11(토)",slots:[{c:'ana',p:'1교시',t:'09:30–12:10',tag:'발표',tc:'tg'},{c:'eth',p:'2교시',t:'13:00–15:40',tag:'발표',tc:'tr'},{c:'msc',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'발표',badge:'b-green',color:'#16a34a',name:'생성형 AI 활용 발표',meta:'정승환 · Business Analytics',detail:'ChatGPT 등 활용 업무방안 or 新비즈니스 모델 · 15~20분 · PPT 업로드',due:'4/11(토) 09:30'},{type:'발표',badge:'b-red',color:'#dc2626',name:'조별 윤리적 이슈 발표',meta:'최순규 · Business Ethics',detail:'국내/해외 기업 윤리 위반 케이스스터디',due:'4/11(토) 13:00'},{type:'과제',badge:'b-purple',color:'#7c3aed',name:'MS 팀과제 HW/사례 2',meta:'김성문 · Management Science',detail:'',due:'4/10(금)'}],events:[]},
+  {n:5,label:"5주차",fri:{d:"2026-04-24",label:"4/24(금) MKT개강🆕",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'mkt',p:'2교시🆕',t:'15:55–18:35',tag:'첫수업',tc:'tg'},{c:'mpo',p:'3교시',t:'19:20–22:00',tag:'팀발표1',tc:'tg'}]},sat:{d:"2026-04-25",label:"4/25(토)",slots:[{c:'eth',p:'2교시',t:'13:00–15:40'},{c:'msc',p:'3교시',t:'15:55–18:35',tag:'HW/사례3',tc:'tb'}]},tasks:[{type:'발표',badge:'b-green',color:'#16a34a',name:'MPO 팀사례발표 1 — Rob Parson',meta:'오홍석 · Managing People & Org',detail:'📖 Rob Parson at Morgan Stanley\n팀 30분 발표 + 30분 토론\n개인사례분석1 (2페이지) 별도 제출\n평가: 팀발표 25% + 개인분석 20%',due:'4/24(금) 3교시'},{type:'과제',badge:'b-purple',color:'#7c3aed',name:'MS HW/사례 3 — Case 6.4 New Frontiers',meta:'김성문 · Management Science',detail:'📋 사례분석 3회차 (평가 30% 해당)\nExcel + Word Zip 파일 업로드\n마감: 4/24(금) 13:00',due:'4/24(금) 13:00'}],events:[{icon:'🤝',name:'16·17기 상견례',time:'4/25(토) 오후 7시',detail:'5주차 토요일 수업 후 · 16기와 17기 원우 간 상견례 행사'}]},
+  {n:6,label:"6주차",fri:{d:"2026-05-08",label:"5/8(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'mkt',p:'2교시',t:'15:55–18:35'},{c:'mpo',p:'3교시',t:'19:20–22:00',tag:'팀발표2',tc:'tg'}]},sat:{d:"2026-05-09",label:"5/9(토) FA개강🆕",slots:[{c:'fin',p:'1교시🆕',t:'09:30–12:10'},{c:'eth',p:'2교시',t:'13:00–15:40'},{c:'msc',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'발표',badge:'b-green',color:'#16a34a',name:'MPO 팀사례발표 2 — Recruitment of a Star',meta:'오홍석 · Managing People & Org',detail:'📖 Recruitment of a Star\n팀 30분 발표 + 30분 토론\n개인사례분석2 (2페이지) 별도 제출\n평가: 팀발표 25% + 개인분석 20%',due:'5/8(금) 3교시'}],events:[{icon:'⚽',name:'춘계 체육대회',time:'5/10(일) 11:30~15:30',detail:'전체 EMBA 원우 대상 춘계 체육행사 · 적극 참여 권장'}]},
+  {n:7,label:"7주차",fri:{d:"2026-05-22",label:"5/22(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'mkt',p:'2교시',t:'15:55–18:35'},{c:'mpo',p:'3교시',t:'19:20–22:00',tag:'팀발표3',tc:'tg'}]},sat:{d:"2026-05-23",label:"5/23(토)",slots:[{c:'fin',p:'1교시',t:'09:30–12:10'},{c:'eth',p:'2교시',t:'13:00–15:40',tag:'조별발표2',tc:'tr'},{c:'msc',p:'3교시',t:'15:55–18:35',tag:'개인에세이2',tc:'tb'}]},tasks:[{type:'발표',badge:'b-green',color:'#16a34a',name:'MPO 팀사례발표 3 — TerraCog GPS',meta:'오홍석 · Managing People & Org',detail:'📖 TerraCog Global Positioning Systems\n팀 30분 발표 + 30분 토론\n개인사례분석3 (2페이지) 별도 제출\n평가: 팀발표 25% + 개인분석 20%',due:'5/22(금) 3교시'},{type:'발표',badge:'b-red',color:'#9b1c1c',name:'ETH 조별 윤리이슈발표 2',meta:'최순규 · Business Ethics',detail:'🔍 2차 조별 윤리케이스 발표\n조별발표 2회 30% 중 2회차\n기업윤리위반 케이스스터디',due:'5/23(토)'},{type:'과제',badge:'b-blue',color:'#65a30d',name:'MS 개인과제 2 Essay Part 2',meta:'김성문 · Management Science',detail:'✍️ 개인에세이 2회차 제출\n평가 20% 해당',due:'5/23(토)'}],events:[]},
+  {n:8,label:"8주차",fri:{d:"2026-05-29",label:"5/29(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'mkt',p:'2교시',t:'15:55–18:35'},{c:'mpo',p:'3교시',t:'19:20–22:00',tag:'팀발표4🏁',tc:'tg'}]},sat:{d:"2026-05-30",label:"5/30(토)",slots:[{c:'fin',p:'1교시',t:'09:30–12:10'},{c:'eth',p:'2교시',t:'13:00–15:40'},{c:'msc',p:'3교시',t:'15:55–18:35',tag:'조별최종발표',tc:'tg2'}]},tasks:[{type:'발표',badge:'b-green',color:'#16a34a',name:'MPO 팀사례발표 4 — Martha Rinaldi',meta:'오홍석 · Managing People & Org',detail:'📖 Martha Rinaldi: Should She Stay or Should She Go?\n팀 30분 발표 + 30분 토론\n개인사례분석4 (2페이지) 별도 제출\n✅ MPO 팀발표 시리즈 전체 완료',due:'5/29(금) 3교시'},{type:'발표',badge:'b-purple',color:'#65a30d',name:'MS 조별프로젝트 최종보고서 & 발표',meta:'김성문 · Management Science',detail:'📊 조별 프로젝트 최종보고서 제출 + 수업 내 발표\n조별프로젝트 40% 해당 (최고 비중)\n⚠️ 시험 없는 과목 — 이 발표가 핵심',due:'5/30(토) 3교시'}],events:[]},
+  {n:9,label:"9주차",fri:{d:"2026-06-12",label:"6/12(금)",slots:[{c:'eco',p:'1교시',t:'13:00–15:40'},{c:'mkt',p:'2교시',t:'15:55–18:35'},{c:'fin',p:'3교시',t:'19:20–22:00'}]},sat:{d:"2026-06-13",label:"6/13(토)",slots:[{c:'fin',p:'1교시',t:'09:30–12:10'},{c:'fin',p:'2교시',t:'13:00–15:40'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',name:'Business Economics 시험',meta:'어준경 · Business Economics',detail:'⚠️ 세부 일시 교수님 공지 확인 예정',due:'6/12(금) TBD'}],events:[]},
+  {n:10,label:"10주차",fri:{d:"2026-06-19",label:"6/19(금)",slots:[{c:'mkt',p:'1교시',t:'13:00–15:40'},{c:'mkt',p:'2교시',t:'15:55–18:35'},{c:'fin',p:'3교시',t:'19:20–22:00'}]},sat:{d:"2026-06-20",label:"6/20(토) 종강",slots:[{c:'fin',p:'1교시',t:'09:30–12:10'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',name:'Business Ethics 기말시험',meta:'최순규 · Business Ethics',detail:'🎯 기말시험 60% 해당 (최고 비중)\n세부 일시 교수님 공지 확인 예정',due:'6/20(토) TBD'},{type:'과제',badge:'b-blue',color:'#16a34a',name:'MPO 개인기말보고서 제출',meta:'오홍석 · Managing People & Org',detail:'📝 수업 이론/개념으로 본인회사 실사례 분석\n분량: 3페이지\n기말보고서 35% 해당',due:'6/20(토)'}],events:[{icon:'🎓',name:'17기 종강파티',time:'6/20(토) 오후 7시',detail:'10주차 마지막 수업 후 1학기 마무리 파티'}]},
+];
+
+const CAL_DAY_DATA={
+  "2026-03-06":{classes:[{c:'eco',t:'13:00–15:40'},{c:'ana',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}]},
+  "2026-03-07":{classes:[{c:'ana',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}]},
+  "2026-03-20":{classes:[{c:'eco',t:'13:00–15:40'},{c:'ana',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'BA 개인과제 1 제출',badge:'b-blue',color:'#2563eb'},{name:'MS 에세이 제출',badge:'b-blue',color:'#2563eb'}]},
+  "2026-03-21":{classes:[{c:'ana',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}]},
+  "2026-03-27":{classes:[{c:'eco',t:'13:00–15:40'},{c:'ana',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'BA 팀과제 1 제출',color:'#7c3aed'},{name:'MS 팀과제 HW 1',color:'#7c3aed'}]},
+  "2026-03-28":{classes:[{c:'ana',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],events:[{name:'🎊 개강파티',note:'수업 후',color:'#C9A84C'}]},
+  "2026-04-10":{classes:[{c:'eco',t:'13:00–15:40'},{c:'ana',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MS 팀과제 HW 2',color:'#7c3aed'}]},
+  "2026-04-11":{classes:[{c:'ana',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'생성형AI 발표 09:30',color:'#16a34a'},{name:'Ethics 조별발표 13:00',color:'#dc2626'}]},
+  "2026-04-24":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 1',color:'#16a34a'}]},
+  "2026-04-25":{classes:[{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 팀과제 HW 3',color:'#7c3aed'}],events:[{name:'🤝 상견례',note:'18:00',color:'#C9A84C'}]},
+  "2026-05-08":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 2',color:'#16a34a'}],note:'BA 마지막 수업'},
+  "2026-05-09":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 중간보고서',color:'#2563eb'}],note:'FA 첫 수업 🆕'},
+  "2026-05-10":{events:[{name:'⚽ 춘계 체육대회',note:'11:30~15:30',color:'#C9A84C'}]},
+  "2026-05-22":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 3',color:'#16a34a'}]},
+  "2026-05-23":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 개인에세이 2',color:'#2563eb'}]},
+  "2026-05-29":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 4 (마지막)',color:'#16a34a'}]},
+  "2026-05-30":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 최종보고서&발표',color:'#7c3aed'}]},
+  "2026-06-12":{classes:[{c:'mkt',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'fin',t:'19:20–22:00'}],tasks:[{name:'BE 시험 예정',color:'#dc2626'}]},
+  "2026-06-13":{classes:[{c:'fin',t:'09:30–12:10'},{c:'fin',t:'13:00–15:40'}]},
+  "2026-06-19":{classes:[{c:'mkt',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'fin',t:'19:20–22:00'}]},
+  "2026-06-20":{classes:[{c:'fin',t:'09:30–12:10'}],events:[{name:'🎓 종강파티',note:'수업 후',color:'#C9A84C'}]},
+  "2026-07-22":{events:[{name:'✈️ GSP 시애틀 UW',note:'7/22~24 (3일간)',color:'#C9A84C'}]},
+  "2026-07-23":{events:[{name:'✈️ GSP Day 2',note:'시애틀 UW',color:'#C9A84C'}]},
+  "2026-07-24":{events:[{name:'✈️ GSP Day 3',note:'시애틀 UW',color:'#C9A84C'}]},
+};
+
+// ═══ UTILS ═══
+const today=new Date();today.setHours(0,0,0,0);
+function dateOf(s){const[y,m,d]=s.split('-').map(Number);const dt=new Date(y,m-1,d);dt.setHours(0,0,0,0);return dt;}
+function isPast(s){return dateOf(s)<today;}
+function diffDays(s){return Math.round((dateOf(s)-today)/86400000);}
+
+// ═══ HOVER POPUP ═══
+const hpop=document.getElementById('hpop');
+let hpopTimer=null;
+function showPop(e,html){
+  clearTimeout(hpopTimer);
+  hpop.innerHTML=html;
+  hpop.classList.add('show');
+  movePop(e);
+}
+function movePop(e){
+  const x=e.clientX,y=e.clientY;
+  const pw=hpop.offsetWidth||240,ph=hpop.offsetHeight||100;
+  const vw=window.innerWidth,vh=window.innerHeight;
+  let lx=x+14,ly=y+14;
+  if(lx+pw>vw-8) lx=x-pw-10;
+  if(ly+ph>vh-8) ly=y-ph-10;
+  hpop.style.left=lx+'px';hpop.style.top=ly+'px';
+}
+function hidePop(){hpopTimer=setTimeout(()=>hpop.classList.remove('show'),80);}
+document.addEventListener('mousemove',e=>{if(hpop.classList.contains('show')) movePop(e);});
+
+function attachPop(el,html){
+  el.addEventListener('mouseenter',e=>showPop(e,html));
+  el.addEventListener('mouseleave',hidePop);
+}
+function slotPopHTML(s){
+  return `<div class="hpop-title">${CNAMES[s.c]}</div>
+    <div class="hpop-row"><span class="dot" style="background:${CMAP[s.c]}"></span><span>교수: ${CPROFS[s.c]}</span></div>
+    <div class="hpop-row"><span class="dot" style="background:#aaa"></span><span>시간: ${s.p} ${s.t}</span></div>
+    ${s.tag?`<div class="hpop-row"><span class="dot" style="background:#f0bf5a"></span><span>📌 ${s.tag}</span></div>`:''}`;
+}
+function taskPopHTML(t){
+  return `<div class="hpop-title">${t.name}</div>
+    <div class="hpop-row"><span class="dot" style="background:${t.color||'#666'}"></span><span>${t.meta}</span></div>
+    <div class="hpop-row"><span class="dot" style="background:#f0bf5a"></span><span>⏰ ${t.due}</span></div>
+    ${t.detail?`<div class="hpop-row"><span class="dot" style="background:#aaa"></span><span>${t.detail}</span></div>`:''}`;
+}
+
+// ═══ UPCOMING BANNER ═══
+function buildUpcoming(){
+  let nextW=null;
+  for(const w of WEEKS){
+    const satD=dateOf(w.sat.d);
+    const sunAfter=new Date(satD);sunAfter.setDate(satD.getDate()+1);
+    if(today<sunAfter){nextW=w;break;}
+  }
+  if(!nextW) nextW=WEEKS[WEEKS.length-1];
+  curWeek=WEEKS.indexOf(nextW);
+
+  const days=diffDays(nextW.fri.d);
+  document.getElementById('ub-title').textContent=`${nextW.label} — ${nextW.fri.label} ~ ${nextW.sat.label}`;
+  document.getElementById('ub-eyebrow').textContent=days<=0?'🔴 현재 진행 중':days===1?'내일 수업 시작':'다음 수업까지';
+  if(days>0){
+    const classStart=new Date(nextW.fri.d+'T13:00:00');
+    function updateCountdown(){
+      const now=new Date();
+      const totalMs=classStart-now;
+      if(totalMs<=0){document.getElementById('ub-days').textContent='수업 중';document.getElementById('ub-days-label').textContent='';document.getElementById('ub-hours').textContent='';return;}
+      const totalH=Math.floor(totalMs/3600000);
+      const d=Math.floor(totalH/24);
+      const h=totalH%24;
+      const m=Math.floor((totalMs%3600000)/60000);
+      document.getElementById('ub-days').textContent=`D-${d}`;
+      document.getElementById('ub-days-label').textContent=`${d}일 ${h}시간 후`;
+      document.getElementById('ub-hours').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} 남음`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown,60000);
+  } else {
+    document.getElementById('ub-days').textContent=today<=dateOf(nextW.sat.d)?'수업 중':'—';
+    document.getElementById('ub-days-label').textContent='';
+    document.getElementById('ub-hours').textContent='';
+  }
+  document.getElementById('hl-week-tag').textContent=nextW.label;
+  buildHighlights(nextW);
+}
+
+// ═══ ALL EVENTS (for upcoming panel) ═══
+const ALL_EVENTS=[
+  {icon:'🎊',name:'17기 개강파티',date:'2026-03-28',time:'3/28(토) 수업 후',detail:'3주차 토요일 수업 종료 후 진행 — 완료'},
+  {icon:'🤝',name:'16·17기 상견례',date:'2026-04-25',time:'4/25(토) 오후 7시',detail:'5주차 토요일 수업 후 · 16기와 17기 원우 간 상견례'},
+  {icon:'⚽',name:'춘계 체육대회',date:'2026-05-10',time:'5/10(일) 11:30~15:30',detail:'전체 EMBA 원우 대상 춘계 체육행사 · 적극 참여 권장'},
+  {icon:'🎓',name:'17기 종강파티',date:'2026-06-20',time:'6/20(토) 오후 7시',detail:'10주차 마지막 수업 후 1학기 마무리 파티'},
+  {icon:'✈️',name:'GSP 해외연수 — 시애틀 UW',date:'2026-07-22',time:'7/22(수)~24(금)',detail:'University of Washington · 종강 후 · 참가신청 별도'},
+];
+
+// ═══ HIGHLIGHTS ═══
+function buildHighlights(w){
+  const tasksEl=document.getElementById('hl-tasks');
+  const eventsEl=document.getElementById('hl-events');
+  tasksEl.innerHTML='';eventsEl.innerHTML='';
+
+  if(!w.tasks||!w.tasks.length){
+    tasksEl.innerHTML='<p class="hl-empty">이번 주는 별도 과제·발표 없음</p>';
+  } else {
+    w.tasks.forEach(t=>{
+      const div=document.createElement('div');
+      div.className='hl-item';
+      div.style.borderLeftColor=t.color||'#ccc';
+      const detailLines=t.detail?t.detail.split('\n').join('<br>'):'';
+      div.innerHTML=`<div class="hl-item-body">
+        <div class="hl-type" style="color:${t.color}">${t.type}</div>
+        <div class="hl-name">${t.name}</div>
+        <div class="hl-meta">${t.meta}</div>
+        ${t.detail?`<button class="hl-toggle" onclick="toggleDetail(this)">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+          상세내용
+        </button>
+        <div class="hl-detail"><div class="hl-detail-inner" style="border-left-color:${t.color}">${detailLines}</div></div>`:''}
+      </div>
+      <div class="hl-due">${t.due}</div>`;
+      attachPop(div,taskPopHTML(t));
+      tasksEl.appendChild(div);
+    });
+  }
+
+  // Upcoming events: show next 2+ events from today
+  const upcoming=ALL_EVENTS.filter(e=>dateOf(e.date)>=today).slice(0,2);
+  if(!upcoming.length){
+    eventsEl.innerHTML='<p class="hl-empty">예정된 행사 없음</p>';
+  } else {
+    upcoming.forEach(e=>{
+      const dDiff=diffDays(e.date);
+      const badge=dDiff===0?'<span style="font-size:10px;background:#dc2626;color:#fff;border-radius:4px;padding:1px 6px;margin-left:6px">오늘</span>':dDiff>0?`<span style="font-size:10px;background:rgba(32,56,100,.12);color:#3a5080;border-radius:4px;padding:1px 6px;margin-left:6px">${dDiff}일 후</span>`:'';
+      const div=document.createElement('div');
+      div.className='ev-hl-item';
+      div.innerHTML=`<span class="ev-hl-icon">${e.icon}</span>
+        <div><div class="ev-hl-name">${e.name}${badge}</div><div class="ev-hl-time">${e.time}</div>${e.detail?`<div class="ev-hl-time" style="color:#6b7a8f;margin-top:1px">${e.detail}</div>`:''}</div>`;
+      eventsEl.appendChild(div);
+    });
+  }
+}
+
+function toggleDetail(btn){
+  const item=btn.closest('.hl-item');
+  item.classList.toggle('open');
+}
+
+// ═══ WEEK SCHEDULE ═══
+let curWeek=0;
+function getDefaultWeek(){
+  for(let i=0;i<WEEKS.length;i++){
+    const satD=dateOf(WEEKS[i].sat.d);
+    const sunAfter=new Date(satD);sunAfter.setDate(satD.getDate()+1);
+    if(today<sunAfter) return i;
+  }
+  return WEEKS.length-1;
+}
+function buildWeekSchedule(){
+  const dots=document.getElementById('ws-dots');
+  const panels=document.getElementById('ws-panels');
+  dots.innerHTML='';panels.innerHTML='';
+
+  WEEKS.forEach((w,i)=>{
+    const dot=document.createElement('button');
+    dot.className='ws-dot'+(i===curWeek?' active':'');
+    dot.title=w.label;dot.onclick=()=>goWeek(i);
+    dots.appendChild(dot);
+
+    const panel=document.createElement('div');
+    panel.className='ws-panel'+(i===curWeek?' active':'');
+    panel.id='wsp-'+i;
+    panel.style.display=i===curWeek?'block':'none';
+
+    const friPast=isPast(w.fri.d),satPast=isPast(w.sat.d);
+    const badge=satPast?'<span style="font-size:12px;color:#9ca3af;margin-left:8px">✓ 완료</span>':
+      (today>=dateOf(w.fri.d)&&!satPast?'<span style="font-size:12px;color:#16a34a;font-weight:700;margin-left:8px">📍 진행 중</span>':'');
+
+    panel.innerHTML=`
+      <div style="margin-bottom:12px;font-size:14px;font-weight:700;color:var(--navy)">${w.fri.label} ~ ${w.sat.label}${badge}</div>
+      <div class="ws-day-grid">
+        <div class="ws-day-card">
+          <div class="ws-day-head"><h4>금요일</h4><span>${w.fri.label}</span></div>
+          <div class="slot-list" id="slots-fri-${i}"></div>
+        </div>
+        <div class="ws-day-card">
+          <div class="ws-day-head"><h4>토요일</h4><span>${w.sat.label}</span></div>
+          <div class="slot-list" id="slots-sat-${i}"></div>
+        </div>
+      </div>`;
+    panels.appendChild(panel);
+  });
+  document.getElementById('ws-week-label').textContent=WEEKS[curWeek].label;
+  document.getElementById('ws-title').textContent=`${WEEKS[curWeek].label} 수업 시간표`;
+
+  // Render slots for current week immediately
+  renderSlots(curWeek);
+}
+
+function renderSlots(i){
+  const w=WEEKS[i];
+  ['fri','sat'].forEach(day=>{
+    const el=document.getElementById(`slots-${day}-${i}`);
+    if(!el||el.dataset.rendered) return;
+    el.dataset.rendered='1';
+    w[day].slots.forEach(s=>{
+      const div=document.createElement('div');
+      div.className='slot-item';
+      div.style.borderLeft=`3px solid ${CMAP[s.c]}`;
+      div.innerHTML=`
+        <div class="slot-time-col"><span class="per">${s.p}</span>${s.t}</div>
+        <div class="slot-body-col">
+          <div class="slot-swatch" style="background:${CMAP[s.c]}"></div>
+          <div><div class="slot-name">${CNAMES[s.c]}</div><div class="slot-prof">${CPROFS[s.c]} 교수</div></div>
+          ${s.tag?`<span class="slot-tag ${s.tc||''}">${s.tag}</span>`:''}
+        </div>`;
+      attachPop(div,slotPopHTML(s));
+      el.appendChild(div);
+    });
+  });
+}
+
+function goWeek(i){
+  curWeek=i;
+  document.querySelectorAll('.ws-dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));
+  document.querySelectorAll('.ws-panel').forEach((p,idx)=>{p.style.display=idx===i?'block':'none';});
+  document.getElementById('ws-week-label').textContent=WEEKS[i].label;
+  document.getElementById('ws-title').textContent=`${WEEKS[i].label} 수업 시간표`;
+  renderSlots(i);
+}
+function moveWeek(d){goWeek(Math.max(0,Math.min(WEEKS.length-1,curWeek+d)));}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft') moveWeek(-1);
+  if(e.key==='ArrowRight') moveWeek(1);
+});
+
+// ═══ TABS ═══
+function switchTab(e,id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+// Attach hover popups to event cards
+document.querySelectorAll('.event-card[data-pop]').forEach(card=>{
+  const[title,date,desc]=card.dataset.pop.split('|');
+  attachPop(card,`<div class="hpop-title">${title}</div>
+    <div class="hpop-row"><span class="dot" style="background:#f0bf5a"></span><span>${date}</span></div>
+    <div class="hpop-row"><span class="dot" style="background:#aaa"></span><span>${desc}</span></div>`);
+});
+
+// ═══ FILTER ASSIGNMENTS ═══
+function filterAssign(e,type){
+  document.querySelectorAll('.af-btn').forEach(b=>b.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  document.querySelectorAll('#assign-table tbody tr').forEach(tr=>{
+    tr.classList.toggle('hidden-row',type!=='all'&&tr.dataset.type!==type);
+  });
+}
+
+// ═══ CALENDAR ═══
+function buildCalendar(){
+  const months=[
+    {y:2026,m:3,name:'3월'},{y:2026,m:4,name:'4월'},
+    {y:2026,m:5,name:'5월'},{y:2026,m:6,name:'6월'},
+    {y:2026,m:7,name:'7월 (GSP)'},
+  ];
+  const dow=['일','월','화','수','목','금','토'];
+  const grid=document.getElementById('cal-grid');
+  grid.innerHTML='';
+
+  months.forEach(({y,m,name})=>{
+    const card=document.createElement('div');
+    card.className='cal-month-card';
+    const firstDow=new Date(y,m-1,1).getDay();
+    const daysInM=new Date(y,m,0).getDate();
+    const isGSP=m===7;
+
+    const tdList=[];
+    for(let i=0;i<firstDow;i++) tdList.push({empty:true});
+    for(let d=1;d<=daysInM;d++){
+      const key=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const dt=new Date(y,m-1,d);dt.setHours(0,0,0,0);
+      const dw=dt.getDay();
+      const ev=CAL_DAY_DATA[key];
+      const isTod=dt.getTime()===today.getTime();
+      const isPastD=dt<today;
+      const isClass=ev&&ev.classes&&ev.classes.length>0;
+      const hasAny=ev&&Object.keys(ev).some(k=>ev[k]&&(Array.isArray(ev[k])?ev[k].length>0:true));
+      const isGSPDay=ev&&ev.events&&ev.events.some(e=>e.name.includes('GSP'));
+      tdList.push({d,key,dw,ev,isTod,isPastD,isClass,hasAny,isGSPDay});
+    }
+    while(tdList.length%7!==0) tdList.push({empty:true});
+
+    let rowsHTML='';
+    for(let r=0;r<tdList.length/7;r++){
+      rowsHTML+='<tr>';
+      for(let c=0;c<7;c++){
+        const cell=tdList[r*7+c];
+        if(cell.empty){rowsHTML+='<td class="cal-cell empty"></td>';continue;}
+        const{d,key,dw,ev,isTod,isPastD,isClass,hasAny,isGSPDay}=cell;
+        const hasEvents=ev&&ev.events&&ev.events.length>0;
+        let cls='cal-cell';
+        if(dw===0) cls+=' cal-day-sun';
+        if(dw===6) cls+=' cal-day-sat';
+        if(isPastD) cls+=' past';
+        else if(isTod) cls+=' today';
+        else if(isClass) cls+=' class-day';
+        if(isGSPDay) cls+=' gsp-day';
+        if(hasEvents) cls+=' event-day';
+        if(hasAny) cls+=' has-ev';
+
+        // Build pill markers — courses + tasks + events all as uniform text pills
+        let markers='<div class="cal-markers">';
+        if(ev&&ev.classes){
+          // Deduplicate courses (same course can appear twice e.g. mkt in week 10)
+          const seen=new Set();
+          ev.classes.forEach(cl=>{
+            if(seen.has(cl.c)) return; seen.add(cl.c);
+            markers+=`<span class="cal-pill" style="background:${CMAP[cl.c]}">${CABBR[cl.c]}</span>`;
+          });
+        }
+        if(ev&&ev.tasks&&ev.tasks.length) markers+=`<span class="cal-pill" style="background:#1d4ed8">과제</span>`;
+        if(hasEvents){
+          ev.events.forEach(e=>{
+            const emojiMatch=e.name.match(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/u);
+            const emoji=emojiMatch?emojiMatch[0]:'🎯';
+            const nameShort=e.name.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu,'').trim().replace(/\s+/g,'').substring(0,5);
+            markers+=`<span class="cal-pill" style="background:var(--gold)">${emoji}${nameShort}</span>`;
+          });
+        }
+        markers+='</div>';
+        const evChips='';
+
+        const onclickAttr=hasAny?`onclick="openDayModal('${key}','${name} ${d}일')"`:'' ;
+        rowsHTML+=`<td class="${cls}" ${onclickAttr}><div class="cal-day-num">${d}</div>${markers}${evChips}</td>`;
+      }
+      rowsHTML+='</tr>';
+    }
+
+    card.innerHTML=`
+      <div class="cal-month-head"><h3>${name}</h3><span>2026</span></div>
+      <table class="cal-table">
+        <thead><tr>${dow.map(d=>`<th>${d}</th>`).join('')}</tr></thead>
+        <tbody>${rowsHTML}</tbody>
+      </table>`;
+
+    // Attach hover popups to cells with events
+    grid.appendChild(card);
+    card.querySelectorAll('.cal-cell.has-ev').forEach(td=>{
+      const key2=td.getAttribute('onclick')?.match(/'([\d-]+)'/)?.[1];
+      if(!key2) return;
+      const ev2=CAL_DAY_DATA[key2];
+      if(!ev2) return;
+      let popHTML=`<div class="hpop-title">${key2.substring(5).replace('-','/')}</div>`;
+      if(ev2.note) popHTML+=`<div class="hpop-row"><span class="dot" style="background:#16a34a"></span><span>${ev2.note}</span></div>`;
+      if(ev2.classes) ev2.classes.forEach(cl=>{
+        popHTML+=`<div class="hpop-row"><span class="dot" style="background:${CMAP[cl.c]}"></span><span>${CNAMES[cl.c]} · ${cl.t}</span></div>`;
+      });
+      if(ev2.tasks) ev2.tasks.forEach(t=>{
+        popHTML+=`<div class="hpop-row"><span class="dot" style="background:${t.color||'#1d4ed8'}"></span><span>📌 ${t.name}</span></div>`;
+      });
+      if(ev2.events) ev2.events.forEach(e=>{
+        popHTML+=`<div class="hpop-row"><span class="dot" style="background:var(--gold)"></span><span>${e.name} ${e.note}</span></div>`;
+      });
+      attachPop(td,popHTML);
+    });
+  });
+}
+
+// ═══ DAY MODAL ═══
+function openDayModal(key,label){
+  const ev=CAL_DAY_DATA[key];if(!ev) return;
+  hidePop();
+  document.getElementById('modalDate').textContent=label;
+  let body='';
+  if(ev.note) body+=`<div style="background:#e8f4e8;border-radius:10px;padding:8px 12px;margin-bottom:12px;font-size:13px;font-weight:700;color:#15803d">📌 ${ev.note}</div>`;
+  if(ev.classes&&ev.classes.length){
+    body+='<div class="modal-group"><div class="modal-group-title">🏫 수업 일정</div><div class="modal-items">';
+    ev.classes.forEach(cl=>{
+      body+=`<div class="modal-item" style="border-left-color:${CMAP[cl.c]}">
+        <div class="modal-item-name">${CNAMES[cl.c]}</div>
+        <div class="modal-item-meta">${CPROFS[cl.c]} 교수</div>
+        <div class="modal-item-time">⏰ ${cl.t}</div>
+      </div>`;
+    });
+    body+='</div></div>';
+  }
+  if(ev.tasks&&ev.tasks.length){
+    body+='<div class="modal-group"><div class="modal-group-title">📋 과제 / 발표</div><div class="modal-items">';
+    ev.tasks.forEach(t=>{
+      body+=`<div class="modal-item" style="border-left-color:${t.color||'#1d4ed8'}">
+        <div class="modal-item-name">${t.name}</div>
+        ${t.note?`<div class="modal-item-detail">${t.note}</div>`:''}
+      </div>`;
+    });
+    body+='</div></div>';
+  }
+  if(ev.events&&ev.events.length){
+    body+='<div class="modal-group"><div class="modal-group-title">🎯 행사 / 이벤트</div><div class="modal-items">';
+    ev.events.forEach(e=>{
+      body+=`<div class="modal-item" style="border-left-color:var(--gold)">
+        <div class="modal-item-name">${e.name}</div>
+        <div class="modal-item-time">${e.note}</div>
+      </div>`;
+    });
+    body+='</div></div>';
+  }
+  document.getElementById('modalBody').innerHTML=body;
+  document.getElementById('dayModal').classList.add('open');
+}
+function closeModal(){document.getElementById('dayModal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+
+// ═══ STATS ═══
+function updateStats(){
+  const classDays=Object.keys(CAL_DAY_DATA).filter(k=>CAL_DAY_DATA[k].classes&&CAL_DAY_DATA[k].classes.length>0&&k<='2026-07-01');
+  const done=classDays.filter(k=>isPast(k)).length;
+  const total=classDays.length;
+  const pct=Math.round(done/total*100);
+  document.getElementById('stat-days').textContent=`${done}/${total}`;
+  document.getElementById('stat-days-pct').textContent=pct+'%';
+  document.getElementById('stat-days-bar').style.width=pct+'%';
+  document.getElementById('stat-days-sub').textContent=`진행률 ${pct}% · 남은 ${total-done}일`;
+  // courses stat: count active courses as of today
+  const allCourses=7;
+  const endedCourses=1; // BA ended 4/11
+  const startedCourses=4; // FA starts 5/9 (not yet)
+  const activeCourses=allCourses-endedCourses-(dateOf('2026-05-09')>today?1:0);
+  const coursePct=Math.round(activeCourses/allCourses*100);
+  document.getElementById('stat-courses').textContent=`${activeCourses}/${allCourses}`;
+  document.getElementById('stat-courses-pct').textContent=coursePct+'%';
+  document.getElementById('stat-courses-bar').style.width=coursePct+'%';
+  document.getElementById('stat-courses-sub').textContent=`개강 ${activeCourses}개 · 종강 ${endedCourses}개`;
+}
+
+// ═══ CALENDAR CAROUSEL (mobile) ═══
+let calMonthIdx=0;
+const CAL_MONTH_CARDS=[];
+const CAL_MONTH_NAMES=['3월','4월','5월','6월','7월 (GSP)'];
+const CAL_MONTH_NUMS=[3,4,5,6,7];
+
+function initCalCarousel(){
+  CAL_MONTH_CARDS.length=0;
+  document.querySelectorAll('.cal-month-card').forEach(c=>CAL_MONTH_CARDS.push(c));
+  // Start at current/next upcoming month
+  const todayM=today.getMonth()+1;
+  let idx=CAL_MONTH_NUMS.findIndex(m=>m>=todayM);
+  if(idx<0) idx=CAL_MONTH_CARDS.length-1;
+  calMonthIdx=idx;
+  updateCalCarousel();
+}
+
+function updateCalCarousel(){
+  CAL_MONTH_CARDS.forEach((c,i)=>c.classList.toggle('mob-active',i===calMonthIdx));
+  const label=document.getElementById('cal-car-label');
+  if(label) label.textContent='2026 · '+CAL_MONTH_NAMES[calMonthIdx];
+  const prev=document.getElementById('cal-car-prev');
+  const next=document.getElementById('cal-car-next');
+  if(prev) prev.disabled=calMonthIdx===0;
+  if(next) next.disabled=calMonthIdx===CAL_MONTH_CARDS.length-1;
+}
+
+function moveCalMonth(delta){
+  calMonthIdx=Math.max(0,Math.min(CAL_MONTH_CARDS.length-1,calMonthIdx+delta));
+  updateCalCarousel();
+}
+
+// ═══ INIT ═══
+curWeek=getDefaultWeek();
+buildUpcoming();
+buildWeekSchedule();
+buildCalendar();
+initCalCarousel();
+updateStats();
+</script>
+</body>
+</html>

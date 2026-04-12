@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no">
 <title>EMBA 17기 2026년 1학기 학술운영보드</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
@@ -34,9 +35,10 @@ body{
   position:sticky;top:10px;z-index:50;
 }
 .hero-inner{display:grid;grid-template-columns:1.4fr .65fr;gap:22px;align-items:center}
-.hero h1{font-size:clamp(20px,2.8vw,34px);font-weight:900;line-height:1.2;margin-bottom:8px}
+.hero h1{font-size:clamp(20px,2.8vw,34px);font-weight:900;line-height:1.2;margin-bottom:8px;word-break:keep-all;overflow-wrap:break-word}
 .hero-desc{font-size:clamp(12px,1.3vw,15px);opacity:.88;line-height:1.6}
 .contact-strip{margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.16);font-size:13px;opacity:.88;line-height:1.7}
+.contact-strip a{color:#fff!important;text-decoration:none}
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .stat{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px;position:relative}
 .stat strong{display:block;font-size:clamp(18px,2.2vw,28px);font-weight:900;margin-bottom:3px}
@@ -393,7 +395,6 @@ body{
   <div class="hero-inner">
     <div>
       <h1>EMBA 17기 2026년 1학기 학술운영보드</h1>
-      <p class="hero-desc">17기 원우 대상 수업·과제·발표·시험·주요행사를 한 화면에서 관리하고 공유할 수 있는 학술 운영 대시보드입니다.</p>
       <div class="contact-strip">학술국장 류인식 010-4119-7704 &nbsp;|&nbsp; 부국장 이형헌 010-7260-5073</div>
     </div>
     <div class="hero-stats">

@@ -654,7 +654,9 @@ function movePop(e){
 function hidePop(){hpopTimer=setTimeout(()=>hpop.classList.remove('show'),80);}
 document.addEventListener('mousemove',e=>{if(hpop.classList.contains('show')) movePop(e);});
 
+const isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
 function attachPop(el,html){
+  if(isTouch) return;
   el.addEventListener('mouseenter',e=>showPop(e,html));
   el.addEventListener('mouseleave',hidePop);
 }

@@ -24,7 +24,9 @@ body{
     radial-gradient(circle at top right,rgba(32,56,100,.12),transparent 22%),
     linear-gradient(180deg,var(--bg1),var(--bg2));
   min-height:100vh;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
+html{overflow-x:hidden}
 .page{max-width:1480px;margin:0 auto;padding:22px 28px 60px}
 
 /* ─── HERO ─── */
@@ -376,11 +378,26 @@ body{
   .ws-dot{width:7px;height:7px}
   /* event card: compact horizontal row */
   .event-cards{grid-template-columns:1fr;gap:8px}
-  .event-card{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:14px}
+  .event-card{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:14px;min-width:0}
+  .event-card>*{min-width:0}
   .event-card-icon{font-size:24px;margin-bottom:0;flex-shrink:0}
   .event-card-name{font-size:13px;margin-bottom:1px}
   .event-card-date{font-size:11.5px;margin-bottom:2px}
-  .event-card-desc{font-size:11px;line-height:1.4}
+  .event-card-desc{font-size:11px;line-height:1.4;word-break:keep-all}
+  /* sports card: 확장 패널이 포함돼 있어 세로 스택으로 복귀 */
+  .sports-event-card{display:block;padding:14px}
+  .sports-event-card .event-card-icon{display:inline-block;font-size:22px;margin-right:6px;vertical-align:middle}
+  .sports-event-card .event-card-name{display:inline-block;font-size:14px;margin-bottom:3px;vertical-align:middle}
+  .sports-event-card .event-card-date{font-size:12px;margin-bottom:3px}
+  .sports-event-card .event-card-desc{font-size:11.5px;margin-bottom:2px}
+  .sports-event-card .sports-badge{font-size:10.5px;padding:3px 8px}
+  .sports-event-card .sports-expand-btn{font-size:11.5px;padding:7px 8px;gap:4px}
+  .sports-sponsor-item{padding:9px 11px}
+  .sports-sponsor-name{font-size:12.5px}
+  .sports-sponsor-co{font-size:10.5px}
+  .sports-sponsor-gift{font-size:11.5px}
+  .sports-attend-row{font-size:12.5px}
+  .sports-attend-total{font-size:15px}
   /* calendar carousel */
   .cal-carousel-nav{display:flex}
   .cal-grid{display:block}

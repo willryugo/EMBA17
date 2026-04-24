@@ -572,9 +572,9 @@ body{
         </div>
         <div class="sports-detail" id="sports-attend-detail">
           <div id="sports-attend-list">로딩 중...</div>
-          <div class="sports-footer" style="margin-top:8px">
+          <div class="sports-footer" style="margin-top:8px;display:flex;align-items:center;justify-content:space-between">
             <span id="sports-updated"></span>
-            <span>📋 구글시트 연동</span>
+            <button onclick="refreshSportsData()" style="background:none;border:none;font-size:12px;color:#52617f;cursor:pointer;font-family:inherit;padding:2px 6px;border-radius:6px;transition:background .15s" onmouseover="this.style.background='rgba(0,0,0,.06)'" onmouseout="this.style.background='none'">🔄 새로고침</button>
           </div>
         </div>
       </div>
@@ -1284,13 +1284,30 @@ function renderSportsCard(sponsorData,attendData){
     </div>
     <div style="margin-top:8px;font-size:11px;color:#52617f;text-align:center">📋 구글시트 기준 · 매일 자동갱신</div>`;
   // 타임스탬프
-  const ts=parseInt(localStorage.getItem(SPORTS_TS)||'0');
-  const upd=ts?new Date(ts).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'})+'기준':'';
+  const ts=parseInt(localStorage.getItem(ATTEND_TS)||localStorage.getItem(SPORTS_TS)||'0');
+  let upd='';
+  if(ts){
+    const d=new Date(ts);
+    const day=['일','월','화','수','목','금','토'][d.getDay()];
+    const mm=String(d.getMonth()+1).padStart(2,'0');
+    const dd=String(d.getDate()).padStart(2,'0');
+    const hh=String(d.getHours()).padStart(2,'0');
+    const mi=String(d.getMinutes()).padStart(2,'0');
+    upd=`🕐 ${mm}/${dd}(${day}) ${hh}:${mi} 기준`;
+  }
   document.getElementById('sports-updated').textContent=upd;
   // D-day
   const dday=Math.ceil((new Date('2026-05-10')-new Date())/(1000*60*60*24));
   const el=document.getElementById('sports-dday');
   if(el) el.textContent=dday>0?dday:(dday===0?'Day!':'종료');
+}
+
+async function refreshSportsData(){
+  [SPORTS_CACHE,SPORTS_TS,ATTEND_CACHE,ATTEND_TS].forEach(k=>localStorage.removeItem(k));
+  document.getElementById('sports-list').innerHTML='로딩 중...';
+  document.getElementById('sports-attend-list').innerHTML='로딩 중...';
+  const [data,attendData]=await Promise.all([fetchSportsData(),fetchAttendData()]);
+  renderSportsCard(data,attendData);
 }
 
 function toggleSportsSection(id){

@@ -553,6 +553,7 @@ body{
         <div class="event-card-desc">전체 EMBA 원우 대상 · 적극 참여 권장</div>
         <div style="margin-top:7px">
           <span class="sports-badge">🏆 17기 찬조 <span id="sports-count">—</span></span>
+          <span class="sports-badge">👥 참석 <span id="sports-attend-count">—</span></span>
         </div>
         <button class="sports-expand-btn" onclick="event.stopPropagation();toggleSportsCard()">
           <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
@@ -1148,7 +1149,9 @@ function moveCalMonth(delta){
 
 // ═══ SPORTS EVENT ═══
 const SPORTS_URL='https://docs.google.com/spreadsheets/d/15n_t9nZ61FG3tfXGaWPnaUfYwIzpI9uk/gviz/tq?tqx=out:csv&gid=1502290582';
+const ATTEND_URL='https://docs.google.com/spreadsheets/d/15n_t9nZ61FG3tfXGaWPnaUfYwIzpI9uk/gviz/tq?tqx=out:csv&sheet=%EC%B2%B4%EC%9C%A1%ED%96%89%EC%82%AC%20%EC%B0%B8%EC%84%9D%EC%9E%90';
 const SPORTS_CACHE='emba17_sports';const SPORTS_TS='emba17_sports_ts';
+const ATTEND_CACHE='emba17_attend';const ATTEND_TS='emba17_attend_ts';
 const SPORTS_FALLBACK=[
   {name:'하승호',co:'㈜고스트트래블/대표이사',gift:'푸꾸옥 리조트 3박 이용권'},
   {name:'홍진성',co:'㈜SEISIN/대표이사',gift:'오사카 히노데온천호텔 숙박권 2매, 일일투어버스 무료탑승권 5매'},
@@ -1202,15 +1205,65 @@ async function fetchSportsData(){
   return cached?JSON.parse(cached):SPORTS_FALLBACK;
 }
 
-function renderSportsCard(data){
-  const totalPpl=data.reduce((s,d)=>s+(d.name.includes('·')?d.name.split('·').length:1),0);
-  document.getElementById('sports-count').textContent=totalPpl+'명';
-  const html=data.map(d=>`<div class="sports-sponsor-item">
+function parseAttendCSV(csv){
+  const lines=csv.trim().split('\n');
+  let attend=0,family=0,total=0;
+  for(const line of lines){
+    const cols=line.split(',').map(c=>c.replace(/^"|"$/g,'').trim());
+    const joined=cols.join(' ');
+    if(joined.includes('17기')&&!joined.includes('동반')){
+      const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
+      if(last) attend=parseInt(last);
+    }
+    if(joined.includes('동반가족')&&attend>0&&family===0){
+      const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
+      if(last) family=parseInt(last);
+    }
+    if(joined.includes('총 참석인원')||joined.includes('총참석인원')){
+      const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
+      if(last) total=parseInt(last);
+    }
+  }
+  return {attend,family,total:total||attend+family};
+}
+
+async function fetchAttendData(){
+  const cached=localStorage.getItem(ATTEND_CACHE);
+  const ts=parseInt(localStorage.getItem(ATTEND_TS)||'0');
+  if(cached&&Date.now()-ts<86400000) return JSON.parse(cached);
+  try{
+    const r=await fetch(ATTEND_URL);
+    if(!r.ok) throw new Error();
+    const csv=await r.text();
+    const data=parseAttendCSV(csv);
+    if(data.attend>0||data.total>0){
+      localStorage.setItem(ATTEND_CACHE,JSON.stringify(data));
+      localStorage.setItem(ATTEND_TS,Date.now().toString());
+      return data;
+    }
+  }catch(e){}
+  return cached?JSON.parse(cached):{attend:10,family:19,total:29};
+}
+
+function renderSportsCard(sponsorData,attendData){
+  // 찬조 배지
+  const sponsorPpl=sponsorData.reduce((s,d)=>s+(d.name.includes('·')?d.name.split('·').length:1),0);
+  document.getElementById('sports-count').textContent=sponsorPpl+'명';
+  // 참석 배지
+  const aEl=document.getElementById('sports-attend-count');
+  if(aEl) aEl.textContent=`${attendData.attend}명 (가족 ${attendData.family}명)`;
+  // 찬조 목록
+  const sponsorHTML=sponsorData.map(d=>`<div class="sports-sponsor-item">
     <div class="sports-sponsor-name">🙋 ${d.name}</div>
     <div class="sports-sponsor-co">${d.co}</div>
     <div class="sports-sponsor-gift">🎁 ${d.gift}</div>
   </div>`).join('');
-  document.getElementById('sports-list').innerHTML=html;
+  document.getElementById('sports-list').innerHTML=`
+    <div style="font-size:11px;font-weight:800;color:#52617f;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏆 17기 찬조 명단</div>
+    ${sponsorHTML}
+    <div style="margin-top:12px;padding:10px 12px;background:#e8f1fd;border-radius:10px;font-size:12px;font-weight:700;color:var(--navy)">
+      👥 참석 현황 &nbsp;·&nbsp; 17기 본인 <b>${attendData.attend}명</b> + 동반가족 <b>${attendData.family}명</b> = 총 <b>${attendData.total}명</b>
+    </div>`;
   const ts=parseInt(localStorage.getItem(SPORTS_TS)||'0');
   const upd=ts?new Date(ts).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'})+'기준':'';
   document.getElementById('sports-updated').textContent=upd;
@@ -1223,8 +1276,8 @@ function renderSportsCard(data){
 function toggleSportsCard(){document.getElementById('sports-card').classList.toggle('sports-card-open');}
 
 async function initSportsCard(){
-  const data=await fetchSportsData();
-  renderSportsCard(data);
+  const [data,attendData]=await Promise.all([fetchSportsData(),fetchAttendData()]);
+  renderSportsCard(data,attendData);
 }
 
 // ═══ INIT ═══

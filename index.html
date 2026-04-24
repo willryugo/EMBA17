@@ -437,7 +437,7 @@ html{overflow-x:hidden}
   <div class="hero-inner">
     <div>
       <h1>EMBA 17기 2026년 1학기 학술운영보드</h1>
-      <div class="contact-strip">📞 학술국장 류인식 <a href="tel:01041197704">010-4119-7704</a> &nbsp;|&nbsp; 부국장 이형헌 <a href="tel:01072605073">010-7260-5073</a></div>
+      <div class="contact-strip">📞 학술국장 류인식 <a href="tel:01041197704">010-4119-7704</a> &nbsp;|&nbsp; 📞 부국장 이형헌 <a href="tel:01072605073">010-7260-5073</a></div>
     </div>
     <div class="hero-stats">
       <div class="stat">
@@ -768,27 +768,68 @@ function buildUpcoming(){
 
   const days=diffDays(nextW.fri.d);
   document.getElementById('ub-title').textContent=`${nextW.label} — ${nextW.fri.label} ~ ${nextW.sat.label}`;
-  document.getElementById('ub-eyebrow').textContent=days<=0?'🔴 현재 진행 중':days===1?'내일 수업 시작':'다음 수업까지';
-  if(days>0){
-    const classStart=new Date(nextW.fri.d+'T13:00:00');
-    function updateCountdown(){
+  // 당일 수업 시작 시간 파악 (CAL_DATA 기준)
+  function getTodayClassBounds(){
+    const now=new Date();
+    const todayStr=now.toISOString().slice(0,10);
+    const d=CAL_DATA[todayStr];
+    if(!d||!d.classes||!d.classes.length) return null;
+    const parseT=s=>{const[h,m]=s.split(':').map(Number);const dt=new Date(now);dt.setHours(h,m,0,0);return dt;};
+    const first=d.classes[0].t.split('–')[0].trim();
+    const last=d.classes[d.classes.length-1].t.split('–')[1].trim();
+    return {start:parseT(first),end:parseT(last),startLabel:first};
+  }
+
+  function runClassCountdown(targetDate,label){
+    function tick(){
       const now=new Date();
-      const totalMs=classStart-now;
-      if(totalMs<=0){document.getElementById('ub-days').textContent='수업 중';document.getElementById('ub-days-label').textContent='';document.getElementById('ub-hours').textContent='';return;}
-      const totalH=Math.floor(totalMs/3600000);
+      const ms=targetDate-now;
+      const elDays=document.getElementById('ub-days');
+      const elLabel=document.getElementById('ub-days-label');
+      const elHours=document.getElementById('ub-hours');
+      if(ms<=0){
+        document.getElementById('ub-eyebrow').textContent='🔴 현재 진행 중';
+        elDays.textContent='수업 중';elLabel.textContent='';elHours.textContent='';
+        return;
+      }
+      const totalH=Math.floor(ms/3600000);
       const d=Math.floor(totalH/24);
       const h=totalH%24;
-      const m=Math.floor((totalMs%3600000)/60000);
-      document.getElementById('ub-days').textContent=`D-${d}`;
-      document.getElementById('ub-days-label').textContent=`${d}일 ${h}시간 후`;
-      document.getElementById('ub-hours').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} 남음`;
+      const m=Math.floor((ms%3600000)/60000);
+      elDays.textContent=d>0?`D-${d}`:'D-0';
+      elLabel.textContent=d>0?`${d}일 ${h}시간 후`:`${h}시간 ${m}분 후`;
+      elHours.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} 남음`;
     }
-    updateCountdown();
-    setInterval(updateCountdown,60000);
+    tick();
+    setInterval(tick,60000);
+  }
+
+  if(days>0){
+    // 이번주 금요일까지 남은 날
+    document.getElementById('ub-eyebrow').textContent=days===1?'내일 수업 시작':'다음 수업까지';
+    const classStart=new Date(nextW.fri.d+'T13:00:00');
+    runClassCountdown(classStart,'첫 수업까지');
   } else {
-    document.getElementById('ub-days').textContent=today<=dateOf(nextW.sat.d)?'수업 중':'—';
-    document.getElementById('ub-days-label').textContent='';
-    document.getElementById('ub-hours').textContent='';
+    // 수업 주간 당일 — 실제 시간 기준으로 판단
+    const bounds=getTodayClassBounds();
+    const now=new Date();
+    if(bounds && now<bounds.start){
+      // 수업 시작 전: 카운트다운
+      document.getElementById('ub-eyebrow').textContent=`🕐 오늘 첫 수업 ${bounds.startLabel} 시작까지`;
+      runClassCountdown(bounds.start,'첫 수업까지');
+    } else if(bounds && now<=bounds.end){
+      // 실제 수업 시간 중
+      document.getElementById('ub-eyebrow').textContent='🔴 현재 진행 중';
+      document.getElementById('ub-days').textContent='수업 중';
+      document.getElementById('ub-days-label').textContent='';
+      document.getElementById('ub-hours').textContent='';
+    } else {
+      // 당일 수업 종료 후
+      document.getElementById('ub-eyebrow').textContent='✅ 오늘 수업 완료';
+      document.getElementById('ub-days').textContent='종료';
+      document.getElementById('ub-days-label').textContent='수고하셨습니다';
+      document.getElementById('ub-hours').textContent='';
+    }
   }
   document.getElementById('hl-week-tag').textContent=nextW.label;
   buildHighlights(nextW);

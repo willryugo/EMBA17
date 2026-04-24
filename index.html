@@ -1224,6 +1224,7 @@ const SPORTS_FALLBACK=[
   {name:'이관우',co:'이스티온네이처/대표',gift:'마스크시트 100세트'},
   {name:'권성미',co:'마세라티공식딜러 ISP 일산전시장/전무',gift:'마세라티 우산 50개'},
   {name:'손성일·김양진·김주한·이민협·박세환',co:'KT&G, ㈜한국인삼공사',gift:'정관장제품 시가 100만원 상당'},
+  {name:'서현수',co:'㈜메가그룹/대표이사',gift:'카누 커피머신 10대 + 버라이어티 캡슐팩, 스타벅스 모바일 쿠폰 (전 참여 가정당 2매 사전제공)'},
 ];
 
 function parseCSVLine(line){
@@ -1273,13 +1274,15 @@ function parseAttendCSV(csv){
   for(const line of lines){
     const cols=line.split(',').map(c=>c.replace(/^"|"$/g,'').trim());
     const joined=cols.join(' ');
-    if(joined.includes('17기')&&!joined.includes('동반')){
+    if(joined.includes('17기')&&!joined.includes('동반')&&!joined.includes('총')){
+      // 17기 원우 행 합계를 모두 누적 (여러 행 있을 수 있음)
       const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
-      if(last) attend=parseInt(last);
+      if(last) attend+=parseInt(last);
     }
-    if(joined.includes('동반가족')&&attend>0&&family===0){
+    if(joined.includes('동반가족')){
+      // 동반가족 행 합계를 모두 누적
       const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
-      if(last) family=parseInt(last);
+      if(last) family+=parseInt(last);
     }
     if(joined.includes('총 참석인원')||joined.includes('총참석인원')){
       const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();

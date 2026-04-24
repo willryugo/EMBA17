@@ -798,7 +798,7 @@ function buildUpcoming(){
 const ALL_EVENTS=[
   {icon:'🎊',name:'17기 개강파티',date:'2026-03-28',time:'3/28(토) 수업 후',detail:'3주차 토요일 수업 종료 후 진행 — 완료'},
   {icon:'🤝',name:'16·17기 상견례',date:'2026-04-25',time:'4/25(토) 오후 7시',detail:'5주차 토요일 수업 후 · 16기와 17기 원우 간 상견례'},
-  {icon:'⚽',name:'춘계 체육대회',date:'2026-05-10',time:'5/10(일) 11:30~15:30',detail:'전체 EMBA 원우 대상 춘계 체육행사 · 적극 참여 권장'},
+  {icon:'⚽',name:'춘계 체육대회',date:'2026-05-10',time:'5/10(일) 11:30~15:30',detail:'전체 EMBA 원우 대상 춘계 체육행사 · 적극 참여 권장',isSports:true},
   {icon:'🎓',name:'17기 종강파티',date:'2026-06-20',time:'6/20(토) 오후 7시',detail:'10주차 마지막 수업 후 1학기 마무리 파티'},
   {icon:'✈️',name:'GSP 해외연수 — 시애틀 UW',date:'2026-07-22',time:'7/22(수)~24(금)',detail:'University of Washington · 종강 후 · 참가신청 별도'},
 ];
@@ -843,8 +843,42 @@ function buildHighlights(w){
       const badge=dDiff===0?'<span style="font-size:10px;background:#dc2626;color:#fff;border-radius:4px;padding:1px 6px;margin-left:6px">오늘</span>':dDiff>0?`<span style="font-size:10px;background:rgba(32,56,100,.12);color:#3a5080;border-radius:4px;padding:1px 6px;margin-left:6px">${dDiff}일 후</span>`:'';
       const div=document.createElement('div');
       div.className='ev-hl-item';
-      div.innerHTML=`<span class="ev-hl-icon">${e.icon}</span>
-        <div><div class="ev-hl-name">${e.name}${badge}</div><div class="ev-hl-time">${e.time}</div>${e.detail?`<div class="ev-hl-time" style="color:#6b7a8f;margin-top:1px">${e.detail}</div>`:''}</div>`;
+      if(e.isSports){
+        div.style.cssText='display:block;cursor:default';
+        div.innerHTML=`
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+            <span class="ev-hl-icon">${e.icon}</span>
+            <div style="flex:1;min-width:0">
+              <div class="ev-hl-name">${e.name}${badge}</div>
+              <div class="ev-hl-time">${e.time}</div>
+            </div>
+          </div>
+          <div style="margin-bottom:8px">
+            <span class="sports-badge" style="margin-top:0">🏆 17기 찬조 <span id="hl-sports-count">—</span></span>
+            <span class="sports-badge" style="margin-top:0;margin-left:4px;background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.3);color:#1d4ed8">👥 참석 <span id="hl-sports-attend-count">—</span>명</span>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="sports-expand-btn" id="hl-sports-sponsor-btn" style="margin-top:0;flex:1;font-size:11px;padding:5px 8px" onclick="toggleHlSportsSection('sponsor')">
+              <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+              🏆 찬조 명단
+            </button>
+            <button class="sports-expand-btn" id="hl-sports-attend-btn" style="margin-top:0;flex:1;font-size:11px;padding:5px 8px;background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.3);color:#1d4ed8" onclick="toggleHlSportsSection('attend')">
+              <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+              👥 참석 현황
+            </button>
+          </div>
+          <div class="sports-detail" id="hl-sports-sponsor-detail"><div id="hl-sports-list">로딩 중...</div></div>
+          <div class="sports-detail" id="hl-sports-attend-detail">
+            <div id="hl-sports-attend-list">로딩 중...</div>
+            <div class="sports-footer" style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+              <span id="hl-sports-updated" style="font-size:10px;color:#9ca3af"></span>
+              <button onclick="refreshSportsData()" style="background:#e8f1fd;border:1px solid #bfdbfe;border-radius:8px;font-size:11px;font-weight:700;color:#1d4ed8;cursor:pointer;font-family:inherit;padding:4px 10px;display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0">🔄 새로고침</button>
+            </div>
+          </div>`;
+      } else {
+        div.innerHTML=`<span class="ev-hl-icon">${e.icon}</span>
+          <div><div class="ev-hl-name">${e.name}${badge}</div><div class="ev-hl-time">${e.time}</div>${e.detail?`<div class="ev-hl-time" style="color:#6b7a8f;margin-top:1px">${e.detail}</div>`:''}</div>`;
+      }
       eventsEl.appendChild(div);
     });
   }
@@ -1313,6 +1347,17 @@ function renderSportsCard(sponsorData,attendData){
     upd=`🕐 ${mm}/${dd}(${day}) ${hh}:${mi} 기준`;
   }
   document.getElementById('sports-updated').textContent=upd;
+  // hl-events 패널 동기화
+  const hlCount=document.getElementById('hl-sports-count');
+  if(hlCount) hlCount.textContent=sponsorPpl+'명';
+  const hlACount=document.getElementById('hl-sports-attend-count');
+  if(hlACount) hlACount.textContent=attendData.total;
+  const hlList=document.getElementById('hl-sports-list');
+  if(hlList) hlList.innerHTML=document.getElementById('sports-list').innerHTML;
+  const hlAttList=document.getElementById('hl-sports-attend-list');
+  if(hlAttList) hlAttList.innerHTML=document.getElementById('sports-attend-list').innerHTML;
+  const hlUpd=document.getElementById('hl-sports-updated');
+  if(hlUpd) hlUpd.textContent=upd;
   // D-day
   const dday=Math.ceil((new Date('2026-05-10')-new Date())/(1000*60*60*24));
   const el=document.getElementById('sports-dday');
@@ -1323,8 +1368,19 @@ async function refreshSportsData(){
   [SPORTS_CACHE,SPORTS_TS,ATTEND_CACHE,ATTEND_TS].forEach(k=>localStorage.removeItem(k));
   document.getElementById('sports-list').innerHTML='로딩 중...';
   document.getElementById('sports-attend-list').innerHTML='로딩 중...';
+  const hlL=document.getElementById('hl-sports-list');if(hlL) hlL.innerHTML='로딩 중...';
+  const hlA=document.getElementById('hl-sports-attend-list');if(hlA) hlA.innerHTML='로딩 중...';
   const [data,attendData]=await Promise.all([fetchSportsData(),fetchAttendData()]);
   renderSportsCard(data,attendData);
+}
+
+function toggleHlSportsSection(id){
+  const det=document.getElementById('hl-sports-'+id+'-detail');
+  const btn=document.getElementById('hl-sports-'+id+'-btn');
+  if(!det||!btn) return;
+  const isOpen=det.classList.contains('sports-open');
+  det.classList.toggle('sports-open',!isOpen);
+  btn.classList.toggle('sports-btn-open',!isOpen);
 }
 
 function toggleSportsSection(id){

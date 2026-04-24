@@ -227,6 +227,25 @@ body{
 .cal-car-btn:disabled{opacity:.35;cursor:default}
 .cal-car-label{font-size:17px;font-weight:900;color:var(--navy);text-align:center}
 
+/* ─── SPORTS CARD ─── */
+@keyframes sports-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.55),0 6px 20px rgba(32,56,100,.1)}
+  50%{box-shadow:0 0 0 10px rgba(201,168,76,0),0 6px 20px rgba(32,56,100,.14)}
+}
+.sports-event-card{border:2px solid var(--gold)!important;animation:sports-pulse 2.4s ease-in-out infinite;cursor:pointer}
+.sports-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.35);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;color:#92620a;margin-top:7px;margin-right:4px}
+.sports-expand-btn{width:100%;margin-top:10px;background:rgba(201,168,76,.1);border:1px dashed rgba(201,168,76,.5);border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;font-weight:700;color:#92620a;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .15s}
+.sports-expand-btn:hover{background:rgba(201,168,76,.2)}
+.sports-expand-btn svg{transition:transform .22s;flex-shrink:0}
+.sports-card-open .sports-expand-btn svg{transform:rotate(180deg)}
+.sports-detail{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .2s;opacity:0}
+.sports-card-open .sports-detail{max-height:700px;opacity:1;margin-top:10px}
+.sports-sponsor-item{background:#fffbef;border-radius:10px;padding:10px 13px;margin-bottom:7px;border-left:3px solid var(--gold)}
+.sports-sponsor-item:last-child{margin-bottom:0}
+.sports-sponsor-name{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:2px}
+.sports-sponsor-co{font-size:11px;color:#52617f;margin-bottom:3px}
+.sports-sponsor-gift{font-size:12px;color:#7c5e00;font-weight:600}
+.sports-footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:10px;color:#9ca3af}
 /* courses tab */
 .course-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
 .course-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:17px;box-shadow:0 2px 8px rgba(32,56,100,.05)}
@@ -527,9 +546,25 @@ body{
         <div class="event-card-icon">🤝</div><div class="event-card-name">16·17기 상견례</div>
         <div class="event-card-date">4/25(토) 18:00</div><div class="event-card-desc">5주차 토요일 수업 후 선배기수와 만남</div>
       </div>
-      <div class="event-card" data-pop="춘계 체육대회|5/10(일) 11:30~15:30|전체 EMBA 원우 대상 춘계 체육행사. 적극 참여 권장">
-        <div class="event-card-icon">⚽</div><div class="event-card-name">춘계 체육대회</div>
-        <div class="event-card-date">5/10(일) 11:30~15:30</div><div class="event-card-desc">전체 EMBA 원우 대상 춘계 체육행사</div>
+      <div class="event-card sports-event-card" id="sports-card" onclick="toggleSportsCard()">
+        <div class="event-card-icon">⚽</div>
+        <div class="event-card-name">춘계 체육대회 <span style="font-size:11px;color:var(--gold);font-weight:700">D-<span id="sports-dday">?</span></span></div>
+        <div class="event-card-date">5/10(일) 11:30~15:30</div>
+        <div class="event-card-desc">전체 EMBA 원우 대상 · 적극 참여 권장</div>
+        <div style="margin-top:7px">
+          <span class="sports-badge">🏆 17기 찬조 <span id="sports-count">—</span></span>
+        </div>
+        <button class="sports-expand-btn" onclick="event.stopPropagation();toggleSportsCard()">
+          <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+          17기 찬조 명단 보기
+        </button>
+        <div class="sports-detail">
+          <div id="sports-list">로딩 중...</div>
+          <div class="sports-footer">
+            <span id="sports-updated"></span>
+            <span>📋 구글시트 연동</span>
+          </div>
+        </div>
       </div>
       <div class="event-card" data-pop="17기 종강파티|6/20(토) 수업 후|10주차 마지막 수업 후 1학기 마무리 행사">
         <div class="event-card-icon">🎓</div><div class="event-card-name">17기 종강파티</div>
@@ -1111,6 +1146,87 @@ function moveCalMonth(delta){
   updateCalCarousel();
 }
 
+// ═══ SPORTS EVENT ═══
+const SPORTS_URL='https://docs.google.com/spreadsheets/d/15n_t9nZ61FG3tfXGaWPnaUfYwIzpI9uk/gviz/tq?tqx=out:csv&gid=1502290582';
+const SPORTS_CACHE='emba17_sports';const SPORTS_TS='emba17_sports_ts';
+const SPORTS_FALLBACK=[
+  {name:'하승호',co:'㈜고스트트래블/대표이사',gift:'푸꾸옥 리조트 3박 이용권'},
+  {name:'홍진성',co:'㈜SEISIN/대표이사',gift:'오사카 히노데온천호텔 숙박권 2매, 일일투어버스 무료탑승권 5매'},
+  {name:'류사빈',co:'매일유업/유가공CMG 그룹장',gift:'매일유업 제품(두유, 치즈)'},
+  {name:'김제헌',co:'㈜코드캣/대표',gift:'와인 100병 (마키키 쇼비뇽 블랑 50병, 리슬링 50병)'},
+  {name:'최민용',co:'(주)피엔에프케어즈/대표이사',gift:'현금 100만원'},
+  {name:'박은만',co:'유한양행/이사',gift:'유한양행 생활용품 150개'},
+  {name:'이관우',co:'이스티온네이처/대표',gift:'마스크시트 100세트'},
+  {name:'권성미',co:'마세라티공식딜러 ISP 일산전시장/전무',gift:'마세라티 우산 50개'},
+  {name:'손성일·김양진·김주한·이민협·박세환',co:'KT&G, ㈜한국인삼공사',gift:'정관장제품 시가 100만원 상당'},
+];
+
+function parseCSVLine(line){
+  const res=[];let cur='';let inQ=false;
+  for(let i=0;i<line.length;i++){
+    if(line[i]==='"'){inQ=!inQ;}
+    else if(line[i]===','&&!inQ){res.push(cur.trim().replace(/^"|"$/g,''));cur='';}
+    else cur+=line[i];
+  }
+  res.push(cur.trim().replace(/^"|"$/g,''));
+  return res;
+}
+
+function parseSportsCSV(csv){
+  const lines=csv.trim().split('\n').filter(l=>l.trim());
+  const data=[];
+  for(let i=1;i<lines.length;i++){
+    const c=parseCSVLine(lines[i]);
+    if(c.length>=4&&c[0].includes('17')){
+      data.push({name:c[1]||'',co:c[2]||'',gift:c[3]||''});
+    }
+  }
+  return data.length>0?data:null;
+}
+
+async function fetchSportsData(){
+  const cached=localStorage.getItem(SPORTS_CACHE);
+  const ts=parseInt(localStorage.getItem(SPORTS_TS)||'0');
+  if(cached&&Date.now()-ts<86400000) return JSON.parse(cached);
+  try{
+    const r=await fetch(SPORTS_URL);
+    if(!r.ok) throw new Error();
+    const csv=await r.text();
+    const data=parseSportsCSV(csv);
+    if(data&&data.length>0){
+      localStorage.setItem(SPORTS_CACHE,JSON.stringify(data));
+      localStorage.setItem(SPORTS_TS,Date.now().toString());
+      return data;
+    }
+  }catch(e){}
+  return cached?JSON.parse(cached):SPORTS_FALLBACK;
+}
+
+function renderSportsCard(data){
+  const totalPpl=data.reduce((s,d)=>s+(d.name.includes('·')?d.name.split('·').length:1),0);
+  document.getElementById('sports-count').textContent=totalPpl+'명';
+  const html=data.map(d=>`<div class="sports-sponsor-item">
+    <div class="sports-sponsor-name">🙋 ${d.name}</div>
+    <div class="sports-sponsor-co">${d.co}</div>
+    <div class="sports-sponsor-gift">🎁 ${d.gift}</div>
+  </div>`).join('');
+  document.getElementById('sports-list').innerHTML=html;
+  const ts=parseInt(localStorage.getItem(SPORTS_TS)||'0');
+  const upd=ts?new Date(ts).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'})+'기준':'';
+  document.getElementById('sports-updated').textContent=upd;
+  // D-day
+  const dday=Math.ceil((new Date('2026-05-10')-new Date())/(1000*60*60*24));
+  const el=document.getElementById('sports-dday');
+  if(el) el.textContent=dday>0?dday:(dday===0?'Day!':'종료');
+}
+
+function toggleSportsCard(){document.getElementById('sports-card').classList.toggle('sports-card-open');}
+
+async function initSportsCard(){
+  const data=await fetchSportsData();
+  renderSportsCard(data);
+}
+
 // ═══ INIT ═══
 curWeek=getDefaultWeek();
 buildUpcoming();
@@ -1118,6 +1234,7 @@ buildWeekSchedule();
 buildCalendar();
 initCalCarousel();
 updateStats();
+initSportsCard();
 </script>
 </body>
 </html>

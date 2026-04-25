@@ -427,6 +427,64 @@ html{overflow-x:hidden}
   .ws-dot{width:6px;height:6px}
   .ws-dots{gap:5px}
 }
+
+/* ── FLOAT PANEL ── */
+.float-panel{position:fixed;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:900;padding:8px 0}
+.float-btn{background:var(--navy);color:#fff;border:none;border-radius:12px 0 0 12px;padding:13px 10px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:56px;box-shadow:-4px 3px 14px rgba(32,56,100,.35);transition:background .15s,transform .15s,box-shadow .15s}
+.float-btn:hover{background:var(--gold);transform:translateX(-5px);box-shadow:-6px 4px 18px rgba(201,168,76,.45)}
+.float-btn .fb-icon{font-size:20px;line-height:1}
+.float-btn .fb-label{font-size:9.5px;line-height:1.3;text-align:center;word-break:keep-all}
+
+/* ── MODAL OVERLAY ── */
+.fm-overlay{position:fixed;inset:0;background:rgba(10,20,50,.6);z-index:1100;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px)}
+.fm-overlay.active{display:flex}
+.fm-box{background:#fff;border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.4);position:relative;overflow:hidden;display:flex;flex-direction:column;max-height:92vh}
+.fm-close{position:absolute;top:10px;right:12px;background:rgba(0,0,0,.13);border:none;border-radius:50%;width:32px;height:32px;font-size:17px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.fm-close:hover{background:rgba(220,38,38,.25)}
+
+/* ── ORG CHART ── */
+.fm-org{width:min(940px,95vw);padding:24px 20px 20px;overflow:auto}
+.org-title-bar{background:var(--navy);color:#fff;text-align:center;padding:10px 16px;border-radius:10px;font-size:15px;font-weight:900;letter-spacing:.04em;margin-bottom:20px}
+.org-l1{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
+.org-l1-sides{display:flex;gap:8px}
+.org-connector{display:flex;flex-direction:column;align-items:center}
+.org-vc{width:2px;height:20px;background:#9ca3af}
+.org-hc{display:flex;align-items:flex-start;gap:0}
+.org-row{display:flex;justify-content:center;gap:8px;margin-bottom:8px;position:relative}
+.org-row::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:2px;height:8px;background:#9ca3af}
+.ob{border-radius:8px;padding:8px 10px;text-align:center;min-width:100px;border:1.5px solid rgba(0,0,0,.1)}
+.ob-role{font-size:11px;font-weight:800;margin-bottom:3px;letter-spacing:.04em}
+.ob-name{font-size:12.5px;font-weight:900;margin-bottom:2px}
+.ob-yr{font-size:10px;font-weight:600;opacity:.75}
+.ob-co{font-size:10px;opacity:.8;line-height:1.3}
+.ob-navy{background:#203864;color:#fff;border-color:#203864}
+.ob-gray{background:#4b5563;color:#fff;border-color:#374151}
+.ob-blue{background:#bfdbfe;color:#1e3a5f;border-color:#93c5fd}
+.ob-gold{background:#C9A84C;color:#fff;border-color:#b8963e}
+.ob-gold2{background:#92400e;color:#fff;border-color:#78350f}
+.ob-hline{display:flex;align-items:flex-start;gap:0;justify-content:center}
+.ob-hline .ob{position:relative}
+.org-branch{display:flex;flex-direction:column;align-items:center}
+.org-vline{width:2px;height:14px;background:#9ca3af;margin:0 auto}
+.org-hbar{height:2px;background:#9ca3af;width:100%}
+.org-children{display:flex;gap:8px;justify-content:center}
+.org-child-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+.org-cline{width:2px;height:12px;background:#9ca3af}
+@media(max-width:640px){
+  .fm-org{padding:12px 8px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .fm-org>*{min-width:600px} /* 전체를 600px 기준으로 가로스크롤 */
+  .ob{min-width:76px;max-width:84px;padding:6px 5px}
+  .ob-role{font-size:9px}.ob-name{font-size:10px}.ob-co{font-size:8.5px;white-space:normal}
+  .float-btn{min-width:48px;padding:10px 7px}
+  .float-btn .fb-icon{font-size:17px}
+  .float-btn .fb-label{font-size:8.5px}
+  .fm-members{width:96vw;height:78vh}
+}
+
+/* ── MEMBERS IFRAME ── */
+.fm-members{width:min(1100px,96vw);height:82vh;display:flex;flex-direction:column}
+.fm-members iframe{flex:1;border:none;border-radius:0 0 20px 20px}
+.fm-members-header{background:var(--navy);color:#fff;padding:14px 20px;font-size:14px;font-weight:900;border-radius:20px 20px 0 0;display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
@@ -1448,6 +1506,96 @@ buildCalendar();
 initCalCarousel();
 updateStats();
 initSportsCard();
+
+function openFloatModal(type){
+  document.getElementById('fm-overlay').classList.add('active');
+  document.getElementById('fm-org-view').style.display = type==='org'?'':'none';
+  document.getElementById('fm-members-view').style.display = type==='members'?'flex':'none';
+}
+function closeFloatModal(){
+  document.getElementById('fm-overlay').classList.remove('active');
+}
 </script>
+
+<!-- ── FLOATING PANEL ── -->
+<div class="float-panel">
+  <button class="float-btn" onclick="openFloatModal('org')">
+    <span class="fb-icon">🏢</span><span class="fb-label">원우회<br>조직도</span>
+  </button>
+  <button class="float-btn" onclick="openFloatModal('members')">
+    <span class="fb-icon">👥</span><span class="fb-label">원우회<br>명단</span>
+  </button>
+</div>
+
+<!-- ── MODAL OVERLAY ── -->
+<div class="fm-overlay" id="fm-overlay" onclick="closeFloatModal()">
+  <div onclick="event.stopPropagation()" style="position:relative;display:contents">
+
+    <!-- 조직도 -->
+    <div class="fm-box fm-org" id="fm-org-view">
+      <button class="fm-close" onclick="closeFloatModal()">✕</button>
+      <div class="org-title-bar">연세대학교 EMBA 제 17기 원우회</div>
+
+      <!-- L1: 고문 + 회장 + 감사 -->
+      <div style="display:flex;align-items:flex-start;justify-content:center;gap:14px;margin-bottom:10px">
+        <div style="display:flex;gap:7px;margin-top:18px">
+          <div class="ob ob-gray"><div class="ob-role">고 문</div><div class="ob-name">조 호 경 <span class="ob-yr">(68)</span></div><div class="ob-co">엠디바이스㈜ 대표이사</div></div>
+          <div class="ob ob-gray"><div class="ob-role">고 문</div><div class="ob-name">강 병 성 <span class="ob-yr">(68)</span></div><div class="ob-co">㈜성유상사 사장</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div class="ob ob-navy" style="min-width:150px"><div class="ob-role">회 장</div><div class="ob-name" style="font-size:14px">정 종 균 <span class="ob-yr">(80)</span></div><div class="ob-co">㈜시스메이트 대표이사</div></div>
+          <div style="width:2px;height:14px;background:#9ca3af"></div>
+        </div>
+        <div style="margin-top:18px">
+          <div class="ob ob-gray"><div class="ob-role">감 사</div><div class="ob-name">정 지 현 <span class="ob-yr">(82)</span></div><div class="ob-co">삼덕회계법인 Director</div></div>
+        </div>
+      </div>
+
+      <!-- L2: 부회장 -->
+      <div style="display:flex;justify-content:center;gap:10px;margin-bottom:10px">
+        <div class="ob ob-blue"><div class="ob-role">부 회 장</div><div class="ob-name">류 사 빈 <span class="ob-yr">(79)</span></div><div class="ob-co">매일유업 그룹장</div></div>
+        <div class="ob ob-blue"><div class="ob-role">부 회 장</div><div class="ob-name">김 운 용 <span class="ob-yr">(80)</span></div><div class="ob-co">㈜인피니티 CEO</div></div>
+      </div>
+      <div style="width:2px;height:12px;background:#9ca3af;margin:0 auto 0"></div>
+
+      <!-- L3: 국장 -->
+      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:6px;flex-wrap:wrap">
+        <div class="ob ob-gold"><div class="ob-role">사무국장</div><div class="ob-name">김 태 웅 <span class="ob-yr">(80)</span></div><div class="ob-co">삼성전자 수석엔지니어</div></div>
+        <div class="ob ob-gold"><div class="ob-role">재무국장</div><div class="ob-name">김 선 도 <span class="ob-yr">(82)</span></div><div class="ob-co">IBK기업은행 팀장</div></div>
+        <div class="ob ob-gold"><div class="ob-role">문화국장</div><div class="ob-name">김 미 르 <span class="ob-yr">(79)</span></div><div class="ob-co">㈜썸이미지니어링 대표</div></div>
+        <div class="ob ob-gold"><div class="ob-role">홍보국장</div><div class="ob-name">정 수 인 <span class="ob-yr">(77)</span></div><div class="ob-co">㈜런컬렉션 이사</div></div>
+        <div class="ob ob-gold"><div class="ob-role" style="font-size:9.5px">커뮤니케이션국장</div><div class="ob-name">박 흥 규 <span class="ob-yr">(82)</span></div><div class="ob-co">삼성전자 그룹장</div></div>
+        <div class="ob ob-gold"><div class="ob-role">학술국장</div><div class="ob-name">류 인 식 <span class="ob-yr">(82)</span></div><div class="ob-co">㈜포이닉스 이사</div></div>
+        <div class="ob ob-gold"><div class="ob-role">기획국장</div><div class="ob-name">김 주 민 <span class="ob-yr">(80)</span></div><div class="ob-co">동국제강㈜ 부장</div></div>
+      </div>
+
+      <!-- L4: 부국장 -->
+      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:6px;flex-wrap:wrap">
+        <div class="ob ob-gold2"><div class="ob-role">사무부국장</div><div class="ob-name">김 대 언 <span class="ob-yr">(82)</span></div><div class="ob-co">㈜온다글로벌로지스 부사장</div></div>
+        <div class="ob ob-gold2"><div class="ob-role">부 국 장</div><div class="ob-name">박 준 호 <span class="ob-yr">(76)</span></div><div class="ob-co">㈜위메이드 팀장</div></div>
+        <div class="ob ob-gold2"><div class="ob-role">문화부국장</div><div class="ob-name">김 제 헌 <span class="ob-yr">(86)</span></div><div class="ob-co">㈜코드캣 대표</div></div>
+        <div class="ob ob-gold2"><div class="ob-role">홍보부국장</div><div class="ob-name">홍 진 성 <span class="ob-yr">(79)</span></div><div class="ob-co">㈜SEISIN 대표이사</div></div>
+        <div class="ob ob-gold2"><div class="ob-role" style="font-size:9px">커뮤니케이션부국장</div><div class="ob-name">정 희 선 <span class="ob-yr">(82)</span></div><div class="ob-co">익스피디아그룹 부장</div></div>
+        <div class="ob ob-gold2"><div class="ob-role">학술부국장</div><div class="ob-name">이 형 헌 <span class="ob-yr">(82)</span></div><div class="ob-co">삼성전자 부장</div></div>
+        <div class="ob ob-gold2"><div class="ob-role">기획부국장</div><div class="ob-name">김 진 성 <span class="ob-yr">(86)</span></div><div class="ob-co">WPP MEDIA 부장</div></div>
+      </div>
+
+      <!-- L5: 하일산 (기획부 하단) -->
+      <div style="display:flex;justify-content:flex-end;padding-right:calc(50% - 350px);margin-bottom:4px">
+        <div class="ob ob-gold2" style="min-width:88px"><div class="ob-name">하 일 산 <span class="ob-yr">(84)</span></div><div class="ob-co">레이몰드㈜ 대표이사</div></div>
+      </div>
+    </div>
+
+    <!-- 원우명단 -->
+    <div class="fm-box fm-members" id="fm-members-view" style="display:none">
+      <div class="fm-members-header">
+        <span>👥</span> 연세 EMBA 17기 원우명단
+        <button class="fm-close" style="position:static;margin-left:auto" onclick="closeFloatModal()">✕</button>
+      </div>
+      <iframe src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=332354456&single=true" allowfullscreen></iframe>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>

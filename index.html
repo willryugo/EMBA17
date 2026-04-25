@@ -429,7 +429,7 @@ html{overflow-x:hidden}
 }
 
 /* ── FLOAT PANEL ── */
-.float-panel{position:fixed;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:900;padding:8px 0}
+.float-panel{position:fixed;right:0;bottom:90px;display:flex;flex-direction:column;gap:6px;z-index:900;padding:8px 0}
 .float-btn{background:var(--navy);color:#fff;border:none;border-radius:12px 0 0 12px;padding:13px 10px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:56px;box-shadow:-4px 3px 14px rgba(32,56,100,.35);transition:background .15s,transform .15s,box-shadow .15s}
 .float-btn:hover{background:var(--gold);transform:translateX(-5px);box-shadow:-6px 4px 18px rgba(201,168,76,.45)}
 .float-btn .fb-icon{font-size:20px;line-height:1}
@@ -1529,10 +1529,9 @@ function closeFloatModal(){
 
 <!-- ── MODAL OVERLAY ── -->
 <div class="fm-overlay" id="fm-overlay" onclick="closeFloatModal()">
-  <div onclick="event.stopPropagation()" style="position:relative;display:contents">
 
     <!-- 조직도 -->
-    <div class="fm-box fm-org" id="fm-org-view">
+    <div class="fm-box fm-org" id="fm-org-view" onclick="event.stopPropagation()">
       <button class="fm-close" onclick="closeFloatModal()">✕</button>
       <div class="org-title-bar">연세대학교 EMBA 제 17기 원우회</div>
 
@@ -1587,7 +1586,7 @@ function closeFloatModal(){
     </div>
 
     <!-- 원우명단 -->
-    <div class="fm-box fm-members" id="fm-members-view" style="display:none">
+    <div class="fm-box fm-members" id="fm-members-view" style="display:none" onclick="event.stopPropagation()">
       <div class="fm-members-header">
         <span>👥</span> 연세 EMBA 17기 원우명단
         <button class="fm-close" style="position:static;margin-left:auto" onclick="closeFloatModal()">✕</button>
@@ -1595,7 +1594,6 @@ function closeFloatModal(){
       <iframe src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=332354456&single=true" allowfullscreen></iframe>
     </div>
 
-  </div>
 </div>
 </body>
 </html>

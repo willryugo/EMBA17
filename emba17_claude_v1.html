@@ -1843,12 +1843,17 @@ function closeFloatModal(){
         <button class="fm-close" style="position:static;margin-left:auto" onclick="closeFloatModal()">✕</button>
       </div>
       <div class="fm-modal-copy">
-        명단을 페이지 내부 표로 정리했습니다. 데스크톱에서는 표 형태, 모바일에서는 카드 형태로 표시됩니다.
+        사진이 함께 보이도록 원우명단은 원본 시트 화면을 그대로 연결했습니다.
+        필요하면
+        <a href="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=674509073&single=true" target="_blank" rel="noopener">새 창으로 열기</a>
+        로 확인할 수 있습니다.
       </div>
-      <div class="fm-mobile-hint">모바일에서는 카드형 목록으로 자동 전환되고, 데스크톱 표에서는 상단 헤더를 고정해 둘 수 있습니다.</div>
-      <div class="fm-content-wrap">
-        <div class="member-html-scroll">
-          <div class="member-directory" id="memberDirectoryRoot"></div>
+      <div class="fm-mobile-hint">모바일에서는 사진이 보이도록 원본 명단 시트를 유지합니다. 필요하면 브라우저 확대를 함께 사용하면 더 편합니다.</div>
+      <div class="fm-pdf-wrap">
+        <div class="fm-embed-scroll members-scroll">
+          <div class="fm-embed-stage">
+            <iframe src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=674509073&single=true" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </div>

@@ -526,6 +526,8 @@ html{overflow-x:hidden}
 .member-table thead th{position:sticky;top:76px;z-index:3;background:linear-gradient(180deg,#fff2bf,#ffcb29);color:#2d2d2d;padding:10px 10px;border-bottom:2px solid #cf9b00;border-top:1px solid #ead38e;text-align:left;font-weight:900;white-space:nowrap}
 .member-table td{padding:11px 10px;border-bottom:1px solid #e8edf4;vertical-align:top;color:#30405f;line-height:1.5;background:#fff}
 .member-table tbody tr:nth-child(even) td{background:#fbfcfe}
+.member-photo-cell{width:82px}
+.member-photo{width:58px;height:72px;object-fit:cover;object-position:center top;border-radius:8px;border:1px solid #d8dee9;background:#f3f6fb;display:block}
 .member-order{width:56px;color:#61708c;font-weight:800}
 .member-name-cell{min-width:120px}
 .member-name-strong{font-size:15px;font-weight:900;color:var(--navy)}
@@ -533,7 +535,8 @@ html{overflow-x:hidden}
 .member-role-badge{display:inline-block;background:#eef4ff;color:#27406c;border:1px solid #c9d8f7;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:800}
 .member-mobile-list{display:none;padding:14px;gap:12px}
 .member-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:0 8px 18px rgba(32,56,100,.06)}
-.member-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.member-card-top{display:grid;grid-template-columns:72px 1fr auto;align-items:start;gap:12px;margin-bottom:10px}
+.member-card-photo{width:72px;height:90px;object-fit:cover;object-position:center top;border-radius:10px;border:1px solid #d8dee9;background:#f3f6fb}
 .member-card-name{font-size:18px;font-weight:900;color:var(--navy)}
 .member-card-birth{font-size:12px;font-weight:800;color:#61708c;margin-top:3px}
 .member-card-order{background:#f3f6fb;color:#52617f;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800;white-space:nowrap}
@@ -1783,9 +1786,11 @@ function renderOrgChart(){
 function renderMemberDirectory(){
   const root=document.getElementById('memberDirectoryRoot');
   if(!root) return;
+  const photoFor=member=>`assets/member_photos/member_${String(member.order).padStart(2,'0')}.jpg`;
   const desktopRows=MEMBER_DIRECTORY.map(member=>`
     <tr>
       <td class="member-order">${member.order}</td>
+      <td class="member-photo-cell"><img class="member-photo" src="${photoFor(member)}" alt="${member.name} 사진" loading="lazy"></td>
       <td class="member-name-cell">
         <div class="member-name-strong">${member.name}</div>
         <div class="member-sub">${member.birth?member.birth+'년생':'연도 미표기'}</div>
@@ -1799,6 +1804,7 @@ function renderMemberDirectory(){
   const mobileCards=MEMBER_DIRECTORY.map(member=>`
     <article class="member-card">
       <div class="member-card-top">
+        <img class="member-card-photo" src="${photoFor(member)}" alt="${member.name} 사진" loading="lazy">
         <div>
           <div class="member-card-name">${member.name}</div>
           <div class="member-card-birth">${member.birth?member.birth+'년생':'연도 미표기'}</div>
@@ -1823,6 +1829,7 @@ function renderMemberDirectory(){
         <thead>
           <tr>
             <th>순서</th>
+            <th>사진</th>
             <th>이름</th>
             <th>회사명</th>
             <th>직위</th>
@@ -1898,17 +1905,14 @@ function closeFloatModal(){
         <button class="fm-close" style="position:static;margin-left:auto" onclick="closeFloatModal()">✕</button>
       </div>
       <div class="fm-modal-copy">
-        사진이 함께 보이도록 원우명단은 원본 시트 화면을 그대로 연결했습니다.
-        필요하면
+        원우명단을 사진 포함 카드형으로 정리했습니다.
+        원본 확인이 필요하면
         <a href="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=674509073&single=true" target="_blank" rel="noopener">새 창으로 열기</a>
-        로 확인할 수 있습니다.
+        를 이용할 수 있습니다.
       </div>
-      <div class="fm-mobile-hint">모바일에서는 사진이 보이도록 원본 명단 시트를 유지합니다. 필요하면 브라우저 확대를 함께 사용하면 더 편합니다.</div>
-      <div class="fm-pdf-wrap">
-        <div class="fm-embed-scroll members-scroll">
-          <div class="fm-embed-stage">
-            <iframe src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=674509073&single=true" allowfullscreen></iframe>
-          </div>
+      <div class="fm-content-wrap">
+        <div class="member-html-scroll">
+          <div class="member-directory" id="memberDirectoryRoot"></div>
         </div>
       </div>
     </div>

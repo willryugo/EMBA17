@@ -771,8 +771,8 @@ function buildUpcoming(){
   // 당일 수업 시작 시간 파악 (CAL_DATA 기준)
   function getTodayClassBounds(){
     const now=new Date();
-    const todayStr=now.toISOString().slice(0,10);
-    const d=CAL_DATA[todayStr];
+    const todayStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+    const d=CAL_DAY_DATA[todayStr];
     if(!d||!d.classes||!d.classes.length) return null;
     const parseT=s=>{const[h,m]=s.split(':').map(Number);const dt=new Date(now);dt.setHours(h,m,0,0);return dt;};
     const first=d.classes[0].t.split('–')[0].trim();

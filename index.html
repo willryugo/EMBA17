@@ -443,8 +443,13 @@ html{overflow-x:hidden}
 .fm-close:hover{background:rgba(220,38,38,.25)}
 
 /* ── ORG CHART ── */
-.fm-org{width:min(940px,95vw);padding:24px 20px 20px;overflow:auto}
-.org-title-bar{background:var(--navy);color:#fff;text-align:center;padding:10px 16px;border-radius:10px;font-size:15px;font-weight:900;letter-spacing:.04em;margin-bottom:20px}
+.fm-org{width:min(1180px,96vw);height:84vh;padding:0;background:linear-gradient(180deg,#f8fbff,#edf3fb)}
+.org-title-bar{background:var(--navy);color:#fff;text-align:center;padding:14px 18px;font-size:15px;font-weight:900;letter-spacing:.04em}
+.fm-modal-copy{padding:12px 20px 10px;font-size:12.5px;line-height:1.6;color:#4a5876;border-bottom:1px solid rgba(32,56,100,.08);background:rgba(255,255,255,.82)}
+.fm-modal-copy a{color:var(--navy);font-weight:800;text-decoration:none}
+.fm-modal-copy a:hover{text-decoration:underline}
+.fm-pdf-wrap{flex:1;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(233,240,249,.95))}
+.fm-pdf-frame{width:100%;height:100%;border:none;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px rgba(32,56,100,.08)}
 .org-l1{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
 .org-l1-sides{display:flex;gap:8px}
 .org-connector{display:flex;flex-direction:column;align-items:center}
@@ -492,7 +497,7 @@ html{overflow-x:hidden}
 
 /* ── MEMBERS IFRAME ── */
 .fm-members{width:min(1100px,96vw);height:82vh;display:flex;flex-direction:column}
-.fm-members iframe{flex:1;border:none;border-radius:0 0 20px 20px}
+.fm-members iframe{flex:1;border:none;border-radius:0 0 20px 20px;background:#fff}
 .fm-members-header{background:var(--navy);color:#fff;padding:14px 20px;font-size:14px;font-weight:900;border-radius:20px 20px 0 0;display:flex;align-items:center;gap:8px}
 </style>
 </head>
@@ -1547,100 +1552,19 @@ function closeFloatModal(){
     <div class="fm-box fm-org" id="fm-org-view" onclick="event.stopPropagation()">
       <button class="fm-close" onclick="closeFloatModal()">✕</button>
       <div class="org-title-bar">연세대학교 EMBA 제 17기 원우회</div>
-
-      <div class="oc-scroll"><div class="oc-inner">
-
-      <!-- ── L0: 고문 ← 회장 → 감사 ── -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:0">
-        <!-- 고문 그룹 (좌측) -->
-        <div style="display:flex;align-items:center">
-          <div style="display:flex;flex-direction:column;gap:5px">
-            <div class="ob ob-gray"><div class="ob-role">고 문</div><div class="ob-name">조 호 경 <span class="ob-yr">(68)</span></div><div class="ob-co">엠디바이스㈜ 대표이사</div></div>
-            <div class="ob ob-gray"><div class="ob-role">고 문</div><div class="ob-name">강 병 성 <span class="ob-yr">(68)</span></div><div class="ob-co">성유상사 사장</div></div>
-          </div>
-          <!-- 고문→회장 수평선 -->
-          <div style="width:20px;height:2px;background:#9ca3af;flex-shrink:0"></div>
-        </div>
-        <!-- 회장 (중앙) -->
-        <div style="display:flex;flex-direction:column;align-items:center">
-          <div class="ob ob-navy" style="min-width:130px"><div class="ob-role">회 장</div><div class="ob-name" style="font-size:14px">정 종 균 <span class="ob-yr">(80)</span></div><div class="ob-co">㈜시스메이트 대표이사</div></div>
-          <div class="oc-vconn"></div>
-        </div>
-        <!-- 회장→감사 수평선 + 감사 (우측) -->
-        <div style="display:flex;align-items:center">
-          <div style="width:20px;height:2px;background:#9ca3af;flex-shrink:0"></div>
-          <div class="ob ob-gray"><div class="ob-role">감 사</div><div class="ob-name">정 지 현 <span class="ob-yr">(82)</span></div><div class="ob-co">삼덕회계법인 Director</div></div>
-        </div>
+      <div class="fm-modal-copy">
+        최신 조직도 PDF를 팝업 안에서 바로 볼 수 있도록 연결했습니다.
+        브라우저에 따라 미리보기가 제한되면
+        <a href="./assets/emba17_org_chart.pdf" target="_blank" rel="noopener">새 창으로 열기</a>
+        로 확인할 수 있습니다.
       </div>
-
-      <!-- ── L1: 부회장 2명 (수평바+수직선 포함) ── -->
-      <div class="oc-ch-row ch2">
-        <div class="oc-ch">
-          <div class="ob ob-blue"><div class="ob-role">부 회 장</div><div class="ob-name">류 사 빈 <span class="ob-yr">(79)</span></div><div class="ob-co">매일유업 그룹장</div></div>
-        </div>
-        <div class="oc-ch">
-          <div class="ob ob-blue"><div class="ob-role">부 회 장</div><div class="ob-name">김 운 용 <span class="ob-yr">(80)</span></div><div class="ob-co">㈜인피니티 CEO</div></div>
-        </div>
+      <div class="fm-pdf-wrap">
+        <iframe
+          class="fm-pdf-frame"
+          src="./assets/emba17_org_chart.pdf#view=FitH"
+          title="연세대학교 EMBA 원우회 조직도 17기"
+        ></iframe>
       </div>
-      <div class="oc-vconn"></div>
-
-      <!-- ── L2~L4: 7개 부서 세로열 (국장 → 부국장 → 하일산) ── -->
-      <div class="oc-ch-row ch7">
-
-        <!-- 사무국 -->
-        <div class="oc-ch">
-          <div class="ob ob-gold"><div class="ob-role">사무국장</div><div class="ob-name">김 태 웅 <span class="ob-yr">(80)</span></div><div class="ob-co">삼성전자 수석엔지니어</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2"><div class="ob-role">사무부국장</div><div class="ob-name">김 대 언 <span class="ob-yr">(82)</span></div><div class="ob-co">㈜온다글로벌로지스 부사장</div></div>
-        </div>
-
-        <!-- 재무국 -->
-        <div class="oc-ch">
-          <div class="ob ob-gold"><div class="ob-role">재무국장</div><div class="ob-name">김 선 도 <span class="ob-yr">(82)</span></div><div class="ob-co">IBK기업은행 팀장</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2"><div class="ob-role">재무부국장</div><div class="ob-name">박 준 호 <span class="ob-yr">(76)</span></div><div class="ob-co">㈜위메이드 팀장</div></div>
-        </div>
-
-        <!-- 문화국 -->
-        <div class="oc-ch">
-          <div class="ob ob-gold"><div class="ob-role">문화국장</div><div class="ob-name">김 미 르 <span class="ob-yr">(79)</span></div><div class="ob-co">㈜썸이미지니어링 대표</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2"><div class="ob-role">문화부국장</div><div class="ob-name">김 제 헌 <span class="ob-yr">(86)</span></div><div class="ob-co">㈜코드캣 대표</div></div>
-        </div>
-
-        <!-- 홍보국 -->
-        <div class="oc-ch">
-          <div class="ob ob-gold"><div class="ob-role">홍보국장</div><div class="ob-name">정 수 인 <span class="ob-yr">(77)</span></div><div class="ob-co">㈜런컬렉션 이사</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2"><div class="ob-role">홍보부국장</div><div class="ob-name">홍 진 성 <span class="ob-yr">(79)</span></div><div class="ob-co">㈜SEISIN 대표이사</div></div>
-        </div>
-
-        <!-- 커뮤니케이션국 -->
-        <div class="oc-ch">
-          <div class="ob ob-gold"><div class="ob-role" style="font-size:9px">커뮤니케이션국장</div><div class="ob-name">박 흥 규 <span class="ob-yr">(82)</span></div><div class="ob-co">삼성전자 그룹장</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2"><div class="ob-role" style="font-size:8px">커뮤니케이션부국장</div><div class="ob-name">정 희 선 <span class="ob-yr">(82)</span></div><div class="ob-co">익스피디아그룹 부장</div></div>
-        </div>
-
-        <!-- 학술국 -->
-        <div class="oc-ch">
-          <div class="ob ob-gold"><div class="ob-role">학술국장</div><div class="ob-name">류 인 식 <span class="ob-yr">(82)</span></div><div class="ob-co">㈜포이닉스 이사</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2"><div class="ob-role">학술부국장</div><div class="ob-name">이 형 헌 <span class="ob-yr">(82)</span></div><div class="ob-co">삼성전자 부장</div></div>
-        </div>
-
-        <!-- 기획국 (+ 하일산) -->
-        <div class="oc-ch">
-          <div class="ob ob-gold"><div class="ob-role">기획국장</div><div class="ob-name">김 주 민 <span class="ob-yr">(80)</span></div><div class="ob-co">동국제강㈜ 부장</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2"><div class="ob-role">기획부국장</div><div class="ob-name">김 진 성 <span class="ob-yr">(86)</span></div><div class="ob-co">WPP MEDIA 부장</div></div>
-          <div class="oc-vconn"></div>
-          <div class="ob ob-gold2" style="border-style:dashed"><div class="ob-name">하 일 산 <span class="ob-yr">(84)</span></div><div class="ob-co">레이몰드㈜ 대표이사</div></div>
-        </div>
-
-      </div><!-- oc-ch-row ch7 -->
-
-      </div></div><!-- oc-inner / oc-scroll -->
     </div>
 
     <!-- 원우명단 -->
@@ -1649,7 +1573,13 @@ function closeFloatModal(){
         <span>👥</span> 연세 EMBA 17기 원우명단
         <button class="fm-close" style="position:static;margin-left:auto" onclick="closeFloatModal()">✕</button>
       </div>
-      <iframe src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/pubhtml?gid=674509073&single=true" allowfullscreen></iframe>
+      <div class="fm-modal-copy">
+        구글시트의 원우회 명단 탭을 그대로 연결했습니다.
+        화면이 작거나 로딩이 느릴 때는
+        <a href="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=332354456&single=true" target="_blank" rel="noopener">새 창으로 열기</a>
+        를 이용할 수 있습니다.
+      </div>
+      <iframe src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=332354456&single=true" allowfullscreen></iframe>
     </div>
 
 </div>

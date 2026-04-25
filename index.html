@@ -616,7 +616,13 @@ html{overflow-x:hidden}
   .fm-members .fm-modal-copy,.fm-members .fm-mobile-hint{display:none}
   .fm-members .fm-pdf-wrap{padding:0;background:#fff}
   .fm-members .fm-embed-scroll{border-radius:0;box-shadow:none}
-  .fm-embed-scroll.members-scroll{--embed-scale:.72}
+  .fm-embed-scroll.members-scroll{--embed-scale:.9}
+  .members-scroll .fm-embed-stage{
+    transform:translateX(-108px) scale(var(--embed-scale,1));
+    transform-origin:0 0;
+    width:calc((100% + 108px) / var(--embed-scale,1));
+    min-width:calc((100% + 108px) / var(--embed-scale,1));
+  }
 }
 </style>
 </head>

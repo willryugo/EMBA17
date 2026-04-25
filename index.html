@@ -468,6 +468,58 @@ html{overflow-x:hidden}
 .fm-embed-scroll.org-scroll{--embed-scale:.68}
 .fm-embed-scroll.members-scroll{--embed-scale:.6}
 .fm-mobile-hint{display:none;padding:0 20px 10px;font-size:11px;line-height:1.5;color:#61708c;background:rgba(255,255,255,.82);border-bottom:1px solid rgba(32,56,100,.08)}
+.fm-content-wrap{flex:1;min-height:0;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(233,240,249,.95))}
+.org-html-scroll,.member-html-scroll{height:100%;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px rgba(32,56,100,.08)}
+.org-html-stage{min-width:960px;padding:22px}
+.org-section{margin-bottom:18px}
+.org-row-flex{display:flex;gap:14px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.org-row-between{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:start}
+.org-side-col{display:flex;gap:12px;justify-content:center}
+.org-title-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(32,56,100,.08);color:var(--navy);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:800;margin:0 auto 10px}
+.org-node{background:#fff;border:1px solid #d7dfed;border-radius:16px;padding:12px 14px;min-width:180px;box-shadow:0 8px 20px rgba(32,56,100,.08)}
+.org-node.role-president{border-color:#203864;background:linear-gradient(180deg,#243f73,#203864);color:#fff}
+.org-node.role-vp{border-color:#9cb8e8;background:linear-gradient(180deg,#eef4ff,#dde9ff)}
+.org-node.role-advisor,.org-node.role-auditor{border-color:#c9ced9;background:linear-gradient(180deg,#f8f9fb,#eef1f5)}
+.org-node.role-dept{border-color:#e3d0a0;background:linear-gradient(180deg,#fffef9,#fff7e7)}
+.org-node-head{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;opacity:.78}
+.org-node-name{font-size:24px;font-weight:900;line-height:1.1;margin-bottom:4px}
+.org-node-meta{font-size:12px;line-height:1.5;opacity:.9}
+.org-node-mini{min-width:150px}
+.org-node-mini .org-node-name{font-size:18px}
+.org-dept-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.org-dept-card{border:1px solid #e3d7bb;border-radius:18px;background:#fff;padding:14px;box-shadow:0 8px 18px rgba(32,56,100,.06)}
+.org-dept-name{font-size:14px;font-weight:900;color:var(--navy);margin-bottom:10px}
+.org-dept-people{display:grid;gap:8px}
+.org-person-chip{background:#f8fafc;border-radius:12px;padding:10px 11px;border-left:4px solid var(--gold)}
+.org-person-chip .label{font-size:10px;font-weight:800;color:#92620a;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.org-person-chip .name{font-size:15px;font-weight:900;color:var(--navy)}
+.org-person-chip .meta{font-size:11.5px;color:#52617f;line-height:1.45;margin-top:2px}
+.member-html-scroll{padding:0}
+.member-directory{min-width:1080px}
+.member-summary{position:sticky;top:0;z-index:4;background:#fff;border-bottom:1px solid #e6e9ef;padding:14px 18px}
+.member-summary h4{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:4px}
+.member-summary p{font-size:12.5px;color:#61708c;line-height:1.5}
+.member-table-wrap{padding:0 18px 18px}
+.member-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+.member-table thead th{position:sticky;top:76px;z-index:3;background:linear-gradient(180deg,#fff2bf,#ffcb29);color:#2d2d2d;padding:10px 10px;border-bottom:2px solid #cf9b00;border-top:1px solid #ead38e;text-align:left;font-weight:900;white-space:nowrap}
+.member-table td{padding:11px 10px;border-bottom:1px solid #e8edf4;vertical-align:top;color:#30405f;line-height:1.5;background:#fff}
+.member-table tbody tr:nth-child(even) td{background:#fbfcfe}
+.member-order{width:56px;color:#61708c;font-weight:800}
+.member-name-cell{min-width:120px}
+.member-name-strong{font-size:15px;font-weight:900;color:var(--navy)}
+.member-sub{font-size:11px;color:#7b879b;margin-top:2px}
+.member-role-badge{display:inline-block;background:#eef4ff;color:#27406c;border:1px solid #c9d8f7;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:800}
+.member-mobile-list{display:none;padding:14px;gap:12px}
+.member-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:0 8px 18px rgba(32,56,100,.06)}
+.member-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.member-card-name{font-size:18px;font-weight:900;color:var(--navy)}
+.member-card-birth{font-size:12px;font-weight:800;color:#61708c;margin-top:3px}
+.member-card-order{background:#f3f6fb;color:#52617f;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800;white-space:nowrap}
+.member-card-grid{display:grid;grid-template-columns:84px 1fr;gap:6px 10px;font-size:12.5px;line-height:1.55}
+.member-card-grid dt{color:#7b879b;font-weight:800}
+.member-card-grid dd{margin:0;color:#30405f}
+.member-card-grid a{color:#244b86;text-decoration:none}
+.member-card-grid a:hover{text-decoration:underline}
 .org-l1{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
 .org-l1-sides{display:flex;gap:8px}
 .org-connector{display:flex;flex-direction:column;align-items:center}
@@ -511,9 +563,19 @@ html{overflow-x:hidden}
   .fm-modal-copy{padding:10px 14px 8px;font-size:11.5px}
   .fm-mobile-hint{display:block;padding:0 14px 8px}
   .fm-pdf-wrap{padding:10px}
-  .fm-embed-scroll.org-scroll{--embed-scale:.34}
-  .fm-embed-scroll.members-scroll{--embed-scale:.4}
-  .fm-members iframe{border-radius:0}
+  .fm-content-wrap{padding:10px}
+  .org-html-stage{min-width:0;padding:14px}
+  .org-row-between{grid-template-columns:1fr;gap:12px}
+  .org-side-col{flex-wrap:wrap}
+  .org-node{min-width:0;width:100%}
+  .org-node-name{font-size:20px}
+  .org-dept-grid{grid-template-columns:1fr}
+  .member-directory{min-width:0}
+  .member-summary{padding:12px 14px}
+  .member-summary h4{font-size:16px}
+  .member-summary p{font-size:11.5px}
+  .member-table-wrap{display:none}
+  .member-mobile-list{display:grid}
 }
 
 /* ── MEMBERS IFRAME ── */
@@ -838,6 +900,52 @@ const CAL_DAY_DATA={
   "2026-07-23":{events:[{name:'✈️ GSP Day 2',note:'시애틀 UW',detail:'University of Washington 프로그램 진행',color:'#C9A84C'}]},
   "2026-07-24":{events:[{name:'✈️ GSP Day 3',note:'시애틀 UW',detail:'프로그램 종료 및 귀국 일정 개별 진행',color:'#C9A84C'}]},
 };
+
+const ORG_CHART_DATA={
+  advisors:[
+    {role:'고문',name:'조호경',birth:'68',company:'엠디바이스㈜',title:'대표이사'},
+    {role:'고문',name:'강병성',birth:'68',company:'성유상사',title:'사장'},
+  ],
+  president:{role:'회장',name:'정종균',birth:'80',company:'㈜시스메이트',title:'대표이사'},
+  auditor:{role:'감사',name:'정지현',birth:'82',company:'삼덕회계법인',title:'Director'},
+  vicePresidents:[
+    {role:'부회장',name:'류사빈',birth:'79',company:'매일유업',title:'유가공CMG 그룹장'},
+    {role:'부회장',name:'김운용',birth:'80',company:'(주)인피니티',title:'CEO'},
+  ],
+  departments:[
+    {dept:'사무국',people:[
+      {label:'국장',name:'김태웅',birth:'80',company:'삼성전자',title:'수석 엔지니어'},
+      {label:'부국장',name:'김대언',birth:'82',company:'㈜온다글로벌로지스',title:'부사장'},
+    ]},
+    {dept:'재무국',people:[
+      {label:'국장',name:'김선도',birth:'82',company:'IBK기업은행',title:'팀장'},
+      {label:'부국장',name:'박준호',birth:'76',company:'㈜위메이드',title:'부장/팀장'},
+    ]},
+    {dept:'문화국',people:[
+      {label:'국장',name:'김미르',birth:'79',company:'㈜썸이미지니어링',title:'대표이사'},
+      {label:'부국장',name:'김제헌',birth:'86',company:'㈜코드캣',title:'대표'},
+    ]},
+    {dept:'홍보국',people:[
+      {label:'국장',name:'정수인',birth:'77',company:'㈜런컬렉션',title:'이사'},
+      {label:'부국장',name:'홍진성',birth:'79',company:'㈜SEISIN',title:'대표이사'},
+    ]},
+    {dept:'커뮤니케이션국',people:[
+      {label:'국장',name:'박흥규',birth:'82',company:'삼성전자',title:'그룹장'},
+      {label:'부국장',name:'정희선',birth:'87',company:'익스피디아 그룹',title:'부장'},
+    ]},
+    {dept:'학술국',people:[
+      {label:'국장',name:'류인식',birth:'82',company:'㈜포이닉스/제너럴아이디어',title:''},
+      {label:'부국장',name:'이형헌',birth:'82',company:'삼성전자',title:'부장'},
+    ]},
+    {dept:'기획국',people:[
+      {label:'국장',name:'김주민',birth:'80',company:'동국제강㈜',title:'부장'},
+      {label:'부국장',name:'김진성',birth:'86',company:'WPP MEDIA',title:'부장'},
+      {label:'협력',name:'하일산',birth:'84',company:'레이몰드㈜',title:'대표이사'},
+    ]},
+  ],
+};
+
+const MEMBER_DIRECTORY=[{"order": "1", "name": "강병성", "birth": "68", "company": "성유상사", "title": "사장", "phone": "010-2293-5104", "email": "riverbs1@naver.com", "role": "고문"}, {"order": "2", "name": "권성미", "birth": "", "company": "아이에스피", "title": "전무", "phone": "010-4501-4752", "email": "smkwon@pknu.ac.kr", "role": ""}, {"order": "3", "name": "김관영", "birth": "", "company": "삼성전자", "title": "수석연구원", "phone": "010-7168-2097", "email": "kay0508.kim@gmail.com", "role": ""}, {"order": "4", "name": "김대언", "birth": "82", "company": "㈜온다글로벌로지스", "title": "부사장", "phone": "010-4719-4753", "email": "daeeon.kim@ondagl.com", "role": "사무부국장"}, {"order": "5", "name": "김동환", "birth": "", "company": "LG전자", "title": "책임연구원", "phone": "010-4477-0316", "email": "raykdh@yonsei.ac.kr", "role": ""}, {"order": "6", "name": "김미르", "birth": "79", "company": "㈜썸이미지니어링", "title": "대표이사", "phone": "010-9492-798", "email": "mir@designsome.net", "role": "문화국장"}, {"order": "7", "name": "김민기", "birth": "", "company": "엠엘에스피㈜", "title": "대표이사", "phone": "010-4763-4486", "email": "mkkim80kr@gmail.com", "role": ""}, {"order": "8", "name": "김병수", "birth": "", "company": "씨에스베어링㈜", "title": "이사(CSO)", "phone": "010-2258-8358", "email": "johnnyw907@gmail.com", "role": ""}, {"order": "9", "name": "김선도", "birth": "82", "company": "IBK기업은행", "title": "팀장", "phone": "010-4026-0655", "email": "crown_2000@naver.com", "role": "재무국장"}, {"order": "10", "name": "김승민", "birth": "", "company": "㈜인원그룹", "title": "대표이사", "phone": "010-4199-1665", "email": "gogoaqua@naver.com", "role": ""}, {"order": "11", "name": "김양진", "birth": "", "company": "㈜한국인삼공사", "title": "상무", "phone": "010-4752-2039", "email": "lovagsun@naver.com", "role": ""}, {"order": "12", "name": "김오성", "birth": "", "company": "㈜서울역북부역세권개발", "title": "팀장", "phone": "010-5620-7276", "email": "gdstarex@hanwha.com", "role": ""}, {"order": "13", "name": "김운용", "birth": "80", "company": "(주)인피니티", "title": "CEO", "phone": "010-8915-1041", "email": "kenneth@inpiniti.com", "role": "부회장"}, {"order": "14", "name": "김제헌", "birth": "86", "company": "㈜코드캣", "title": "대표", "phone": "010-7172-7289", "email": "neo@codecat.kr", "role": "문화부국장"}, {"order": "15", "name": "김종문", "birth": "", "company": "삼성물산㈜ 건설부문", "title": "프로", "phone": "010-6287-1980", "email": "jmunkimm@gmail.com", "role": ""}, {"order": "16", "name": "김주민", "birth": "80", "company": "동국제강㈜", "title": "부장", "phone": "010-4709-9635", "email": "jumin.kim@dongkuk.com", "role": "기획국장"}, {"order": "17", "name": "김주한", "birth": "", "company": "㈜한국인삼공사", "title": "실장", "phone": "010-4846-9733", "email": "kkjoohan@kgc.co.kr", "role": ""}, {"order": "18", "name": "김주혁", "birth": "", "company": "㈜엔투시스", "title": "대표이사", "phone": "010-6667-5016", "email": "jhkim@n2sys.co.kr", "role": ""}, {"order": "19", "name": "김준수", "birth": "", "company": "SPC 빅바이트컴퍼니", "title": "대표이사", "phone": "010-6822-7617", "email": "idealkjs@naver.com", "role": ""}, {"order": "20", "name": "김진성", "birth": "86", "company": "WPP MEDIA", "title": "부장", "phone": "010-8889-6405", "email": "jinsung.kim1204@gmail.com", "role": "기획부국장"}, {"order": "21", "name": "김창진", "birth": "", "company": "유한양행", "title": "재무팀장", "phone": "010-4723-4883", "email": "chang74@yuhan.co.kr", "role": ""}, {"order": "22", "name": "김태웅", "birth": "80", "company": "삼성전자", "title": "수석 엔지니어", "phone": "010-8715-1140", "email": "kimtw0912@gmail.com", "role": "사무국장"}, {"order": "23", "name": "류사빈", "birth": "79", "company": "매일유업", "title": "유가공CMG 그룹장", "phone": "010-8735-7521", "email": "cstangle@maeil.com", "role": "부회장"}, {"order": "24", "name": "류인식", "birth": "82", "company": "㈜포이닉스/제너럴아이디어", "title": "", "phone": "010-4119-7704", "email": "willryugo@gmail.com", "role": "학술국장"}, {"order": "25", "name": "박세환", "birth": "", "company": "KT&G", "title": "실장", "phone": "010-7720-3603", "email": "sehwan@ktng.com", "role": ""}, {"order": "26", "name": "박은만", "birth": "", "company": "유한양행", "title": "이사", "phone": "010-6511-2247", "email": "teamcheck@yuhan.co.kr", "role": ""}, {"order": "27", "name": "박준호", "birth": "76", "company": "㈜위메이드", "title": "부장/팀장", "phone": "010-3065-7866", "email": "pjh1258@naver.com", "role": "부국장"}, {"order": "28", "name": "박흥규", "birth": "82", "company": "삼성전자", "title": "그룹장", "phone": "010-4812-7182", "email": "heungkyu.park@samsung.com", "role": "커뮤니케이션국장"}, {"order": "29", "name": "서현수", "birth": "", "company": "그룹메가㈜", "title": "대표이사", "phone": "010-9117-9917", "email": "ceo@group-mega.co.kr", "role": ""}, {"order": "30", "name": "손성일", "birth": "", "company": "KT&G", "title": "부장", "phone": "010-6361-8941", "email": "seongil333@gmail.com", "role": ""}, {"order": "31", "name": "윤지현", "birth": "", "company": "삼성전자", "title": "파트장, 수석 디자이너", "phone": "010-9961-0527", "email": "jeehyun.yoon1@gmail.com", "role": ""}, {"order": "32", "name": "이강현", "birth": "", "company": "빗썸", "title": "실장", "phone": "010-8883-4819", "email": "lkhgw84@gmail.com", "role": ""}, {"order": "33", "name": "이관우", "birth": "", "company": "이스티온네이처", "title": "대표", "phone": "010-2037-9578", "email": "gywoo102@istyonnature.com", "role": ""}, {"order": "34", "name": "이민협", "birth": "", "company": "KT&G", "title": "부장(미디어부장)", "phone": "010-3064-7704", "email": "aries0407@ktng.com", "role": ""}, {"order": "35", "name": "이선민", "birth": "", "company": "㈜블랜더", "title": "대표", "phone": "010-6522-0478", "email": "min@yiincompany.com", "role": ""}, {"order": "36", "name": "이우람", "birth": "", "company": "㈜삼동", "title": "상무이사", "phone": "010-4836-4542", "email": "ramalee@samdong.com", "role": ""}, {"order": "37", "name": "이현호", "birth": "", "company": "㈜코리아세븐", "title": "팀장", "phone": "010-7737-9412", "email": "leehyunho1902@gmail.com", "role": ""}, {"order": "38", "name": "이형헌", "birth": "82", "company": "삼성전자", "title": "부장", "phone": "010-7260-5073", "email": "gaepy@naver.com", "role": "학술부국장"}, {"order": "39", "name": "전형민", "birth": "", "company": "Dell Technologies (델 테크놀로지스)", "title": "이사", "phone": "010-4937-3316", "email": "hyungmin.jeon@dell.com", "role": ""}, {"order": "40", "name": "정수인", "birth": "77", "company": "㈜런컬렉션", "title": "이사", "phone": "010-2975-7791", "email": "issi1218@gmail.com", "role": "홍보국장"}, {"order": "41", "name": "정의영", "birth": "", "company": "비즈톡㈜", "title": "대표이사", "phone": "010-3394-6396", "email": "justin@biztalk.co.kr", "role": ""}, {"order": "42", "name": "정종균", "birth": "80", "company": "㈜시스메이트", "title": "대표이사", "phone": "010-9008-1545", "email": "jongkyun@sysmate.co.kr", "role": "회장"}, {"order": "43", "name": "정지현", "birth": "82", "company": "삼덕회계법인", "title": "Director", "phone": "010-8975-0753", "email": "jihjung82@gmail.com", "role": "감사"}, {"order": "44", "name": "정희선", "birth": "87", "company": "익스피디아 그룹", "title": "부장", "phone": "010-2818-9511", "email": "heeseonjung1@gmail.com", "role": "커뮤니케이션부국장"}, {"order": "45", "name": "조호경", "birth": "68", "company": "엠디바이스㈜", "title": "대표이사", "phone": "010-8783-9796", "email": "chohk86@mdevice.co.kr", "role": "고문"}, {"order": "46", "name": "최민용", "birth": "", "company": "㈜피엔에프케어즈", "title": "대표이사", "phone": "010-8986-6226", "email": "paulchoi@pfcares.co.kr", "role": ""}, {"order": "47", "name": "최인호", "birth": "", "company": "㈜크리버코리아", "title": "부본부장", "phone": "010-8234-5152", "email": "chooises@gmail.com", "role": ""}, {"order": "48", "name": "하승호", "birth": "", "company": "㈜고스트트래블", "title": "대표이사", "phone": "010-8844-8155", "email": "ceo@gdaytour.net", "role": ""}, {"order": "49", "name": "하일산", "birth": "84", "company": "레이몰드㈜", "title": "대표이사", "phone": "010-3939-0852", "email": "hailsan@kakao.com", "role": "기획부국장"}, {"order": "50", "name": "홍진성", "birth": "79", "company": "㈜SEISIN", "title": "대표이사", "phone": "010-7656-4733", "email": "hong@seisin-group.com", "role": "홍보부국장"}, {"order": "51", "name": "홍진헌", "birth": "", "company": "LG CNS", "title": "상무", "phone": "010-9394-2003", "email": "hong@lgcns.com", "role": ""}, {"order": "52", "name": "황재성", "birth": "", "company": "태양3C㈜", "title": "부사장", "phone": "010-9333-5106", "email": "tristanhwang@gmail.com", "role": ""}];
 
 // ═══ UTILS ═══
 const today=new Date();today.setHours(0,0,0,0);
@@ -1577,6 +1685,103 @@ function toggleGspSection(id){
   btn.classList.toggle('gsp-btn-open');
 }
 
+function renderOrgChart(){
+  const root=document.getElementById('orgChartRoot');
+  if(!root) return;
+  const personNode=(person, cls='')=>`
+    <div class="org-node ${cls}">
+      <div class="org-node-head">${person.role}</div>
+      <div class="org-node-name">${person.name}${person.birth?` (${person.birth})`:''}</div>
+      <div class="org-node-meta">${person.company}${person.title?` · ${person.title}`:''}</div>
+    </div>`;
+  const miniChip=(person)=>`
+    <div class="org-person-chip">
+      <div class="label">${person.label}</div>
+      <div class="name">${person.name}${person.birth?` (${person.birth})`:''}</div>
+      <div class="meta">${person.company}${person.title?` · ${person.title}`:''}</div>
+    </div>`;
+  root.innerHTML=`
+    <section class="org-section">
+      <div class="org-title-chip">임원진</div>
+      <div class="org-row-between">
+        <div class="org-side-col">${ORG_CHART_DATA.advisors.map(person=>personNode(person,'role-advisor org-node-mini')).join('')}</div>
+        <div class="org-row-flex" style="flex-direction:column;gap:12px">
+          ${personNode(ORG_CHART_DATA.president,'role-president')}
+          <div class="org-row-flex">${ORG_CHART_DATA.vicePresidents.map(person=>personNode(person,'role-vp org-node-mini')).join('')}</div>
+        </div>
+        <div class="org-side-col">${personNode(ORG_CHART_DATA.auditor,'role-auditor org-node-mini')}</div>
+      </div>
+    </section>
+    <section class="org-section">
+      <div class="org-title-chip">국별 구성</div>
+      <div class="org-dept-grid">
+        ${ORG_CHART_DATA.departments.map(dept=>`
+          <article class="org-dept-card">
+            <div class="org-dept-name">${dept.dept}</div>
+            <div class="org-dept-people">${dept.people.map(miniChip).join('')}</div>
+          </article>
+        `).join('')}
+      </div>
+    </section>`;
+}
+
+function renderMemberDirectory(){
+  const root=document.getElementById('memberDirectoryRoot');
+  if(!root) return;
+  const desktopRows=MEMBER_DIRECTORY.map(member=>`
+    <tr>
+      <td class="member-order">${member.order}</td>
+      <td class="member-name-cell">
+        <div class="member-name-strong">${member.name}</div>
+        <div class="member-sub">${member.birth?member.birth+'년생':'연도 미표기'}</div>
+      </td>
+      <td>${member.company||'-'}</td>
+      <td>${member.title||'-'}</td>
+      <td>${member.phone||'-'}</td>
+      <td>${member.email?`<a href="mailto:${member.email}">${member.email}</a>`:'-'}</td>
+      <td>${member.role?`<span class="member-role-badge">${member.role}</span>`:'-'}</td>
+    </tr>`).join('');
+  const mobileCards=MEMBER_DIRECTORY.map(member=>`
+    <article class="member-card">
+      <div class="member-card-top">
+        <div>
+          <div class="member-card-name">${member.name}</div>
+          <div class="member-card-birth">${member.birth?member.birth+'년생':'연도 미표기'}</div>
+        </div>
+        <div class="member-card-order">No. ${member.order}</div>
+      </div>
+      <dl class="member-card-grid">
+        <dt>회사명</dt><dd>${member.company||'-'}</dd>
+        <dt>직위</dt><dd>${member.title||'-'}</dd>
+        <dt>연락처</dt><dd>${member.phone||'-'}</dd>
+        <dt>이메일</dt><dd>${member.email?`<a href="mailto:${member.email}">${member.email}</a>`:'-'}</dd>
+        <dt>원우회 활동</dt><dd>${member.role||'-'}</dd>
+      </dl>
+    </article>`).join('');
+  root.innerHTML=`
+    <div class="member-summary">
+      <h4>■ 연세대 EMBA 17기 원우명단 (${MEMBER_DIRECTORY.length}명)</h4>
+      <p>데스크톱에서는 표 헤더를 고정하고, 모바일에서는 카드형으로 더 쉽게 볼 수 있게 정리했습니다.</p>
+    </div>
+    <div class="member-table-wrap">
+      <table class="member-table">
+        <thead>
+          <tr>
+            <th>순서</th>
+            <th>이름</th>
+            <th>회사명</th>
+            <th>직위</th>
+            <th>연락처</th>
+            <th>이메일</th>
+            <th>원우회 활동</th>
+          </tr>
+        </thead>
+        <tbody>${desktopRows}</tbody>
+      </table>
+    </div>
+    <div class="member-mobile-list">${mobileCards}</div>`;
+}
+
 async function initSportsCard(){
   const [data,attendData]=await Promise.all([fetchSportsData(),fetchAttendData()]);
   renderSportsCard(data,attendData);
@@ -1590,6 +1795,8 @@ buildCalendar();
 initCalCarousel();
 updateStats();
 initSportsCard();
+renderOrgChart();
+renderMemberDirectory();
 
 function openFloatModal(type){
   document.getElementById('fm-overlay').classList.add('active');
@@ -1619,21 +1826,12 @@ function closeFloatModal(){
       <button class="fm-close" onclick="closeFloatModal()">✕</button>
       <div class="org-title-bar">연세대학교 EMBA 제 17기 원우회</div>
       <div class="fm-modal-copy">
-        구글시트의 `17기 원우회` 탭을 팝업 안에서 바로 볼 수 있도록 연결했습니다.
-        필요하면
-        <a href="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=332354456&single=true" target="_blank" rel="noopener">새 창으로 열기</a>
-        로 확인할 수 있습니다.
+        원우회 조직도를 페이지 내부 레이아웃으로 정리했습니다. 모바일에서는 위에서 아래로 더 읽기 쉽게 배치됩니다.
       </div>
-      <div class="fm-mobile-hint">모바일에서는 두 손가락으로 확대/축소하고, 한 손가락으로 화면을 이동하면 조금 더 안정적으로 볼 수 있습니다.</div>
-      <div class="fm-pdf-wrap">
-        <div class="fm-embed-scroll org-scroll">
-          <div class="fm-embed-stage">
-            <iframe
-              class="fm-embed-frame"
-              src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=332354456&single=true"
-              title="연세대학교 EMBA 원우회 조직도 17기"
-            ></iframe>
-          </div>
+      <div class="fm-mobile-hint">모바일에서는 확대 없이도 구조를 읽을 수 있도록 세로형으로 정리했습니다.</div>
+      <div class="fm-content-wrap">
+        <div class="org-html-scroll">
+          <div class="org-html-stage" id="orgChartRoot"></div>
         </div>
       </div>
     </div>
@@ -1645,15 +1843,12 @@ function closeFloatModal(){
         <button class="fm-close" style="position:static;margin-left:auto" onclick="closeFloatModal()">✕</button>
       </div>
       <div class="fm-modal-copy">
-        구글시트의 원우회 명단 탭을 그대로 연결했습니다.
-        화면이 작거나 로딩이 느릴 때는
-        <a href="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=674509073&single=true" target="_blank" rel="noopener">새 창으로 열기</a>
-        를 이용할 수 있습니다.
+        명단을 페이지 내부 표로 정리했습니다. 데스크톱에서는 표 형태, 모바일에서는 카드 형태로 표시됩니다.
       </div>
-      <div class="fm-mobile-hint">모바일에서는 처음 표시를 더 축소해 두었습니다. 가로로 넘기면서 보고, 필요하면 브라우저 확대를 함께 쓰면 더 편합니다.</div>
-      <div class="fm-embed-scroll members-scroll">
-        <div class="fm-embed-stage">
-          <iframe src="https://docs.google.com/spreadsheets/d/1zpiYbF9U0tT3fAgP22YzZ0wK3mw65oPCnB_QurYiNFw/htmlview?gid=674509073&single=true" allowfullscreen></iframe>
+      <div class="fm-mobile-hint">모바일에서는 카드형 목록으로 자동 전환되고, 데스크톱 표에서는 상단 헤더를 고정해 둘 수 있습니다.</div>
+      <div class="fm-content-wrap">
+        <div class="member-html-scroll">
+          <div class="member-directory" id="memberDirectoryRoot"></div>
         </div>
       </div>
     </div>

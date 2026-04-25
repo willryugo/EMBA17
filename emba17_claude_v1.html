@@ -522,7 +522,7 @@ html{overflow-x:hidden}
 .member-html-scroll{padding:0}
 .member-directory{min-width:1080px}
 .member-summary{position:sticky;top:0;z-index:4;background:#fff;border-bottom:1px solid #e6e9ef;padding:14px 18px}
-.member-summary h4{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:4px}
+.member-summary h4{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:4px;letter-spacing:0;white-space:nowrap}
 .member-summary p{font-size:12.5px;color:#61708c;line-height:1.5}
 .member-table-wrap{padding:0 18px 18px}
 .member-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
@@ -544,6 +544,7 @@ html{overflow-x:hidden}
 .member-card-photo{width:52px;height:62px;object-fit:cover;object-position:center top;border-radius:8px;border:1px solid #d8dee9;background:#f3f6fb}
 .member-card-name{font-size:14px;font-weight:900;color:var(--navy);line-height:1.1}
 .member-card-birth{font-size:11px;font-weight:800;color:#61708c;margin-top:2px}
+.member-card-side{display:grid;justify-items:end;gap:5px}
 .member-card-order{background:#f3f6fb;color:#52617f;border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap}
 .member-card-meta{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
 .member-card-chip{display:inline-flex;align-items:center;max-width:100%;padding:3px 7px;border-radius:999px;font-size:10px;font-weight:800;line-height:1.15}
@@ -1843,12 +1844,14 @@ function renderMemberDirectory(){
           <div class="member-card-name">${member.name}</div>
           <div class="member-card-birth">${member.birth?member.birth+'년생':'연도 미표기'}</div>
           <div class="member-card-meta">
-            ${member.role?`<span class="member-card-chip role">${member.role}</span>`:''}
             ${member.company?`<span class="member-card-chip company">${member.company}</span>`:''}
             ${member.title?`<span class="member-card-chip title">${member.title}</span>`:''}
           </div>
         </div>
-        <div class="member-card-order">No. ${member.order}</div>
+        <div class="member-card-side">
+          <div class="member-card-order">No. ${member.order}</div>
+          ${member.role?`<span class="member-card-chip role">${member.role}</span>`:''}
+        </div>
       </div>
       <div class="member-card-contact">
         <div class="member-card-phone">${member.phone?`<a href="tel:${String(member.phone).replace(/[^\\d+]/g,'')}">${member.phone}</a>`:'-'}</div>

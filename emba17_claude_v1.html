@@ -243,6 +243,7 @@ html{overflow-x:hidden}
 .sports-detail{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .2s;opacity:0}
 .sports-detail.sports-open{max-height:2000px;opacity:1;margin-top:10px}
 .gsp-event-card{border:2px solid rgba(201,168,76,.58)!important;background:linear-gradient(180deg,#fffaf0,#f6efe2)!important}
+.gsp-actions{display:flex;gap:7px;margin-top:10px}
 .gsp-expand-btn{width:100%;margin-top:10px;background:rgba(32,56,100,.06);border:1px dashed rgba(32,56,100,.22);border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .15s}
 .gsp-expand-btn:hover{background:rgba(32,56,100,.12)}
 .gsp-expand-btn svg{transition:transform .22s;flex-shrink:0}
@@ -405,6 +406,16 @@ html{overflow-x:hidden}
   .sports-event-card .event-card-desc{font-size:11.5px;margin-bottom:2px}
   .sports-event-card .sports-badge{font-size:10.5px;padding:3px 8px}
   .sports-event-card .sports-expand-btn{font-size:11.5px;padding:7px 8px;gap:4px}
+  .gsp-event-card{display:block;padding:14px}
+  .gsp-event-card .event-card-icon{display:inline-block;font-size:22px;margin-right:6px;margin-bottom:0;vertical-align:middle}
+  .gsp-event-card .event-card-name{display:inline-block;font-size:14px;margin-bottom:3px;vertical-align:middle;line-height:1.25}
+  .gsp-event-card .event-card-date{font-size:12px;margin-bottom:3px}
+  .gsp-event-card .event-card-desc{font-size:11.5px;margin-bottom:2px;line-height:1.45}
+  .gsp-actions{display:grid;grid-template-columns:1fr;gap:7px;margin-top:9px}
+  .gsp-event-card .gsp-expand-btn{font-size:11.5px;padding:8px 9px;gap:4px;margin-top:0;white-space:normal!important}
+  .gsp-panel{padding:10px 12px;border-radius:10px}
+  .gsp-panel-title{font-size:12.5px}
+  .gsp-panel-list{font-size:11.5px;line-height:1.55}
   .sports-sponsor-item{padding:9px 11px}
   .sports-sponsor-name{font-size:12.5px}
   .sports-sponsor-co{font-size:10.5px}
@@ -570,7 +581,7 @@ html{overflow-x:hidden}
   .float-btn{min-width:48px;padding:10px 7px}
   .float-btn .fb-icon{font-size:17px}
   .float-btn .fb-label{font-size:8.5px}
-  .fm-members{width:96vw;height:90vh}
+  .fm-members .fm-close{width:30px;height:30px;font-size:16px}
   .fm-modal-copy{padding:10px 14px 8px;font-size:11.5px}
   .fm-mobile-hint{display:block;padding:0 14px 8px}
   .fm-pdf-wrap{padding:10px}
@@ -597,6 +608,16 @@ html{overflow-x:hidden}
 .fm-members{width:min(1100px,96vw);height:86vh;display:flex;flex-direction:column}
 .fm-members iframe{flex:1;border:none;border-radius:0 0 20px 20px;background:#fff}
 .fm-members-header{background:var(--navy);color:#fff;padding:14px 20px;font-size:14px;font-weight:900;border-radius:20px 20px 0 0;display:flex;align-items:center;gap:8px}
+@media(max-width:640px){
+  .fm-members{width:100vw;height:100dvh;max-height:100dvh;border-radius:0}
+  .fm-members-header{border-radius:0;padding:10px 14px;font-size:13px}
+  .fm-members .fm-close{width:30px;height:30px;font-size:16px}
+  .fm-members iframe{border-radius:0}
+  .fm-members .fm-modal-copy,.fm-members .fm-mobile-hint{display:none}
+  .fm-members .fm-pdf-wrap{padding:0;background:#fff}
+  .fm-members .fm-embed-scroll{border-radius:0;box-shadow:none}
+  .fm-embed-scroll.members-scroll{--embed-scale:.72}
+}
 </style>
 </head>
 <body>
@@ -776,7 +797,7 @@ html{overflow-x:hidden}
       <div class="event-card gsp-event-card" id="gsp-card">
         <div class="event-card-icon">✈️</div><div class="event-card-name">GSP 해외연수 — 시애틀 UW</div>
         <div class="event-card-date">7/22(수)~24(금)</div><div class="event-card-desc">University of Washington · 종강 후 · 참석/미참석 안내 확인</div>
-        <div style="display:flex;gap:7px;margin-top:10px">
+        <div class="gsp-actions">
           <button class="gsp-expand-btn" id="gsp-attend-btn" style="flex:1;margin-top:0;white-space:nowrap" onclick="toggleGspSection('attend')">
             <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
             ✈️ 참석 안내

@@ -1795,13 +1795,13 @@ buildCalendar();
 initCalCarousel();
 updateStats();
 initSportsCard();
-renderOrgChart();
-renderMemberDirectory();
 
 function openFloatModal(type){
   document.getElementById('fm-overlay').classList.add('active');
   document.getElementById('fm-org-view').style.display = type==='org'?'':'none';
   document.getElementById('fm-members-view').style.display = type==='members'?'flex':'none';
+  if(type==='org') renderOrgChart();
+  if(type==='members') renderMemberDirectory();
 }
 function closeFloatModal(){
   document.getElementById('fm-overlay').classList.remove('active');

@@ -242,6 +242,19 @@ html{overflow-x:hidden}
 .sports-btn-open svg{transform:rotate(180deg)}
 .sports-detail{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .2s;opacity:0}
 .sports-detail.sports-open{max-height:2000px;opacity:1;margin-top:10px}
+.gsp-event-card{border:2px solid rgba(201,168,76,.58)!important;background:linear-gradient(180deg,#fffaf0,#f6efe2)!important}
+.gsp-expand-btn{width:100%;margin-top:10px;background:rgba(32,56,100,.06);border:1px dashed rgba(32,56,100,.22);border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .15s}
+.gsp-expand-btn:hover{background:rgba(32,56,100,.12)}
+.gsp-expand-btn svg{transition:transform .22s;flex-shrink:0}
+.gsp-btn-open svg{transform:rotate(180deg)}
+.gsp-detail{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .2s;opacity:0}
+.gsp-detail.gsp-open{max-height:2200px;opacity:1;margin-top:10px}
+.gsp-panel{background:#fff;border-radius:12px;padding:12px 14px;border-left:4px solid var(--gold);margin-bottom:8px}
+.gsp-panel:last-child{margin-bottom:0}
+.gsp-panel-title{font-size:13px;font-weight:900;color:var(--navy);margin-bottom:6px}
+.gsp-panel-list{margin:0;padding-left:17px;font-size:12.5px;line-height:1.65;color:#4a5876}
+.gsp-panel-list li{margin-bottom:4px}
+.gsp-panel-list li:last-child{margin-bottom:0}
 .sports-attend-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--navy);padding:5px 0;border-bottom:1px solid rgba(32,56,100,.08)}
 .sports-attend-total{display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:900;color:var(--navy);padding-top:9px;margin-top:4px}
 .sports-sponsor-item{background:#fffbef;border-radius:10px;padding:10px 13px;margin-bottom:7px;border-left:3px solid var(--gold)}
@@ -683,9 +696,44 @@ html{overflow-x:hidden}
         <div class="event-card-icon">🎓</div><div class="event-card-name">17기 종강파티</div>
         <div class="event-card-date">6/20(토) 수업 후</div><div class="event-card-desc">10주차 마지막 수업 후 · 1학기 마무리</div>
       </div>
-      <div class="event-card" data-pop="GSP 해외연수 — 시애틀 UW|7/22(수)~24(금)|University of Washington. 종강 후 진행. 참가신청 및 세부일정 별도 공지 예정.">
+      <div class="event-card gsp-event-card" id="gsp-card">
         <div class="event-card-icon">✈️</div><div class="event-card-name">GSP 해외연수 — 시애틀 UW</div>
-        <div class="event-card-date">7/22(수)~24(금)</div><div class="event-card-desc">University of Washington · 종강 후 · 참가신청 별도</div>
+        <div class="event-card-date">7/22(수)~24(금)</div><div class="event-card-desc">University of Washington · 종강 후 · 참석/미참석 안내 확인</div>
+        <div style="display:flex;gap:7px;margin-top:10px">
+          <button class="gsp-expand-btn" id="gsp-attend-btn" style="flex:1;margin-top:0;white-space:nowrap" onclick="toggleGspSection('attend')">
+            <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+            ✈️ 참석 안내
+          </button>
+          <button class="gsp-expand-btn" id="gsp-absent-btn" style="flex:1;margin-top:0;white-space:nowrap;background:rgba(146,64,14,.08);border-color:rgba(146,64,14,.3);color:#92400e" onclick="toggleGspSection('absent')">
+            <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+            📘 미참석 안내
+          </button>
+        </div>
+        <div class="gsp-detail" id="gsp-attend-detail">
+          <div class="gsp-panel">
+            <div class="gsp-panel-title">참석 원우 안내</div>
+            <ul class="gsp-panel-list">
+              <li>학생 부담: 항공권, 숙박비, 일부 식대(학교 공식 일정 외 식사)</li>
+              <li>학교 부담: 상대교 수업료 및 프로그램 비용</li>
+              <li>항공권은 개별 예약입니다.</li>
+              <li>그룹호텔은 희망자만 신청하며, 미이용 시 숙소는 개별 예약해야 합니다.</li>
+              <li>가족 동반 숙박은 가능하지만 공식 일정 참여는 불가합니다.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gsp-detail" id="gsp-absent-detail">
+          <div class="gsp-panel">
+            <div class="gsp-panel-title">미참석 원우 안내</div>
+            <ul class="gsp-panel-list">
+              <li>Global Study Program은 EMBA 필수과목입니다.</li>
+              <li>미참석 시 별도 대체과목 개설은 없습니다.</li>
+              <li>부족한 1.5학점은 방학 중 Corporate MBA 계절학기로 이수해야 합니다.</li>
+              <li>운영 예시: 월/화/목/금 19:00-22:00, 2주 8회</li>
+              <li>또는 수 19:00-22:00 / 토 09:00-19:00, 2주 4회</li>
+              <li>올해 여름학기 참고 기간: 6월 5주 ~ 7월 4주</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -786,9 +834,9 @@ const CAL_DAY_DATA={
   "2026-06-13":{classes:[{c:'fin',t:'09:30–12:10'},{c:'fin',t:'13:00–15:40'}]},
   "2026-06-19":{classes:[{c:'mkt',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'fin',t:'19:20–22:00'}],tasks:[{name:'MKT BrandPro Debrief🏁',color:'#7c3aed'}]},
   "2026-06-20":{classes:[{c:'fin',t:'09:30–12:10'}],events:[{name:'🎓 종강파티',note:'수업 후',color:'#C9A84C'}]},
-  "2026-07-22":{events:[{name:'✈️ GSP 시애틀 UW',note:'7/22~24 (3일간)',color:'#C9A84C'}]},
-  "2026-07-23":{events:[{name:'✈️ GSP Day 2',note:'시애틀 UW',color:'#C9A84C'}]},
-  "2026-07-24":{events:[{name:'✈️ GSP Day 3',note:'시애틀 UW',color:'#C9A84C'}]},
+  "2026-07-22":{note:'GSP 필수과목 · 참석/미참석 안내 확인',events:[{name:'✈️ GSP 시애틀 UW',note:'7/22~24 (3일간)',detail:'참석 원우: 항공권·숙박·일부 식대 개인 부담 / 미참석 원우: Corporate MBA 계절학기로 1.5학점 이수',color:'#C9A84C'}]},
+  "2026-07-23":{events:[{name:'✈️ GSP Day 2',note:'시애틀 UW',detail:'University of Washington 프로그램 진행',color:'#C9A84C'}]},
+  "2026-07-24":{events:[{name:'✈️ GSP Day 3',note:'시애틀 UW',detail:'프로그램 종료 및 귀국 일정 개별 진행',color:'#C9A84C'}]},
 };
 
 // ═══ UTILS ═══
@@ -1230,6 +1278,7 @@ function buildCalendar(){
       });
       if(ev2.events) ev2.events.forEach(e=>{
         popHTML+=`<div class="hpop-row"><span class="dot" style="background:var(--gold)"></span><span>${e.name} ${e.note}</span></div>`;
+        if(e.detail) popHTML+=`<div class="hpop-row"><span class="dot" style="background:#aaa"></span><span>${e.detail}</span></div>`;
       });
       attachPop(td,popHTML);
     });
@@ -1270,6 +1319,7 @@ function openDayModal(key,label){
       body+=`<div class="modal-item" style="border-left-color:var(--gold)">
         <div class="modal-item-name">${e.name}</div>
         <div class="modal-item-time">${e.note}</div>
+        ${e.detail?`<div class="modal-item-detail">${e.detail}</div>`:''}
       </div>`;
     });
     body+='</div></div>';
@@ -1517,6 +1567,14 @@ function toggleSportsSection(id){
   if(!det||!btn) return;
   det.classList.toggle('sports-open');
   btn.classList.toggle('sports-btn-open');
+}
+
+function toggleGspSection(id){
+  const det=document.getElementById('gsp-'+id+'-detail');
+  const btn=document.getElementById('gsp-'+id+'-btn');
+  if(!det||!btn) return;
+  det.classList.toggle('gsp-open');
+  btn.classList.toggle('gsp-btn-open');
 }
 
 async function initSportsCard(){

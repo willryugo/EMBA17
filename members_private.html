@@ -191,6 +191,7 @@ const PRIVATE_PIN = '2580';
 const ACCESS_KEY = 'emba_private_access_v1';
 const TAB_CONFIG = [
   { id:'week17', label:'이번주 생일', note:'17기만 표시 · 오늘부터 7일 이내 생일자' },
+  { id:'nextweek17', label:'다음주 생일', note:'17기만 표시 · 오늘 기준 8일~14일 뒤 생일자' },
   { id:'month17', label:'이번달 생일', note:'17기만 표시 · 이번 달 생일자 전체' },
   { id:'officer17', label:'17기 원우회', note:'17기 원우회 간부만 표시' },
   { id:'all17', label:'17기 전체', note:'17기 전체 명단' },
@@ -286,6 +287,12 @@ function getTabData(tabId){
         .map(member => ({ ...member, offset: nextBirthdayOffset(member, today) }))
         .filter(member => member.offset !== null && member.offset >= 0 && member.offset <= 7)
         .sort((a,b) => a.offset - b.offset);
+    case 'nextweek17':
+      return group17
+        .filter(hasBirthday)
+        .map(member => ({ ...member, offset: nextBirthdayOffset(member, today) }))
+        .filter(member => member.offset !== null && member.offset >= 8 && member.offset <= 14)
+        .sort((a,b) => a.offset - b.offset);
     case 'month17':
       return group17
         .filter(member => hasBirthday(member) && Number(member.month) === (today.getMonth() + 1))
@@ -330,10 +337,10 @@ function renderView(){
     return;
   }
   empty.hidden = true;
-  if(ACTIVE_TAB === 'week17' || ACTIVE_TAB === 'month17'){
+  if(ACTIVE_TAB === 'week17' || ACTIVE_TAB === 'nextweek17' || ACTIVE_TAB === 'month17'){
     grid.innerHTML = data.map(member => {
       const offset = nextBirthdayOffset(member, new Date(new Date().setHours(0,0,0,0)));
-      const badge = ACTIVE_TAB === 'week17'
+      const badge = ACTIVE_TAB === 'week17' || ACTIVE_TAB === 'nextweek17'
         ? `<span class="birthday-dday">${offset === 0 ? 'TODAY' : `D-${offset}`}</span>`
         : `<span class="birthday-date">🎂 ${birthdayLabel(member)}</span>`;
       return cardHTML(member, {

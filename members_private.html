@@ -35,7 +35,7 @@ body{
 .eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.64;margin-bottom:8px}
 .hero h1{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.12;margin-bottom:10px}
 .hero p{font-size:14px;line-height:1.7;opacity:.88;max-width:780px}
-.hero-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px;max-width:420px}
 .stat{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:12px 14px}
 .stat-label{font-size:11px;font-weight:800;opacity:.72;margin-bottom:6px}
 .stat-value{font-size:24px;font-weight:900}
@@ -113,10 +113,14 @@ body{
 .gate-error.show{display:block}
 @media(max-width:820px){
   .shell{padding:12px 12px 42px}
-  .hero{padding:18px 18px 16px;border-radius:22px}
-  .hero h1{font-size:26px}
-  .hero p{font-size:12.5px}
+  .hero{padding:14px 14px 12px;border-radius:22px}
+  .hero .eyebrow{display:none}
+  .hero h1{font-size:22px;line-height:1.06;margin-bottom:4px}
+  .hero p{display:none}
   .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat{padding:10px 12px;border-radius:14px}
+  .stat-label{font-size:10px;margin-bottom:4px}
+  .stat-value{font-size:20px}
   .content{border-radius:22px}
   .toolbar{padding:12px 12px 10px}
   .tabs{gap:6px}
@@ -167,9 +171,7 @@ body{
     <p>별도 공유용 명단 페이지입니다. 생일 `upcoming`은 17기 기준으로 주간·월간 탭에서 확인하고, 원우회 간부 탭과 전체 탭을 나눠 빠르게 찾아볼 수 있게 구성했습니다.</p>
     <div class="hero-stats">
       <div class="stat"><div class="stat-label">17기 전체</div><div class="stat-value" id="stat17">-</div></div>
-      <div class="stat"><div class="stat-label">16기 전체</div><div class="stat-value" id="stat16">-</div></div>
       <div class="stat"><div class="stat-label">17기 간부</div><div class="stat-value" id="stat17off">-</div></div>
-      <div class="stat"><div class="stat-label">16기 간부</div><div class="stat-value" id="stat16off">-</div></div>
     </div>
   </section>
 
@@ -356,9 +358,7 @@ function renderView(){
 
 function renderStats(){
   document.getElementById('stat17').textContent = PRIVATE_DATA.sheet17.length;
-  document.getElementById('stat16').textContent = PRIVATE_DATA.sheet16.length;
   document.getElementById('stat17off').textContent = PRIVATE_DATA.sheet17.filter(isOfficer).length;
-  document.getElementById('stat16off').textContent = PRIVATE_DATA.sheet16.filter(isOfficer).length;
 }
 
 async function loadData(){

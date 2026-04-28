@@ -18,6 +18,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%}
+[hidden]{display:none !important}
 body{
   font-family:"Noto Sans KR","Segoe UI","Apple SD Gothic Neo",sans-serif;
   color:var(--ink);
@@ -151,7 +152,7 @@ body{
     <h2>원우회 내부 명단</h2>
     <p>이 페이지는 원우회 내부 확인용입니다. 4자리 PIN을 입력하면 17기·16기 명단과 간부·생일 정보를 볼 수 있습니다.</p>
     <div class="pin-row">
-      <input id="pinInput" type="password" inputmode="numeric" maxlength="4" placeholder="2580">
+      <input id="pinInput" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="4자리 PIN">
       <button id="pinButton" type="button">입장</button>
     </div>
     <div class="gate-help">브라우저를 닫기 전까지는 다시 묻지 않도록 설정됩니다.</div>

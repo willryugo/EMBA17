@@ -199,7 +199,7 @@ const TAB_CONFIG = [
 ];
 
 let PRIVATE_DATA = null;
-let ACTIVE_TAB = 'week17';
+let ACTIVE_TAB = 'all17';
 
 function normalizeDigits(value){
   return String(value || '').replace(/[^\d]/g,'');
@@ -229,6 +229,10 @@ function birthdayLabel(member){
   return `${member.month}/${member.day}`;
 }
 
+function birthdayInline(member){
+  return hasBirthday(member) ? ` · ${member.month}/${member.day}` : '';
+}
+
 function formatRole(member){
   return member.role ? `<span class="chip role">${member.role}</span>` : '';
 }
@@ -252,7 +256,7 @@ function cardHTML(member, options = {}){
         <img class="photo" src="${member.photo}" alt="${member.name} 사진" loading="lazy">
         <div>
           <div class="name">${member.name}</div>
-          <div class="birth">${member.birth ? member.birth + '년생' : '생년 미표기'}${options.birthInfo ? ` · ${options.birthInfo}` : ''}</div>
+          <div class="birth">${member.birth ? member.birth + '년생' : '생년 미표기'}${options.birthInfo ? ` · ${options.birthInfo}` : birthdayInline(member)}</div>
           <div class="meta">
             ${extraChip}
             ${member.team ? `<span class="chip team">${member.team}조</span>` : ''}

@@ -34,11 +34,13 @@ body{
 }
 .eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.64;margin-bottom:8px}
 .hero h1{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.12;margin-bottom:10px}
-.hero p{font-size:14px;line-height:1.7;opacity:.88;max-width:780px}
-.hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px;max-width:420px}
-.stat{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:12px 14px}
-.stat-label{font-size:11px;font-weight:800;opacity:.72;margin-bottom:6px}
-.stat-value{font-size:24px;font-weight:900}
+.hero-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
+.hero-stamp{font-size:12px;font-weight:700;opacity:.82}
+.hero-refresh{
+  border:none;border-radius:999px;padding:9px 14px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;
+  font:inherit;font-size:12px;font-weight:900;letter-spacing:.01em
+}
+.hero-refresh:hover{background:rgba(255,255,255,.22)}
 .content{
   margin-top:18px;background:var(--panel);border:1px solid var(--border);border-radius:28px;
   box-shadow:0 12px 36px rgba(23,32,51,.08);overflow:hidden;
@@ -115,12 +117,10 @@ body{
   .shell{padding:12px 12px 42px}
   .hero{padding:14px 14px 12px;border-radius:22px}
   .hero .eyebrow{display:none}
-  .hero h1{font-size:22px;line-height:1.06;margin-bottom:4px}
-  .hero p{display:none}
-  .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stat{padding:10px 12px;border-radius:14px}
-  .stat-label{font-size:10px;margin-bottom:4px}
-  .stat-value{font-size:20px}
+  .hero h1{font-size:22px;line-height:1.12;margin-bottom:2px}
+  .hero-tools{margin-top:6px;gap:8px}
+  .hero-stamp{font-size:11px}
+  .hero-refresh{padding:8px 12px;font-size:11px}
   .content{border-radius:22px}
   .toolbar{padding:12px 12px 10px}
   .tabs{gap:6px}
@@ -167,11 +167,10 @@ body{
 <main class="shell" id="appShell" hidden>
   <section class="hero">
     <div class="eyebrow">EMBA Internal Directory</div>
-    <h1>EMBA 2026 17기 원우회명단</h1>
-    <p>별도 공유용 명단 페이지입니다. 생일 `upcoming`은 17기 기준으로 주간·월간 탭에서 확인하고, 원우회 간부 탭과 전체 탭을 나눠 빠르게 찾아볼 수 있게 구성했습니다.</p>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-label">17기 전체</div><div class="stat-value" id="stat17">-</div></div>
-      <div class="stat"><div class="stat-label">17기 간부</div><div class="stat-value" id="stat17off">-</div></div>
+    <h1>EMBA 2026 학술보드<br>: 17기, 16기 원우회 명단</h1>
+    <div class="hero-tools">
+      <div class="hero-stamp" id="pageStamp">기준일 불러오는 중...</div>
+      <button class="hero-refresh" id="refreshPageButton" type="button">새로고침</button>
     </div>
   </section>
 
@@ -349,9 +348,10 @@ function renderView(){
   grid.innerHTML = data.map(member => cardHTML(member)).join('');
 }
 
-function renderStats(){
-  document.getElementById('stat17').textContent = PRIVATE_DATA.sheet17.length;
-  document.getElementById('stat17off').textContent = PRIVATE_DATA.sheet17.filter(isOfficer).length;
+function renderStamp(){
+  const now = new Date();
+  const stamp = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} 기준`;
+  document.getElementById('pageStamp').textContent = stamp;
 }
 
 async function loadData(){
@@ -362,7 +362,7 @@ async function loadData(){
 
 async function bootPrivatePage(){
   await loadData();
-  renderStats();
+  renderStamp();
   renderTabs();
   renderView();
 }
@@ -394,6 +394,7 @@ document.getElementById('pinButton').addEventListener('click', tryPin);
 document.getElementById('pinInput').addEventListener('keydown', e => {
   if(e.key === 'Enter') tryPin();
 });
+document.getElementById('refreshPageButton').addEventListener('click', () => location.reload());
 
 if(sessionStorage.getItem(ACCESS_KEY) === 'ok'){
   unlockPage();

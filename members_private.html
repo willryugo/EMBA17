@@ -100,6 +100,37 @@ body{
   margin:18px;border:1px dashed #d8deea;border-radius:18px;background:#fbfcff;padding:24px;text-align:center;
   color:#73809a;font-size:14px;font-weight:700
 }
+.org-board-shell{grid-column:1/-1;background:#fff;border:1px solid #e4e8f1;border-radius:22px;padding:18px;box-shadow:0 8px 18px rgba(32,56,100,.06)}
+.org-section{margin-bottom:18px}
+.org-section:last-child{margin-bottom:0}
+.org-title-chip{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;background:#eef2f8;color:#304261;font-size:12px;font-weight:900;margin-bottom:10px}
+.org-lead-wrap{display:grid;gap:16px}
+.org-tier{position:relative;padding-top:8px}
+.org-tier::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:14px;background:#d6dce7}
+.org-tier-president{display:flex;justify-content:center}
+.org-tier-exec{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:start;position:relative;padding-top:20px}
+.org-tier-exec::before{content:'';position:absolute;top:0;left:18%;right:18%;height:2px;background:#d6dce7}
+.org-group-col{display:grid;gap:10px;align-content:start}
+.org-group-title{text-align:center;font-size:12px;font-weight:900;color:#7f8aa0}
+.org-node{background:linear-gradient(180deg,#fff,#f6f8fd);border:1px solid #d8e0ee;border-radius:18px;padding:12px 14px;box-shadow:0 8px 18px rgba(32,56,100,.06)}
+.org-node.role-president{background:linear-gradient(180deg,#27406c,#203864);border-color:#27406c;color:#fff;min-width:250px}
+.org-node.role-president .org-node-meta{color:rgba(255,255,255,.86)}
+.org-node.role-vp{border-color:#9ec1ff;background:#eef5ff}
+.org-node-head{font-size:11px;font-weight:900;color:#55627d;margin-bottom:6px}
+.org-node.role-president .org-node-head{color:rgba(255,255,255,.82)}
+.org-node-name{font-size:22px;font-weight:900;color:#1f2f4d;line-height:1.08}
+.org-node.role-president .org-node-name{color:#fff}
+.org-node-meta{font-size:11px;line-height:1.55;color:#64748b;margin-top:6px}
+.org-node-mini .org-node-name{font-size:16px}
+.org-tier-dept::before{height:16px}
+.org-dept-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.org-dept-card{border:1px solid #e6d6aa;border-radius:18px;padding:14px;background:linear-gradient(180deg,#fffefb,#fffaf0)}
+.org-dept-name{font-size:14px;font-weight:900;color:#304261;margin-bottom:10px}
+.org-dept-people{display:grid;gap:8px}
+.org-person-chip{background:#f7f9fd;border-left:4px solid #d4af37;border-radius:14px;padding:10px 12px}
+.org-person-chip .label{font-size:11px;font-weight:900;color:#9a6a00;margin-bottom:4px}
+.org-person-chip .name{font-size:14px;font-weight:900;color:#223556;line-height:1.15}
+.org-person-chip .meta{font-size:11px;line-height:1.45;color:#66758f;margin-top:4px}
 .birthday-card{border-color:#ecd9a6;background:linear-gradient(180deg,#fffdf7,#fff8eb)}
 .birthday-date{display:inline-flex;align-items:center;gap:6px;background:#fff3cf;color:#9a6800;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:900}
 .birthday-dday{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#fff;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:900}
@@ -143,6 +174,26 @@ body{
   .subbar-title{font-size:17px;line-height:1.2;word-break:keep-all}
   .subbar-note{font-size:11px;text-align:left;margin-top:4px}
   .grid{padding:12px;gap:9px}
+  .org-board-shell{padding:12px;border-radius:18px}
+  .org-title-chip{margin-bottom:8px;padding:5px 10px;font-size:11px}
+  .org-lead-wrap{gap:10px}
+  .org-tier{padding-top:6px}
+  .org-tier::before{height:10px}
+  .org-tier-exec{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-top:10px}
+  .org-tier-exec::before{left:25%;right:25%;height:2px}
+  .org-tier-exec .org-group-col:last-child{grid-column:1/-1;max-width:220px;justify-self:center}
+  .org-group-title{font-size:11px}
+  .org-node{padding:10px 12px;border-radius:16px}
+  .org-node.role-president{min-width:0;max-width:none}
+  .org-node-name{font-size:15px}
+  .org-node-mini .org-node-name{font-size:13px}
+  .org-node-meta{font-size:10px}
+  .org-dept-grid{grid-template-columns:1fr;gap:10px}
+  .org-dept-card{padding:12px}
+  .org-dept-name{font-size:13px;margin-bottom:8px}
+  .org-person-chip{padding:9px 10px}
+  .org-person-chip .name{font-size:13px}
+  .org-person-chip .meta{font-size:10px}
   .card{padding:10px;border-radius:16px}
   .card-top{grid-template-columns:56px 1fr auto;gap:9px}
   .photo{width:56px;height:68px;border-radius:10px}
@@ -211,11 +262,102 @@ const ACCESS_KEY = 'emba_private_access_v1';
 const TAB_CONFIG = [
   { id:'twoweeks17', label:'2주내 생일', note:'17기만 표시 · 오늘부터 14일 이내 생일자' },
   { id:'month17', label:'이번달 생일', note:'17기만 표시 · 이번 달 생일자 전체' },
-  { id:'officer17', label:'17기 원우회', note:'17기 원우회 간부만 표시' },
+  { id:'officer17', label:'17기 원우회', note:'17기 원우회 조직도' },
   { id:'all17', label:'17기 전체', note:'17기 전체 명단' },
-  { id:'officer16', label:'16기 원우회', note:'16기 원우회 간부만 표시' },
+  { id:'officer16', label:'16기 원우회', note:'16기 원우회 조직도' },
   { id:'all16', label:'16기 전체', note:'16기 전체 명단' }
 ];
+
+const ORG_CHART_SETS = {
+  officer17: {
+    title:'연세대학교 EMBA 제 17기 원우회',
+    advisors:[
+      {role:'고문',name:'조호경',birth:'68',company:'엠디바이스㈜',title:'대표이사'},
+      {role:'고문',name:'강병성',birth:'68',company:'성유상사',title:'사장'}
+    ],
+    president:{role:'회장',name:'정종균',birth:'80',company:'㈜시스메이트',title:'대표이사'},
+    auditor:{role:'감사',name:'정지현',birth:'82',company:'삼덕회계법인',title:'Director'},
+    vicePresidents:[
+      {role:'부회장',name:'류사빈',birth:'79',company:'매일유업',title:'유가공CMG 그룹장'},
+      {role:'부회장',name:'김운용',birth:'80',company:'(주)인피니티',title:'CEO'}
+    ],
+    departments:[
+      {dept:'사무국',people:[
+        {label:'국장',name:'김태웅',birth:'80',company:'삼성전자',title:'수석 엔지니어'},
+        {label:'부국장',name:'김대언',birth:'82',company:'㈜온다글로벌로지스',title:'부사장'}
+      ]},
+      {dept:'재무국',people:[
+        {label:'국장',name:'김선도',birth:'82',company:'IBK기업은행',title:'팀장'},
+        {label:'부국장',name:'박준호',birth:'76',company:'㈜위메이드',title:'부장/팀장'}
+      ]},
+      {dept:'문화국',people:[
+        {label:'국장',name:'김미르',birth:'79',company:'㈜썸이미지니어링',title:'대표이사'},
+        {label:'부국장',name:'김제헌',birth:'86',company:'㈜코드캣',title:'대표'}
+      ]},
+      {dept:'홍보국',people:[
+        {label:'국장',name:'정수인',birth:'77',company:'㈜런컬렉션',title:'이사'},
+        {label:'부국장',name:'홍진성',birth:'79',company:'㈜SEISIN',title:'대표이사'},
+        {label:'부국장',name:'하일산',birth:'84',company:'레이몰드㈜',title:'대표이사'}
+      ]},
+      {dept:'커뮤니케이션국',people:[
+        {label:'국장',name:'박흥규',birth:'82',company:'삼성전자',title:'그룹장'},
+        {label:'부국장',name:'정희선',birth:'87',company:'익스피디아 그룹',title:'부장'}
+      ]},
+      {dept:'학술국',people:[
+        {label:'국장',name:'류인식',birth:'82',company:'㈜포이닉스/제너럴아이디어',title:''},
+        {label:'부국장',name:'이형헌',birth:'82',company:'삼성전자',title:'부장'}
+      ]},
+      {dept:'기획국',people:[
+        {label:'국장',name:'김주민',birth:'80',company:'동국제강㈜',title:'부장'},
+        {label:'부국장',name:'김진성',birth:'86',company:'WPP MEDIA',title:'부장'}
+      ]}
+    ]
+  },
+  officer16: {
+    title:'연세대학교 EMBA 제 16기 원우회',
+    advisors:[
+      {role:'고문',name:'이치형',birth:'73',company:'CJ푸드빌/베이커리사업',title:'본부장'},
+      {role:'고문',name:'정은호',birth:'73',company:'세연아이넷㈜',title:'대표이사'}
+    ],
+    president:{role:'회장',name:'송관종',birth:'70',company:'아폴로투자자문㈜',title:'대표'},
+    auditor:{role:'감사',name:'이동인',birth:'81',company:'인우세무회계',title:'대표세무사'},
+    vicePresidents:[
+      {role:'부회장',name:'이용운',birth:'80',company:'현대그룹/현대엘리베이터',title:'상무'},
+      {role:'부회장',name:'현준섭',birth:'75',company:'㈜한미글로벌',title:'이사'},
+      {role:'부회장',name:'김영만',birth:'80',company:'㈜썬에버',title:'대표이사'}
+    ],
+    departments:[
+      {dept:'사무국',people:[
+        {label:'국장',name:'김민석',birth:'84',company:'라온어스',title:'이사'},
+        {label:'부국장',name:'이승화',birth:'86',company:'㈜티와이',title:'전무이사'}
+      ]},
+      {dept:'재무국',people:[
+        {label:'국장',name:'김주영',birth:'81',company:'IBK기업은행',title:'팀장'},
+        {label:'부국장',name:'김한나',birth:'85',company:'IBK기업은행',title:'차장'}
+      ]},
+      {dept:'문화국',people:[
+        {label:'국장',name:'이석우',birth:'85',company:'㈜정림개발 메이필드호텔',title:'이사'},
+        {label:'부국장',name:'이상봉',birth:'84',company:'㈜니어스랩',title:'부장'}
+      ]},
+      {dept:'홍보국',people:[
+        {label:'국장',name:'윤주희',birth:'76',company:'㈜더브리즈',title:'대표'},
+        {label:'부국장',name:'김혜린',birth:'89',company:'㈜알엠에스',title:'대표'}
+      ]},
+      {dept:'커뮤니케이션국',people:[
+        {label:'국장',name:'안창현',birth:'84',company:'㈜여행하기좋은날',title:'대표이사'},
+        {label:'부국장',name:'김종호',birth:'85',company:'㈜앨런컴퍼니',title:'대표이사'}
+      ]},
+      {dept:'학술국',people:[
+        {label:'국장',name:'김승민',birth:'83',company:'삼성전자㈜',title:'수석'},
+        {label:'부국장',name:'신선호',birth:'87',company:'한국자동차영업협회㈜',title:'대표이사'}
+      ]},
+      {dept:'기획국',people:[
+        {label:'국장',name:'배상현',birth:'72',company:'㈜삼사원',title:'대표이사'},
+        {label:'부국장',name:'우주한',birth:'81',company:'한솔케미칼',title:'수석연구원'}
+      ]}
+    ]
+  }
+};
 
 let PRIVATE_DATA = null;
 let ACTIVE_TAB = 'all17';
@@ -322,6 +464,61 @@ function cardHTML(member, options = {}){
   `;
 }
 
+function renderOrgChartHTML(chart){
+  const personNode=(person, cls='')=>`
+    <div class="org-node ${cls}">
+      <div class="org-node-head">${person.role}</div>
+      <div class="org-node-name">${person.name}${person.birth?` (${person.birth})`:''}</div>
+      <div class="org-node-meta">${person.company}${person.title?` · ${person.title}`:''}</div>
+    </div>`;
+  const miniChip=(person)=>`
+    <div class="org-person-chip">
+      <div class="label">${person.label}</div>
+      <div class="name">${person.name}${person.birth?` (${person.birth})`:''}</div>
+      <div class="meta">${person.company}${person.title?` · ${person.title}`:''}</div>
+    </div>`;
+  return `
+    <section class="org-board-shell">
+      <div class="subbar-title" style="margin-bottom:14px">${chart.title}</div>
+      <section class="org-section">
+        <div class="org-title-chip">임원진</div>
+        <div class="org-lead-wrap">
+          <div class="org-tier org-tier-president">
+            ${personNode(chart.president,'role-president')}
+          </div>
+          <div class="org-tier org-tier-exec">
+            <div class="org-group-col">
+              <div class="org-group-title">고문</div>
+              ${chart.advisors.map(person=>personNode(person,'org-node-mini')).join('')}
+            </div>
+            <div class="org-group-col">
+              <div class="org-group-title">부회장단</div>
+              ${chart.vicePresidents.map(person=>personNode(person,'role-vp org-node-mini')).join('')}
+            </div>
+            <div class="org-group-col">
+              <div class="org-group-title">감사</div>
+              ${personNode(chart.auditor,'org-node-mini')}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="org-section">
+        <div class="org-title-chip">국별 구성</div>
+        <div class="org-tier org-tier-dept">
+          <div class="org-dept-grid">
+            ${chart.departments.map(dept=>`
+              <article class="org-dept-card">
+                <div class="org-dept-name">${dept.dept}</div>
+                <div class="org-dept-people">${dept.people.map(miniChip).join('')}</div>
+              </article>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+    </section>
+  `;
+}
+
 function getTabData(tabId){
   const today = new Date();
   today.setHours(0,0,0,0);
@@ -367,6 +564,7 @@ function renderTabs(){
 
 function renderView(){
   const config = TAB_CONFIG.find(tab => tab.id === ACTIVE_TAB);
+  const isOrgTab = ACTIVE_TAB === 'officer17' || ACTIVE_TAB === 'officer16';
   const data = filterByQuery(getTabData(ACTIVE_TAB));
   document.getElementById('viewTitle').textContent = config.label;
   document.getElementById('viewNote').textContent = ACTIVE_QUERY
@@ -374,6 +572,12 @@ function renderView(){
     : config.note;
   const grid = document.getElementById('cardGrid');
   const empty = document.getElementById('emptyState');
+  if(isOrgTab){
+    grid.innerHTML = renderOrgChartHTML(ORG_CHART_SETS[ACTIVE_TAB]);
+    empty.hidden = true;
+    document.getElementById('viewNote').textContent = config.note;
+    return;
+  }
   if(!data.length){
     grid.innerHTML = '';
     empty.hidden = false;

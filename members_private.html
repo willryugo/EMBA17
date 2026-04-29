@@ -34,6 +34,7 @@ body{
 }
 .eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.64;margin-bottom:8px}
 .hero h1{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.12;margin-bottom:10px}
+.hero h1 .hero-subtitle{display:block;font-size:.8em;line-height:1.16;font-weight:800;opacity:.95;margin-top:4px}
 .hero-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;flex-wrap:wrap}
 .hero-stamp{font-size:12px;font-weight:700;opacity:.82}
 .hero-refresh{
@@ -177,6 +178,7 @@ body{
   .hero{padding:14px 14px 12px;border-radius:22px}
   .hero .eyebrow{display:none}
   .hero h1{font-size:22px;line-height:1.12;margin-bottom:2px}
+  .hero h1 .hero-subtitle{font-size:.72em;margin-top:3px}
   .hero-tools{margin-top:6px;gap:8px}
   .hero-stamp{font-size:11px}
   .hero-refresh{padding:8px 12px;font-size:11px}
@@ -251,7 +253,7 @@ body{
 <main class="shell" id="appShell" hidden>
   <section class="hero">
     <div class="eyebrow">EMBA Internal Directory</div>
-    <h1>EMBA 2026 학술보드<br>: 17기, 16기 원우회 명단</h1>
+    <h1>EMBA 2026 학술보드<span class="hero-subtitle">: 17기, 16기 원우회 명단</span></h1>
     <div class="hero-tools">
       <div class="hero-stamp" id="pageStamp">기준일 불러오는 중...</div>
       <button class="hero-refresh" id="refreshPageButton" type="button">새로고침</button>

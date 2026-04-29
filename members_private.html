@@ -46,6 +46,17 @@ body{
   box-shadow:0 12px 36px rgba(23,32,51,.08);overflow:hidden;
 }
 .toolbar{padding:18px 18px 12px;border-bottom:1px solid rgba(32,56,100,.08);background:rgba(255,255,255,.86)}
+.toolbar-search{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.toolbar-search input{
+  flex:1;border:1px solid #d5ddec;border-radius:14px;background:#fbfcff;color:#1d2940;
+  padding:11px 14px;font:inherit;font-size:13px;font-weight:700
+}
+.toolbar-search input::placeholder{color:#7a879d;font-weight:600}
+.toolbar-search button{
+  border:none;border-radius:12px;padding:10px 12px;background:#edf1f8;color:#44516d;cursor:pointer;
+  font:inherit;font-size:12px;font-weight:900;white-space:nowrap
+}
+.toolbar-search button:hover{background:#e3eaf7;color:var(--navy)}
 .tabs{display:flex;gap:8px;flex-wrap:wrap}
 .tab-btn{
   border:none;border-radius:999px;padding:10px 14px;background:#edf1f8;color:#45536f;cursor:pointer;
@@ -123,6 +134,9 @@ body{
   .hero-refresh{padding:8px 12px;font-size:11px}
   .content{border-radius:22px}
   .toolbar{padding:12px 12px 10px}
+  .toolbar-search{margin-bottom:10px}
+  .toolbar-search input{padding:10px 12px;font-size:12px}
+  .toolbar-search button{padding:9px 11px;font-size:11px}
   .tabs{gap:6px}
   .tab-btn{padding:9px 11px;font-size:11.5px}
   .subbar{padding:10px 12px 0;display:block}
@@ -176,6 +190,10 @@ body{
 
   <section class="content">
     <div class="toolbar">
+      <div class="toolbar-search">
+        <input id="searchInput" type="search" placeholder="검색: 이름, 조, 연도, 기수, 위원회/직책">
+        <button id="searchClearButton" type="button">지우기</button>
+      </div>
       <div class="tabs" id="tabs"></div>
     </div>
     <div class="subbar">
@@ -201,6 +219,7 @@ const TAB_CONFIG = [
 
 let PRIVATE_DATA = null;
 let ACTIVE_TAB = 'all17';
+let ACTIVE_QUERY = '';
 
 function normalizeDigits(value){
   return String(value || '').replace(/[^\d]/g,'');
@@ -232,6 +251,34 @@ function birthdayLabel(member){
 
 function birthdayInline(member){
   return hasBirthday(member) ? ` · ${member.month}/${member.day}` : '';
+}
+
+function searchHaystack(member){
+  return [
+    member.name,
+    member.team ? `${member.team}조` : '',
+    member.birth ? `${member.birth}` : '',
+    member.birth ? `${member.birth}년생` : '',
+    member.month ? `${member.month}` : '',
+    member.day ? `${member.day}` : '',
+    hasBirthday(member) ? `${member.month}/${member.day}` : '',
+    member.company,
+    member.title,
+    member.phone,
+    member.email,
+    member.role,
+    member.cohort
+  ].filter(Boolean).join(' ').toLowerCase();
+}
+
+function filterByQuery(list){
+  const query = ACTIVE_QUERY.trim().toLowerCase();
+  if(!query) return list;
+  const tokens = query.split(/\s+/).filter(Boolean);
+  return list.filter(member => {
+    const haystack = searchHaystack(member);
+    return tokens.every(token => haystack.includes(token));
+  });
 }
 
 function formatRole(member){
@@ -320,9 +367,11 @@ function renderTabs(){
 
 function renderView(){
   const config = TAB_CONFIG.find(tab => tab.id === ACTIVE_TAB);
-  const data = getTabData(ACTIVE_TAB);
+  const data = filterByQuery(getTabData(ACTIVE_TAB));
   document.getElementById('viewTitle').textContent = config.label;
-  document.getElementById('viewNote').textContent = config.note;
+  document.getElementById('viewNote').textContent = ACTIVE_QUERY
+    ? `${config.note} · 검색 ${data.length}건`
+    : config.note;
   const grid = document.getElementById('cardGrid');
   const empty = document.getElementById('emptyState');
   if(!data.length){
@@ -357,7 +406,11 @@ function renderStamp(){
 async function loadData(){
   const res = await fetch(`./private_members_data.json?v=${Date.now()}`, { cache:'no-store' });
   if(!res.ok) throw new Error('명단 데이터를 불러오지 못했습니다.');
-  PRIVATE_DATA = await res.json();
+  const raw = await res.json();
+  PRIVATE_DATA = {
+    sheet17: raw.sheet17.map(member => ({ ...member, cohort:'17기' })),
+    sheet16: raw.sheet16.map(member => ({ ...member, cohort:'16기' }))
+  };
 }
 
 async function bootPrivatePage(){
@@ -395,6 +448,17 @@ document.getElementById('pinInput').addEventListener('keydown', e => {
   if(e.key === 'Enter') tryPin();
 });
 document.getElementById('refreshPageButton').addEventListener('click', () => location.reload());
+document.getElementById('searchInput').addEventListener('input', e => {
+  ACTIVE_QUERY = e.target.value;
+  if(PRIVATE_DATA) renderView();
+});
+document.getElementById('searchClearButton').addEventListener('click', () => {
+  ACTIVE_QUERY = '';
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  if(PRIVATE_DATA) renderView();
+  input.focus();
+});
 
 if(sessionStorage.getItem(ACCESS_KEY) === 'ok'){
   unlockPage();

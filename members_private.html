@@ -57,13 +57,30 @@ body{
   font:inherit;font-size:12px;font-weight:900;white-space:nowrap
 }
 .toolbar-search button:hover{background:#e3eaf7;color:var(--navy)}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs{display:grid;gap:10px}
+.tab-group{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tab-group-label{
+  display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;
+  font-size:11px;font-weight:900;letter-spacing:.02em
+}
+.tab-group.birth .tab-group-label{background:#fff3cf;color:#9a6800}
+.tab-group.org .tab-group-label{background:#eaf2ff;color:#2a4c83}
+.tab-group.member .tab-group-label{background:#eef2f8;color:#4a5876}
 .tab-btn{
   border:none;border-radius:999px;padding:10px 14px;background:#edf1f8;color:#45536f;cursor:pointer;
   font:inherit;font-size:13px;font-weight:800;transition:all .18s ease
 }
 .tab-btn:hover{background:#e3eaf7;color:var(--navy)}
 .tab-btn.active{background:linear-gradient(180deg,var(--navy),var(--navy2));color:#fff;box-shadow:0 6px 18px rgba(32,56,100,.18)}
+.tab-btn.birth{background:#fff9e8;color:#9a6800;border:1px solid #f2dfaa}
+.tab-btn.birth:hover{background:#fff3cf;color:#7f5600}
+.tab-btn.birth.active{background:linear-gradient(180deg,#d9a93a,#c58d13);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(201,168,76,.28)}
+.tab-btn.org{background:#edf4ff;color:#2a4c83;border:1px solid #c7dafc}
+.tab-btn.org:hover{background:#e1ecff;color:#1f3c69}
+.tab-btn.org.active{background:linear-gradient(180deg,#355d9b,#203864);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(32,56,100,.22)}
+.tab-btn.member{background:#f2f5fb;color:#5a6782;border:1px solid #dde4f0}
+.tab-btn.member:hover{background:#e8eef8;color:#394964}
+.tab-btn.member.active{background:linear-gradient(180deg,#4e6288,#2c3f61);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(62,81,114,.22)}
 .subbar{
   display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px 0;color:#586581
 }
@@ -168,7 +185,9 @@ body{
   .toolbar-search{margin-bottom:10px}
   .toolbar-search input{padding:10px 12px;font-size:12px}
   .toolbar-search button{padding:9px 11px;font-size:11px}
-  .tabs{gap:6px}
+  .tabs{gap:8px}
+  .tab-group{gap:6px}
+  .tab-group-label{padding:5px 9px;font-size:10px}
   .tab-btn{padding:9px 11px;font-size:11.5px}
   .subbar{padding:10px 12px 0;display:block}
   .subbar-title{font-size:17px;line-height:1.2;word-break:keep-all}
@@ -260,12 +279,12 @@ body{
 const PRIVATE_PIN = '2580';
 const ACCESS_KEY = 'emba_private_access_v1';
 const TAB_CONFIG = [
-  { id:'twoweeks17', label:'2주내 생일', note:'17기만 표시 · 오늘부터 14일 이내 생일자' },
-  { id:'month17', label:'이번달 생일', note:'17기만 표시 · 이번 달 생일자 전체' },
-  { id:'officer17', label:'17기 원우회', note:'17기 원우회 조직도' },
-  { id:'all17', label:'17기 전체', note:'17기 전체 명단' },
-  { id:'officer16', label:'16기 원우회', note:'16기 원우회 조직도' },
-  { id:'all16', label:'16기 전체', note:'16기 전체 명단' }
+  { id:'twoweeks17', label:'2주내 생일', note:'17기만 표시 · 오늘부터 14일 이내 생일자', group:'birth' },
+  { id:'month17', label:'이번달 생일', note:'17기만 표시 · 이번 달 생일자 전체', group:'birth' },
+  { id:'officer17', label:'17기 원우회', note:'17기 원우회 조직도', group:'org' },
+  { id:'officer16', label:'16기 원우회', note:'16기 원우회 조직도', group:'org' },
+  { id:'all17', label:'17기 전체', note:'17기 전체 명단', group:'member' },
+  { id:'all16', label:'16기 전체', note:'16기 전체 명단', group:'member' }
 ];
 
 const ORG_CHART_SETS = {
@@ -550,9 +569,23 @@ function getTabData(tabId){
 
 function renderTabs(){
   const tabs = document.getElementById('tabs');
-  tabs.innerHTML = TAB_CONFIG.map(tab => `
-    <button class="tab-btn ${tab.id === ACTIVE_TAB ? 'active' : ''}" data-tab="${tab.id}">${tab.label}</button>
-  `).join('');
+  const groupLabels = {
+    birth:'생일',
+    org:'조직도',
+    member:'원우회 전체'
+  };
+  const groupOrder = ['birth','org','member'];
+  tabs.innerHTML = groupOrder.map(group => {
+    const items = TAB_CONFIG.filter(tab => tab.group === group);
+    return `
+      <div class="tab-group ${group}">
+        <span class="tab-group-label">${groupLabels[group]}</span>
+        ${items.map(tab => `
+          <button class="tab-btn ${group} ${tab.id === ACTIVE_TAB ? 'active' : ''}" data-tab="${tab.id}">${tab.label}</button>
+        `).join('')}
+      </div>
+    `;
+  }).join('');
   tabs.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       ACTIVE_TAB = btn.dataset.tab;

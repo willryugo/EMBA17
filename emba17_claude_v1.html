@@ -475,6 +475,13 @@ html{overflow-x:hidden}
 .fm-modal-copy{padding:12px 20px 10px;font-size:12.5px;line-height:1.6;color:#4a5876;border-bottom:1px solid rgba(32,56,100,.08);background:rgba(255,255,255,.82)}
 .fm-modal-copy a{color:var(--navy);font-weight:800;text-decoration:none}
 .fm-modal-copy a:hover{text-decoration:underline}
+.org-switch-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:10px 20px 0;background:rgba(255,255,255,.82)}
+.org-switch-btn{
+  border:none;border-radius:999px;padding:8px 14px;background:#edf1f8;color:#45536f;cursor:pointer;
+  font:inherit;font-size:12px;font-weight:800;transition:all .18s ease
+}
+.org-switch-btn:hover{background:#e3eaf7;color:var(--navy)}
+.org-switch-btn.active{background:linear-gradient(180deg,var(--navy),var(--navy2));color:#fff;box-shadow:0 6px 18px rgba(32,56,100,.18)}
 .fm-pdf-wrap{flex:1;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(233,240,249,.95));min-height:0}
 .fm-embed-scroll{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-x pan-y pinch-zoom;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px rgba(32,56,100,.08)}
 .fm-embed-stage{width:calc(100% / var(--embed-scale,1));height:calc(100% / var(--embed-scale,1));min-width:calc(100% / var(--embed-scale,1));min-height:calc(100% / var(--embed-scale,1));transform:scale(var(--embed-scale,1));transform-origin:0 0}
@@ -596,6 +603,8 @@ html{overflow-x:hidden}
   .float-btn .fb-icon{font-size:17px}
   .float-btn .fb-label{font-size:8.5px}
   .fm-org .fm-modal-copy{display:none}
+  .fm-org .org-switch-tabs{padding:8px 14px 0}
+  .fm-org .org-switch-btn{padding:8px 12px;font-size:11px}
   .fm-org .fm-mobile-hint{display:block;padding:8px 14px;font-size:11px;border-bottom:1px solid rgba(32,56,100,.08)}
   .fm-org .fm-content-wrap{padding:8px}
   .org-html-scroll{border-radius:12px}
@@ -981,49 +990,97 @@ const CAL_DAY_DATA={
   "2026-07-24":{events:[{name:'✈️ GSP Day 3',note:'시애틀 UW',detail:'프로그램 종료 및 귀국 일정 개별 진행',color:'#C9A84C'}]},
 };
 
-const ORG_CHART_DATA={
-  advisors:[
-    {role:'고문',name:'조호경',birth:'68',company:'엠디바이스㈜',title:'대표이사'},
-    {role:'고문',name:'강병성',birth:'68',company:'성유상사',title:'사장'},
-  ],
-  president:{role:'회장',name:'정종균',birth:'80',company:'㈜시스메이트',title:'대표이사'},
-  auditor:{role:'감사',name:'정지현',birth:'82',company:'삼덕회계법인',title:'Director'},
-  vicePresidents:[
-    {role:'부회장',name:'류사빈',birth:'79',company:'매일유업',title:'유가공CMG 그룹장'},
-    {role:'부회장',name:'김운용',birth:'80',company:'(주)인피니티',title:'CEO'},
-  ],
-  departments:[
-    {dept:'사무국',people:[
-      {label:'국장',name:'김태웅',birth:'80',company:'삼성전자',title:'수석 엔지니어'},
-      {label:'부국장',name:'김대언',birth:'82',company:'㈜온다글로벌로지스',title:'부사장'},
-    ]},
-    {dept:'재무국',people:[
-      {label:'국장',name:'김선도',birth:'82',company:'IBK기업은행',title:'팀장'},
-      {label:'부국장',name:'박준호',birth:'76',company:'㈜위메이드',title:'부장/팀장'},
-    ]},
-    {dept:'문화국',people:[
-      {label:'국장',name:'김미르',birth:'79',company:'㈜썸이미지니어링',title:'대표이사'},
-      {label:'부국장',name:'김제헌',birth:'86',company:'㈜코드캣',title:'대표'},
-    ]},
-    {dept:'홍보국',people:[
-      {label:'국장',name:'정수인',birth:'77',company:'㈜런컬렉션',title:'이사'},
-      {label:'부국장',name:'홍진성',birth:'79',company:'㈜SEISIN',title:'대표이사'},
-    ]},
-    {dept:'커뮤니케이션국',people:[
-      {label:'국장',name:'박흥규',birth:'82',company:'삼성전자',title:'그룹장'},
-      {label:'부국장',name:'정희선',birth:'87',company:'익스피디아 그룹',title:'부장'},
-    ]},
-    {dept:'학술국',people:[
-      {label:'국장',name:'류인식',birth:'82',company:'㈜포이닉스/제너럴아이디어',title:''},
-      {label:'부국장',name:'이형헌',birth:'82',company:'삼성전자',title:'부장'},
-    ]},
-    {dept:'기획국',people:[
-      {label:'국장',name:'김주민',birth:'80',company:'동국제강㈜',title:'부장'},
-      {label:'부국장',name:'김진성',birth:'86',company:'WPP MEDIA',title:'부장'},
-      {label:'협력',name:'하일산',birth:'84',company:'레이몰드㈜',title:'대표이사'},
-    ]},
-  ],
+const ORG_CHART_SETS={
+  cohort17:{
+    title:'연세대학교 EMBA 제 17기 원우회',
+    advisors:[
+      {role:'고문',name:'조호경',birth:'68',company:'엠디바이스㈜',title:'대표이사'},
+      {role:'고문',name:'강병성',birth:'68',company:'성유상사',title:'사장'},
+    ],
+    president:{role:'회장',name:'정종균',birth:'80',company:'㈜시스메이트',title:'대표이사'},
+    auditor:{role:'감사',name:'정지현',birth:'82',company:'삼덕회계법인',title:'Director'},
+    vicePresidents:[
+      {role:'부회장',name:'류사빈',birth:'79',company:'매일유업',title:'유가공CMG 그룹장'},
+      {role:'부회장',name:'김운용',birth:'80',company:'(주)인피니티',title:'CEO'},
+    ],
+    departments:[
+      {dept:'사무국',people:[
+        {label:'국장',name:'김태웅',birth:'80',company:'삼성전자',title:'수석 엔지니어'},
+        {label:'부국장',name:'김대언',birth:'82',company:'㈜온다글로벌로지스',title:'부사장'},
+      ]},
+      {dept:'재무국',people:[
+        {label:'국장',name:'김선도',birth:'82',company:'IBK기업은행',title:'팀장'},
+        {label:'부국장',name:'박준호',birth:'76',company:'㈜위메이드',title:'부장/팀장'},
+      ]},
+      {dept:'문화국',people:[
+        {label:'국장',name:'김미르',birth:'79',company:'㈜썸이미지니어링',title:'대표이사'},
+        {label:'부국장',name:'김제헌',birth:'86',company:'㈜코드캣',title:'대표'},
+      ]},
+      {dept:'홍보국',people:[
+        {label:'국장',name:'정수인',birth:'77',company:'㈜런컬렉션',title:'이사'},
+        {label:'부국장',name:'홍진성',birth:'79',company:'㈜SEISIN',title:'대표이사'},
+      ]},
+      {dept:'커뮤니케이션국',people:[
+        {label:'국장',name:'박흥규',birth:'82',company:'삼성전자',title:'그룹장'},
+        {label:'부국장',name:'정희선',birth:'87',company:'익스피디아 그룹',title:'부장'},
+      ]},
+      {dept:'학술국',people:[
+        {label:'국장',name:'류인식',birth:'82',company:'㈜포이닉스/제너럴아이디어',title:''},
+        {label:'부국장',name:'이형헌',birth:'82',company:'삼성전자',title:'부장'},
+      ]},
+      {dept:'기획국',people:[
+        {label:'국장',name:'김주민',birth:'80',company:'동국제강㈜',title:'부장'},
+        {label:'부국장',name:'김진성',birth:'86',company:'WPP MEDIA',title:'부장'},
+        {label:'협력',name:'하일산',birth:'84',company:'레이몰드㈜',title:'대표이사'},
+      ]},
+    ],
+  },
+  cohort16:{
+    title:'연세대학교 EMBA 제 16기 원우회',
+    advisors:[
+      {role:'고문',name:'이치형',birth:'73',company:'CJ푸드빌/베이커리사업',title:'본부장'},
+      {role:'고문',name:'정은호',birth:'73',company:'세연아이넷㈜',title:'대표이사'},
+    ],
+    president:{role:'회장',name:'송관종',birth:'70',company:'아폴로투자자문㈜',title:'대표'},
+    auditor:{role:'감사',name:'이동인',birth:'81',company:'인우세무회계',title:'대표세무사'},
+    vicePresidents:[
+      {role:'부회장',name:'이용운',birth:'80',company:'현대그룹/현대엘리베이터',title:'상무'},
+      {role:'부회장',name:'현준섭',birth:'75',company:'㈜한미글로벌',title:'이사'},
+      {role:'부회장',name:'김영만',birth:'80',company:'㈜썬에버',title:'대표이사'},
+    ],
+    departments:[
+      {dept:'사무국',people:[
+        {label:'국장',name:'김민석',birth:'84',company:'라온어스',title:'이사'},
+        {label:'부국장',name:'이승화',birth:'86',company:'㈜티와이',title:'전무이사'},
+      ]},
+      {dept:'재무국',people:[
+        {label:'국장',name:'김주영',birth:'81',company:'IBK기업은행',title:'팀장'},
+        {label:'부국장',name:'김한나',birth:'85',company:'IBK기업은행',title:'차장'},
+      ]},
+      {dept:'문화국',people:[
+        {label:'국장',name:'이석우',birth:'85',company:'㈜정림개발 메이필드호텔',title:'이사'},
+        {label:'부국장',name:'이상봉',birth:'84',company:'㈜니어스랩',title:'부장'},
+      ]},
+      {dept:'홍보국',people:[
+        {label:'국장',name:'윤주희',birth:'76',company:'㈜더브리즈',title:'대표'},
+        {label:'부국장',name:'김혜린',birth:'89',company:'㈜알엠에스',title:'대표'},
+      ]},
+      {dept:'커뮤니케이션국',people:[
+        {label:'국장',name:'안창현',birth:'84',company:'㈜여행하기좋은날',title:'대표이사'},
+        {label:'부국장',name:'김종호',birth:'85',company:'㈜앨런컴퍼니',title:'대표이사'},
+      ]},
+      {dept:'학술국',people:[
+        {label:'국장',name:'김승민',birth:'83',company:'삼성전자㈜',title:'수석'},
+        {label:'부국장',name:'신선호',birth:'87',company:'한국자동차영업협회㈜',title:'대표이사'},
+      ]},
+      {dept:'기획국',people:[
+        {label:'국장',name:'배상현',birth:'72',company:'㈜삼사원',title:'대표이사'},
+        {label:'부국장',name:'우주한',birth:'81',company:'한솔케미칼',title:'수석연구원'},
+      ]},
+    ],
+  }
 };
+let ACTIVE_ORG_COHORT='cohort17';
 
 // ═══ UTILS ═══
 const today=new Date();today.setHours(0,0,0,0);
@@ -1766,6 +1823,16 @@ function toggleGspSection(id){
 function renderOrgChart(){
   const root=document.getElementById('orgChartRoot');
   if(!root) return;
+  const chart=ORG_CHART_SETS[ACTIVE_ORG_COHORT];
+  const titleBar=document.getElementById('orgChartTitle');
+  if(titleBar) titleBar.textContent=chart.title;
+  const switchRoot=document.getElementById('orgSwitchTabs');
+  if(switchRoot){
+    switchRoot.innerHTML=`
+      <button class="org-switch-btn ${ACTIVE_ORG_COHORT==='cohort17'?'active':''}" type="button" onclick="setOrgCohort('cohort17')">17기 원우회</button>
+      <button class="org-switch-btn ${ACTIVE_ORG_COHORT==='cohort16'?'active':''}" type="button" onclick="setOrgCohort('cohort16')">16기 원우회</button>
+    `;
+  }
   const personNode=(person, cls='')=>`
     <div class="org-node ${cls}">
       <div class="org-node-head">${person.role}</div>
@@ -1783,20 +1850,20 @@ function renderOrgChart(){
       <div class="org-title-chip">임원진</div>
       <div class="org-lead-wrap">
         <div class="org-tier org-tier-president">
-          ${personNode(ORG_CHART_DATA.president,'role-president')}
+          ${personNode(chart.president,'role-president')}
         </div>
         <div class="org-tier org-tier-exec">
           <div class="org-group-col">
             <div class="org-group-title">고문</div>
-            ${ORG_CHART_DATA.advisors.map(person=>personNode(person,'role-advisor org-node-mini')).join('')}
+            ${chart.advisors.map(person=>personNode(person,'role-advisor org-node-mini')).join('')}
           </div>
           <div class="org-group-col">
             <div class="org-group-title">부회장단</div>
-            ${ORG_CHART_DATA.vicePresidents.map(person=>personNode(person,'role-vp org-node-mini')).join('')}
+            ${chart.vicePresidents.map(person=>personNode(person,'role-vp org-node-mini')).join('')}
           </div>
           <div class="org-group-col">
             <div class="org-group-title">감사</div>
-            ${personNode(ORG_CHART_DATA.auditor,'role-auditor org-node-mini')}
+            ${personNode(chart.auditor,'role-auditor org-node-mini')}
           </div>
         </div>
       </div>
@@ -1805,7 +1872,7 @@ function renderOrgChart(){
       <div class="org-title-chip">국별 구성</div>
       <div class="org-tier org-tier-dept">
       <div class="org-dept-grid">
-        ${ORG_CHART_DATA.departments.map(dept=>`
+        ${chart.departments.map(dept=>`
           <article class="org-dept-card">
             <div class="org-dept-name">${dept.dept}</div>
             <div class="org-dept-people">${dept.people.map(miniChip).join('')}</div>
@@ -1814,6 +1881,10 @@ function renderOrgChart(){
       </div>
       </div>
     </section>`;
+}
+function setOrgCohort(cohort){
+  ACTIVE_ORG_COHORT=cohort;
+  renderOrgChart();
 }
 
 async function initSportsCard(){
@@ -1833,6 +1904,7 @@ initSportsCard();
 function openFloatModal(type){
   document.getElementById('fm-overlay').classList.add('active');
   document.getElementById('fm-org-view').style.display = '';
+  ACTIVE_ORG_COHORT='cohort17';
   renderOrgChart();
 }
 function closeFloatModal(){
@@ -1853,10 +1925,11 @@ function closeFloatModal(){
     <!-- 조직도 -->
     <div class="fm-box fm-org" id="fm-org-view" onclick="event.stopPropagation()">
       <button class="fm-close" onclick="closeFloatModal()">✕</button>
-      <div class="org-title-bar">연세대학교 EMBA 제 17기 원우회</div>
+      <div class="org-title-bar" id="orgChartTitle">연세대학교 EMBA 제 17기 원우회</div>
       <div class="fm-modal-copy">
         원우회 조직도를 페이지 내부 레이아웃으로 정리했습니다. 모바일에서는 위에서 아래로 더 읽기 쉽게 배치됩니다.
       </div>
+      <div class="org-switch-tabs" id="orgSwitchTabs"></div>
       <div class="fm-mobile-hint">모바일에서는 확대 없이도 구조를 읽을 수 있도록 세로형으로 정리했습니다.</div>
       <div class="fm-content-wrap">
         <div class="org-html-scroll">

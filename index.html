@@ -794,11 +794,27 @@ html{overflow-x:hidden}
 
 <!-- TABS -->
 <div class="tabs-wrap">
+  <!-- 2학기 D-day 배너 -->
+  <div class="s2-dday-wrap" style="margin-bottom:16px">
+    <div>
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#0e7490;margin-bottom:5px">EMBA 17기 · 2026년 2학기</div>
+      <div style="font-size:18px;font-weight:900;color:var(--navy)">9/4(금) 개강 — 12/19(토) 종강</div>
+      <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap">
+        <span style="font-size:12px;font-weight:700;color:#52617f">🗓 총 10주 · 20수업일</span>
+        <span style="font-size:12px;font-weight:700;color:#52617f">📚 7개 과목</span>
+        <span style="font-size:12px;font-weight:700;color:#52617f">🗒 위 주간 시간표에서 주차별 수업 확인</span>
+      </div>
+    </div>
+    <div style="text-align:center;background:rgba(255,255,255,.8);border-radius:12px;padding:12px 20px">
+      <div style="font-size:11px;font-weight:700;color:#0e7490;margin-bottom:3px" id="s2-dday-label">개강까지</div>
+      <div class="s2-dday-num" id="s2-dday">—</div>
+      <div style="font-size:10px;color:#52617f;margin-top:3px">일</div>
+    </div>
+  </div>
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab(event,'sem2')" style="color:#0e7490">📅 2학기 상세</button>
-    <button class="tab-btn" onclick="switchTab(event,'events')" style="border-left:2px solid rgba(32,56,100,.15);margin-left:4px">🗄️ 1학기 주요행사</button>
-    <button class="tab-btn" onclick="switchTab(event,'tasks')">🗄️ 1학기 전체과제</button>
-    <button class="tab-btn" onclick="switchTab(event,'courses')">🗄️ 1학기 과목안내</button>
+    <button class="tab-btn active" onclick="switchTab(event,'s2-events')">🎯 행사·일정</button>
+    <button class="tab-btn" onclick="switchTab(event,'s2-tasks')">📋 과제현황</button>
+    <button class="tab-btn" onclick="switchTab(event,'s2-courses')">📚 과목안내</button>
   </div>
 
   <div class="tab-panel" id="tab-tasks">
@@ -971,40 +987,15 @@ html{overflow-x:hidden}
     </div>
   </div>
 
-  <!-- ══════ 2학기 탭 ══════ -->
-  <div class="tab-panel active" id="tab-sem2">
-    <div class="s2-dday-wrap" style="margin-bottom:16px">
-      <div>
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#0e7490;margin-bottom:5px">EMBA 17기 · 2026년 2학기</div>
-        <div style="font-size:18px;font-weight:900;color:var(--navy)">9/4(금) 개강 — 12/19(토) 종강</div>
-        <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap">
-          <span style="font-size:12px;font-weight:700;color:#52617f">🗓 총 10주 · 20수업일</span>
-          <span style="font-size:12px;font-weight:700;color:#52617f">📚 7개 과목</span>
-          <span style="font-size:12px;font-weight:700;color:#52617f">🗒 위 주간 시간표에서 주차별 수업 확인</span>
-        </div>
-      </div>
-      <div style="text-align:center;background:rgba(255,255,255,.8);border-radius:12px;padding:12px 20px">
-        <div style="font-size:11px;font-weight:700;color:#0e7490;margin-bottom:3px" id="s2-dday-label">개강까지</div>
-        <div class="s2-dday-num" id="s2-dday">—</div>
-        <div style="font-size:10px;color:#52617f;margin-top:3px">일</div>
-      </div>
-    </div>
-
-    <!-- 2학기 서브탭 -->
-    <div class="tabs-wrap" style="margin-top:0">
-      <div class="tab-nav">
-        <button class="tab-btn s2-tab-btn active" onclick="switchS2Tab(event,'s2-events')">🎯 행사·일정</button>
-        <button class="tab-btn s2-tab-btn" onclick="switchS2Tab(event,'s2-tasks')">📋 과제현황</button>
-        <button class="tab-btn s2-tab-btn" onclick="switchS2Tab(event,'s2-courses')">📚 과목안내</button>
-      </div>
-      <div class="s2-panel active" id="tab-s2-events">
-        <div class="s2-empty"><div class="s2-empty-icon">🗓</div>행사·원우회 일정 확정 시 업데이트됩니다.</div>
-      </div>
-      <div class="s2-panel" id="tab-s2-tasks">
-        <div class="s2-empty"><div class="s2-empty-icon">📋</div>강의계획서 배포 후 과제 일정이 업데이트됩니다.</div>
-      </div>
-      <div class="s2-panel" id="tab-s2-courses">
-        <div class="course-cards">
+  <!-- ══════ 2학기 탭 패널 (기본 활성) ══════ -->
+  <div class="tab-panel active" id="tab-s2-events">
+    <div class="s2-empty"><div class="s2-empty-icon">🗓</div>행사·원우회 일정 확정 시 업데이트됩니다.</div>
+  </div>
+  <div class="tab-panel" id="tab-s2-tasks">
+    <div class="s2-empty"><div class="s2-empty-icon">📋</div>강의계획서 배포 후 과제 일정이 업데이트됩니다.</div>
+  </div>
+  <div class="tab-panel" id="tab-s2-courses">
+    <div class="course-cards">
           <div class="course-card"><div class="cc-bar" style="background:#0e7490"></div><div class="cc-name">Financial Markets &amp; Valuation</div><div class="cc-prof">한재훈 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 1교시</span><span class="cc-chip">13:00–15:40</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
           <div class="course-card"><div class="cc-bar" style="background:#6d28d9"></div><div class="cc-name">Global Business Environment</div><div class="cc-prof">곽주영 교수</div><div class="cc-chips"><span class="cc-chip">1~4주</span><span class="cc-chip">금 2교시 + 토 1교시</span><span class="cc-chip">4주 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
           <div class="course-card"><div class="cc-bar" style="background:#be185d"></div><div class="cc-name">Creating Value Through IT Innovation</div><div class="cc-prof">임일 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 3교시</span><span class="cc-chip">19:20–22:00</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
@@ -1013,23 +1004,21 @@ html{overflow-x:hidden}
           <div class="course-card"><div class="cc-bar" style="background:#b45309"></div><div class="cc-name">Data Driven Marketing Decisions</div><div class="cc-prof">박창희 교수</div><div class="cc-chips"><span class="cc-chip">6~10주</span><span class="cc-chip">금 2교시 → 1교시</span><span class="cc-chip" style="background:#fef3c7;color:#92400e">11/6 개강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
           <div class="course-card"><div class="cc-bar" style="background:#475569"></div><div class="cc-name">Operations &amp; Supply Chain Management</div><div class="cc-prof">허대식 교수</div><div class="cc-chips"><span class="cc-chip">5~10주</span><span class="cc-chip">토 1교시 → 2교시</span><span class="cc-chip" style="background:#f1f5f9;color:#475569">10/24 개강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
         </div>
-      </div>
-    </div>
   </div>
 </div>
 
 <!-- CALENDAR SECTION (3월~7월) -->
 <div class="cal-section">
-  <div class="cal-section-head"><h2>🗄️ 1학기 전체 캘린더 (3~7월 · 종료)</h2></div>
+  <div class="cal-section-head"><h2>🗓️ 2학기 전체 캘린더 (9~12월)</h2></div>
   <div class="cal-legend">
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#c7d8ff"></div>수업일</div>
-    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--eco)"></div>Economics</div>
-    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--ana)"></div>Analytics</div>
-    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--mpo)"></div>MPO</div>
-    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--eth)"></div>Ethics</div>
-    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--msc)"></div>Sci</div>
-    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--mkt)"></div>Marketing</div>
-    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--fin)"></div>Accounting</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#0e7490"></div>FMV</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#6d28d9"></div>GBE</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#be185d"></div>IT혁신</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#1e40af"></div>전략</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#166534"></div>회계</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#b45309"></div>DDM</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#475569"></div>OSCM</div>
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#1d4ed8"></div>과제/발표</div>
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--gold)"></div>행사</div>
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#dc2626"></div>시험</div>
@@ -1537,9 +1526,8 @@ function filterAssign(e,type){
 // ═══ CALENDAR ═══
 function buildCalendar(){
   const months=[
-    {y:2026,m:3,name:'3월'},{y:2026,m:4,name:'4월'},
-    {y:2026,m:5,name:'5월'},{y:2026,m:6,name:'6월'},
-    {y:2026,m:7,name:'7월 (GSP)'},
+    {y:2026,m:9,name:'9월'},{y:2026,m:10,name:'10월'},
+    {y:2026,m:11,name:'11월'},{y:2026,m:12,name:'12월'},
   ];
   const dow=['일','월','화','수','목','금','토'];
   const grid=document.getElementById('cal-grid');
@@ -1736,8 +1724,8 @@ function updateStats(){
 // ═══ CALENDAR CAROUSEL (mobile) ═══
 let calMonthIdx=0;
 const CAL_MONTH_CARDS=[];
-const CAL_MONTH_NAMES=['3월','4월','5월','6월','7월 (GSP)'];
-const CAL_MONTH_NUMS=[3,4,5,6,7];
+const CAL_MONTH_NAMES=['9월','10월','11월','12월'];
+const CAL_MONTH_NUMS=[9,10,11,12];
 
 function initCalCarousel(){
   CAL_MONTH_CARDS.length=0;
@@ -2049,6 +2037,16 @@ const WEEKS2=[
   {n:10,label:'10주차',fri:{d:'2026-12-18',label:'12/18(금)',slots:[{c:'ddm',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'}]},sat:{d:'2026-12-19',label:'12/19(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'osc',p:'2교시',t:'13:00–15:40'}]},tasks:[],events:[]},
 ];
 let curWeek2=0;
+
+// ── 2학기 캘린더 데이터: WEEKS2 → CAL_DAY_DATA 병합 (날짜 키가 1학기와 겹치지 않음) ──
+Object.assign(CABBR,{fmv:'FMV',gbe:'GBE',cvt:'IT혁신',str:'전략',mac:'회계',ddm:'DDM',osc:'OSCM'});
+WEEKS2.forEach(w=>{
+  ['fri','sat'].forEach(day=>{
+    const dd=w[day];
+    if(!dd) return;
+    CAL_DAY_DATA[dd.d]={classes:dd.slots.map(s=>({c:s.c,t:s.t}))};
+  });
+});
 
 function getDefaultWeek2(){
   const sem2Start=dateOf('2026-09-04');

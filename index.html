@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>EMBA 17기 2026년 1학기 학술운영보드</title>
+<title>EMBA 17기 2026년 2학기 학술운영보드</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
 :root{
@@ -719,7 +719,7 @@ html{overflow-x:hidden}
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <h1>EMBA 17기 2026년 1학기 학술운영보드</h1>
+      <h1>EMBA 17기 2026년 2학기 학술운영보드</h1>
       <div class="contact-strip">학술 관련 문의는 원우회 공지 채널을 통해 안내드립니다.</div>
     </div>
     <div class="hero-stats">
@@ -795,10 +795,10 @@ html{overflow-x:hidden}
 <!-- TABS -->
 <div class="tabs-wrap">
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab(event,'events')">🎯 주요행사</button>
-    <button class="tab-btn" onclick="switchTab(event,'tasks')">📋 전체 과제</button>
-    <button class="tab-btn" onclick="switchTab(event,'courses')">📚 과목안내</button>
-    <button class="tab-btn" onclick="switchTab(event,'sem2')" style="border-left:2px solid rgba(14,116,144,.3);margin-left:4px;color:#0e7490">🆕 2학기</button>
+    <button class="tab-btn active" onclick="switchTab(event,'sem2')" style="color:#0e7490">📅 2학기 상세</button>
+    <button class="tab-btn" onclick="switchTab(event,'events')" style="border-left:2px solid rgba(32,56,100,.15);margin-left:4px">🗄️ 1학기 주요행사</button>
+    <button class="tab-btn" onclick="switchTab(event,'tasks')">🗄️ 1학기 전체과제</button>
+    <button class="tab-btn" onclick="switchTab(event,'courses')">🗄️ 1학기 과목안내</button>
   </div>
 
   <div class="tab-panel" id="tab-tasks">
@@ -844,7 +844,7 @@ html{overflow-x:hidden}
     </div>
   </div>
 
-  <div class="tab-panel active" id="tab-events">
+  <div class="tab-panel" id="tab-events">
     <section class="exam-brief" aria-label="기말시험 일정 요약">
       <div class="exam-brief-head">
         <div>
@@ -972,15 +972,15 @@ html{overflow-x:hidden}
   </div>
 
   <!-- ══════ 2학기 탭 ══════ -->
-  <div class="tab-panel" id="tab-sem2">
-    <!-- D-day 배너 -->
-    <div class="s2-dday-wrap">
+  <div class="tab-panel active" id="tab-sem2">
+    <div class="s2-dday-wrap" style="margin-bottom:16px">
       <div>
         <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#0e7490;margin-bottom:5px">EMBA 17기 · 2026년 2학기</div>
         <div style="font-size:18px;font-weight:900;color:var(--navy)">9/4(금) 개강 — 12/19(토) 종강</div>
         <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap">
           <span style="font-size:12px;font-weight:700;color:#52617f">🗓 총 10주 · 20수업일</span>
           <span style="font-size:12px;font-weight:700;color:#52617f">📚 7개 과목</span>
+          <span style="font-size:12px;font-weight:700;color:#52617f">🗒 위 주간 시간표에서 주차별 수업 확인</span>
         </div>
       </div>
       <div style="text-align:center;background:rgba(255,255,255,.8);border-radius:12px;padding:12px 20px">
@@ -988,20 +988,6 @@ html{overflow-x:hidden}
         <div class="s2-dday-num" id="s2-dday">—</div>
         <div style="font-size:10px;color:#52617f;margin-top:3px">일</div>
       </div>
-    </div>
-
-    <!-- 2학기 주차별 수업 -->
-    <div class="week-schedule-wrap" style="margin-top:0;margin-bottom:16px">
-      <div class="ws-header">
-        <div class="ws-title" id="ws2-title">2학기 수업 시간표</div>
-        <div class="ws-nav">
-          <button class="ws-nav-btn" onclick="moveSem2Week(-1)">‹</button>
-          <div class="ws-dots" id="ws2-dots"></div>
-          <span class="ws-week-label" id="ws2-week-label"></span>
-          <button class="ws-nav-btn" onclick="moveSem2Week(1)">›</button>
-        </div>
-      </div>
-      <div id="ws2-panels"></div>
     </div>
 
     <!-- 2학기 서브탭 -->
@@ -1034,7 +1020,7 @@ html{overflow-x:hidden}
 
 <!-- CALENDAR SECTION (3월~7월) -->
 <div class="cal-section">
-  <div class="cal-section-head"><h2>학기 전체 캘린더</h2></div>
+  <div class="cal-section-head"><h2>🗄️ 1학기 전체 캘린더 (3~7월 · 종료)</h2></div>
   <div class="cal-legend">
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#c7d8ff"></div>수업일</div>
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--eco)"></div>Economics</div>
@@ -1263,13 +1249,14 @@ function taskPopHTML(t){
 // ═══ UPCOMING BANNER ═══
 function buildUpcoming(){
   let nextW=null;
-  for(const w of WEEKS){
+  for(const w of WEEKS2){
     const satD=dateOf(w.sat.d);
     const sunAfter=new Date(satD);sunAfter.setDate(satD.getDate()+1);
     if(today<sunAfter){nextW=w;break;}
   }
-  if(!nextW) nextW=WEEKS[WEEKS.length-1];
-  curWeek=WEEKS.indexOf(nextW);
+  if(!nextW) nextW=WEEKS2[WEEKS2.length-1];
+  curWeek=WEEKS2.indexOf(nextW);
+  const isOpening=(nextW===WEEKS2[0]);
 
   const days=diffDays(nextW.fri.d);
   document.getElementById('ub-title').textContent=`${nextW.label} — ${nextW.fri.label} ~ ${nextW.sat.label}`;
@@ -1311,7 +1298,7 @@ function buildUpcoming(){
 
   if(days>0){
     // 이번주 금요일까지 남은 날
-    document.getElementById('ub-eyebrow').textContent=days===1?'내일 수업 시작':'다음 수업까지';
+    document.getElementById('ub-eyebrow').textContent=isOpening?'🎓 2학기 개강까지':(days===1?'내일 수업 시작':'다음 수업까지');
     const classStart=new Date(nextW.fri.d+'T13:00:00');
     runClassCountdown(classStart,'첫 수업까지');
   } else {
@@ -1438,19 +1425,19 @@ function toggleDetail(btn){
 // ═══ WEEK SCHEDULE ═══
 let curWeek=0;
 function getDefaultWeek(){
-  for(let i=0;i<WEEKS.length;i++){
-    const satD=dateOf(WEEKS[i].sat.d);
+  for(let i=0;i<WEEKS2.length;i++){
+    const satD=dateOf(WEEKS2[i].sat.d);
     const sunAfter=new Date(satD);sunAfter.setDate(satD.getDate()+1);
     if(today<sunAfter) return i;
   }
-  return WEEKS.length-1;
+  return WEEKS2.length-1;
 }
 function buildWeekSchedule(){
   const dots=document.getElementById('ws-dots');
   const panels=document.getElementById('ws-panels');
   dots.innerHTML='';panels.innerHTML='';
 
-  WEEKS.forEach((w,i)=>{
+  WEEKS2.forEach((w,i)=>{
     const dot=document.createElement('button');
     dot.className='ws-dot'+(i===curWeek?' active':'');
     dot.title=w.label;dot.onclick=()=>goWeek(i);
@@ -1479,15 +1466,15 @@ function buildWeekSchedule(){
       </div>`;
     panels.appendChild(panel);
   });
-  document.getElementById('ws-week-label').textContent=WEEKS[curWeek].label;
-  document.getElementById('ws-title').textContent=`${WEEKS[curWeek].label} 수업 시간표`;
+  document.getElementById('ws-week-label').textContent=WEEKS2[curWeek].label;
+  document.getElementById('ws-title').textContent=`${WEEKS2[curWeek].label} 수업 시간표 · 2학기`;
 
   // Render slots for current week immediately
   renderSlots(curWeek);
 }
 
 function renderSlots(i){
-  const w=WEEKS[i];
+  const w=WEEKS2[i];
   ['fri','sat'].forEach(day=>{
     const el=document.getElementById(`slots-${day}-${i}`);
     if(!el||el.dataset.rendered) return;
@@ -1511,13 +1498,13 @@ function renderSlots(i){
 
 function goWeek(i){
   curWeek=i;
-  document.querySelectorAll('.ws-dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));
-  document.querySelectorAll('.ws-panel').forEach((p,idx)=>{p.style.display=idx===i?'block':'none';});
-  document.getElementById('ws-week-label').textContent=WEEKS[i].label;
-  document.getElementById('ws-title').textContent=`${WEEKS[i].label} 수업 시간표`;
+  document.querySelectorAll('#ws-dots .ws-dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));
+  document.querySelectorAll('#ws-panels .ws-panel').forEach((p,idx)=>{p.style.display=idx===i?'block':'none';});
+  document.getElementById('ws-week-label').textContent=WEEKS2[i].label;
+  document.getElementById('ws-title').textContent=`${WEEKS2[i].label} 수업 시간표 · 2학기`;
   renderSlots(i);
 }
-function moveWeek(d){goWeek(Math.max(0,Math.min(WEEKS.length-1,curWeek+d)));}
+function moveWeek(d){goWeek(Math.max(0,Math.min(WEEKS2.length-1,curWeek+d)));}
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft') moveWeek(-1);
   if(e.key==='ArrowRight') moveWeek(1);
@@ -1705,37 +1692,45 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 
 // ═══ STATS ═══
 function updateStats(){
-  const classDays=Object.keys(CAL_DAY_DATA).filter(k=>CAL_DAY_DATA[k].classes&&CAL_DAY_DATA[k].classes.length>0&&k<='2026-07-01');
+  // ── 2학기 기준 통계 ──
+  // 총 수업일: WEEKS2의 금·토 전체
+  const classDays=[];
+  WEEKS2.forEach(w=>{classDays.push(w.fri.d,w.sat.d);});
   const done=classDays.filter(k=>isPast(k)).length;
   const total=classDays.length;
-  const pct=Math.round(done/total*100);
+  const pct=total?Math.round(done/total*100):0;
   document.getElementById('stat-days').textContent=`${done}/${total}`;
   document.getElementById('stat-days-pct').textContent=pct+'%';
   document.getElementById('stat-days-bar').style.width=pct+'%';
   document.getElementById('stat-days-sub').textContent=`진행률 ${pct}% · 남은 ${total-done}일`;
-  // courses stat: count active courses as of today
-  const allCourses=7;
-  const endedCourses=1; // BA ended 4/11
-  const startedCourses=4; // FA starts 5/9
-  const activeCourses=allCourses-endedCourses-(dateOf('2026-05-09')>today?1:0);
-  const coursePct=Math.round(activeCourses/allCourses*100);
-  document.getElementById('stat-courses').textContent=`${activeCourses}/${allCourses}`;
+  // 운영 과목 수: 토요일이 지난 주에 등장한 과목 = 개강 완료
+  const courseCodes=Object.keys(CNAMES2);
+  const allCourses=courseCodes.length; // 7
+  const started=courseCodes.filter(c=>WEEKS2.some(w=>isPast(w.sat.d)&&[...w.fri.slots,...w.sat.slots].some(s=>s.c===c))).length;
+  const coursePct=Math.round(started/allCourses*100);
+  document.getElementById('stat-courses').textContent=`${started}/${allCourses}`;
   document.getElementById('stat-courses-pct').textContent=coursePct+'%';
   document.getElementById('stat-courses-bar').style.width=coursePct+'%';
-  document.getElementById('stat-courses-sub').textContent=`개강 ${activeCourses}개 · 종강 ${endedCourses}개`;
-  // 과제 진척도: CAL_DAY_DATA 기반 동적 계산
+  document.getElementById('stat-courses-sub').textContent=started>0?`개강 ${started}개 · 예정 ${allCourses-started}개`:`전 과목 개강 예정 (${allCourses}개)`;
+  // 과제 진척도: WEEKS2 기반 (강의계획서 배포 전이면 미정)
   let taskTotal=0,taskDone=0;
-  Object.keys(CAL_DAY_DATA).forEach(k=>{
-    const t=CAL_DAY_DATA[k].tasks;
-    if(!t||!t.length) return;
-    taskTotal+=t.length;
-    if(dateOf(k)<=today) taskDone+=t.length;
+  WEEKS2.forEach(w=>{
+    if(!w.tasks||!w.tasks.length) return;
+    taskTotal+=w.tasks.length;
+    if(isPast(w.sat.d)) taskDone+=w.tasks.length;
   });
-  const taskPct=taskTotal?Math.round(taskDone/taskTotal*100):0;
-  document.getElementById('stat-tasks').textContent=`${taskDone}/${taskTotal}`;
-  document.getElementById('stat-tasks-pct').textContent=taskPct+'%';
-  document.getElementById('stat-tasks-bar').style.width=taskPct+'%';
-  document.getElementById('stat-tasks-sub').textContent=`완료 ${taskDone}건 · 남은 ${taskTotal-taskDone}건`;
+  if(taskTotal===0){
+    document.getElementById('stat-tasks').textContent='예정';
+    document.getElementById('stat-tasks-pct').textContent='—';
+    document.getElementById('stat-tasks-bar').style.width='0%';
+    document.getElementById('stat-tasks-sub').textContent='강의계획서 배포 후 업데이트';
+  }else{
+    const taskPct=Math.round(taskDone/taskTotal*100);
+    document.getElementById('stat-tasks').textContent=`${taskDone}/${taskTotal}`;
+    document.getElementById('stat-tasks-pct').textContent=taskPct+'%';
+    document.getElementById('stat-tasks-bar').style.width=taskPct+'%';
+    document.getElementById('stat-tasks-sub').textContent=`완료 ${taskDone}건 · 남은 ${taskTotal-taskDone}건`;
+  }
 }
 
 // ═══ CALENDAR CAROUSEL (mobile) ═══
@@ -2039,6 +2034,8 @@ async function initSportsCard(){
 const CMAP2={fmv:'#0e7490',gbe:'#6d28d9',cvt:'#be185d',str:'#1e40af',mac:'#166534',ddm:'#b45309',osc:'#475569'};
 const CNAMES2={fmv:'Financial Markets & Valuation',gbe:'Global Business Environment',cvt:'Creating Value Through IT Innovation',str:'Strategy for Executives',mac:'Managerial Accounting for Executives',ddm:'Data Driven Marketing Decisions',osc:'Operations & Supply Chain Mgmt'};
 const CPROFS2={fmv:'한재훈',gbe:'곽주영',cvt:'임일',str:'김보경',mac:'문두철',ddm:'박창희',osc:'허대식'};
+// 2학기 과목 코드(fmv/gbe/…)를 공용 맵에 병합 — 1학기 코드와 겹치지 않아 시간표 렌더 함수 재사용 가능
+Object.assign(CMAP,CMAP2);Object.assign(CNAMES,CNAMES2);Object.assign(CPROFS,CPROFS2);
 const WEEKS2=[
   {n:1,label:'1주차',fri:{d:'2026-09-04',label:'9/4(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-09-05',label:'9/5(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
   {n:2,label:'2주차',fri:{d:'2026-09-18',label:'9/18(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-09-19',label:'9/19(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},

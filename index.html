@@ -200,6 +200,14 @@ html{overflow-x:hidden}
   padding:clamp(16px,2.5vw,26px);box-shadow:0 10px 24px rgba(23,32,51,.07);
 }
 .tab-panel.active{display:block}
+.s2-panel{display:none;background:var(--panel);border:1px solid var(--border);border-radius:0 0 var(--r) var(--r);padding:clamp(14px,2.5vw,24px);box-shadow:0 8px 20px rgba(23,32,51,.06)}
+.s2-panel.active{display:block}
+.s2-empty{padding:32px;text-align:center;color:#9ca3af;font-size:14px;font-weight:600}
+.s2-empty .s2-empty-icon{font-size:36px;margin-bottom:12px}
+.s2-dday-wrap{background:linear-gradient(135deg,#e0f7fa,#ede9fe);border-radius:14px;padding:16px 20px;margin-bottom:16px;border:1px solid rgba(14,116,144,.25);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.s2-dday-num{font-size:32px;font-weight:900;color:#0e7490;line-height:1}
+.s2-event-card{background:#fff;border-radius:14px;padding:14px 16px;border:1px solid var(--border);margin-bottom:10px;display:flex;gap:13px;align-items:flex-start}
+.s2-event-card:last-child{margin-bottom:0}
 
 /* assign table */
 .assign-filter{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
@@ -790,6 +798,7 @@ html{overflow-x:hidden}
     <button class="tab-btn active" onclick="switchTab(event,'events')">🎯 주요행사</button>
     <button class="tab-btn" onclick="switchTab(event,'tasks')">📋 전체 과제</button>
     <button class="tab-btn" onclick="switchTab(event,'courses')">📚 과목안내</button>
+    <button class="tab-btn" onclick="switchTab(event,'sem2')" style="border-left:2px solid rgba(14,116,144,.3);margin-left:4px;color:#0e7490">🆕 2학기</button>
   </div>
 
   <div class="tab-panel" id="tab-tasks">
@@ -961,6 +970,66 @@ html{overflow-x:hidden}
       <div class="course-card"><div class="cc-bar" style="background:var(--fin)"></div><div class="cc-name">Financial Accounting</div><div class="cc-prof">최현욱 교수</div><div class="cc-chips"><span class="cc-chip">6~10주</span><span class="cc-chip">토 1교시+</span><span class="cc-chip">5/9 개강</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">6/20 기말</span></div><div class="cc-eval"><b>평가:</b> 기말시험 70%, 출석 10%, 기타 20% · 복습 위주 · 시험: 사지선다/OX, 서술형 없음</div></div>
     </div>
   </div>
+
+  <!-- ══════ 2학기 탭 ══════ -->
+  <div class="tab-panel" id="tab-sem2">
+    <!-- D-day 배너 -->
+    <div class="s2-dday-wrap">
+      <div>
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#0e7490;margin-bottom:5px">EMBA 17기 · 2026년 2학기</div>
+        <div style="font-size:18px;font-weight:900;color:var(--navy)">9/4(금) 개강 — 12/19(토) 종강</div>
+        <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap">
+          <span style="font-size:12px;font-weight:700;color:#52617f">🗓 총 10주 · 20수업일</span>
+          <span style="font-size:12px;font-weight:700;color:#52617f">📚 7개 과목</span>
+        </div>
+      </div>
+      <div style="text-align:center;background:rgba(255,255,255,.8);border-radius:12px;padding:12px 20px">
+        <div style="font-size:11px;font-weight:700;color:#0e7490;margin-bottom:3px" id="s2-dday-label">개강까지</div>
+        <div class="s2-dday-num" id="s2-dday">—</div>
+        <div style="font-size:10px;color:#52617f;margin-top:3px">일</div>
+      </div>
+    </div>
+
+    <!-- 2학기 주차별 수업 -->
+    <div class="week-schedule-wrap" style="margin-top:0;margin-bottom:16px">
+      <div class="ws-header">
+        <div class="ws-title" id="ws2-title">2학기 수업 시간표</div>
+        <div class="ws-nav">
+          <button class="ws-nav-btn" onclick="moveSem2Week(-1)">‹</button>
+          <div class="ws-dots" id="ws2-dots"></div>
+          <span class="ws-week-label" id="ws2-week-label"></span>
+          <button class="ws-nav-btn" onclick="moveSem2Week(1)">›</button>
+        </div>
+      </div>
+      <div id="ws2-panels"></div>
+    </div>
+
+    <!-- 2학기 서브탭 -->
+    <div class="tabs-wrap" style="margin-top:0">
+      <div class="tab-nav">
+        <button class="tab-btn s2-tab-btn active" onclick="switchS2Tab(event,'s2-events')">🎯 행사·일정</button>
+        <button class="tab-btn s2-tab-btn" onclick="switchS2Tab(event,'s2-tasks')">📋 과제현황</button>
+        <button class="tab-btn s2-tab-btn" onclick="switchS2Tab(event,'s2-courses')">📚 과목안내</button>
+      </div>
+      <div class="s2-panel active" id="tab-s2-events">
+        <div class="s2-empty"><div class="s2-empty-icon">🗓</div>행사·원우회 일정 확정 시 업데이트됩니다.</div>
+      </div>
+      <div class="s2-panel" id="tab-s2-tasks">
+        <div class="s2-empty"><div class="s2-empty-icon">📋</div>강의계획서 배포 후 과제 일정이 업데이트됩니다.</div>
+      </div>
+      <div class="s2-panel" id="tab-s2-courses">
+        <div class="course-cards">
+          <div class="course-card"><div class="cc-bar" style="background:#0e7490"></div><div class="cc-name">Financial Markets &amp; Valuation</div><div class="cc-prof">한재훈 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 1교시</span><span class="cc-chip">13:00–15:40</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#6d28d9"></div><div class="cc-name">Global Business Environment</div><div class="cc-prof">곽주영 교수</div><div class="cc-chips"><span class="cc-chip">1~4주</span><span class="cc-chip">금 2교시 + 토 1교시</span><span class="cc-chip">4주 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#be185d"></div><div class="cc-name">Creating Value Through IT Innovation</div><div class="cc-prof">임일 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 3교시</span><span class="cc-chip">19:20–22:00</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#1e40af"></div><div class="cc-name">Strategy for Executives</div><div class="cc-prof">김보경 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 2교시</span><span class="cc-chip">13:00–15:40</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#166534"></div><div class="cc-name">Managerial Accounting for Executives</div><div class="cc-prof">문두철 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 3교시</span><span class="cc-chip">15:55–18:35</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#b45309"></div><div class="cc-name">Data Driven Marketing Decisions</div><div class="cc-prof">박창희 교수</div><div class="cc-chips"><span class="cc-chip">6~10주</span><span class="cc-chip">금 2교시 → 1교시</span><span class="cc-chip" style="background:#fef3c7;color:#92400e">11/6 개강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#475569"></div><div class="cc-name">Operations &amp; Supply Chain Management</div><div class="cc-prof">허대식 교수</div><div class="cc-chips"><span class="cc-chip">5~10주</span><span class="cc-chip">토 1교시 → 2교시</span><span class="cc-chip" style="background:#f1f5f9;color:#475569">10/24 개강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- CALENDAR SECTION (3월~7월) -->
@@ -1033,19 +1102,19 @@ const CAL_DAY_DATA={
   "2026-03-28":{classes:[{c:'ana',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],events:[{name:'🎊 개강파티',note:'수업 후',color:'#C9A84C'}]},
   "2026-04-10":{classes:[{c:'eco',t:'13:00–15:40'},{c:'ana',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MS 팀과제 HW 2',color:'#7c3aed'}]},
   "2026-04-11":{classes:[{c:'ana',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'생성형AI 발표 09:30',color:'#16a34a'},{name:'Ethics 조별발표 13:00',color:'#dc2626'}]},
-  "2026-04-24":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 1',color:'#16a34a'}]},
+  "2026-04-24":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 1',color:'#16a34a'},{name:'MPO 개인사례분석 1',color:'#16a34a'}]},
   "2026-04-25":{classes:[{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 팀과제 HW 3',color:'#7c3aed'}],events:[{name:'🤝 상견례',note:'18:00',color:'#C9A84C'}]},
-  "2026-05-08":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 2',color:'#16a34a'}],note:'BA 마지막 수업'},
+  "2026-05-08":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 2',color:'#16a34a'},{name:'MPO 개인사례분석 2',color:'#16a34a'}],note:'BA 마지막 수업'},
   "2026-05-09":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 중간보고서',color:'#2563eb'}],note:'FA 첫 수업 🆕'},
   "2026-05-10":{events:[{name:'⚽ 춘계 체육대회',note:'11:30~15:30',color:'#C9A84C'}]},
-  "2026-05-22":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 3',color:'#16a34a'}]},
-  "2026-05-23":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 개인에세이 2',color:'#2563eb'}]},
-  "2026-05-29":{classes:[{c:'eco',t:'13:00–15:00'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'BE 기말시험 13:00',color:'#dc2626'},{name:'MPO 팀발표 4 (마지막)',color:'#16a34a'},{name:'MKT 고객욕구분석 보고서',color:'#7c3aed'}]},
+  "2026-05-22":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 3',color:'#16a34a'},{name:'MPO 개인사례분석 3',color:'#16a34a'}]},
+  "2026-05-23":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 개인에세이 2',color:'#2563eb'},{name:'ETH 조별발표 2',color:'#9b1c1c'}]},
+  "2026-05-29":{classes:[{c:'eco',t:'13:00–15:00'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'BE 기말시험 13:00',color:'#dc2626'},{name:'MPO 팀발표 4 (마지막)',color:'#16a34a'},{name:'MPO 개인사례분석 4',color:'#16a34a'},{name:'MKT 고객욕구분석 보고서',color:'#7c3aed'}]},
   "2026-05-30":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–14:30'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'Ethics 기말시험 13:00',color:'#dc2626'},{name:'MS 최종보고서&발표',color:'#7c3aed'}]},
   "2026-06-12":{classes:[{c:'mkt',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'fin',t:'19:20–22:00'}],tasks:[{name:'MKT 전략진단 보고서',color:'#7c3aed'},{name:'MKT BrandPro 등록+분석',color:'#7c3aed'}]},
   "2026-06-13":{classes:[{c:'fin',t:'09:30–12:10'},{c:'fin',t:'13:00–15:40'}]},
   "2026-06-19":{classes:[{c:'mkt',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'fin',t:'19:20–22:00'}],tasks:[{name:'MKT BrandPro Debrief🏁',color:'#7c3aed'}]},
-  "2026-06-20":{classes:[{c:'fin',t:'09:30–12:10'}],tasks:[{name:'FA 기말시험 오전',color:'#dc2626'},{name:'MPO 기말보고서',color:'#16a34a'}],events:[{name:'🎓 종강파티',note:'12:10 수업 종료 후',detail:'모든 1학기 수업 종료 후 진행 · 단순 식사/1박 워크샵 등 형식 미정',color:'#C9A84C'}]},
+  "2026-06-20":{classes:[{c:'fin',t:'09:30–12:10'}],tasks:[{name:'FA 기말시험 오전',color:'#dc2626'},{name:'MPO 개인기말보고서',color:'#16a34a'}],events:[{name:'🎓 종강파티',note:'12:10 수업 종료 후',detail:'모든 1학기 수업 종료 후 진행 · 단순 식사/1박 워크샵 등 형식 미정',color:'#C9A84C'}]},
   "2026-07-22":{note:'GSP 필수과목 · 참석/미참석 안내 확인',events:[{name:'✈️ GSP 시애틀 UW',note:'7/22~24 (3일간)',detail:'참석 원우: 항공권·숙박·일부 식대 개인 부담 / 미참석 원우: Corporate MBA 계절학기로 1.5학점 이수',color:'#C9A84C'}]},
   "2026-07-23":{events:[{name:'✈️ GSP Day 2',note:'시애틀 UW',detail:'University of Washington 프로그램 진행',color:'#C9A84C'}]},
   "2026-07-24":{events:[{name:'✈️ GSP Day 3',note:'시애틀 UW',detail:'프로그램 종료 및 귀국 일정 개별 진행',color:'#C9A84C'}]},
@@ -1654,6 +1723,19 @@ function updateStats(){
   document.getElementById('stat-courses-pct').textContent=coursePct+'%';
   document.getElementById('stat-courses-bar').style.width=coursePct+'%';
   document.getElementById('stat-courses-sub').textContent=`개강 ${activeCourses}개 · 종강 ${endedCourses}개`;
+  // 과제 진척도: CAL_DAY_DATA 기반 동적 계산
+  let taskTotal=0,taskDone=0;
+  Object.keys(CAL_DAY_DATA).forEach(k=>{
+    const t=CAL_DAY_DATA[k].tasks;
+    if(!t||!t.length) return;
+    taskTotal+=t.length;
+    if(dateOf(k)<=today) taskDone+=t.length;
+  });
+  const taskPct=taskTotal?Math.round(taskDone/taskTotal*100):0;
+  document.getElementById('stat-tasks').textContent=`${taskDone}/${taskTotal}`;
+  document.getElementById('stat-tasks-pct').textContent=taskPct+'%';
+  document.getElementById('stat-tasks-bar').style.width=taskPct+'%';
+  document.getElementById('stat-tasks-sub').textContent=`완료 ${taskDone}건 · 남은 ${taskTotal-taskDone}건`;
 }
 
 // ═══ CALENDAR CAROUSEL (mobile) ═══
@@ -1953,6 +2035,114 @@ async function initSportsCard(){
   renderSportsCard(data,attendData);
 }
 
+// ═══ 2학기 DATA ═══
+const CMAP2={fmv:'#0e7490',gbe:'#6d28d9',cvt:'#be185d',str:'#1e40af',mac:'#166534',ddm:'#b45309',osc:'#475569'};
+const CNAMES2={fmv:'Financial Markets & Valuation',gbe:'Global Business Environment',cvt:'Creating Value Through IT Innovation',str:'Strategy for Executives',mac:'Managerial Accounting for Executives',ddm:'Data Driven Marketing Decisions',osc:'Operations & Supply Chain Mgmt'};
+const CPROFS2={fmv:'한재훈',gbe:'곽주영',cvt:'임일',str:'김보경',mac:'문두철',ddm:'박창희',osc:'허대식'};
+const WEEKS2=[
+  {n:1,label:'1주차',fri:{d:'2026-09-04',label:'9/4(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-09-05',label:'9/5(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:2,label:'2주차',fri:{d:'2026-09-18',label:'9/18(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-09-19',label:'9/19(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:3,label:'3주차',fri:{d:'2026-10-02',label:'10/2(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-03',label:'10/3(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:4,label:'4주차',fri:{d:'2026-10-16',label:'10/16(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-17',label:'10/17(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:5,label:'5주차',fri:{d:'2026-10-23',label:'10/23(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'cvt',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-24',label:'10/24(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:6,label:'6주차',fri:{d:'2026-11-06',label:'11/6(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-11-07',label:'11/7(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:7,label:'7주차',fri:{d:'2026-11-20',label:'11/20(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-11-21',label:'11/21(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:8,label:'8주차',fri:{d:'2026-11-27',label:'11/27(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'ddm',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-11-28',label:'11/28(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
+  {n:9,label:'9주차',fri:{d:'2026-12-11',label:'12/11(금)',slots:[{c:'ddm',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'}]},sat:{d:'2026-12-12',label:'12/12(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'osc',p:'2교시',t:'13:00–15:40'}]},tasks:[],events:[]},
+  {n:10,label:'10주차',fri:{d:'2026-12-18',label:'12/18(금)',slots:[{c:'ddm',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'}]},sat:{d:'2026-12-19',label:'12/19(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'osc',p:'2교시',t:'13:00–15:40'}]},tasks:[],events:[]},
+];
+let curWeek2=0;
+
+function getDefaultWeek2(){
+  const sem2Start=dateOf('2026-09-04');
+  if(today<sem2Start) return 0;
+  for(let i=WEEKS2.length-1;i>=0;i--){
+    const satD=dateOf(WEEKS2[i].sat.d);
+    const sunAfter=new Date(satD);sunAfter.setDate(satD.getDate()+1);
+    if(today<sunAfter) return i;
+  }
+  return WEEKS2.length-1;
+}
+
+function buildSem2WeekSchedule(){
+  curWeek2=getDefaultWeek2();
+  const dotsEl=document.getElementById('ws2-dots');
+  const panelsEl=document.getElementById('ws2-panels');
+  if(!dotsEl||!panelsEl) return;
+  dotsEl.innerHTML='';panelsEl.innerHTML='';
+  WEEKS2.forEach((w,i)=>{
+    const dot=document.createElement('button');
+    dot.className='ws-dot'+(i===curWeek2?' active':'');
+    dot.title=w.label;dot.onclick=()=>goSem2Week(i);
+    dotsEl.appendChild(dot);
+    const panel=document.createElement('div');
+    panel.className='ws-panel';panel.id='wsp2-'+i;
+    panel.style.display=i===curWeek2?'block':'none';
+    const friPast=isPast(w.fri.d),satPast=isPast(w.sat.d);
+    const badge=satPast?'<span style="font-size:12px;color:#9ca3af;margin-left:8px">✓ 완료</span>':
+      (today>=dateOf(w.fri.d)&&!satPast?'<span style="font-size:12px;color:#16a34a;font-weight:700;margin-left:8px">📍 진행 중</span>':'');
+    panel.innerHTML=`<div style="margin-bottom:12px;font-size:14px;font-weight:700;color:var(--navy)">${w.fri.label} ~ ${w.sat.label}${badge}</div>
+      <div class="ws-day-grid">
+        <div class="ws-day-card"><div class="ws-day-head"><h4>금요일</h4><span>${w.fri.label}</span></div><div class="slot-list" id="slots2-fri-${i}"></div></div>
+        <div class="ws-day-card"><div class="ws-day-head"><h4>토요일</h4><span>${w.sat.label}</span></div><div class="slot-list" id="slots2-sat-${i}"></div></div>
+      </div>`;
+    panelsEl.appendChild(panel);
+  });
+  document.getElementById('ws2-week-label').textContent=WEEKS2[curWeek2].label;
+  document.getElementById('ws2-title').textContent=`${WEEKS2[curWeek2].label} — 2학기`;
+  renderSem2Slots(curWeek2);
+}
+
+function renderSem2Slots(i){
+  const w=WEEKS2[i];
+  ['fri','sat'].forEach(day=>{
+    const el=document.getElementById(`slots2-${day}-${i}`);
+    if(!el||el.dataset.rendered) return;
+    el.dataset.rendered='1';
+    w[day].slots.forEach(s=>{
+      const div=document.createElement('div');
+      div.className='slot-item';
+      div.style.borderLeft=`3px solid ${CMAP2[s.c]}`;
+      div.innerHTML=`<div class="slot-time-col"><span class="per">${s.p}</span>${s.t}</div>
+        <div class="slot-body-col">
+          <div class="slot-swatch" style="background:${CMAP2[s.c]}"></div>
+          <div><div class="slot-name">${CNAMES2[s.c]}</div><div class="slot-prof">${CPROFS2[s.c]} 교수</div></div>
+        </div>`;
+      el.appendChild(div);
+    });
+  });
+}
+
+function goSem2Week(i){
+  document.querySelectorAll('[id^="wsp2-"]').forEach((p,idx)=>{p.style.display='none';});
+  document.querySelectorAll('#ws2-dots .ws-dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));
+  curWeek2=i;
+  document.getElementById('wsp2-'+i).style.display='block';
+  document.getElementById('ws2-week-label').textContent=WEEKS2[i].label;
+  document.getElementById('ws2-title').textContent=`${WEEKS2[i].label} — 2학기`;
+  renderSem2Slots(i);
+}
+function moveSem2Week(d){goSem2Week(Math.max(0,Math.min(WEEKS2.length-1,curWeek2+d)));}
+
+function switchS2Tab(e,id){
+  document.querySelectorAll('.s2-tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.s2-panel').forEach(p=>p.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+function initSem2(){
+  const ddEl=document.getElementById('s2-dday');
+  const ddLabel=document.getElementById('s2-dday-label');
+  if(ddEl){
+    const dd=diffDays('2026-09-04');
+    if(dd>0){ddEl.textContent=dd;if(ddLabel)ddLabel.textContent='일 후 개강';}
+    else if(dd===0){ddEl.textContent='D-0';if(ddLabel)ddLabel.textContent='오늘 개강!';}
+    else{ddEl.textContent=`D+${Math.abs(dd)}`;if(ddLabel)ddLabel.textContent='일째 진행 중';}
+  }
+  buildSem2WeekSchedule();
+}
+
 // ═══ INIT ═══
 curWeek=getDefaultWeek();
 buildUpcoming();
@@ -1961,6 +2151,7 @@ buildCalendar();
 initCalCarousel();
 updateStats();
 initSportsCard();
+initSem2();
 
 function openFloatModal(type){
   document.getElementById('fm-overlay').classList.add('active');

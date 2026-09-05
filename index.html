@@ -743,6 +743,34 @@ html{overflow-x:hidden}
   </div>
 </div>
 
+<!-- ══ 학기 격자 (한 학기 전체 조망) ══ -->
+<div class="tg-wrap" id="tgWrap">
+  <div class="tg-head">
+    <h2>학기 진행</h2>
+    <span class="aside" id="tgAside">—</span>
+  </div>
+  <div class="tg-line">
+    <span class="lead" id="tgWeekNow">—</span>
+    <span id="tgDue">—</span>
+  </div>
+  <div class="tg-rail" id="tgRail"></div>
+  <div class="tg-railcap"><span id="tgRailL">—</span><span id="tgRailR">—</span></div>
+  <div class="tg-grid" id="tgGrid"></div>
+  <div class="tg-legend" id="tgLegend"></div>
+</div>
+
+<!-- 주차 상세 모달 -->
+<div class="wk-back" id="wkBack">
+  <div class="wk" role="dialog" aria-modal="true" aria-labelledby="wkTitle">
+    <div class="wk-h">
+      <h3 id="wkTitle">—</h3>
+      <div class="sub" id="wkSub"></div>
+      <button class="wk-x" type="button" onclick="closeWeek()" aria-label="닫기">✕</button>
+    </div>
+    <div class="wk-b" id="wkBody"></div>
+  </div>
+</div>
+
 <!-- WEEK SCHEDULE -->
 <div class="week-schedule-wrap">
   <div class="ws-header">
@@ -2018,6 +2046,111 @@ function closeFloatModal(){
 @media(max-width:520px){.cm-head h3{font-size:17px}.cm-body{padding:16px 17px 20px}.cm-ev-n{width:92px}}
 .tab-btn{position:relative;overflow:hidden}
 .tab-prog{position:absolute;left:0;bottom:0;height:2px;background:var(--gold);width:0}
+
+/* ══════════════ 학기 격자 (E안 이식) ══════════════
+   행 = 과목(교수) · 열 = 수업 주말 1~10주차.
+   데이터는 전부 WEEKS2 에서 파생한다 — 이 블록에 사실을 적지 말 것. */
+.tg-wrap{
+  --tg-ink:#172033; --tg-ink2:#6f7a8e;
+  --tg-line:#e0d9cb; --tg-line2:#efe9dd;
+  --tg-red:#dc2626; --tg-amber:#8a3d0b; --tg-blue:#1d4ed8;  /* 앰버는 박창희(ddm #b45309) 막대와 같은 색이 되지 않게 한 단계 어둡게 */
+  --tg-r:2px;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px 18px 14px;margin-bottom:18px;
+}
+.tg-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.tg-head h2{font-size:15px;font-weight:900;color:var(--navy);letter-spacing:-.01em}
+.tg-head .aside{font-size:11.5px;color:var(--tg-ink2);font-weight:600}
+.tg-line{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;color:var(--tg-ink2)}
+.tg-line .lead{color:var(--tg-ink);font-weight:800;font-size:13px}
+
+/* 날짜 레일 — 개강~종강 실제 경과일 비례 */
+.tg-rail{position:relative;height:7px;margin-top:8px;background:var(--tg-line2);border-radius:var(--tg-r)}
+.tg-rail .now{position:absolute;top:-3px;width:3px;height:13px;background:var(--tg-ink);border-radius:var(--tg-r);z-index:2}
+.tg-rail .tk{position:absolute;top:-3px;width:3px;height:13px;border-radius:var(--tg-r)}
+.tg-railcap{display:flex;justify-content:space-between;margin-top:4px;font-size:11px;color:var(--tg-ink2)}
+.tg-railcap b{color:var(--tg-ink);font-weight:700}
+
+/* 격자 */
+.tg-grid{position:relative;margin-top:10px;border-top:1px solid var(--tg-line)}
+.tg-row{display:flex;align-items:center;height:15px;border-top:1px solid var(--tg-line2)}
+.tg-row.tg-h{height:14px;border-top:0}
+.tg-row.tg-m{height:13px;border-top:0}
+.tg-m .tg-c{font-size:11px;color:var(--tg-ink2);line-height:13px;text-align:left;font-weight:700;opacity:0}
+.tg-m .tg-c.mon{opacity:1}
+.tg-lb{flex:0 0 42px;font-size:11px;font-weight:700;color:var(--tg-ink2);white-space:nowrap;line-height:1}
+.tg-c{flex:1 1 0;height:14px;margin-left:2px;position:relative}
+.tg-h .tg-c{font-size:11px;color:var(--tg-ink2);text-align:center;line-height:14px;font-weight:600}
+.tg-c .bar{position:absolute;left:0;right:0;top:5px;height:4px;border-radius:var(--tg-r)}
+.tg-c .blk{
+  position:absolute;left:0;right:0;top:0;bottom:0;border-radius:var(--tg-r);
+  color:#fff;font-size:11px;font-weight:800;line-height:14px;text-align:center;font-style:normal;
+}
+.tg-c .blk.ex{background:var(--tg-red)}
+.tg-c .blk.hw{background:var(--tg-amber)}
+.tg-c.past .bar,.tg-c.past .blk{opacity:.34}
+
+/* 오늘 세로바 — 배지를 위에 띄우면 레일 글자를 덮으므로 선 + 헤더 알약으로 */
+.tg-today{position:absolute;top:0;bottom:0;width:2px;background:var(--tg-red);z-index:3;pointer-events:none;border-radius:1px}
+.tg-h .tg-c.thisweek{color:#fff;font-weight:800;background:var(--tg-red);border-radius:7px;line-height:14px;position:relative;z-index:4}  /* 세로바(z-index 3)보다 위 — 안 그러면 날짜 숫자를 관통한다 */
+.tg-m .tg-c.mon{position:relative;z-index:4}
+.tg-hit{position:absolute;top:0;bottom:0;z-index:2;cursor:pointer;background:transparent;border:0;padding:0;border-radius:3px}
+.tg-hit:hover,.tg-hit:focus-visible{background:rgba(32,56,100,.09);outline:none}
+.tg-hit:focus-visible{box-shadow:inset 0 0 0 2px var(--navy)}
+
+.tg-legend{display:flex;flex-wrap:wrap;gap:5px 12px;align-items:center;margin-top:8px;padding-top:7px;
+  border-top:1px solid var(--tg-line);font-size:11px;color:var(--tg-ink2)}
+.tg-legend .k{display:inline-flex;align-items:center;gap:4px}
+.tg-legend .lg-bar{width:14px;height:4px;border-radius:var(--tg-r);background:var(--tg-ink2)}
+.tg-legend .lg-blk{width:14px;height:14px;border-radius:var(--tg-r);background:var(--tg-ink2);color:#fff;
+  font-size:11px;font-weight:800;line-height:14px;text-align:center;font-style:normal}
+.tg-legend .lg-blk.ex{background:var(--tg-red)}
+.tg-legend .lg-blk.hw{background:var(--tg-amber)}
+
+/* 주차 상세 모달 */
+.wk-back{position:fixed;inset:0;background:rgba(16,24,40,.55);z-index:900;
+  display:none;align-items:flex-start;justify-content:center;padding:20px 14px;overflow-y:auto}
+.wk-back.on{display:flex}
+.wk{background:#fff;border-radius:16px;max-width:540px;width:100%;overflow:hidden}
+.wk-h{padding:16px 18px 14px;background:var(--navy);color:#fff;position:relative}
+.wk-h h3{font-size:17px;font-weight:900;margin-bottom:3px}
+.wk-h .sub{font-size:12px;opacity:.9}
+.wk-x{position:absolute;top:12px;right:12px;width:30px;height:30px;border:0;cursor:pointer;
+  background:rgba(255,255,255,.2);color:#fff;font-size:16px;border-radius:50%;line-height:1}
+.wk-b{padding:14px 18px 18px;max-height:64vh;overflow-y:auto}
+.wk-day{font-size:11px;font-weight:800;color:#6f7a8e;margin:13px 0 6px;letter-spacing:.03em}
+.wk-day:first-child{margin-top:0}
+.wk-r{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid #efe9dd}
+.wk-r .p{flex:0 0 54px;font-size:11px;color:#6f7a8e;line-height:1.35}
+.wk-r .n{font-size:13px;font-weight:700;color:var(--ink);line-height:1.4}
+.wk-r .m{font-size:11.5px;color:#6f7a8e;margin-top:2px;line-height:1.5;white-space:pre-line}
+.wk-tag{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;border-radius:3px;
+  padding:1px 6px;margin-left:5px;vertical-align:1px}
+.wk-tag.ex{background:#dc2626} .wk-tag.hw{background:#b45309} .wk-tag.no{background:#6f7a8e}
+.wk-note{margin-top:13px;padding:11px 13px;border-radius:10px;background:var(--goldbg);
+  border:1px solid var(--border);font-size:12px;color:var(--ink);line-height:1.65;white-space:pre-line}
+
+/* PC — 칸이 넓어지면 도형 대신 이름을 쓸 수 있다 */
+@media (min-width:900px){
+  .tg-row{height:22px}
+  .tg-row.tg-h{height:18px}
+  .tg-row.tg-m{height:17px}
+  .tg-lb{flex:0 0 58px;font-size:12px}
+  .tg-c{height:20px;margin-left:3px}
+  .tg-h .tg-c,.tg-m .tg-c{font-size:12px;line-height:20px}
+  .tg-c .bar{top:8px;height:5px}
+  .tg-c .blk{font-size:11.5px;line-height:20px;letter-spacing:-.01em;
+    padding:0 4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .tg-rail{height:9px}
+  .tg-rail .now,.tg-rail .tk{height:15px}
+  .blk .s{display:none}
+  .blk .l{display:inline}
+}
+@media (max-width:899px){
+  .blk .l{display:none}
+  .blk .s{display:inline}
+}
+
 </style>
 
 <div class="cm-back" id="courseModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
@@ -2233,6 +2366,245 @@ document.addEventListener('keydown',function(e){
   if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){ show(0); start(); }
   window.__tabAuto={start:start,stop:stop,cur:function(){return ids[i]}};
 })();
+
+/* 블록 라벨 후보 — 넓은 것부터. 칸에 들어가는 첫 번째를 tgFitLabels 가 고른다. */
+function tgLabelCands(name,kind){
+  var raw=String(name).replace(/^(FMV|GSE|CVT|STR|MAC|DDM|OSC)\s+/,'').trim();
+  var out=[raw];
+  /* '개인과제 — Recent M&A' → '개인과제'. 단 꼬리가 종류어면(… — 시험) 앞토막은
+     과목명이라 행 이름과 겹치고 종류도 안 읽히므로 후보에서 뺀다. */
+  var parts=raw.split(/\s*[—–]\s*/);
+  if(parts.length>1 && !/^(시험|기말고사|기말시험|중간고사|과제|발표|보고서|제안서)$/.test(parts[1].trim()))
+    out.push(parts[0].trim());
+  var q=raw.match(/['"‘’“”]([^'"‘’“”]+)['"‘’“”]/);
+  var m=raw.match(/(기말|중간)(고사|시험)/);
+  var word = m ? m[0]
+    : (kind==='ex' ? '시험'
+      : /제안서/.test(raw) ? '제안서'
+      : /보고서/.test(raw) ? '보고서'
+      : /발표/.test(raw)   ? '발표' : '과제');
+  if(q) out.push(q[1]+' '+word);                        /* "'New IT' 프로젝트 제안서" → 'New IT 제안서' */
+  out.push(word);
+  out.push(kind==='ex'?'시':'과');                       /* 최후 — 반드시 들어간다 */
+  var seen={}, uniq=[];
+  out.forEach(function(x){ if(x&&!seen[x]){seen[x]=1;uniq.push(x);} });
+  return uniq;
+}
+
+/* 칸 폭을 실측해 라벨을 줄인다. 폰(.l 숨김)에서는 건너뛴다. */
+function tgFitLabels(g){
+  var blks=g.querySelectorAll('.tg-c .blk');
+  for(var i=0;i<blks.length;i++){
+    var el=blks[i], L=el.querySelector('.l');
+    if(!L || getComputedStyle(L).display==='none') continue;
+    var labs=(window.__TGLAB||[])[+el.dataset.li]||[];
+    for(var j=0;j<labs.length;j++){
+      L.textContent=labs[j];
+      if(el.scrollWidth<=el.clientWidth+1) break;
+    }
+  }
+}
+
+/* ══════════════ 학기 격자 — 전부 WEEKS2 에서 파생 ══════════════
+   상수를 새로 만들지 않는다. 시간표가 바뀌면 격자도 저절로 따라온다. */
+function tgDeriveGrid(){
+  var W=WEEKS2, N=W.length;
+  var mons={}, wk=W.map(function(w,idx){
+    var f=w.fri||w.sat, mo=f.d.slice(5,7);
+    var showMon=!mons[mo]; mons[mo]=1;
+    return {n:w.n, fri:w.fri, sat:w.sat, mon:showMon?(+mo)+'월':''};
+  });
+  /* 과목별 수업 주차 */
+  var weeksOf={};
+  W.forEach(function(w,idx){
+    ['fri','sat'].forEach(function(d){
+      if(!w[d]) return;
+      w[d].slots.forEach(function(s){ (weeksOf[s.c]=weeksOf[s.c]||{})[idx]=1; });
+    });
+  });
+  /* 교수명 → 과목코드 역인덱스 (task.meta 가 '교수 · 과목명' 형식) */
+  var byProf={}; for(var k in CPROFS2) byProf[CPROFS2[k]]=k;
+  /* 주차별 시험·과제 */
+  var evOf={}, noteOf={};
+  W.forEach(function(w,idx){
+    (w.tasks||[]).forEach(function(t){
+      if(t.type==='공지'){ noteOf[idx]=(noteOf[idx]?noteOf[idx]+'\n':'')+t.name; return; }
+      var prof=(t.meta||'').split('·')[0].trim();
+      var c=byProf[prof]; if(!c) return;
+      var kind=(t.type==='시험')?'ex':'hw';
+      (evOf[c]=evOf[c]||{})[idx]={t:kind,labs:tgLabelCands(t.name,kind),task:t};
+    });
+  });
+  /* 화면 행 순서 = 학기 중 처음 등장하는 순서 */
+  var order=[], seen={};
+  W.forEach(function(w){ ['fri','sat'].forEach(function(d){
+    if(!w[d]) return;
+    w[d].slots.forEach(function(s){ if(!seen[s.c]){seen[s.c]=1;order.push(s.c);} });
+  })});
+  return {wk:wk, order:order, weeksOf:weeksOf, evOf:evOf, noteOf:noteOf, N:N};
+}
+
+function tgTodayIdx(G){
+  var t=new Date(); t.setHours(0,0,0,0);
+  var last=-1;
+  for(var i=0;i<G.wk.length;i++){
+    var w=G.wk[i], end=(w.sat||w.fri).d, start=(w.fri||w.sat).d;
+    var ds=new Date(start+'T00:00:00'), de=new Date(end+'T23:59:59');
+    if(t>=ds && t<=de) return i;            /* 수업 주말 안 */
+    if(t>de) last=i;                        /* 지나간 마지막 주 */
+  }
+  return last;                              /* 개강 전이면 -1 */
+}
+
+function buildTermGrid(){
+  var g=document.getElementById('tgGrid'); if(!g||typeof WEEKS2==='undefined') return;
+  var G=tgDeriveGrid(); window.__TG=G;
+  var cur=tgTodayIdx(G), today=new Date(); today.setHours(0,0,0,0);
+  var first=(G.wk[0].fri||G.wk[0].sat).d, lastW=G.wk[G.N-1];
+  var last=(lastW.sat||lastW.fri).d;
+  var d0=new Date(first+'T00:00:00'), d1=new Date(last+'T00:00:00');
+  var span=(d1-d0)/86400000;
+
+  /* ── 머리글 ── */
+  var days=0; G.wk.forEach(function(w){ if(w.fri)days++; if(w.sat)days++; });
+  document.getElementById('tgAside').textContent=
+    G.order.length+'과목 · '+days+'수업일 · 격주 금·토';
+  var dd=Math.ceil((d1-today)/86400000);
+  document.getElementById('tgWeekNow').textContent=
+    cur<0 ? '개강 전' : (cur>=G.N-1&&today>d1 ? '종강' : G.wk[cur].n+'주차 / '+G.N+'주');
+  document.getElementById('tgRailL').innerHTML='<b>'+first.slice(5).replace('-','.')+'</b> 개강';
+  document.getElementById('tgRailR').innerHTML='<b>'+last.slice(5).replace('-','.')+'</b> 종강 (토)';
+
+  /* ── 레일: 남은 마감 눈금 ── */
+  var rail=document.getElementById('tgRail'), rh='', left=0;
+  Object.keys(G.evOf).forEach(function(c){
+    var m=G.evOf[c];
+    for(var idx in m){
+      var t=m[idx].task, dt=new Date(t.d+'T00:00:00');
+      var pct=Math.max(0,Math.min(100,(dt-d0)/86400000/span*100));
+      if(dt>=today) left++;
+      rh+='<span class="tk" style="left:'+pct.toFixed(1)+'%;background:'+(CMAP2[c]||'#888')+
+          '" title="'+t.name+' · '+(t.due||'')+'"></span>';
+    }
+  });
+  var pnow=Math.max(0,Math.min(100,(today-d0)/86400000/span*100));
+  rh+='<span class="now" style="left:'+pnow.toFixed(1)+'%" title="오늘"></span>';
+  rail.innerHTML=rh;
+  document.getElementById('tgDue').textContent=
+    '남은 마감 '+left+'건 · 종강 '+(dd>0?'D-'+dd:'완료');
+
+  /* ── 격자 ── */
+  var H='<div class="tg-row tg-m"><span class="tg-lb"></span>';
+  G.wk.forEach(function(w){ H+='<span class="tg-c'+(w.mon?' mon':'')+'">'+(w.mon||'')+'</span>'; });
+  H+='</div><div class="tg-row tg-h"><span class="tg-lb">금요일</span>';
+  G.wk.forEach(function(w,i){
+    var f=w.fri||w.sat, day=String(+f.d.slice(8,10));
+    H+='<span class="tg-c'+(i===cur?' thisweek':'')+'">'+day+'</span>';
+  });
+  H+='</div>';
+  var LAB=[];
+  G.order.forEach(function(c){
+    H+='<div class="tg-row"><span class="tg-lb">'+(CPROFS2[c]||c)+'</span>';
+    for(var i=0;i<G.N;i++){
+      var on=G.weeksOf[c]&&G.weeksOf[c][i], ev=G.evOf[c]&&G.evOf[c][i];
+      H+='<span class="tg-c'+(i<cur?' past':'')+'">';
+      if(ev){
+        var li=LAB.push(ev.labs)-1;
+        H+='<i class="blk '+ev.t+'" data-li="'+li+'" title="'+ev.task.name.replace(/"/g,'&quot;')+'">'+
+           '<span class="s">'+(ev.t==='ex'?'시':'과')+'</span>'+
+           '<span class="l">'+ev.labs[0]+'</span></i>';
+      }
+      else if(on) H+='<i class="bar" style="background:'+(CMAP2[c]||'#888')+'"></i>';
+      H+='</span>';
+    }
+    H+='</div>';
+  });
+  g.innerHTML=H;
+  window.__TGLAB=LAB;
+  tgFitLabels(g);
+
+  document.getElementById('tgLegend').innerHTML=
+    '<span class="k"><i class="lg-bar"></i>수업</span>'+
+    '<span class="k"><i class="lg-blk ex">시</i>시험</span>'+
+    '<span class="k"><i class="lg-blk hw">과</i>과제</span>'+
+    '<span class="k">빈칸 = 수업 없음</span>'+
+    '<span class="k" style="color:#dc2626;font-weight:800">▌오늘</span>'+
+    '<span class="k">열을 누르면 그 주 상세</span>';
+
+  /* ── 열 클릭 영역 + 오늘 세로바: 실제 좌표에서 계산 ── */
+  var head=g.querySelector('.tg-h'), cells=head.querySelectorAll('.tg-c');
+  var gr=g.getBoundingClientRect();
+  for(var i=0;i<cells.length;i++){
+    var cr=cells[i].getBoundingClientRect();
+    var b=document.createElement('button');
+    b.className='tg-hit'; b.type='button';
+    b.style.left=(cr.left-gr.left)+'px'; b.style.width=cr.width+'px';
+    b.setAttribute('aria-label',G.wk[i].n+'주차 상세');
+    b.dataset.w=i;
+    g.appendChild(b);
+    if(i===cur){
+      var tl=document.createElement('div');
+      tl.className='tg-today';
+      tl.style.left=(cr.left-gr.left+cr.width/2-1)+'px';
+      g.appendChild(tl);
+    }
+  }
+}
+
+function openWeek(idx){
+  var G=window.__TG; if(!G) return;
+  var w=WEEKS2[idx], H='', cnt=0, evs=0;
+  var fl=w.fri?w.fri.label:'', sl=w.sat?w.sat.label:'';
+  document.getElementById('wkTitle').textContent=
+    w.label+' — '+[fl,sl].filter(Boolean).join(' ~ ');
+  ['fri','sat'].forEach(function(d){
+    var dd=w[d]; if(!dd||!dd.slots.length) return;
+    H+='<div class="wk-day">'+(d==='fri'?'금요일 ':'토요일 ')+dd.label+'</div>';
+    dd.slots.forEach(function(s){
+      cnt++;
+      var ev=G.evOf[s.c]&&G.evOf[s.c][idx];
+      var same=ev&&ev.task.d===dd.d;
+      H+='<div class="wk-r"><div class="p">'+s.p+'<br>'+s.t+'</div><div>'+
+         '<div class="n">'+(CNAMES2[s.c]||s.c)+
+         (same?'<span class="wk-tag '+ev.t+'">'+(ev.t==='ex'?'시험':'과제')+'</span>':'')+
+         (s.tag?'<span class="wk-tag no">'+s.tag+'</span>':'')+'</div>'+
+         '<div class="m">'+(CPROFS2[s.c]||'')+' 교수'+(same?' · '+ev.task.name:'')+'</div>'+
+         (same&&ev.task.detail?'<div class="m">'+ev.task.detail+'</div>':'')+
+         '</div></div>';
+      if(same) evs++;
+    });
+  });
+  if(G.noteOf[idx]) H+='<div class="wk-note">⚠ '+G.noteOf[idx]+'</div>';
+  if(!H) H='<div class="wk-note">이 주에는 수업이 없습니다.</div>';
+  document.getElementById('wkSub').textContent=
+    (cnt?cnt+'교시':'수업 없음')+(evs?' · 시험·과제 '+evs+'건':'');
+  document.getElementById('wkBody').innerHTML=H;
+  document.getElementById('wkBack').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeWeek(){
+  var b=document.getElementById('wkBack'); if(!b) return;
+  b.classList.remove('on');
+  document.getElementById('wkBody').innerHTML='';  /* 잔존 오버레이가 클릭을 가로채지 않게 */
+  document.body.style.overflow='';
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest?e.target.closest('.tg-hit'):null;
+  if(b){ openWeek(+b.dataset.w); return; }
+  if(e.target.id==='wkBack') closeWeek();
+});
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeWeek(); });
+buildTermGrid();
+var __tgT;
+window.addEventListener('resize',function(){
+  clearTimeout(__tgT);
+  __tgT=setTimeout(function(){
+    var g=document.getElementById('tgGrid'); if(!g) return;
+    g.querySelectorAll('.tg-hit,.tg-today').forEach(function(x){x.remove()});
+    buildTermGrid();
+  },150);
+});
+
 </script>
 <!-- /COURSE MODAL -->
 </body>

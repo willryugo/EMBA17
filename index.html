@@ -804,164 +804,24 @@ html{overflow-x:hidden}
       <div style="font-size:10px;color:#52617f;margin-top:3px">일</div>
     </div>
   </div>
-  <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab(event,'s2-tasks')">📋 과제현황</button>
-    <button class="tab-btn" onclick="switchTab(event,'s2-courses')">📚 과목안내</button>
-    <button class="tab-btn" onclick="switchTab(event,'s2-events')">🎯 행사·일정</button>
+  <div class="tab-nav" role="tablist" aria-label="2학기 정보">
+    <button class="tab-btn active" id="tabbtn-s2-events" role="tab" aria-selected="true" aria-controls="tab-s2-events" onclick="switchTab(event,'s2-events')">🎯 행사·일정</button>
+    <button class="tab-btn" id="tabbtn-s2-tasks" role="tab" aria-selected="false" aria-controls="tab-s2-tasks" onclick="switchTab(event,'s2-tasks')">📋 과제현황</button>
+    <button class="tab-btn" id="tabbtn-s2-courses" role="tab" aria-selected="false" aria-controls="tab-s2-courses" onclick="switchTab(event,'s2-courses')">📚 과목안내</button>
   </div>
 
-  <div class="tab-panel" id="tab-tasks">
-    <div class="assign-filter">
-      <button class="af-btn active" onclick="filterAssign(event,'all')">전체</button>
-      <button class="af-btn" onclick="filterAssign(event,'발표')">발표</button>
-      <button class="af-btn" onclick="filterAssign(event,'과제')">과제</button>
-      <button class="af-btn" onclick="filterAssign(event,'시험')">시험</button>
-    </div>
-    <div style="overflow-x:auto">
-    <table class="assign-table" id="assign-table">
-      <thead><tr><th>주차</th><th>과목</th><th>구분</th><th>과제/발표명</th><th>일시</th><th>비고</th></tr></thead>
-      <tbody>
-        <tr data-type="과제" class="past-item"><td>2주</td><td>Business Analytics</td><td><span class="badge b-blue">개인과제</span></td><td>BA 개인과제 1</td><td>3/20(금)</td><td>지도학습 vs 비지도학습 정리 + 실무사례 각 1개</td></tr>
-        <tr data-type="과제" class="past-item"><td>2주</td><td>Management Science</td><td><span class="badge b-blue">개인과제</span></td><td>MS 에세이 제출</td><td>3/21(토)</td><td>자기소개 에세이 (평가 20%)</td></tr>
-        <tr data-type="과제" class="past-item"><td>3주</td><td>Business Analytics</td><td><span class="badge b-purple">팀과제</span></td><td>BA 팀과제 1 — 머신러닝 경영사례 제안</td><td>3/27(금)</td><td>ML 실제 경영사례 적용 제안서</td></tr>
-        <tr data-type="과제" class="past-item"><td>3주</td><td>Management Science</td><td><span class="badge b-purple">팀과제</span></td><td>MS HW/사례 1</td><td>3/28(토)</td><td>사례분석 제출 1회차</td></tr>
-        <tr data-type="발표" class="past-item"><td>4주</td><td>Business Analytics</td><td><span class="badge b-green">발표</span></td><td>생성형 AI 활용 발표 (4주 종강)</td><td>4/11(토) 09:30</td><td>15~20분, PPT 업로드, 팀 대표 1인 발표 — BA 수업 종료</td></tr>
-        <tr data-type="발표" class="past-item"><td>4주</td><td>Business Ethics</td><td><span class="badge b-red">발표</span></td><td>ETH 조별 윤리이슈발표 1</td><td>4/11(토) 13:00</td><td>1차 조별발표 (총 2회, 30%) · 윤리 위반 케이스스터디</td></tr>
-        <tr data-type="과제" class="past-item"><td>4주</td><td>Management Science</td><td><span class="badge b-purple">팀과제</span></td><td>MS HW/사례 2</td><td>4/10(금)</td><td>사례분석 제출 2회차</td></tr>
-<tr data-type="발표"><td>5주</td><td>Managing People & Org</td><td><span class="badge b-green">팀발표</span></td><td>MPO 팀사례발표 1 — Rob Parson</td><td>4/24(금) 3교시 19:20</td><td>Rob Parson at Morgan Stanley · 30분 발표+30분 토론</td></tr>
-        <tr data-type="과제"><td>5주</td><td>Managing People & Org</td><td><span class="badge b-blue">개인과제</span></td><td>MPO 개인사례분석 1</td><td>4/24(금) 수업시간</td><td>자신 팀 발표 외 사례 1개 선택 · 2페이지 개인의견 · 평가 20%</td></tr>
-        <tr data-type="과제"><td>5주</td><td>Management Science</td><td><span class="badge b-purple">팀과제</span></td><td>MS HW/사례 3 — Case 6.4 New Frontiers</td><td>4/24(금) 13:00</td><td>Excel + Word Zip 파일 업로드 · 사례분석 30%</td></tr>
-        <tr data-type="발표"><td>6주</td><td>Managing People & Org</td><td><span class="badge b-green">팀발표</span></td><td>MPO 팀사례발표 2 — Recruitment of a Star</td><td>5/8(금) 3교시 19:20</td><td>Recruitment of a Star · 30분+30분 토론</td></tr>
-        <tr data-type="과제"><td>6주</td><td>Managing People & Org</td><td><span class="badge b-blue">개인과제</span></td><td>MPO 개인사례분석 2</td><td>5/8(금) 수업시간</td><td>자신 팀 발표 외 사례 1개 선택 · 2페이지 개인의견 · 평가 20%</td></tr>
-        <tr data-type="발표"><td>7주</td><td>Managing People & Org</td><td><span class="badge b-green">팀발표</span></td><td>MPO 팀사례발표 3 — TerraCog GPS</td><td>5/22(금) 3교시 19:20</td><td>TerraCog Global Positioning Systems · 30분+30분 토론</td></tr>
-        <tr data-type="과제"><td>7주</td><td>Managing People & Org</td><td><span class="badge b-blue">개인과제</span></td><td>MPO 개인사례분석 3</td><td>5/22(금) 수업시간</td><td>자신 팀 발표 외 사례 1개 선택 · 2페이지 개인의견 · 평가 20%</td></tr>
-        <tr data-type="발표"><td>7주</td><td>Business Ethics</td><td><span class="badge b-red">발표</span></td><td>ETH 조별 윤리이슈발표 2</td><td>5/23(토)</td><td>2차 조별발표 (총 2회 30%) · 기업윤리위반 케이스스터디</td></tr>
-        <tr data-type="과제"><td>7주</td><td>Management Science</td><td><span class="badge b-blue">개인과제</span></td><td>MS 개인과제 2 Essay Part 2</td><td>5/23(토)</td><td>개인에세이 2회차 제출 (평가 20%)</td></tr>
-        <tr data-type="발표"><td>8주</td><td>Managing People & Org</td><td><span class="badge b-green">최종발표</span></td><td>MPO 팀사례발표 4 — Martha Rinaldi</td><td>5/29(금) 3교시 19:20</td><td>Martha Rinaldi: Should She Stay or Should She Go? · ✅ MPO 팀발표 완료</td></tr>
-        <tr data-type="과제"><td>8주</td><td>Managing People & Org</td><td><span class="badge b-blue">개인과제</span></td><td>MPO 개인사례분석 4</td><td>5/29(금) 수업시간</td><td>자신 팀 발표 외 사례 1개 선택 · 2페이지 개인의견 · 평가 20%</td></tr>
-        <tr data-type="시험"><td>8주</td><td>Business Economics</td><td><span class="badge b-red">기말시험</span></td><td>Business Economics 기말시험</td><td>5/29(금) 13:00–15:00</td><td>Closed-book · 객관식 15~20문제 + 짧은 주관식 2~4문제 · 신분증 지참 · 전자기기/계산기 보관</td></tr>
-        <tr data-type="발표"><td>8주</td><td>Management Science</td><td><span class="badge b-purple">최종발표</span></td><td>MS 조별프로젝트 최종보고서 & 발표</td><td>5/30(토) 3교시</td><td>최종보고서 제출 + 수업 내 발표 · 조별프로젝트 40% · 시험 없음</td></tr>
-        <tr data-type="시험"><td>8주</td><td>Business Ethics</td><td><span class="badge b-red">기말시험</span></td><td>Business Ethics 기말시험</td><td>5/30(토) 2교시 13:00</td><td>90분 · 4지선다 25문제 · 기말 60% · 범위: 윤리경영/사람 변화/윤리적 조직/CSR · 사례 출제 없음</td></tr>
-        <tr data-type="과제"><td>8주</td><td>Marketing Management</td><td><span class="badge b-purple">팀과제</span></td><td>MKT 고객욕구분석 보고서 제출</td><td>5/29(금) 2교시 중</td><td>강좌4 전략적 마케팅관리 · Workshop 결과물 제출</td></tr>
-        <tr data-type="과제"><td>9주</td><td>Marketing Management</td><td><span class="badge b-purple">팀과제</span></td><td>MKT 마케팅전략 진단 보고서 제출</td><td>6/12(금) 2교시 시작 전</td><td>강좌6 · 마케팅전략 진단 Workshop(강좌5) 결과물</td></tr>
-        <tr data-type="과제"><td>9주</td><td>Marketing Management</td><td><span class="badge b-purple">팀과제</span></td><td>MKT BrandPro Simulation 등록 + 기업분석</td><td>6/12(금) 2교시</td><td>강좌6 · BrandPro 등록 후 기업분석 제출 · Reading: 교재2 전체</td></tr>
-        <tr data-type="발표"><td>10주</td><td>Marketing Management</td><td><span class="badge b-purple">최종발표</span></td><td>MKT BrandPro Debrief</td><td>6/19(금) 2교시 15:55</td><td>강좌8 · BrandPro Simulation 최종 Debrief · 마케팅 전략 리뷰</td></tr>
-        <tr data-type="과제"><td>10주</td><td>Managing People & Org</td><td><span class="badge b-blue">기말보고서</span></td><td>MPO 개인기말보고서</td><td>6/20(토)</td><td>이론→본인회사 실사례 분석 · 3페이지 · 기말보고서 35%</td></tr>
-        <tr data-type="시험"><td>10주</td><td>Financial Accounting</td><td><span class="badge b-red">기말시험</span></td><td>Financial Accounting 기말시험</td><td>6/20(토) 오전</td><td>기말 70% · 복습 위주 · 사지선다/OX · 서술형 없음 · 학술국 시트 최신본 반영 (2026-05-22)</td></tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="tab-events">
-    <section class="exam-brief" aria-label="기말시험 일정 요약">
-      <div class="exam-brief-head">
-        <div>
-          <div class="exam-brief-title">📝 기말시험 일정 요약</div>
-          <div class="exam-brief-sub">날짜순 · 과목별 현재 공지된 시험 방식만 모아보기</div>
-        </div>
-        <div class="exam-brief-tag">2026-05-22 시트 반영</div>
-      </div>
-      <div class="exam-list">
-        <article class="exam-item">
-          <div class="exam-date">5/29(금) 13:00–15:00</div>
-          <div class="exam-course"><span class="exam-dot" style="background:var(--eco)"></span>Business Economics</div>
-          <div class="exam-summary">Closed-book exam. 객관식 15~20문제 + 짧은 주관식 2~4문제. 학생증/공식 신분증 지참, 전자기기와 계산기는 가방 보관.</div>
-          <div class="exam-status">강의실 추후 안내</div>
-        </article>
-        <article class="exam-item">
-          <div class="exam-date">5/30(토) 13:00–14:30</div>
-          <div class="exam-course"><span class="exam-dot" style="background:var(--eth)"></span>Business Ethics</div>
-          <div class="exam-summary">90분, 4지선다형 25문제. 윤리경영, 사람의 변화, 윤리적 조직, CSR(Porter & Kramer 논문 포함) 범위. 사례 출제 없음.</div>
-          <div class="exam-status">범위/방식 공지됨</div>
-        </article>
-        <article class="exam-item">
-          <div class="exam-date">6/20(토) 오전</div>
-          <div class="exam-course"><span class="exam-dot" style="background:var(--fin)"></span>Financial Accounting</div>
-          <div class="exam-summary">기말시험 70%. 복습 위주. 사지선다와 OX로 진행, 서술형 없음.</div>
-          <div class="exam-status">오전 시험 공지됨</div>
-        </article>
-      </div>
-    </section>
-    <div class="event-cards">
-      <div class="event-card" data-pop="17기 개강파티|3/28(토) 수업 후|3주차 토요일 수업 종료 후 진행 — 완료">
-        <div class="event-card-icon">🎊</div><div class="event-card-name">17기 개강파티</div>
-        <div class="event-card-date">3/28(토) 수업 후</div><div class="event-card-desc">3주차 토요일 수업 종료 후 진행 — 완료</div>
-      </div>
-      <div class="event-card" data-pop="16·17기 상견례|4/25(토) 18:00|16기·17기 원우회 조직 간 인사 및 교류 일정">
-        <div class="event-card-icon">🤝</div><div class="event-card-name">16·17기 상견례</div>
-        <div class="event-card-date">4/25(토) 18:00</div><div class="event-card-desc">16기·17기 원우회 조직 간 인사 및 교류</div>
-      </div>
-      
-      <div class="event-card" data-pop="17기 종강파티|6/20(토) 12:10 수업 종료 후|모든 1학기 수업 종료 후 진행 · 단순 식사/1박 워크샵 등 형식 미정">
-        <div class="event-card-icon">🎓</div><div class="event-card-name">17기 종강파티</div>
-        <div class="event-card-date">6/20(토) 12:10 수업 종료 후</div><div class="event-card-desc">형식 미정 · 추후 확정 안내</div>
-      </div>
-      <div class="event-card gsp-event-card" id="gsp-card">
-        <div class="event-card-icon">✈️</div><div class="event-card-name">GSP 해외연수 — 시애틀 UW</div>
-        <div class="event-card-date">7/22(수)~24(금)</div><div class="event-card-desc">University of Washington · 종강 후 · 참석/미참석 안내 확인</div>
-        <div class="gsp-actions">
-          <button class="gsp-expand-btn" id="gsp-attend-btn" style="flex:1;margin-top:0;white-space:nowrap" onclick="toggleGspSection('attend')">
-            <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
-            ✈️ 참석 안내
-          </button>
-          <button class="gsp-expand-btn" id="gsp-absent-btn" style="flex:1;margin-top:0;white-space:nowrap;background:rgba(146,64,14,.08);border-color:rgba(146,64,14,.3);color:#92400e" onclick="toggleGspSection('absent')">
-            <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
-            📘 미참석 안내
-          </button>
-        </div>
-        <div class="gsp-detail" id="gsp-attend-detail">
-          <div class="gsp-panel">
-            <div class="gsp-panel-title">참석 원우 안내</div>
-            <ul class="gsp-panel-list">
-              <li>학생 부담: 항공권, 숙박비, 일부 식대(학교 공식 일정 외 식사)</li>
-              <li>학교 부담: 상대교 수업료 및 프로그램 비용</li>
-              <li>항공권은 개별 예약입니다.</li>
-              <li>그룹호텔은 희망자만 신청하며, 미이용 시 숙소는 개별 예약해야 합니다.</li>
-              <li>가족 동반 숙박은 가능하지만 공식 일정 참여는 불가합니다.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="gsp-detail" id="gsp-absent-detail">
-          <div class="gsp-panel">
-            <div class="gsp-panel-title">미참석 원우 안내</div>
-            <ul class="gsp-panel-list">
-              <li>Global Study Program은 EMBA 필수과목입니다.</li>
-              <li>미참석 시 별도 대체과목 개설은 없습니다.</li>
-              <li>부족한 1.5학점은 방학 중 Corporate MBA 계절학기로 이수해야 합니다.</li>
-              <li>운영 예시: 월/화/목/금 19:00-22:00, 2주 8회</li>
-              <li>또는 수 19:00-22:00 / 토 09:00-19:00, 2주 4회</li>
-              <li>올해 여름학기 참고 기간: 6월 5주 ~ 7월 4주</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="tab-courses">
-    <div class="course-cards">
-      <div class="course-card"><div class="cc-bar" style="background:var(--eco)"></div><div class="cc-name">Business Economics</div><div class="cc-prof">어준경 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 1교시</span><span class="cc-chip">5/29 기말</span></div><div class="cc-eval"><b>평가:</b> 5/29(금) 13:00–15:00 기말시험 · Closed-book · 객관식 15~20문제 + 짧은 주관식 2~4문제</div></div>
-      <div class="course-card" style="opacity:.75"><div class="cc-bar" style="background:var(--ana)"></div><div class="cc-name">Business Analytics <span style="font-size:11px;color:#dc2626;font-weight:700">✓ 종강</span></div><div class="cc-prof">정승환 교수</div><div class="cc-chips"><span class="cc-chip">1~4주</span><span class="cc-chip">금 2교시+토 1교시</span><span class="cc-chip" style="background:#fde8e8;color:#c0392b">4/11 종강</span></div><div class="cc-eval"><b>평가:</b> 개인과제 2회, 팀과제 2회, 시험 없음 — 4주차로 종강 완료</div></div>
-      <div class="course-card"><div class="cc-bar" style="background:var(--mpo)"></div><div class="cc-name">Managing People & Org</div><div class="cc-prof">오홍석 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 3교시</span><span class="cc-chip">19:20–22:00</span></div><div class="cc-eval"><b>평가:</b> 출석·토론 20%, 팀사례발표 25% (4회), 개인분석 20%, Reflection 35%</div></div>
-      <div class="course-card"><div class="cc-bar" style="background:var(--eth)"></div><div class="cc-name">Business Ethics</div><div class="cc-prof">최순규 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 2교시</span><span class="cc-chip">13:00–15:40</span></div><div class="cc-eval"><b>평가:</b> 조별 발표 포함, 세부 기준 별도 공지</div></div>
-      <div class="course-card"><div class="cc-bar" style="background:var(--msc)"></div><div class="cc-name">Management Science</div><div class="cc-prof">김성문 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 3교시</span><span class="cc-chip">15:55–18:35</span></div><div class="cc-eval"><b>평가:</b> 출석 10%, 에세이 20%, 사례분석 30%, 조별 프로젝트 40%</div></div>
-      <div class="course-card"><div class="cc-bar" style="background:var(--mkt)"></div><div class="cc-name">Marketing Management <span style="font-size:11px;color:#7c3aed;font-weight:700">🆕 5주차 개강</span></div><div class="cc-prof">김동훈 교수</div><div class="cc-chips"><span class="cc-chip">5~10주</span><span class="cc-chip">금 2교시</span><span class="cc-chip">15:55–18:35</span><span class="cc-chip" style="background:#f3e8ff;color:#7c3aed">4/24 시작</span></div><div class="cc-eval"><b>평가:</b> 고객욕구분석 보고서(강좌4) · 전략진단 보고서(강좌6) · BrandPro Debrief(강좌8) · Reading: 교재1+교재2</div></div>
-      <div class="course-card"><div class="cc-bar" style="background:var(--fin)"></div><div class="cc-name">Financial Accounting</div><div class="cc-prof">최현욱 교수</div><div class="cc-chips"><span class="cc-chip">6~10주</span><span class="cc-chip">토 1교시+</span><span class="cc-chip">5/9 개강</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">6/20 기말</span></div><div class="cc-eval"><b>평가:</b> 기말시험 70%, 출석 10%, 기타 20% · 복습 위주 · 시험: 사지선다/OX, 서술형 없음</div></div>
-    </div>
-  </div>
-
-  <!-- ══════ 2학기 탭 패널 (기본 활성) ══════ -->
-  <div class="tab-panel" id="tab-s2-events">
+  <div role="tabpanel" aria-labelledby="tabbtn-s2-events" tabindex="-1" class="tab-panel active" id="tab-s2-events">
+    <h3 class="tp-title" id="tptitle-tab-s2-events"><span class="tp-ico">🎯</span>행사·일정</h3>
     <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:4px 18px 16px">
       <div style="font-size:13px;font-weight:800;color:var(--navy);padding:14px 0 2px">2학기 주요 일정 <span style="font-size:11px;font-weight:400;color:#6b7280">· 원우회 개강총회 기준</span></div>
       <div style="display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--border);opacity:.6;"><div style="flex:0 0 54px;text-align:center"><div style="font-size:19px;line-height:1">📖</div><div style="font-size:13px;font-weight:800;color:#9ca3af;margin-top:3px">09.04</div><div style="font-size:11px;color:#9ca3af">금</div></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:800;color:var(--ink)">2학기 개강<span style="font-size:11px;font-weight:700;color:#9ca3af;background:#f3f4f6;border-radius:999px;padding:2px 8px;margin-left:6px">지남</span></div><div style="font-size:12px;color:#6b7280;margin-top:2px">1교시 13:00 · 재무시장과 가치평가</div><div style="font-size:12px;color:#374151;margin-top:5px;line-height:1.6">새로운 배움의 시작</div></div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--border);"><div style="flex:0 0 54px;text-align:center"><div style="font-size:19px;line-height:1">🍻</div><div style="font-size:13px;font-weight:800;color:#b91c1c;margin-top:3px">09.05</div><div style="font-size:11px;color:#9ca3af">토</div></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:800;color:var(--ink)">17기 원우회 개강파티<span style="font-size:11px;font-weight:700;color:#b91c1c;background:#fee2e2;border-radius:999px;padding:2px 8px;margin-left:6px">오늘</span></div><div style="font-size:12px;color:#6b7280;margin-top:2px">수업 후 <b>18:30 ~</b></div><div style="font-size:12px;color:#374151;margin-top:5px;line-height:1.6"><b>신촌 정직한족발</b>(1차) → 이후 신촌 일대<br><span style="display:inline-block;background:#fee2e2;color:#b91c1c;font-weight:800;border-radius:6px;padding:3px 8px;margin:3px 0">⚠️ 주소 변경 — 서울 서대문구 연세로7안길 51 1층</span><br><span style="color:#6b7280">신촌역 1번 출구에서 531m · 개강총회 자료에 “기존 안내된 주소가 아니므로 유의바람” 명시</span><br>수업 종료 후 ~ · 17기 전체 대관 · TABLE 13 예약<br><span style="color:#9ca3af">기본 세팅 — 족발(大) · 보쌈(大) · 막국수</span></div></div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--border);"><div style="flex:0 0 54px;text-align:center"><div style="font-size:19px;line-height:1">🏛️</div><div style="font-size:13px;font-weight:800;color:#0e7490;margin-top:3px">09.19</div><div style="font-size:11px;color:#9ca3af">토</div></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:800;color:var(--ink)">학교 주관 개강파티<span style="font-size:11px;font-weight:700;color:#0e7490;background:#e0f2f5;border-radius:999px;padding:2px 8px;margin-left:6px">예정</span></div><div style="font-size:12px;color:#6b7280;margin-top:2px">교수님과 함께하는 공식적인 만남의 자리</div><div style="font-size:12px;color:#374151;margin-top:5px;line-height:1.6"><span style="color:#b45309">⚠️ 같은 날 1교시에 곽주영 교수 케이스 발표(6·7조)가 있습니다</span></div></div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--border);"><div style="flex:0 0 54px;text-align:center"><div style="font-size:19px;line-height:1">⛰️</div><div style="font-size:13px;font-weight:800;color:#0e7490;margin-top:3px">10.31</div><div style="font-size:11px;color:#9ca3af">토</div></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:800;color:var(--ink)">총동문회 등반대회<span style="font-size:11px;font-weight:700;color:#0e7490;background:#e0f2f5;border-radius:999px;padding:2px 8px;margin-left:6px">예정</span></div><div style="font-size:12px;color:#6b7280;margin-top:2px">총동문회 주관 · 선·후배 교류</div><div style="font-size:12px;color:#374151;margin-top:5px;line-height:1.6">연회 장소 <b>연세백양로플라자 그랜드볼룸</b><br><span style="color:#9ca3af">집합 시각·코스·신청 방법은 원우회 공지 예정</span></div></div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--border);"><div style="flex:0 0 54px;text-align:center"><div style="font-size:19px;line-height:1">🎓</div><div style="font-size:13px;font-weight:800;color:#0e7490;margin-top:3px">12.19</div><div style="font-size:11px;color:#9ca3af">토</div></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:800;color:var(--ink)">종강 & 종강파티<span style="font-size:11px;font-weight:700;color:#0e7490;background:#e0f2f5;border-radius:999px;padding:2px 8px;margin-left:6px">예정</span></div><div style="font-size:12px;color:#6b7280;margin-top:2px">2학기 마지막 수업일</div><div style="font-size:12px;color:#374151;margin-top:5px;line-height:1.6">함께한 시간을 돌아보며</div></div></div>
     </div>
   </div>
-  <div class="tab-panel active" id="tab-s2-tasks">
+  <div role="tabpanel" aria-labelledby="tabbtn-s2-tasks" tabindex="-1" class="tab-panel" id="tab-s2-tasks">
+    <h3 class="tp-title" id="tptitle-tab-s2-tasks"><span class="tp-ico">📋</span>과제현황</h3>
     <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:14px">
       <div style="font-size:13px;font-weight:800;color:var(--navy);margin-bottom:4px">📄 강의계획서 수집 현황 <span style="color:#0e7490">4 / 7</span></div>
-      <div style="font-size:12px;color:#6b7280;line-height:1.6">확정: <b style="color:#0e7490">Financial Markets &amp; Valuation</b> · <b style="color:#6d28d9">Global Strategy and Execution</b> · <b style="color:#1e40af">Strategy for Executives</b> · <b style="color:#be185d">Creating Value Through IT Innovation</b><br>미배포 3과목: Managerial Accounting(문두철) · Data Driven Marketing(박창희) · OSCM(허대식)</div>
+      <div style="font-size:12px;color:#6b7280;line-height:1.6">확정: <b style="color:#0e7490">재무시장과 가치평가</b> · <b style="color:#6d28d9">글로벌 경영전략과 실행</b> · <b style="color:#1e40af">경영자를 위한 전략</b> · <b style="color:#be185d">IT 혁신을 통한 가치창출</b><br>미배포 3과목: Managerial Accounting(문두철) · Data Driven Marketing(박창희) · OSCM(허대식)</div>
     </div>
     <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:14px">
       <div style="font-size:13px;font-weight:800;color:#b91c1c;margin-bottom:12px">🎯 확정된 시험 3건</div>
@@ -1003,15 +863,16 @@ html{overflow-x:hidden}
       </div>
     </div>
   </div>
-  <div class="tab-panel" id="tab-s2-courses">
+  <div role="tabpanel" aria-labelledby="tabbtn-s2-courses" tabindex="-1" class="tab-panel" id="tab-s2-courses">
+    <h3 class="tp-title" id="tptitle-tab-s2-courses"><span class="tp-ico">📚</span>과목안내</h3>
     <div class="course-cards">
-          <div class="course-card"><div class="cc-bar" style="background:#0e7490"></div><div class="cc-name">Financial Markets &amp; Valuation <span style="font-size:11px;color:#0e7490;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">한재훈 교수 · 경영관 615호</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 1교시</span><span class="cc-chip">13:00–15:40</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">11/27 기말</span></div><div class="cc-eval"><b>평가:</b> 기말고사 60% · 과제 30%(개인 3회, 일정 추후 공지) · 출석·참여 10%<br><b>교재:</b> 핵심 기업재무 5판(Berk·DeMarzo) · HBS Case 9-202-024</div></div>
-          <div class="course-card"><div class="cc-bar" style="background:#6d28d9"></div><div class="cc-name">Global Strategy and Execution <span style="font-size:11px;color:#6d28d9;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">곽주영 교수 · 글로벌 경영전략과 실행</div><div class="cc-chips"><span class="cc-chip">1~4주</span><span class="cc-chip">금 2교시 + 토 1교시</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">10/17 시험</span><span class="cc-chip" style="background:#dbeafe;color:#1d4ed8">10/3 녹화전환</span></div><div class="cc-eval"><b>평가:</b> 시험 60% · 사례발표(팀) 20% · 출석 20%<br><b>시험:</b> 10/17(토) 오픈북 · 전 범위 · 전부 주관식 · 교안만 지참<br><b>주의:</b> 결석 2회 초과 시 성적 부여 불가 · 1시간 이상 지각은 부호 다운그레이드</div></div>
-          <div class="course-card"><div class="cc-bar" style="background:#be185d"></div><div class="cc-name">Creating Value Through IT Innovation <span style="font-size:11px;color:#be185d;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">임일 교수 · MBS7272 · 경영 B204 · 연구실 623</div><div class="cc-chips"><span class="cc-chip">1~7주</span><span class="cc-chip">금 3교시</span><span class="cc-chip">19:20–21:50</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">11/20 기말</span></div><div class="cc-eval"><b>평가:</b> 기말시험 40%(오픈북) · 수업참여·출석 20% · Case/article 발표·리포트(팀) 20% · AI Strategy 프로젝트(팀) 20%<br><b>일정:</b> 10/16 New IT 제안서 · 11/6 AI Strategy 최종보고서+발표 · 11/20 기말<br><b>주의:</b> 지각·조퇴 3회 = 결석 1회 · 팀원 상호평가가 최종 성적의 5%</div></div>
-          <div class="course-card"><div class="cc-bar" style="background:#1e40af"></div><div class="cc-name">Strategy for Executives <span style="font-size:11px;color:#1e40af;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">김보경 교수 · MBS6311-01 · 경영 B204</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 2교시</span><span class="cc-chip">13:00–15:40</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">11/28 기말</span></div><div class="cc-eval"><b>평가:</b> 출석·수업참여 40%(10+30) · 시험 40% · 개인과제 20%<br><b>일정:</b> 11/21 개인과제(Recent M&amp;A) · 11/28 기말고사(주관식, 강의실 진행)<br><b>교재:</b> Harvard Case · HBR · DBR · AER 케이스 중심</div></div>
-          <div class="course-card"><div class="cc-bar" style="background:#166534"></div><div class="cc-name">Managerial Accounting for Executives</div><div class="cc-prof">문두철 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 3교시</span><span class="cc-chip">15:55–18:35</span><span class="cc-chip">11/28 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
-          <div class="course-card"><div class="cc-bar" style="background:#b45309"></div><div class="cc-name">Data Driven Marketing Decisions</div><div class="cc-prof">박창희 교수</div><div class="cc-chips"><span class="cc-chip">6~10주</span><span class="cc-chip">금 2·3교시 → 1·2교시</span><span class="cc-chip" style="background:#fef3c7;color:#92400e">11/6 개강</span><span class="cc-chip">12/18 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
-          <div class="course-card"><div class="cc-bar" style="background:#475569"></div><div class="cc-name">Operations &amp; Supply Chain Management</div><div class="cc-prof">허대식 교수</div><div class="cc-chips"><span class="cc-chip">5~10주</span><span class="cc-chip">토 1교시 → 1·2교시</span><span class="cc-chip" style="background:#f1f5f9;color:#475569">10/24 개강</span><span class="cc-chip">12/19 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#0e7490"></div><div class="cc-name">재무시장과 가치평가<span class="cc-en">Financial Markets &amp; Valuation</span> <span style="font-size:11px;color:#0e7490;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">한재훈 교수 · 경영관 615호</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">금 1교시</span><span class="cc-chip">13:00–15:40</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">11/27 기말</span></div><div class="cc-eval"><b>평가:</b> 기말고사 60% · 과제 30%(개인 3회, 일정 추후 공지) · 출석·참여 10%<br><b>교재:</b> 핵심 기업재무 5판(Berk·DeMarzo) · HBS Case 9-202-024</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#6d28d9"></div><div class="cc-name">글로벌 경영전략과 실행<span class="cc-en">Global Strategy and Execution</span> <span style="font-size:11px;color:#6d28d9;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">곽주영 교수</div><div class="cc-chips"><span class="cc-chip">1~4주</span><span class="cc-chip">금 2교시 + 토 1교시</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">10/17 시험</span><span class="cc-chip" style="background:#dbeafe;color:#1d4ed8">10/3 녹화전환</span></div><div class="cc-eval"><b>평가:</b> 시험 60% · 사례발표(팀) 20% · 출석 20%<br><b>시험:</b> 10/17(토) 오픈북 · 전 범위 · 전부 주관식 · 교안만 지참<br><b>주의:</b> 결석 2회 초과 시 성적 부여 불가 · 1시간 이상 지각은 부호 다운그레이드</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#be185d"></div><div class="cc-name">IT 혁신을 통한 가치창출<span class="cc-en">Creating Value Through IT Innovation</span> <span style="font-size:11px;color:#be185d;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">임일 교수 · MBS7272 · 경영 B204 · 연구실 623</div><div class="cc-chips"><span class="cc-chip">1~7주</span><span class="cc-chip">금 3교시</span><span class="cc-chip">19:20–21:50</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">11/20 기말</span></div><div class="cc-eval"><b>평가:</b> 기말시험 40%(오픈북) · 수업참여·출석 20% · Case/article 발표·리포트(팀) 20% · AI Strategy 프로젝트(팀) 20%<br><b>일정:</b> 10/16 New IT 제안서 · 11/6 AI Strategy 최종보고서+발표 · 11/20 기말<br><b>주의:</b> 지각·조퇴 3회 = 결석 1회 · 팀원 상호평가가 최종 성적의 5%</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#1e40af"></div><div class="cc-name">경영자를 위한 전략<span class="cc-en">Strategy for Executives</span> <span style="font-size:11px;color:#1e40af;font-weight:700">📄 계획서 확정</span></div><div class="cc-prof">김보경 교수 · MBS6311-01 · 경영 B204</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 2교시</span><span class="cc-chip">13:00–15:40</span><span class="cc-chip" style="background:#fee2e2;color:#b91c1c">11/28 기말</span></div><div class="cc-eval"><b>평가:</b> 출석·수업참여 40%(10+30) · 시험 40% · 개인과제 20%<br><b>일정:</b> 11/21 개인과제(Recent M&amp;A) · 11/28 기말고사(주관식, 강의실 진행)<br><b>교재:</b> Harvard Case · HBR · DBR · AER 케이스 중심</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#166534"></div><div class="cc-name">경영자를 위한 관리회계<span class="cc-en">Managerial Accounting for Executives</span></div><div class="cc-prof">문두철 교수</div><div class="cc-chips"><span class="cc-chip">1~8주</span><span class="cc-chip">토 3교시</span><span class="cc-chip">15:55–18:35</span><span class="cc-chip">11/28 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#b45309"></div><div class="cc-name">데이터 기반 마케팅 의사결정<span class="cc-en">Data Driven Marketing Decisions</span></div><div class="cc-prof">박창희 교수</div><div class="cc-chips"><span class="cc-chip">6~10주</span><span class="cc-chip">금 2·3교시 → 1·2교시</span><span class="cc-chip" style="background:#fef3c7;color:#92400e">11/6 개강</span><span class="cc-chip">12/18 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
+          <div class="course-card"><div class="cc-bar" style="background:#475569"></div><div class="cc-name">운영 및 공급사슬관리<span class="cc-en">Operations &amp; Supply Chain Management</span></div><div class="cc-prof">허대식 교수</div><div class="cc-chips"><span class="cc-chip">5~10주</span><span class="cc-chip">토 1교시 → 1·2교시</span><span class="cc-chip" style="background:#f1f5f9;color:#475569">10/24 개강</span><span class="cc-chip">12/19 종강</span></div><div class="cc-eval"><b>평가:</b> 강의계획서 배포 후 업데이트 예정</div></div>
         </div>
   </div>
 </div>
@@ -1485,9 +1346,12 @@ document.addEventListener('keydown',e=>{
 
 // ═══ TABS ═══
 function switchTab(e,id){
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.remove('active'); b.setAttribute('aria-selected','false');
+  });
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   e.currentTarget.classList.add('active');
+  e.currentTarget.setAttribute('aria-selected','true');
   document.getElementById('tab-'+id).classList.add('active');
 }
 // Attach hover popups to event cards
@@ -1499,13 +1363,7 @@ document.querySelectorAll('.event-card[data-pop]').forEach(card=>{
 });
 
 // ═══ FILTER ASSIGNMENTS ═══
-function filterAssign(e,type){
-  document.querySelectorAll('.af-btn').forEach(b=>b.classList.remove('active'));
-  e.currentTarget.classList.add('active');
-  document.querySelectorAll('#assign-table tbody tr').forEach(tr=>{
-    tr.classList.toggle('hidden-row',type!=='all'&&tr.dataset.type!==type);
-  });
-}
+
 
 // ═══ CALENDAR ═══
 function buildCalendar(){
@@ -1814,10 +1672,12 @@ function setOrgCohort(cohort){
 
 // ═══ 2학기 DATA ═══
 const CMAP2={fmv:'#0e7490',gbe:'#6d28d9',cvt:'#be185d',str:'#1e40af',mac:'#166534',ddm:'#b45309',osc:'#475569'};
-const CNAMES2={fmv:'Financial Markets & Valuation',gbe:'Global Strategy and Execution',cvt:'Creating Value Through IT Innovation',str:'Strategy for Executives',mac:'Managerial Accounting for Executives',ddm:'Data Driven Marketing Decisions',osc:'Operations & Supply Chain Mgmt'};
+const CNAMES2={fmv:'재무시장과 가치평가',gbe:'글로벌 경영전략과 실행',cvt:'IT 혁신을 통한 가치창출',str:'경영자를 위한 전략',mac:'경영자를 위한 관리회계',ddm:'데이터 기반 마케팅 의사결정',osc:'운영 및 공급사슬관리'};
 const CPROFS2={fmv:'한재훈',gbe:'곽주영',cvt:'임일',str:'김보경',mac:'문두철',ddm:'박창희',osc:'허대식'};
 /* 격자 행 라벨용 한국어 과목명 — 표시 라벨(번역)이지 일정 데이터가 아니다.
    fmv·gbe 는 이 파일이 이미 쓰던 표기를 그대로 따랐고 나머지는 CNAMES2 영문명의 번역이다. */
+/* 영문 정식명 — 실라버스·러너스가 영문으로 말하므로 부제·툴팁용으로 남긴다 */
+const CEN2={fmv:'Financial Markets & Valuation',gbe:'Global Strategy and Execution',cvt:'Creating Value Through IT Innovation',str:'Strategy for Executives',mac:'Managerial Accounting for Executives',ddm:'Data Driven Marketing Decisions',osc:'Operations & Supply Chain Management'};
 const CKR2={fmv:'재무시장과 가치평가',gbe:'글로벌 경영전략과 실행',cvt:'IT 혁신을 통한 가치창출',
   str:'경영자를 위한 전략',mac:'경영자를 위한 관리회계',ddm:'데이터 기반 마케팅 의사결정',
   osc:'운영 및 공급사슬관리'};
@@ -1826,12 +1686,12 @@ Object.assign(CMAP,CMAP2);Object.assign(CNAMES,CNAMES2);Object.assign(CPROFS,CPR
 const WEEKS2=[
   {n:1,label:'1주차',fri:{d:'2026-09-04',label:'9/4(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-09-05',label:'9/5(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
   {n:2,label:'2주차',fri:{d:'2026-09-18',label:'9/18(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-09-19',label:'9/19(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
-  {n:3,label:'3주차',fri:{d:'2026-10-02',label:'10/2(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-03',label:'10/3(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10',tag:'녹화 전환',tc:'tb'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'공지',badge:'b-blue',color:'#1d4ed8',d:'2026-10-03',name:'10/3 개천절 — 곽주영 교수 오프라인 수업 없음',meta:'곽주영 · Global Strategy and Execution',detail:'실라버스 Session 6(글로벌 마케팅): "개천절 공휴일 — 오프라인 수업은 없고, 강의는 레코딩으로 전환. 링크는 러너스에 공지"\n※ 같은 날 김보경 교수 수업(2교시)은 실라버스에 정상 세션(산업분석)으로 표기 — 진행 여부 별도 확인 필요',due:'10/3(토) 1교시'}],events:[]},
-  {n:4,label:'4주차',fri:{d:'2026-10-16',label:'10/16(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'과제',tc:'tb'}]},sat:{d:'2026-10-17',label:'10/17(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10',tag:'시험',tc:'tr'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'과제',badge:'b-blue',color:'#2563eb',d:'2026-10-16',name:"CVT 'New IT' 프로젝트 제안서",meta:'임일 · Creating Value Through IT Innovation',detail:'팀 과제 — 팀원 중 한 명의 회사에서 AI로 해결할 문제를 골라 제안서 형태로 제출, 승인 필요\n실라버스 Session 4 (Module 3: Deep Learning & LLM)\n포함 항목: 문제 정의와 Scope · 데이터 · AI 도입 전략 · 기대효과(revenue/ROI/cost)',due:'10/16(금) 3교시'},{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-10-17',name:'글로벌 경영전략과 실행 — 시험',meta:'곽주영 · Global Strategy and Execution',detail:'실라버스 Session 8 = 시험. 마지막 날은 수업 없이 시험만 진행\n오픈북 · 시험범위 전체 · 전부 주관식 (시뮬레이션 문제 검토 중, TBA)\n통신기기 사용 불가 — 교안만 지참 가능. 답안지 제출 후 퇴실 가능\n평가 비중 60% (사례발표 20% · 출석 20%)',due:'10/17(토) 1교시 09:30–12:10'}],events:[]},
+  {n:3,label:'3주차',fri:{d:'2026-10-02',label:'10/2(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-03',label:'10/3(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10',tag:'녹화 전환',tc:'tb'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'공지',badge:'b-blue',color:'#1d4ed8',d:'2026-10-03',name:'10/3 개천절 — 곽주영 교수 오프라인 수업 없음',meta:'곽주영 · 글로벌 경영전략과 실행',detail:'실라버스 Session 6(글로벌 마케팅): "개천절 공휴일 — 오프라인 수업은 없고, 강의는 레코딩으로 전환. 링크는 러너스에 공지"\n※ 같은 날 김보경 교수 수업(2교시)은 실라버스에 정상 세션(산업분석)으로 표기 — 진행 여부 별도 확인 필요',due:'10/3(토) 1교시'}],events:[]},
+  {n:4,label:'4주차',fri:{d:'2026-10-16',label:'10/16(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'과제',tc:'tb'}]},sat:{d:'2026-10-17',label:'10/17(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10',tag:'시험',tc:'tr'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'과제',badge:'b-blue',color:'#2563eb',d:'2026-10-16',name:"CVT 'New IT' 프로젝트 제안서",meta:'임일 · IT 혁신을 통한 가치창출',detail:'팀 과제 — 팀원 중 한 명의 회사에서 AI로 해결할 문제를 골라 제안서 형태로 제출, 승인 필요\n실라버스 Session 4 (Module 3: Deep Learning & LLM)\n포함 항목: 문제 정의와 Scope · 데이터 · AI 도입 전략 · 기대효과(revenue/ROI/cost)',due:'10/16(금) 3교시'},{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-10-17',name:'글로벌 경영전략과 실행 — 시험',meta:'곽주영 · 글로벌 경영전략과 실행',detail:'실라버스 Session 8 = 시험. 마지막 날은 수업 없이 시험만 진행\n오픈북 · 시험범위 전체 · 전부 주관식 (시뮬레이션 문제 검토 중, TBA)\n통신기기 사용 불가 — 교안만 지참 가능. 답안지 제출 후 퇴실 가능\n평가 비중 60% (사례발표 20% · 출석 20%)',due:'10/17(토) 1교시 09:30–12:10'}],events:[]},
   {n:5,label:'5주차',fri:{d:'2026-10-23',label:'10/23(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'cvt',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-24',label:'10/24(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[],events:[]},
-  {n:6,label:'6주차',fri:{d:'2026-11-06',label:'11/6(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'과제',tc:'tg2'}]},sat:{d:'2026-11-07',label:'11/7(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'과제',badge:'b-purple',color:'#7c3aed',d:'2026-11-06',name:"CVT 'AI Strategy' 최종보고서 + 발표",meta:'임일 · Creating Value Through IT Innovation',detail:'팀 과제 · 평가 20% — 발표자료와 보고서(표지·참고문헌 포함 10페이지 내외) 제출\n실라버스 Session 7 Final presentations · 팀당 발표 약 10분\n※ 학기말 팀원 상호평가가 최종 성적의 5%를 차지한다(무임승차 방지)',due:'11/6(금) 3교시'}],events:[]},
-  {n:7,label:'7주차',fri:{d:'2026-11-20',label:'11/20(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'기말시험',tc:'tr'}]},sat:{d:'2026-11-21',label:'11/21(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40',tag:'개인과제',tc:'tb'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-20',name:'CVT 기말시험',meta:'임일 · Creating Value Through IT Innovation',detail:'실라버스 Session 8 Final exam · 평가 40%\n**오픈북** — 수업에서 다룬 모든 내용(강의·케이스·아티클) 대상\n단순 암기보다 종합적 이해를 테스트. 상세 안내는 시험 전 주 수업에서 제공\n강의실 B204 · 금 19:20–21:50',due:'11/20(금) 3교시'},{type:'과제',badge:'b-blue',color:'#2563eb',d:'2026-11-21',name:'STR 개인과제 — Recent M&A',meta:'김보경 · Strategy for Executives',detail:'Session 7(M&A, AI) 주제 — 관심 있는 최근 M&A 하나를 골라 작성\nA) 최근 일어난 M&A를 기술하고 그 M&A가 왜 일어났는지 강의에서 배운 개념을 기반으로 설명\nB) 관련 자료를 바르게 인용\n평가 비중 20% · 구체적 지침은 수업 시간에 제공',due:'11/21(토) 2교시'}],events:[]},
-  {n:8,label:'8주차',fri:{d:'2026-11-27',label:'11/27(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40',tag:'기말고사',tc:'tr'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'ddm',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-11-28',label:'11/28(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40',tag:'기말고사',tc:'tr'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-28',name:'STR 기말고사',meta:'김보경 · Strategy for Executives',detail:'실라버스 Session 8 = 기말고사\n수업에서 다룬 강의·케이스·비디오 등을 기반으로 출제, 주관식\n시험 당일 수업시간에 강의실(경영 B204)에서 진행 — 담당교수 상의 없이 대체시험 없음\n평가 비중 40% (출석·수업참여 40% · 개인과제 20%)',due:'11/28(토) 2교시 13:00–15:40'},{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-27',name:'FMV 기말고사',meta:'한재훈 · Financial Markets & Valuation',detail:'강의계획서 8회차 = 기말고사, FMV 마지막 수업일 기준\n평가 비중 60% (과제 30% · 출석·참여 10%)\n범위: 일물일가의 법칙 · 현재가치와 할인율 · 채권/주식 가치평가 · 분산투자와 CAPM\n※ 정확한 시간·형식은 교수님 별도 공지 확인',due:'11/27(금) 1교시'}],events:[]},
+  {n:6,label:'6주차',fri:{d:'2026-11-06',label:'11/6(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'과제',tc:'tg2'}]},sat:{d:'2026-11-07',label:'11/7(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'과제',badge:'b-purple',color:'#7c3aed',d:'2026-11-06',name:"CVT 'AI Strategy' 최종보고서 + 발표",meta:'임일 · IT 혁신을 통한 가치창출',detail:'팀 과제 · 평가 20% — 발표자료와 보고서(표지·참고문헌 포함 10페이지 내외) 제출\n실라버스 Session 7 Final presentations · 팀당 발표 약 10분\n※ 학기말 팀원 상호평가가 최종 성적의 5%를 차지한다(무임승차 방지)',due:'11/6(금) 3교시'}],events:[]},
+  {n:7,label:'7주차',fri:{d:'2026-11-20',label:'11/20(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'기말시험',tc:'tr'}]},sat:{d:'2026-11-21',label:'11/21(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40',tag:'개인과제',tc:'tb'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-20',name:'CVT 기말시험',meta:'임일 · IT 혁신을 통한 가치창출',detail:'실라버스 Session 8 Final exam · 평가 40%\n**오픈북** — 수업에서 다룬 모든 내용(강의·케이스·아티클) 대상\n단순 암기보다 종합적 이해를 테스트. 상세 안내는 시험 전 주 수업에서 제공\n강의실 B204 · 금 19:20–21:50',due:'11/20(금) 3교시'},{type:'과제',badge:'b-blue',color:'#2563eb',d:'2026-11-21',name:'STR 개인과제 — Recent M&A',meta:'김보경 · 경영자를 위한 전략',detail:'Session 7(M&A, AI) 주제 — 관심 있는 최근 M&A 하나를 골라 작성\nA) 최근 일어난 M&A를 기술하고 그 M&A가 왜 일어났는지 강의에서 배운 개념을 기반으로 설명\nB) 관련 자료를 바르게 인용\n평가 비중 20% · 구체적 지침은 수업 시간에 제공',due:'11/21(토) 2교시'}],events:[]},
+  {n:8,label:'8주차',fri:{d:'2026-11-27',label:'11/27(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40',tag:'기말고사',tc:'tr'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'ddm',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-11-28',label:'11/28(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40',tag:'기말고사',tc:'tr'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-28',name:'STR 기말고사',meta:'김보경 · 경영자를 위한 전략',detail:'실라버스 Session 8 = 기말고사\n수업에서 다룬 강의·케이스·비디오 등을 기반으로 출제, 주관식\n시험 당일 수업시간에 강의실(경영 B204)에서 진행 — 담당교수 상의 없이 대체시험 없음\n평가 비중 40% (출석·수업참여 40% · 개인과제 20%)',due:'11/28(토) 2교시 13:00–15:40'},{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-27',name:'FMV 기말고사',meta:'한재훈 · 재무시장과 가치평가',detail:'강의계획서 8회차 = 기말고사, FMV 마지막 수업일 기준\n평가 비중 60% (과제 30% · 출석·참여 10%)\n범위: 일물일가의 법칙 · 현재가치와 할인율 · 채권/주식 가치평가 · 분산투자와 CAPM\n※ 정확한 시간·형식은 교수님 별도 공지 확인',due:'11/27(금) 1교시'}],events:[]},
   {n:9,label:'9주차',fri:{d:'2026-12-11',label:'12/11(금)',slots:[{c:'ddm',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'}]},sat:{d:'2026-12-12',label:'12/12(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'osc',p:'2교시',t:'13:00–15:40'}]},tasks:[],events:[]},
   {n:10,label:'10주차',fri:{d:'2026-12-18',label:'12/18(금)',slots:[{c:'ddm',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'}]},sat:{d:'2026-12-19',label:'12/19(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'osc',p:'2교시',t:'13:00–15:40'}]},tasks:[],events:[]},
 ];
@@ -2177,6 +2037,33 @@ function closeFloatModal(){
   .blk .s{display:inline}
 }
 
+
+/* ══════════════ PC 3분할 ══════════════
+   폰은 좌우폭이 좁아 탭(누르거나 5초 자동순환), PC 는 세 칸을 동시에 편다.
+   이 블록은 .tab-panel{display:none} 보다 뒤에 와야 한다(같은 특정도 = 나중 것이 이긴다). */
+.tp-title{display:none}
+.tp-ico{margin-right:6px}
+@media (min-width:1100px){
+  .tab-nav{display:none}                       /* 칸마다 제목이 있으니 버튼 줄은 불필요 */
+  .tabs-wrap{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;align-items:start;                /* 칸 높이가 제각각(행사 620·과제 906·과목 623) */
+  }
+  .s2-dday-wrap{grid-column:1 / -1}
+  .tab-panel{
+    display:block;margin:0;border-radius:var(--r);   /* 탭에 붙어 있던 위쪽 각을 되살린다 */
+    padding:clamp(14px,1.4vw,20px);
+  }
+  .tp-title{
+    display:flex;align-items:center;
+    font-size:14px;font-weight:900;color:var(--navy);
+    padding-bottom:10px;margin-bottom:12px;border-bottom:2px solid var(--gold);
+  }
+}
+
+
+/* 과목 카드 — 한글 제목 아래 영문 정식명 */
+.cc-en{display:block;font-size:11px;font-weight:600;color:#8a91a0;margin-top:2px;letter-spacing:-.01em}
 </style>
 
 <div class="cm-back" id="courseModal" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
@@ -2348,8 +2235,17 @@ document.addEventListener('keydown',function(e){
 
 /* ═══ 탭 5초 자동 순환 ═══ */
 (function(){
-  const ids=['s2-tasks','s2-courses','s2-events'];
+  /* 순서를 버튼에서 파생시킨다 — 하드코딩하면 버튼 순서를 바꿀 때마다 여기가 어긋난다 */
+  const ids=Array.prototype.slice.call(document.querySelectorAll('.tab-btn')).map(function(b){
+    var m=(b.getAttribute('onclick')||'').match(/'([^']+)'/); return m?m[1]:'';
+  }).filter(Boolean);
   const PERIOD=5000;
+  /* PC 3분할에선 세 칸이 동시에 보이므로 .active 를 돌리는 건 무의미하고 산만하다.
+     start() 를 부르는 경로가 셋(클릭 30초 후·mouseleave·visibilitychange)이라
+     stop() 만으로는 다시 살아난다 → enabled 플래그로 입구를 막는다. */
+  const MQ=window.matchMedia('(min-width:1100px)');
+  const REDUCED=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let enabled=!MQ.matches&&!REDUCED;
   let i=0, timer=null, raf=null, t0=0, paused=false;
   function btns(){return Array.prototype.slice.call(document.querySelectorAll('.tab-btn'))}
   function show(n){
@@ -2358,8 +2254,9 @@ document.addEventListener('keydown',function(e){
     document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
     bs.forEach(function(b){b.classList.remove('active')});
     const panel=document.getElementById('tab-'+ids[i]);
+    bs.forEach(function(b){b.setAttribute('aria-selected','false')});
     if(panel) panel.classList.add('active');
-    if(bs[i]) bs[i].classList.add('active');
+    if(bs[i]){ bs[i].classList.add('active'); bs[i].setAttribute('aria-selected','true'); }
   }
   function bar(){
     const bs=btns(); bs.forEach(function(b){const p=b.querySelector('.tab-prog'); if(p) p.style.width='0'});
@@ -2376,7 +2273,7 @@ document.addEventListener('keydown',function(e){
     })();
   }
   function tick(){ show(i+1); bar(); }
-  function start(){ if(timer) return; paused=false; bar(); timer=setInterval(tick,PERIOD); }
+  function start(){ if(!enabled||timer) return; paused=false; bar(); timer=setInterval(tick,PERIOD); }
   function stop(){ paused=true; clearInterval(timer); timer=null; cancelAnimationFrame(raf);
     btns().forEach(function(b){const p=b.querySelector('.tab-prog'); if(p) p.style.width='0'}); }
   /* 사용자가 직접 누르면 30초 멈췄다가 다시 돈다 */
@@ -2384,12 +2281,33 @@ document.addEventListener('keydown',function(e){
   document.addEventListener('click',function(e){
     const b=e.target.closest?e.target.closest('.tab-btn'):null;
     if(b){ i=btns().indexOf(b); stop(); clearTimeout(resume); resume=setTimeout(start,30000); return; }
-    if(document.getElementById('courseModal').classList.contains('on')){ stop(); clearTimeout(resume); resume=setTimeout(start,30000); }
+    /* 모달이 열려 있으면 정지. 주차 상세 모달을 나중에 붙이면서 여기 빠져 있었다. */
+    var anyModal=['courseModal','wkBack'].some(function(id){
+      var m=document.getElementById(id); return m&&m.classList.contains('on');
+    });
+    if(anyModal){ stop(); clearTimeout(resume); resume=setTimeout(start,30000); }
   });
   const wrap=document.querySelector('.tab-btn') && document.querySelector('.tab-btn').parentElement;
   if(wrap){ wrap.addEventListener('mouseenter',stop); wrap.addEventListener('mouseleave',function(){clearTimeout(resume);resume=setTimeout(start,600)}); }
   document.addEventListener('visibilitychange',function(){ document.hidden?stop():start(); });
-  if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){ show(0); start(); }
+  /* 폭이 바뀌어 3분할↔탭을 오갈 때. 3분할에서도 .active 는 정확히 하나 유지한다 —
+     0개로 두면 창을 줄여 폰으로 돌아오는 순간 탭 영역이 통째로 백지가 된다. */
+  function sync(){
+    enabled=!MQ.matches&&!REDUCED;
+    if(MQ.matches){ stop(); }
+    else { show(i); if(!REDUCED) start(); }
+  }
+  show(0);
+  sync();
+  if(MQ.addEventListener) MQ.addEventListener('change',sync); else if(MQ.addListener) MQ.addListener(sync);
+  /* 탭이 화면 밖인데 돌면 패널 높이가 574px 출렁여(실측) 읽는 중인 아래 내용이 밀린다.
+     보고 있을 때만 돌린다. */
+  if(window.IntersectionObserver){
+    var tw=document.querySelector('.tabs-wrap');
+    if(tw) new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting ? start() : stop(); });
+    },{threshold:.12}).observe(tw);
+  }
   window.__tabAuto={start:start,stop:stop,cur:function(){return ids[i]}};
 })();
 
@@ -2555,7 +2473,7 @@ function buildTermGrid(){
     var abbr=(typeof CABBR!=='undefined'&&CABBR[c])?CABBR[c]:c, col=CMAP2[c]||'#888';
     H+='<div class="tg-row"><span class="tg-lb" title="'+(CNAMES2[c]||c)+' · '+(CPROFS2[c]||'')+' 교수">'
       +'<span class="tgs" style="color:'+col+'">'+abbr+'</span>'
-      +'<span class="tgl"><b style="color:'+col+'">'+((typeof CKR2!=='undefined'&&CKR2[c])||CNAMES2[c]||c)+'</b>'
+      +'<span class="tgl"><b style="color:'+col+'">'+(CNAMES2[c]||c)+'</b>'
       +'<span class="tg-prof"> · '+(CPROFS2[c]||'')+'</span></span></span>';
     for(var i=0;i<G.N;i++){
       var on=G.weeksOf[c]&&G.weeksOf[c][i], ev=G.evOf[c]&&G.evOf[c][i];
@@ -2657,12 +2575,14 @@ function openWeek(idx){
   document.getElementById('wkBody').innerHTML=H;
   document.getElementById('wkBack').classList.add('on');
   document.body.style.overflow='hidden';
+  if(window.__tabAuto) window.__tabAuto.stop();
 }
 function closeWeek(){
   var b=document.getElementById('wkBack'); if(!b) return;
   b.classList.remove('on');
   document.getElementById('wkBody').innerHTML='';  /* 잔존 오버레이가 클릭을 가로채지 않게 */
   document.body.style.overflow='';
+  if(window.__tabAuto) window.__tabAuto.start();   /* start() 안의 enabled 가드가 PC 는 알아서 막는다 */
 }
 document.addEventListener('click',function(e){
   var b=e.target.closest?e.target.closest('.tg-hit'):null;

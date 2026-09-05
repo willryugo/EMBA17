@@ -262,19 +262,6 @@ html{overflow-x:hidden}
 .cal-car-btn:disabled{opacity:.35;cursor:default}
 .cal-car-label{font-size:17px;font-weight:900;color:var(--navy);text-align:center}
 
-/* ─── SPORTS CARD ─── */
-@keyframes sports-pulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.55),0 6px 20px rgba(32,56,100,.1)}
-  50%{box-shadow:0 0 0 10px rgba(201,168,76,0),0 6px 20px rgba(32,56,100,.14)}
-}
-.sports-event-card{border:2px solid var(--gold)!important;animation:sports-pulse 2.4s ease-in-out infinite;cursor:pointer}
-.sports-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.35);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;color:#92620a;margin-top:7px;margin-right:4px}
-.sports-expand-btn{width:100%;margin-top:10px;background:rgba(201,168,76,.1);border:1px dashed rgba(201,168,76,.5);border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;font-weight:700;color:#92620a;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .15s}
-.sports-expand-btn:hover{background:rgba(201,168,76,.2)}
-.sports-expand-btn svg{transition:transform .22s;flex-shrink:0}
-.sports-btn-open svg{transform:rotate(180deg)}
-.sports-detail{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .2s;opacity:0}
-.sports-detail.sports-open{max-height:2000px;opacity:1;margin-top:10px}
 .gsp-event-card{border:2px solid rgba(201,168,76,.58)!important;background:linear-gradient(180deg,#fffaf0,#f6efe2)!important}
 .gsp-actions{display:flex;gap:7px;margin-top:10px}
 .gsp-expand-btn{width:100%;margin-top:10px;background:rgba(32,56,100,.06);border:1px dashed rgba(32,56,100,.22);border-radius:8px;padding:7px 12px;font-family:inherit;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .15s}
@@ -289,14 +276,6 @@ html{overflow-x:hidden}
 .gsp-panel-list{margin:0;padding-left:17px;font-size:12.5px;line-height:1.65;color:#4a5876}
 .gsp-panel-list li{margin-bottom:4px}
 .gsp-panel-list li:last-child{margin-bottom:0}
-.sports-attend-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--navy);padding:5px 0;border-bottom:1px solid rgba(32,56,100,.08)}
-.sports-attend-total{display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:900;color:var(--navy);padding-top:9px;margin-top:4px}
-.sports-sponsor-item{background:#fffbef;border-radius:10px;padding:10px 13px;margin-bottom:7px;border-left:3px solid var(--gold)}
-.sports-sponsor-item:last-child{margin-bottom:0}
-.sports-sponsor-name{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:2px}
-.sports-sponsor-co{font-size:11px;color:#52617f;margin-bottom:3px}
-.sports-sponsor-gift{font-size:12px;color:#7c5e00;font-weight:600}
-.sports-footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:10px;color:#9ca3af}
 /* courses tab */
 .course-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
 .course-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:17px;box-shadow:0 2px 8px rgba(32,56,100,.05)}
@@ -440,14 +419,6 @@ html{overflow-x:hidden}
   .event-card-name{font-size:13px;margin-bottom:1px}
   .event-card-date{font-size:11.5px;margin-bottom:2px}
   .event-card-desc{font-size:11px;line-height:1.4;word-break:keep-all}
-  /* sports card: 확장 패널이 포함돼 있어 세로 스택으로 복귀 */
-  .sports-event-card{display:block;padding:14px}
-  .sports-event-card .event-card-icon{display:inline-block;font-size:22px;margin-right:6px;vertical-align:middle}
-  .sports-event-card .event-card-name{display:inline-block;font-size:14px;margin-bottom:3px;vertical-align:middle}
-  .sports-event-card .event-card-date{font-size:12px;margin-bottom:3px}
-  .sports-event-card .event-card-desc{font-size:11.5px;margin-bottom:2px}
-  .sports-event-card .sports-badge{font-size:10.5px;padding:3px 8px}
-  .sports-event-card .sports-expand-btn{font-size:11.5px;padding:7px 8px;gap:4px}
   .gsp-event-card{display:block;padding:14px}
   .gsp-event-card .event-card-icon{display:inline-block;font-size:22px;margin-right:6px;margin-bottom:0;vertical-align:middle}
   .gsp-event-card .event-card-name{display:inline-block;font-size:14px;margin-bottom:3px;vertical-align:middle;line-height:1.25}
@@ -458,12 +429,6 @@ html{overflow-x:hidden}
   .gsp-panel{padding:10px 12px;border-radius:10px}
   .gsp-panel-title{font-size:12.5px}
   .gsp-panel-list{font-size:11.5px;line-height:1.55}
-  .sports-sponsor-item{padding:9px 11px}
-  .sports-sponsor-name{font-size:12.5px}
-  .sports-sponsor-co{font-size:10.5px}
-  .sports-sponsor-gift{font-size:11.5px}
-  .sports-attend-row{font-size:12.5px}
-  .sports-attend-total{font-size:15px}
   /* calendar carousel */
   .cal-carousel-nav{display:flex}
   .cal-grid{display:block}
@@ -899,36 +864,7 @@ html{overflow-x:hidden}
         <div class="event-card-icon">🤝</div><div class="event-card-name">16·17기 상견례</div>
         <div class="event-card-date">4/25(토) 18:00</div><div class="event-card-desc">16기·17기 원우회 조직 간 인사 및 교류</div>
       </div>
-      <div class="event-card sports-event-card" id="sports-card">
-        <div class="event-card-icon">⚽</div>
-        <div class="event-card-name">춘계 체육대회 <span style="font-size:11px;color:var(--gold);font-weight:700">D-<span id="sports-dday">?</span></span></div>
-        <div class="event-card-date">5/10(일) 11:30~15:30</div>
-        <div class="event-card-desc">전체 EMBA 원우 대상 · 적극 참여 권장</div>
-        <div style="margin-top:7px">
-          <span class="sports-badge">🏆 17기 찬조 <span id="sports-count">—</span></span>
-          <span class="sports-badge">👥 참석 <span id="sports-attend-count">—</span>명</span>
-        </div>
-        <div style="display:flex;gap:7px;margin-top:10px">
-          <button class="sports-expand-btn" id="sports-sponsor-btn" style="flex:1;margin-top:0;white-space:nowrap" onclick="toggleSportsSection('sponsor')">
-            <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
-            🏆 찬조 명단
-          </button>
-          <button class="sports-expand-btn" id="sports-attend-btn" style="flex:1;margin-top:0;white-space:nowrap;background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.3);color:#1d4ed8" onclick="toggleSportsSection('attend')">
-            <svg width="13" height="13" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
-            👥 참석 현황
-          </button>
-        </div>
-        <div class="sports-detail" id="sports-sponsor-detail">
-          <div id="sports-list">로딩 중...</div>
-        </div>
-        <div class="sports-detail" id="sports-attend-detail">
-          <div id="sports-attend-list">로딩 중...</div>
-          <div class="sports-footer" style="margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span id="sports-updated" style="font-size:10px;color:#9ca3af"></span>
-            <button onclick="refreshSportsData()" style="background:#e8f1fd;border:1px solid #bfdbfe;border-radius:8px;font-size:12px;font-weight:700;color:#1d4ed8;cursor:pointer;font-family:inherit;padding:5px 12px;display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0">🔄 데이터 새로고침</button>
-          </div>
-        </div>
-      </div>
+      
       <div class="event-card" data-pop="17기 종강파티|6/20(토) 12:10 수업 종료 후|모든 1학기 수업 종료 후 진행 · 단순 식사/1박 워크샵 등 형식 미정">
         <div class="event-card-icon">🎓</div><div class="event-card-name">17기 종강파티</div>
         <div class="event-card-date">6/20(토) 12:10 수업 종료 후</div><div class="event-card-desc">형식 미정 · 추후 확정 안내</div>
@@ -1123,7 +1059,6 @@ const CAL_DAY_DATA={
   "2026-04-25":{classes:[{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 팀과제 HW 3',color:'#7c3aed'}],events:[{name:'🤝 상견례',note:'18:00',color:'#C9A84C'}]},
   "2026-05-08":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 2',color:'#16a34a'},{name:'MPO 개인사례분석 2',color:'#16a34a'}],note:'BA 마지막 수업'},
   "2026-05-09":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 중간보고서',color:'#2563eb'}],note:'FA 첫 수업 🆕'},
-  "2026-05-10":{events:[{name:'⚽ 춘계 체육대회',note:'11:30~15:30',color:'#C9A84C'}]},
   "2026-05-22":{classes:[{c:'eco',t:'13:00–15:40'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'MPO 팀발표 3',color:'#16a34a'},{name:'MPO 개인사례분석 3',color:'#16a34a'}]},
   "2026-05-23":{classes:[{c:'fin',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}],tasks:[{name:'MS 개인에세이 2',color:'#2563eb'},{name:'ETH 조별발표 2',color:'#9b1c1c'}]},
   "2026-05-29":{classes:[{c:'eco',t:'13:00–15:00'},{c:'mkt',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}],tasks:[{name:'BE 기말시험 13:00',color:'#dc2626'},{name:'MPO 팀발표 4 (마지막)',color:'#16a34a'},{name:'MPO 개인사례분석 4',color:'#16a34a'},{name:'MKT 고객욕구분석 보고서',color:'#7c3aed'}]},
@@ -1362,7 +1297,6 @@ function buildUpcoming(){
 const ALL_EVENTS=[
   {icon:'🎊',name:'17기 개강파티',date:'2026-03-28',time:'3/28(토) 수업 후',detail:'3주차 토요일 수업 종료 후 진행 — 완료'},
   {icon:'🤝',name:'16·17기 상견례',date:'2026-04-25',time:'4/25(토) 오후 7시',detail:'16기·17기 원우회 조직 간 인사 및 교류 일정'},
-  {icon:'⚽',name:'춘계 체육대회',date:'2026-05-10',time:'5/10(일) 11:30~15:30',detail:'전체 EMBA 원우 대상 춘계 체육행사 · 적극 참여 권장',isSports:true},
   {icon:'🎓',name:'17기 종강파티',date:'2026-06-20',time:'6/20(토) 12:10 수업 종료 후',detail:'모든 1학기 수업 종료 후 진행 · 단순 식사/1박 워크샵 등 형식 미정'},
   {icon:'✈️',name:'GSP 해외연수 — 시애틀 UW',date:'2026-07-22',time:'7/22(수)~24(금)',detail:'University of Washington · 종강 후 · 참가신청 별도'},
 ];
@@ -1407,42 +1341,10 @@ function buildHighlights(w){
       const badge=dDiff===0?'<span style="font-size:10px;background:#dc2626;color:#fff;border-radius:4px;padding:1px 6px;margin-left:6px">오늘</span>':dDiff>0?`<span style="font-size:10px;background:rgba(32,56,100,.12);color:#3a5080;border-radius:4px;padding:1px 6px;margin-left:6px">${dDiff}일 후</span>`:'';
       const div=document.createElement('div');
       div.className='ev-hl-item';
-      if(e.isSports){
-        div.style.cssText='display:block;cursor:default';
-        div.innerHTML=`
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-            <span class="ev-hl-icon">${e.icon}</span>
-            <div style="flex:1;min-width:0">
-              <div class="ev-hl-name">${e.name}${badge}</div>
-              <div class="ev-hl-time">${e.time}</div>
-            </div>
-          </div>
-          <div style="margin-bottom:8px">
-            <span class="sports-badge" style="margin-top:0">🏆 17기 찬조 <span id="hl-sports-count">—</span></span>
-            <span class="sports-badge" style="margin-top:0;margin-left:4px;background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.3);color:#1d4ed8">👥 참석 <span id="hl-sports-attend-count">—</span>명</span>
-          </div>
-          <div style="display:flex;gap:6px">
-            <button class="sports-expand-btn" id="hl-sports-sponsor-btn" style="margin-top:0;flex:1;font-size:11px;padding:5px 8px" onclick="toggleHlSportsSection('sponsor')">
-              <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
-              🏆 찬조 명단
-            </button>
-            <button class="sports-expand-btn" id="hl-sports-attend-btn" style="margin-top:0;flex:1;font-size:11px;padding:5px 8px;background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.3);color:#1d4ed8" onclick="toggleHlSportsSection('attend')">
-              <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
-              👥 참석 현황
-            </button>
-          </div>
-          <div class="sports-detail" id="hl-sports-sponsor-detail"><div id="hl-sports-list">로딩 중...</div></div>
-          <div class="sports-detail" id="hl-sports-attend-detail">
-            <div id="hl-sports-attend-list">로딩 중...</div>
-            <div class="sports-footer" style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px">
-              <span id="hl-sports-updated" style="font-size:10px;color:#9ca3af"></span>
-              <button onclick="refreshSportsData()" style="background:#e8f1fd;border:1px solid #bfdbfe;border-radius:8px;font-size:11px;font-weight:700;color:#1d4ed8;cursor:pointer;font-family:inherit;padding:4px 10px;display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0">🔄 새로고침</button>
-            </div>
-          </div>`;
-      } else {
+
         div.innerHTML=`<span class="ev-hl-icon">${e.icon}</span>
           <div><div class="ev-hl-name">${e.name}${badge}</div><div class="ev-hl-time">${e.time}</div>${e.detail?`<div class="ev-hl-time" style="color:#6b7a8f;margin-top:1px">${e.detail}</div>`:''}</div>`;
-      }
+      
       eventsEl.appendChild(div);
     });
   }
@@ -1801,190 +1703,6 @@ function moveCalMonth(delta){
   updateCalCarousel();
 }
 
-// ═══ SPORTS EVENT ═══
-const SPORTS_URL='https://docs.google.com/spreadsheets/d/15n_t9nZ61FG3tfXGaWPnaUfYwIzpI9uk/gviz/tq?tqx=out:csv&gid=1502290582';
-const ATTEND_URL='https://docs.google.com/spreadsheets/d/15n_t9nZ61FG3tfXGaWPnaUfYwIzpI9uk/gviz/tq?tqx=out:csv&sheet=%EC%B2%B4%EC%9C%A1%ED%96%89%EC%82%AC%20%EC%B0%B8%EC%84%9D%EC%9E%90';
-const SPORTS_CACHE='emba17_sports';const SPORTS_TS='emba17_sports_ts';
-const ATTEND_CACHE='emba17_attend';const ATTEND_TS='emba17_attend_ts';
-const SPORTS_FALLBACK=[
-  {name:'하승호',co:'㈜고스트트래블/대표이사',gift:'푸꾸옥 리조트 3박 이용권'},
-  {name:'홍진성',co:'㈜SEISIN/대표이사',gift:'오사카 히노데온천호텔 숙박권 2매, 일일투어버스 무료탑승권 5매'},
-  {name:'류사빈',co:'매일유업/유가공CMG 그룹장',gift:'매일유업 제품(두유, 치즈)'},
-  {name:'김제헌',co:'㈜코드캣/대표',gift:'와인 100병 (마키키 쇼비뇽 블랑 50병, 리슬링 50병)'},
-  {name:'최민용',co:'(주)피엔에프케어즈/대표이사',gift:'현금 100만원'},
-  {name:'박은만',co:'유한양행/이사',gift:'유한양행 생활용품 150개'},
-  {name:'이관우',co:'이스티온네이처/대표',gift:'마스크시트 100세트'},
-  {name:'권성미',co:'마세라티공식딜러 ISP 일산전시장/전무',gift:'마세라티 우산 50개'},
-  {name:'손성일·김양진·김주한·이민협·박세환',co:'KT&G, ㈜한국인삼공사',gift:'정관장제품 시가 100만원 상당'},
-  {name:'서현수',co:'㈜메가그룹/대표이사',gift:'카누 커피머신 10대 + 버라이어티 캡슐팩, 스타벅스 모바일 쿠폰 (전 참여 가정당 2매 사전제공)'},
-];
-
-function parseCSVLine(line){
-  const res=[];let cur='';let inQ=false;
-  for(let i=0;i<line.length;i++){
-    if(line[i]==='"'){inQ=!inQ;}
-    else if(line[i]===','&&!inQ){res.push(cur.trim().replace(/^"|"$/g,''));cur='';}
-    else cur+=line[i];
-  }
-  res.push(cur.trim().replace(/^"|"$/g,''));
-  return res;
-}
-
-function parseSportsCSV(csv){
-  const lines=csv.trim().split('\n').filter(l=>l.trim());
-  const data=[];
-  for(let i=1;i<lines.length;i++){
-    const c=parseCSVLine(lines[i]);
-    if(c.length>=4&&c[0].includes('17')){
-      data.push({name:c[1]||'',co:c[2]||'',gift:c[3]||''});
-    }
-  }
-  return data.length>0?data:null;
-}
-
-async function fetchSportsData(){
-  const cached=localStorage.getItem(SPORTS_CACHE);
-  const ts=parseInt(localStorage.getItem(SPORTS_TS)||'0');
-  if(cached&&Date.now()-ts<86400000) return JSON.parse(cached);
-  try{
-    const r=await fetch(SPORTS_URL);
-    if(!r.ok) throw new Error();
-    const csv=await r.text();
-    const data=parseSportsCSV(csv);
-    if(data&&data.length>0){
-      localStorage.setItem(SPORTS_CACHE,JSON.stringify(data));
-      localStorage.setItem(SPORTS_TS,Date.now().toString());
-      return data;
-    }
-  }catch(e){}
-  return cached?JSON.parse(cached):SPORTS_FALLBACK;
-}
-
-function parseAttendCSV(csv){
-  const lines=csv.trim().split('\n');
-  let attend=0,family=0,total=0;
-  for(const line of lines){
-    const cols=line.split(',').map(c=>c.replace(/^"|"$/g,'').trim());
-    const joined=cols.join(' ');
-    if(joined.includes('17기')&&!joined.includes('동반')&&!joined.includes('총')){
-      // 17기 원우 행 합계를 모두 누적 (여러 행 있을 수 있음)
-      const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
-      if(last) attend+=parseInt(last);
-    }
-    if(joined.includes('동반가족')){
-      // 동반가족 행 합계를 모두 누적
-      const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
-      if(last) family+=parseInt(last);
-    }
-    if(joined.includes('총 참석인원')||joined.includes('총참석인원')){
-      const last=cols.filter(c=>c&&!isNaN(c)&&parseInt(c)>0).pop();
-      if(last) total=parseInt(last);
-    }
-  }
-  return {attend,family,total:total||attend+family};
-}
-
-async function fetchAttendData(){
-  const cached=localStorage.getItem(ATTEND_CACHE);
-  const ts=parseInt(localStorage.getItem(ATTEND_TS)||'0');
-  if(cached&&Date.now()-ts<86400000) return JSON.parse(cached);
-  try{
-    const r=await fetch(ATTEND_URL);
-    if(!r.ok) throw new Error();
-    const csv=await r.text();
-    const data=parseAttendCSV(csv);
-    if(data.attend>0||data.total>0){
-      localStorage.setItem(ATTEND_CACHE,JSON.stringify(data));
-      localStorage.setItem(ATTEND_TS,Date.now().toString());
-      return data;
-    }
-  }catch(e){}
-  return cached?JSON.parse(cached):{attend:13,family:19,total:32};
-}
-
-function renderSportsCard(sponsorData,attendData){
-  // 찬조 배지
-  const sponsorPpl=sponsorData.reduce((s,d)=>s+(d.name.includes('·')?d.name.split('·').length:1),0);
-  document.getElementById('sports-count').textContent=sponsorPpl+'명';
-  // 참석 배지 (총 인원)
-  const aEl=document.getElementById('sports-attend-count');
-  if(aEl) aEl.textContent=attendData.total;
-  // 찬조 목록
-  const sponsorHTML=sponsorData.map(d=>`<div class="sports-sponsor-item">
-    <div class="sports-sponsor-name">🙋 ${d.name}</div>
-    <div class="sports-sponsor-co">${d.co}</div>
-    <div class="sports-sponsor-gift">🎁 ${d.gift}</div>
-  </div>`).join('');
-  document.getElementById('sports-list').innerHTML=`
-    <div style="font-size:11px;font-weight:800;color:#52617f;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">🏆 17기 찬조 명단 (${sponsorPpl}명)</div>
-    ${sponsorHTML}`;
-  // 참석자 현황
-  const familyRow=attendData.family>0?`<div class="sports-attend-row"><span>동반 가족</span><b>${attendData.family}명</b></div>`:'';
-  const memberCount=attendData.family>0?attendData.attend:(attendData.total||attendData.attend);
-  document.getElementById('sports-attend-list').innerHTML=`
-    <div style="font-size:11px;font-weight:800;color:#1d4ed8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">👥 17기 참석 현황</div>
-    <div style="background:#e8f1fd;border-radius:12px;padding:14px 16px">
-      <div class="sports-attend-row"><span>17기 원우</span><b>${memberCount}명</b></div>
-      ${familyRow}
-      <div class="sports-attend-total"><span>총 참석</span><b style="color:var(--gold);font-size:20px">${attendData.total}명</b></div>
-    </div>
-    <div style="margin-top:8px;font-size:11px;color:#52617f;text-align:center">📋 구글시트 기준 · 매일 자동갱신</div>`;
-  // 타임스탬프
-  const ts=parseInt(localStorage.getItem(ATTEND_TS)||localStorage.getItem(SPORTS_TS)||'0');
-  let upd='';
-  if(ts){
-    const d=new Date(ts);
-    const day=['일','월','화','수','목','금','토'][d.getDay()];
-    const mm=String(d.getMonth()+1).padStart(2,'0');
-    const dd=String(d.getDate()).padStart(2,'0');
-    const hh=String(d.getHours()).padStart(2,'0');
-    const mi=String(d.getMinutes()).padStart(2,'0');
-    upd=`🕐 ${mm}/${dd}(${day}) ${hh}:${mi} 기준`;
-  }
-  document.getElementById('sports-updated').textContent=upd;
-  // hl-events 패널 동기화
-  const hlCount=document.getElementById('hl-sports-count');
-  if(hlCount) hlCount.textContent=sponsorPpl+'명';
-  const hlACount=document.getElementById('hl-sports-attend-count');
-  if(hlACount) hlACount.textContent=attendData.total;
-  const hlList=document.getElementById('hl-sports-list');
-  if(hlList) hlList.innerHTML=document.getElementById('sports-list').innerHTML;
-  const hlAttList=document.getElementById('hl-sports-attend-list');
-  if(hlAttList) hlAttList.innerHTML=document.getElementById('sports-attend-list').innerHTML;
-  const hlUpd=document.getElementById('hl-sports-updated');
-  if(hlUpd) hlUpd.textContent=upd;
-  // D-day
-  const dday=Math.ceil((new Date('2026-05-10')-new Date())/(1000*60*60*24));
-  const el=document.getElementById('sports-dday');
-  if(el) el.textContent=dday>0?dday:(dday===0?'Day!':'종료');
-}
-
-async function refreshSportsData(){
-  [SPORTS_CACHE,SPORTS_TS,ATTEND_CACHE,ATTEND_TS].forEach(k=>localStorage.removeItem(k));
-  document.getElementById('sports-list').innerHTML='로딩 중...';
-  document.getElementById('sports-attend-list').innerHTML='로딩 중...';
-  const hlL=document.getElementById('hl-sports-list');if(hlL) hlL.innerHTML='로딩 중...';
-  const hlA=document.getElementById('hl-sports-attend-list');if(hlA) hlA.innerHTML='로딩 중...';
-  const [data,attendData]=await Promise.all([fetchSportsData(),fetchAttendData()]);
-  renderSportsCard(data,attendData);
-}
-
-function toggleHlSportsSection(id){
-  const det=document.getElementById('hl-sports-'+id+'-detail');
-  const btn=document.getElementById('hl-sports-'+id+'-btn');
-  if(!det||!btn) return;
-  const isOpen=det.classList.contains('sports-open');
-  det.classList.toggle('sports-open',!isOpen);
-  btn.classList.toggle('sports-btn-open',!isOpen);
-}
-
-function toggleSportsSection(id){
-  const det=document.getElementById('sports-'+id+'-detail');
-  const btn=document.getElementById('sports-'+id+'-btn');
-  if(!det||!btn) return;
-  det.classList.toggle('sports-open');
-  btn.classList.toggle('sports-btn-open');
-}
 
 function toggleGspSection(id){
   const det=document.getElementById('gsp-'+id+'-detail');
@@ -2059,10 +1777,6 @@ function setOrgCohort(cohort){
   renderOrgChart();
 }
 
-async function initSportsCard(){
-  const [data,attendData]=await Promise.all([fetchSportsData(),fetchAttendData()]);
-  renderSportsCard(data,attendData);
-}
 
 // ═══ 2학기 DATA ═══
 const CMAP2={fmv:'#0e7490',gbe:'#6d28d9',cvt:'#be185d',str:'#1e40af',mac:'#166534',ddm:'#b45309',osc:'#475569'};
@@ -2202,7 +1916,6 @@ buildWeekSchedule();
 buildCalendar();
 initCalCarousel();
 updateStats();
-initSportsCard();
 initSem2();
 
 function openFloatModal(type){

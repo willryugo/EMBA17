@@ -1990,7 +1990,7 @@ function closeFloatModal(){
 .tg-today{position:absolute;top:0;bottom:0;width:2px;background:var(--tg-red);z-index:3;pointer-events:none;border-radius:1px}
 /* 세로바(z-index 3)보다 위 — 안 그러면 숫자를 관통한다 */
 .tg-wk .tg-c.thisweek,.tg-h .tg-c.today{
-  color:#fff;font-weight:800;background:var(--tg-red);border-radius:7px;
+  color:#fff;font-weight:800;background:var(--tg-red);border-radius:3px;
   position:relative;z-index:4;
 }
 .tg-h .tg-c.today{color:#fff}
@@ -2620,22 +2620,57 @@ function tgDeriveGrid(){
   return {wk:wk, order:order, weeksOf:weeksOf, evOf:evOf, noteOf:noteOf, N:N};
 }
 
-function tgTodayIdx(G){
+/* 한 값으로 네 가지를 결정하면 화면이 뒤를 본다.
+   옛 tgTodayIdx 는 '지나간 마지막 주'만 돌려줘서, 수업이 끝난 다음날부터
+   다음 수업 전날까지 줄곧 끝난 주를 가리켰다(9/17 에 1주차 표시 · 내일이 2주차인데).
+   주간 시간표는 getDefaultWeek2() 로 이미 다음 주를 보고 있어 한 화면에서 말이 갈렸다.
+   → 세 개념을 가른다. passed=회색 처리 기준 / focus=주목할 주 / 오늘 바=실제 날짜 위치. */
+function tgWeekState(G){
   var t=new Date(); t.setHours(0,0,0,0);
-  var last=-1;
+  var passed=-1, inW=-1, next=-1;
   for(var i=0;i<G.wk.length;i++){
-    var w=G.wk[i], end=(w.sat||w.fri).d, start=(w.fri||w.sat).d;
-    var ds=new Date(start+'T00:00:00'), de=new Date(end+'T23:59:59');
-    if(t>=ds && t<=de) return i;            /* 수업 주말 안 */
-    if(t>de) last=i;                        /* 지나간 마지막 주 */
+    var w=G.wk[i];
+    var ds=new Date((w.fri||w.sat).d+'T00:00:00');
+    var de=new Date((w.sat||w.fri).d+'T23:59:59');
+    if(t>=ds&&t<=de) inW=i;                 /* 수업 주말 안 */
+    else if(t>de) passed=i;                 /* 지나간 마지막 주 */
+    else if(next<0) next=i;                 /* 아직 오지 않은 첫 주 */
   }
-  return last;                              /* 개강 전이면 -1 */
+  /* 수업 중이면 그 주, 끝났으면 다음 주를 본다 — getDefaultWeek2() 와 같은 기준 */
+  var focus = inW>=0 ? inW : (next>=0 ? next : passed);
+  var dday=null;
+  if(inW<0&&next>=0){
+    var nd=new Date((G.wk[next].fri||G.wk[next].sat).d+'T00:00:00');
+    dday=Math.round((nd-t)/86400000);
+  }
+  return {passed:passed, inW:inW, next:next, focus:focus, dday:dday};
+}
+
+/* 오늘 세로바는 열 중앙에 고정하면 안 된다 — 수업 없는 날에도 '어디쯤 와 있나'가
+   보여야 하기 때문. 각 열 중앙을 그 주 첫 수업일의 시간축 기준점으로 삼고 날짜로 보간한다. */
+function tgTodayX(G, cells, gr, today){
+  var pts=[];
+  for(var i=0;i<G.wk.length&&i<cells.length;i++){
+    var w=G.wk[i], cr=cells[i].getBoundingClientRect();
+    pts.push({t:new Date((w.fri||w.sat).d+'T00:00:00').getTime(),
+              x:cr.left-gr.left+cr.width/2});
+  }
+  if(!pts.length) return null;
+  var tt=today.getTime();
+  if(tt<=pts[0].t) return pts[0].x;
+  for(var j=1;j<pts.length;j++){
+    if(tt<=pts[j].t){
+      var f=(tt-pts[j-1].t)/(pts[j].t-pts[j-1].t);
+      return pts[j-1].x+(pts[j].x-pts[j-1].x)*f;
+    }
+  }
+  return pts[pts.length-1].x;
 }
 
 function buildTermGrid(){
   var g=document.getElementById('tgGrid'); if(!g||typeof WEEKS2==='undefined') return;
   var G=tgDeriveGrid(); window.__TG=G;
-  var cur=tgTodayIdx(G), today=new Date(); today.setHours(0,0,0,0);
+  var S=tgWeekState(G), cur=S.focus, today=new Date(); today.setHours(0,0,0,0);
   var first=(G.wk[0].fri||G.wk[0].sat).d, lastW=G.wk[G.N-1];
   var last=(lastW.sat||lastW.fri).d;
   var d0=new Date(first+'T00:00:00'), d1=new Date(last+'T00:00:00');
@@ -2647,7 +2682,14 @@ function buildTermGrid(){
     G.order.length+'과목 · '+days+'수업일 · 격주 금·토';
   var dd=Math.ceil((d1-today)/86400000);
   document.getElementById('tgWeekNow').textContent=
-    cur<0 ? '개강 전' : (cur>=G.N-1&&today>d1 ? '종강' : G.wk[cur].n+'주차 / '+G.N+'주');
+    cur<0 ? '개강 전'
+    : (today>d1 ? '종강'
+    : G.wk[cur].n+'주차 / '+G.N+'주'
+      + (S.inW>=0 ? ' · 수업 주간'
+        : S.dday===null ? ''
+        : S.dday===0 ? ' · 오늘'
+        : S.dday===1 ? ' · 내일'
+        : ' · D-'+S.dday));
   document.getElementById('tgRailL').innerHTML='<b>'+first.slice(5).replace('-','.')+'</b> 개강';
   document.getElementById('tgRailR').innerHTML='<b>'+last.slice(5).replace('-','.')+'</b> 종강 (토)';
 
@@ -2705,7 +2747,7 @@ function buildTermGrid(){
       +'<span class="tg-prof"> · '+(CPROFS2[c]||'')+'</span></span></span>';
     for(var i=0;i<G.N;i++){
       var on=G.weeksOf[c]&&G.weeksOf[c][i], ev=G.evOf[c]&&G.evOf[c][i];
-      H+='<span class="tg-c'+(i<cur?' past':'')+'">';
+      H+='<span class="tg-c'+(i<=S.passed?' past':'')+'">';
       if(ev){
         var li=LAB.push(ev.labs)-1;
         H+='<i class="blk '+ev.t+'" data-li="'+li+'" title="'+ev.task.name.replace(/"/g,'&quot;')+'">'+
@@ -2764,12 +2806,13 @@ function buildTermGrid(){
     b.setAttribute('aria-label',G.wk[i].n+'주차 상세');
     b.dataset.w=i;
     g.appendChild(b);
-    if(i===cur){
-      var tl=document.createElement('div');
-      tl.className='tg-today';
-      tl.style.left=(cr.left-gr.left+cr.width/2-1)+'px';
-      g.appendChild(tl);
-    }
+  }
+  var tx=tgTodayX(G, cells, gr, today);
+  if(tx!==null){
+    var tl=document.createElement('div');
+    tl.className='tg-today';
+    tl.style.left=(tx-1)+'px';
+    g.appendChild(tl);
   }
 }
 

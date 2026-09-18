@@ -784,7 +784,7 @@ html{overflow-x:hidden}
     <div class="wk-h">
       <h3 id="wkTitle">—</h3>
       <div class="sub" id="wkSub"></div>
-      <button class="wk-x" type="button" onclick="closeWeek()" aria-label="닫기"></button>
+      <button class="wk-x" type="button" onclick="closeWeek()" aria-label="닫기">×</button>
     </div>
     <div class="wk-b" id="wkBody"></div>
   </div>
@@ -1863,7 +1863,7 @@ function closeFloatModal(){
 
     <!-- 조직도 -->
     <div class="fm-box fm-org" id="fm-org-view" onclick="event.stopPropagation()">
-      <button class="fm-close" onclick="closeFloatModal()"></button>
+      <button class="fm-close" type="button" onclick="closeFloatModal()" aria-label="닫기">×</button>
       <div class="org-title-bar" id="orgChartTitle">연세대학교 EMBA 제 17기 원우회</div>
       <div class="fm-modal-copy">
         원우회 조직도를 페이지 내부 레이아웃으로 정리했습니다. 모바일에서는 위에서 아래로 더 읽기 쉽게 배치됩니다.

@@ -771,9 +771,7 @@ html{overflow-x:hidden}
     <span class="lead" id="tgWeekNow">—</span>
     <span id="tgDue">—</span>
   </div>
-  <div class="tg-rail" id="tgRail"></div>
-  <div class="tg-railcap"><span id="tgRailL">—</span><span id="tgRailR">—</span></div>
-  <div class="tg-raillegend">위 띠 = 개강부터 종강까지 · <b>색 눈금 = 과제·시험 마감</b>(과목 색) · 눈금을 누르면 그 주 상세</div>
+  <div class="tg-span"><span id="tgRailL">—</span><span class="tg-span-sep">~</span><span id="tgRailR">—</span></div>
   <div class="tg-grid" id="tgGrid"></div>
   <div class="tg-legend" id="tgLegend"></div>
 </div>
@@ -1937,7 +1935,11 @@ function closeFloatModal(){
 .tg-wrap{
   --tg-ink:#221F1B; --tg-ink2:var(--ink2);
   --tg-line:#e0d9cb; --tg-line2:#F0E9DC;
-  --tg-red:#dc2626; --tg-amber:#8a3d0b; --tg-blue:#1d4ed8;  /* 앰버는 박창희(ddm #b45309) 막대와 같은 색이 되지 않게 한 단계 어둡게 */
+  --tg-red:#dc2626; --tg-task:#2563eb; --tg-blue:#1d4ed8;
+  /* 시험=빨강 / 과제=파랑. 예전엔 과제가 #8a3d0b(짙은 적갈) 이라 둘 다 따뜻한 계열이었고
+     작은 블록에서 구분이 약했다 — 색상(hue) 자체를 갈라야 한 눈에 보인다.
+     ⚠ 값은 거리로 골랐다: #1d4ed8 은 김보경 막대(str #1e40af)와 75 라 너무 가까웠고
+        #2563eb 는 시험과 442 · 가장 가까운 과목(str)과 124 로 임계 100 을 넘는다. */
   --tg-r:2px;
   background:var(--panel);border:1px solid var(--border);border-radius:var(--r);
   padding:16px 18px 14px;margin-bottom:18px;
@@ -1949,22 +1951,13 @@ function closeFloatModal(){
 .tg-line .lead{color:var(--tg-ink);font-weight:800;font-size:13px}
 
 /* 날짜 레일 — 개강~종강 실제 경과일 비례 */
-.tg-rail{position:relative;height:7px;margin-top:14px;background:var(--tg-line2);border-radius:var(--tg-r)}
-/* 오늘 — 마감 눈금과 '모양' 으로 갈라야 한다. 색만 다르면 과목색 중 주황과 헷갈린다. */
-.tg-rail .now{position:absolute;top:-6px;width:2px;height:19px;background:var(--tg-ink);z-index:3;pointer-events:none}
-.tg-rail .now::after{content:'오늘';position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-  font-size:9px;font-weight:800;color:var(--tg-ink);letter-spacing:-.02em;white-space:nowrap}
-/* 마감 눈금 — 보이는 건 3px 이지만 히트박스는 28px 이라야 손가락이 닿는다 */
-.tg-rail .tk{position:absolute;top:-3px;width:3px;height:13px;border-radius:var(--tg-r);
-  border:0;padding:0;cursor:pointer;z-index:2;background-clip:padding-box}
-.tg-rail .tk::before{content:'';position:absolute;left:-13px;right:-13px;top:-9px;bottom:-9px}
-.tg-rail .tk:hover,.tg-rail .tk:focus-visible{outline:none;transform:scaleY(1.35);transform-origin:center}
-.tg-raillegend{font-size:10.5px;color:var(--tg-ink2);margin-top:3px;margin-bottom:2px;
-  letter-spacing:-.01em;line-height:1.5;word-break:keep-all}
-.tg-railcap{display:flex;justify-content:space-between;margin-top:4px;font-size:11px;color:var(--tg-ink2)}
-.tg-railcap b{color:var(--tg-ink);font-weight:700}
-
-/* 격자 */
+/* 레일(진행 띠)은 걷어냈다 — 격자와 같은 8건을 색 막대로만 보여줘서
+   '무엇을 가리키는지 모르겠다' 는 말을 두 번 들었다. 격자가 같은 일을 더 잘한다.
+   개강~종강 기간만 머리말에 남긴다. */
+.tg-span{font-size:11.5px;color:var(--tg-ink2);margin-top:6px;margin-bottom:10px;
+  display:flex;align-items:center;gap:7px;font-variant-numeric:tabular-nums}
+.tg-span b{color:var(--tg-ink);font-weight:700}
+.tg-span-sep{opacity:.5}
 .tg-grid{position:relative;margin-top:10px;border-top:1px solid var(--tg-line)}
 .tg-row{display:flex;align-items:center;height:15px;border-top:1px solid var(--tg-line2)}
 .tg-row.tg-h,.tg-row.tg-wk{height:14px;border-top:0}
@@ -1993,7 +1986,7 @@ function closeFloatModal(){
   color:#fff;font-size:11px;font-weight:800;line-height:14px;text-align:center;font-style:normal;
 }
 .tg-c .blk.ex{background:var(--tg-red)}
-.tg-c .blk.hw{background:var(--tg-amber)}
+.tg-c .blk.hw{background:var(--tg-task)}
 .tg-c.past .bar,.tg-c.past .blk{opacity:.34}
 
 /* 오늘 세로바 — 배지를 위에 띄우면 레일 글자를 덮으므로 선 + 헤더 알약으로 */
@@ -2015,7 +2008,7 @@ function closeFloatModal(){
 .tg-legend .lg-blk{width:14px;height:14px;border-radius:var(--tg-r);background:var(--tg-ink2);color:#fff;
   font-size:11px;font-weight:800;line-height:14px;text-align:center;font-style:normal}
 .tg-legend .lg-blk.ex{background:var(--tg-red)}
-.tg-legend .lg-blk.hw{background:var(--tg-amber)}
+.tg-legend .lg-blk.hw{background:var(--tg-task)}
 
 /* 주차 상세 모달 */
 .wk-back{position:fixed;inset:0;background:rgba(16,24,40,.55);z-index:900;
@@ -2055,12 +2048,9 @@ function closeFloatModal(){
   .tg-c .bar{top:8px;height:5px}
   .tg-c .blk{font-size:11.5px;line-height:20px;letter-spacing:-.01em;
     padding:0 4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-  .tg-rail{height:9px}
-  /* ⚠ now 와 tk 를 같은 높이로 두면 '오늘' 과 '마감' 이 구분되지 않는다 —
+/* ⚠ now 와 tk 를 같은 높이로 두면 '오늘' 과 '마감' 이 구분되지 않는다 —
      넓은 화면에서만 그랬고 폰에선 멀쩡해서 한참 안 보였다. 모양으로 갈라 둔다. */
-  .tg-rail .tk{height:15px}
-  .tg-rail .now{height:21px;top:-6px}
-  .blk .s{display:none}
+.blk .s{display:none}
   .blk .l{display:inline}
 }
 @media (max-width:899px){
@@ -2212,8 +2202,6 @@ body{
   --tg-line:var(--line)!important; --tg-line2:var(--sunk)!important;
 }
 .tg-head h2{color:var(--ink)!important;font-weight:800!important}
-.tg-rail{border-radius:0!important}
-.tg-rail .now{background:var(--acc)!important;border-radius:0!important}
 .tg-c,.cal-day-num,.wk-r .p{font-variant-numeric:tabular-nums}
 
 /* ─── 캘린더 ───
@@ -2706,33 +2694,12 @@ function buildTermGrid(){
   document.getElementById('tgRailL').innerHTML='<b>'+first.slice(5).replace('-','.')+'</b> 개강';
   document.getElementById('tgRailR').innerHTML='<b>'+last.slice(5).replace('-','.')+'</b> 종강 (토)';
 
-  /*  레일: 남은 마감 눈금  */
-  var rail=document.getElementById('tgRail'), rh='', left=0;
-  /* 한 번만 건다 — buildTermGrid 는 주차를 넘길 때마다 다시 도는데
-     매번 걸면 리스너가 쌓여 한 번 눌러도 여러 번 열린다. */
-  if(!rail.dataset.wired){
-    rail.dataset.wired='1';
-    rail.addEventListener('click',function(e){
-      var b=e.target.closest('.tk'); if(!b) return;
-      openWeek(+b.dataset.w);
-    });
-  }
+  /*  남은 마감 건수 — 레일은 없앴지만 이 요약은 격자에 없는 정보라 남긴다  */
+  var left = 0;
   Object.keys(G.evOf).forEach(function(c){
-    var m=G.evOf[c];
-    for(var idx in m){
-      var t=m[idx].task, dt=new Date(t.d+'T00:00:00');
-      var pct=Math.max(0,Math.min(100,(dt-d0)/86400000/span*100));
-      if(dt>=today) left++;
-      /* 버튼이라야 누를 수 있고 키보드로도 닿는다. 폰엔 title 툴팁이 안 뜨므로
-         aria-label 에 사람이 읽을 문장을 넣고, 누르면 그 주 상세를 연다. */
-      rh+='<button type="button" class="tk" data-w="'+idx+'" style="left:'+pct.toFixed(1)+
-          '%;background:'+(CMAP2[c]||'#888')+'" title="'+t.name+' · '+(t.due||'')+
-          '" aria-label="'+(CNAMES2[c]||c)+' '+t.type+' — '+t.name+' · '+(t.due||t.d)+'"></button>';
-    }
+    var m = G.evOf[c];
+    for (var idx in m) { if (new Date(m[idx].task.d + 'T00:00:00') >= today) left++; }
   });
-  var pnow=Math.max(0,Math.min(100,(today-d0)/86400000/span*100));
-  rh+='<span class="now" style="left:'+pnow.toFixed(1)+'%" title="오늘"></span>';
-  rail.innerHTML=rh;
   document.getElementById('tgDue').textContent=
     '남은 마감 '+left+'건 · 종강 '+(dd>0?'D-'+dd:'완료');
 

@@ -1178,7 +1178,7 @@ document.documentElement.setAttribute('data-theme',t);})();
   color:var(--c);background:color-mix(in srgb,var(--c) 13%,transparent);vertical-align:middle;white-space:nowrap}
 .cb-dd.hot{color:var(--ember);background:color-mix(in srgb,var(--ember) 13%,transparent)}
 .cb-dd.done{color:var(--ink3);background:var(--sunk)}
-.cb-chip .cb-dd{position:absolute;top:10px;right:10px}
+.cb-chip .cb-dd{align-self:flex-start;margin-bottom:3px}
 /* 진행선 */
 .cb-tl{margin:0 0 20px}
 .cb-tl ol{list-style:none;display:flex;margin:0;padding:0;position:relative}
@@ -3336,7 +3336,7 @@ const COURSE_BRIEFS={"updated": "2026-10-24 17:56", "courses": [{"code": "fmv", 
     rest=rest.replace(new RegExp(DRE.source,'g'),function(m){var t=dtok(m);if(!first)first=t;toks.push(t.md+t.wd);return ' '});
     rest=rest.replace(/\d+(?:\.\d+)?%/g,function(m){toks.push(m);return ' '});
     rest=rest.replace(/(^|\s)[=·](?=\s|$)/g,' ').replace(/\s+/g,' ').trim();
-    var n=toks.length?esc(toks.join(' · ')):esc(b.t),w=toks.length?'':' w';
+    var n=toks.length?toks.map(function(t,i){return '<span style="white-space:nowrap">'+(i?'· ':'')+esc(t)+'</span>'}).join(' '):esc(b.t),w=toks.length?'':' w';
     return '<div class="cb-chip">'+(live&&first?ddBadge(first.d):'')+
       '<div class="n'+w+'">'+n+'</div>'+(toks.length&&rest?'<div class="l">'+esc(rest)+'</div>':'')+
       (b.s?'<div class="s" title="'+esc(b.s)+'">'+esc(b.s)+'</div>':'')+'</div>';}

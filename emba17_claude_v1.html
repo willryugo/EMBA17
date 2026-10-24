@@ -3432,7 +3432,7 @@ const COURSE_BRIEFS={"updated": "2026-10-24 17:56", "courses": [{"code": "fmv", 
   var API='https://emba-dualbrain.vercel.app/api/hakbot';
   var HK='emba17-hakbot-history',AK='emba17-hakbot-anon',MAX=30;
   var $=function(id){return document.getElementById(id)};
-  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function esc(s){return String(s==null?'':s).replace(/<\/?[a-z][^>]*>/gi,' ').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
   function anon(){var a=ls(AK);if(!a){a=Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);ls(AK,a)}return a||'anon'}
   function hist(){try{return JSON.parse(ls(HK)||'[]')}catch(e){return []}}

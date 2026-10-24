@@ -1161,44 +1161,112 @@ document.documentElement.setAttribute('data-theme',t);})();
 .cb-tab[aria-selected="true"] .k{color:var(--ink2)}
 .cb-tab:focus-visible{outline:2px solid var(--acc);outline-offset:-2px;border-radius:3px}
 .cb-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.cb-top h3{font-size:22px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.3;text-wrap:balance}
-.cb-top .lu{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.5}
-.cb-top .lu b{font-weight:700;color:var(--ink)}
-.cb-stamp{font-size:11.5px;color:var(--ink3);text-align:right;line-height:1.5;white-space:nowrap}
+.cb-top h3{font-size:20px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.3;text-wrap:balance}
+.cb-top .lu{font-size:12px;color:var(--ink3);margin-top:3px;line-height:1.5}
+.cb-top .lu b{font-weight:700;color:var(--ink2)}
+.cb-stamp{font-size:11px;color:var(--ink3);text-align:right;line-height:1.45;white-space:nowrap}
 .cb-stamp b{display:block;font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums}
-.cb-line{font-size:15px;font-weight:700;color:var(--ink);line-height:1.55;margin:12px 0 14px;max-width:75ch}
-.cb-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:16px}
-.cb-facts>div{padding:11px 14px 12px;border-left:1px solid var(--line);min-width:0}
-.cb-facts>div:first-child{border-left:0;padding-left:0}
-.cb-facts b{display:block;font-size:17px;font-weight:900;color:var(--ink);letter-spacing:-.01em;line-height:1.3}
-.cb-facts span{display:block;font-size:12px;color:var(--ink2);margin-top:3px;line-height:1.45}
-.cb-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px 34px}
-.cb-cols>div{min-width:0}
-.cb-sec{margin-bottom:14px}
-.cb-sec h4{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.02em;margin-bottom:6px}
-.cb-item{padding:7px 0;border-top:1px solid var(--sunk)}
-.cb-sec h4+.cb-item{border-top:0;padding-top:0}
-.cb-item .t{font-size:13.5px;color:var(--ink);line-height:1.55}
-.cb-item .t b{font-weight:800}
-.cb-item .d{font-variant-numeric:tabular-nums;font-weight:800;color:var(--acc);margin-right:6px}
-.cb-src{display:block;font-size:11px;color:var(--ink3);margin-top:2px;line-height:1.4}
-.cb-next{background:var(--sunk);border-radius:4px;padding:11px 13px;margin-bottom:14px}
-.cb-next .when{font-size:12px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
-.cb-next .what{font-size:14px;color:var(--ink);line-height:1.55;margin-top:2px;font-weight:600}
-.cb-unsure{border-top:1px dashed var(--line);margin-top:6px;padding-top:10px}
-.cb-unsure h4{font-size:12px;font-weight:800;color:var(--ember);margin-bottom:4px}
-.cb-unsure li{font-size:12.5px;color:var(--ink2);line-height:1.55;margin:2px 0 2px 1.1em}
+/* 숫자 칩 */
+.cb-chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 18px}
+.cb-chip{position:relative;min-width:0;display:flex;flex-direction:column;gap:3px;padding:12px 14px 13px;border-radius:6px;
+  background:color-mix(in srgb,var(--c) 7%,var(--plate));border:1px solid color-mix(in srgb,var(--c) 24%,var(--line))}
+.cb-chip .n{font-size:26px;font-weight:900;line-height:1.12;color:var(--ink);letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.cb-chip .n.w{font-size:17px;line-height:1.32;letter-spacing:-.015em}
+.cb-chip .l{font-size:13px;font-weight:800;color:var(--c);line-height:1.35}
+.cb-chip .s{font-size:11.5px;color:var(--ink2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cb-dd{display:inline-block;font-size:11px;font-weight:800;line-height:1;padding:4px 6px;border-radius:3px;font-variant-numeric:tabular-nums;
+  color:var(--c);background:color-mix(in srgb,var(--c) 13%,transparent);vertical-align:middle;white-space:nowrap}
+.cb-dd.hot{color:var(--ember);background:color-mix(in srgb,var(--ember) 13%,transparent)}
+.cb-dd.done{color:var(--ink3);background:var(--sunk)}
+.cb-chip .cb-dd{position:absolute;top:10px;right:10px}
+/* 진행선 */
+.cb-tl{margin:0 0 20px}
+.cb-tl ol{list-style:none;display:flex;margin:0;padding:0;position:relative}
+.cb-tl ol::before{content:'';position:absolute;left:6%;right:6%;top:9px;height:2px;background:var(--line)}
+.cb-tl li{flex:1 1 0;min-width:0;position:relative;padding-top:26px;text-align:center}
+.cb-tl li.past::before{content:'';position:absolute;top:9px;left:-50%;right:50%;height:2px;background:var(--c)}
+.cb-tl li.past:first-child::before{display:none}
+.cb-tl .dot{position:absolute;top:2px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--plate);border:2px solid var(--line);box-sizing:border-box}
+.cb-tl .past .dot{background:var(--c);border-color:var(--c)}
+.cb-tl .next .dot{border:3px solid var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 18%,transparent)}
+.cb-tl .due .dot{border-radius:3px;transform:rotate(45deg);border-color:var(--ember);background:color-mix(in srgb,var(--ember) 16%,var(--plate))}
+.cb-tl .exam .dot{width:20px;height:20px;margin-left:-10px;top:0;background:var(--ember);border-color:var(--ember)}
+.cb-tl .exam.donex .dot{background:var(--ink3);border-color:var(--ink3)}
+.cb-tl .dt{display:block;font-size:15px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.25}
+.cb-tl .past .dt{color:var(--ink2);font-weight:800}
+.cb-tl .lb{display:block;font-size:11.5px;color:var(--ink2);line-height:1.4;padding:1px 4px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cb-tl .exam .lb,.cb-tl .due .lb{color:var(--ember);font-weight:700}
+.cb-tl .exam.donex .lb{color:var(--ink3);font-weight:600}
+.cb-tl .cb-dd{margin-top:4px}
+/* 세 칸 */
+.cb-blks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:16px}
+.cb-blk{min-width:0;border:1px solid var(--line);border-radius:6px;padding:13px 15px 12px;display:flex;flex-direction:column;gap:7px}
+.cb-blk h4,.cb-rules h4{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:var(--ink)}
+.cb-blk h4 svg,.cb-rules h4 svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cb-blk h4 .cb-dd{margin-left:auto}
+.cb-big{font-size:24px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
+.cb-big small{font-size:13px;font-weight:700;color:var(--ink2);letter-spacing:0;margin-left:6px}
+.cb-big.w{font-size:18px;line-height:1.3}
+.cb-txt{font-size:13px;color:var(--ink);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cb-due{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;align-items:start;padding:7px 0;border-top:1px solid var(--sunk)}
+.cb-due:first-of-type{border-top:0;padding-top:0}
+.cb-due .p{font-size:13px;font-weight:900;color:var(--ember);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.5}
+.cb-due .p.na{color:var(--ink3);font-weight:700}
+.cb-due .t{font-size:13px;font-weight:700;color:var(--ink);line-height:1.5;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cb-due .cb-ev{grid-column:2}
+/* 지킬 것 */
+.cb-rules{margin-bottom:14px}
+.cb-rules ul{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px 22px}
+.cb-rules li{min-width:0;font-size:13px;color:var(--ink);line-height:1.5;padding-left:14px;position:relative}
+.cb-rules li::before{content:'';position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--c)}
+.cb-rules li b{font-weight:800}
+/* 근거·자세히 칩(펼침) */
+.cb-ev{display:block;font-size:11.5px;color:var(--ink2);line-height:1.5}
+.cb-ev>summary{display:inline-flex;align-items:center;gap:3px;list-style:none;cursor:pointer;font-size:11px;font-weight:700;color:var(--ink3);
+  border:1px solid var(--line);border-radius:999px;padding:2px 9px;margin-top:2px;user-select:none}
+.cb-ev>summary::-webkit-details-marker{display:none}
+.cb-ev>summary::after{content:'+';font-weight:800}
+.cb-ev[open]>summary::after{content:'−'}
+.cb-ev>summary:hover{color:var(--ink);border-color:var(--ink3)}
+.cb-ev>summary:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.cb-ev>div{margin-top:6px;padding:8px 10px;background:var(--sunk);border-radius:4px}
+.cb-ev>div p{margin:0 0 4px}.cb-ev>div p:last-child{margin:0}
+.cb-ev .k{color:var(--ink3);font-weight:700;margin-right:4px}
+/* 접힘 줄 */
+.cb-folds{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:flex-start;margin-bottom:12px}
+.cb-fold{flex:0 1 auto;min-width:0}.cb-fold[open]{flex-basis:100%}
+.cb-fold>summary{display:inline-flex;align-items:center;gap:6px;list-style:none;cursor:pointer;font-size:12.5px;font-weight:800;color:var(--ink2);
+  border:1px solid var(--line);border-radius:4px;padding:6px 11px;user-select:none}
+.cb-fold>summary::-webkit-details-marker{display:none}
+.cb-fold>summary::after{content:'+';color:var(--ink3)}
+.cb-fold[open]>summary::after{content:'−'}
+.cb-fold>summary:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.cb-fold.warn>summary{color:#7A5200;background:#FFF4D6;border-color:#E9CF8A}
+:root[data-theme="dark"] .cb-fold.warn>summary{color:#F0CB72;background:#2A2312;border-color:#5A4A22}
+.cb-fold ul{margin:8px 0 0;padding:0 0 0 2px;list-style:none}
+.cb-fold li{font-size:12.5px;color:var(--ink2);line-height:1.55;padding:5px 0;border-top:1px solid var(--sunk)}
+.cb-fold li:first-child{border-top:0}
+.cb-fold li b{color:var(--ink);font-variant-numeric:tabular-nums;margin-right:6px}
+.cb-sum{font-size:14px;font-weight:700;color:var(--ink);line-height:1.55;background:var(--sunk);border-radius:6px;padding:11px 14px}
+.cb-sum span{font-size:11px;font-weight:800;color:var(--c);margin-right:8px;letter-spacing:.02em}
 .cb-empty{font-size:13px;color:var(--ink3);padding:4px 0}
 .cb-note{font-size:11px;color:var(--ink3);margin-top:10px;line-height:1.5}
 @media (max-width:760px){
   .cb-wrap{padding:14px 14px 12px}
-  .cb-cols{grid-template-columns:1fr}
-  .cb-top h3{font-size:19px}
+  .cb-top h3{font-size:18px}
   .cb-stamp{text-align:left}
-  .cb-facts{grid-template-columns:1fr 1fr}
-  .cb-facts>div:nth-child(3){border-left:0;padding-left:0}
-  .cb-facts>div:nth-child(n+3){border-top:1px solid var(--line)}
-  .cb-facts b{font-size:15px}.cb-facts>div{padding:10px 10px 11px}
+  .cb-chips{grid-template-columns:1fr 1fr;gap:8px}
+  .cb-chip{padding:11px 12px 12px}
+  .cb-chip .n{font-size:22px}.cb-chip .n.w{font-size:15px}
+  .cb-tl ol{flex-direction:column}
+  .cb-tl ol::before{left:9px;right:auto;top:6px;bottom:6px;width:2px;height:auto}
+  .cb-tl li{text-align:left;padding:0 0 12px 32px;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}
+  .cb-tl li.past::before{display:none}
+  .cb-tl .dot{top:2px;left:10px}
+  .cb-tl .dt{display:inline}
+  .cb-tl .lb{display:inline;white-space:normal;padding:0}
+  .cb-tl .cb-dd{margin-top:0}
+  .cb-blks{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){.cb-tab{transition:none}}
 </style>
@@ -1347,16 +1415,6 @@ document.documentElement.setAttribute('data-theme',t);})();
   </div>
 </div>
 
-<!--  과목별 한 장 (데이터: Z:/EMBA/_board/course_briefs.json → inject_briefs.py)  -->
-<section class="cb-wrap" id="cbWrap" aria-labelledby="cbTitle">
-  <div class="cb-head">
-    <h2 id="cbTitle">과목별 한 장</h2>
-    <span class="aside" id="cbAside">수업 중 말씀·러너스 공지를 근거로 계속 고칩니다</span>
-  </div>
-  <div class="cb-tabs" role="tablist" id="cbTabs" aria-label="과목"></div>
-  <div id="cbPanel" role="tabpanel" aria-labelledby="cbTitle"></div>
-</section>
-
 <!--  학기 격자 (한 학기 전체 조망)  -->
 <div class="tg-wrap" id="tgWrap">
   <div class="tg-head">
@@ -1371,6 +1429,16 @@ document.documentElement.setAttribute('data-theme',t);})();
   <div class="tg-grid" id="tgGrid"></div>
   <div class="tg-legend" id="tgLegend"></div>
 </div>
+
+<!--  과목별 한 장 (데이터: Z:/EMBA/_board/course_briefs.json → inject_briefs.py)  -->
+<section class="cb-wrap" id="cbWrap" aria-labelledby="cbTitle">
+  <div class="cb-head">
+    <h2 id="cbTitle">과목별 한 장</h2>
+    <span class="aside" id="cbAside">수업 중 말씀·러너스 공지를 근거로 계속 고칩니다</span>
+  </div>
+  <div class="cb-tabs" role="tablist" id="cbTabs" aria-label="과목"></div>
+  <div id="cbPanel" role="tabpanel" aria-labelledby="cbTitle"></div>
+</section>
 
 <!-- 주차 상세 모달 -->
 <div class="wk-back" id="wkBack">
@@ -1530,6 +1598,7 @@ const CAL_DAY_DATA={
   "2026-09-05":{events:[{name:' 17기 원우회 개강파티',note:'수업 후 18:30~',detail:'신촌 정직한족발(1차) · ⚠주소변경 서울 서대문구 연세로7안길 51 1층 · 17기 전체 대관 · TABLE 13 예약',color:'#A8651C'}]},
   "2026-09-19":{events:[{name:' 학교 주관 개강파티',note:'19:00~ 약 1시간 30분',detail:'상남경영원 로터스홀 · 학장님·부학장님 및 교수진, 원우 일동',color:'#A8651C'}]},
   "2026-10-31":{events:[{name:' 총동문회 등반대회',note:'총동문회 주관',detail:'09:00 경영관 계단 앞 접수 → 10:15 안산 산행 → 12:15 그랜드볼룸 오찬 → 13:40 2부(환영사·축하공연·경품) → 16:00 폐회',color:'#A8651C'}]},
+  "2026-11-07":{events:[{name:' 16기 디너 (17기 함께)',note:'수업 후 · 장소 추후 공지',detail:'16기 2학기 디너 — 17기도 함께합니다 · 이날 관리회계(3교시)는 30분 일찍(18:00경) 끝납니다 · 장소는 추후 공지',color:'#A8651C'}]},
   "2026-12-19":{events:[{name:' 종강 & 종강파티',note:'2학기 마지막 수업일',detail:'함께한 시간을 돌아보며',color:'#A8651C'}]},
   "2026-03-06":{classes:[{c:'eco',t:'13:00–15:40'},{c:'ana',t:'15:55–18:35'},{c:'mpo',t:'19:20–22:00'}]},
   "2026-03-07":{classes:[{c:'ana',t:'09:30–12:10'},{c:'eth',t:'13:00–15:40'},{c:'msc',t:'15:55–18:35'}]},
@@ -1781,6 +1850,7 @@ const ALL_EVENTS=[
   {icon:'',name:'17기 원우회 개강파티',date:'2026-09-05',time:'9/5(토) 수업 후 18:30~',detail:'신촌 정직한족발(1차)  이후 신촌 일대\n⚠ 주소 변경 — 서울 서대문구 연세로7안길 51 1층 (신촌역 1번 출구 531m)\n17기 전체 대관 · TABLE 13 예약 · 기본 세팅(족발 大·보쌈 大·막국수)'},
   {icon:'',name:'학교 주관 개강파티',date:'2026-09-19',time:'9/19(토) 2번째 수업 후 · 19:00~ (약 1시간 30분)',detail:'상남경영원 로터스홀\n학교에서 주관하는 공식 행사 — 학장님·부학장님 및 교수진, 원우 일동 참석\n※ 같은 날 곽주영 교수 케이스 발표(6·7조)가 1교시에 있습니다'},
   {icon:'',name:'총동문회 등반대회',date:'2026-10-31',time:'10/31(토)',detail:'선·후배가 함께하는 건강한 도전과 교류 · 총동문회 주관\n09:00–09:30 경영관 계단 앞 접수\n09:30–10:15 개회 · 환영사 · 단체 사진 · 준비운동\n10:15–12:15 안산 산행 · 전망대 촬영 · 하산\n12:15–13:30 오찬 — 연세백양로플라자 그랜드볼룸\n13:40–15:30 2부 환영사 · 축하공연 · 경품 추첨\n15:30–16:00 폐회 · 단체 기념 촬영\n※ 10/31(토)은 수업이 없는 토요일입니다'},
+  {icon:'',name:'16기 디너 (17기 함께)',date:'2026-11-07',time:'11/7(토) 수업 후 · 장소 추후 공지',detail:'16기 2학기 디너 — 17기도 함께합니다 · 이날 관리회계(3교시)는 30분 일찍(18:00경) 끝납니다 · 장소는 추후 공지'},
   {icon:'',name:'종강 & 종강파티',date:'2026-12-19',time:'12/19(토)',detail:'함께한 시간을 돌아보며 · 2학기 마지막 수업일'},
 ];
 
@@ -2314,7 +2384,7 @@ const WEEKS2=[
   {n:3,label:'3주차',fri:{d:'2026-10-02',label:'10/2(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'gbe',p:'2교시',t:'15:55–18:35',tag:'사례발표',tc:'tg'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-03',label:'10/3(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10',tag:'녹화 전환',tc:'tb'},{c:'str',p:'2교시',t:'13:00–15:40',tag:'비대면(자유)',tc:'tb'},{c:'mac',p:'3교시',t:'15:55–18:35',tag:'과제대체',tc:'tg'}]},tasks:[{type:'공지',badge:'b-blue',color:'#1d4ed8',d:'2026-10-02',name:'임일 3회차 준비 — 딥러닝·트랜스포머 예습',meta:'임일 · IT 혁신을 통한 가치창출',detail:'9/18 수업 마무리 안내\n· 다음 모듈은 딥러닝과 트랜스포머입니다 — MBA 과정에서 처음 다루는 내용이라 예습을 권하셨습니다\n· 토론 질문(생각해 올 것): 「AI가 극한으로 발전하면 기업 조직은 단순 플랫화 이상으로 어떻게 달라질까?」\n· 강의 슬라이드와 아티클 요약본은 러너스 게시판에 올려주신다고 하셨습니다\n※ 9/18 진도 — IT Doesn’t Matter 리뷰 · ERP · SCM(채찍효과) · CRM(RFM·해러스 사례) · 클라우드(SaaS/PaaS/IaaS) · DB 기초(RDB·DW·BI)\n   기말시험이 오픈북·전 범위라 이 진도가 그대로 시험 범위입니다',due:'10/2(금) 3교시'},{type:'발표',badge:'b-green',color:'#16a34a',d:'2026-10-02',name:'글로벌전략 사례발표 — 사례 8 Vodafone',meta:'곽주영 · 글로벌 경영전략과 실행',detail:'실라버스 Session 5 — 글로벌 조직관리(1): Who Decides What?\n· 사례 #8 Vodafone, Global-Local Tension (HBS #419031) — 담당 2조\n· 사례 #9 ABB 는 9/5 공지로 발표에서 제외됐습니다\n각 의사결정 권한을 Global HQ / Regional HQ / Country Subsidiary 로 나눠 보는 것이 관건\n※ 한 팀이 발표하지만 전 원우가 토론을 준비해야 합니다 — 교수님이 임의로 지목해 질문하십니다\n평가 비중 — 사례발표(팀) 20%',due:'10/2(금) 2교시'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-02',name:'임일 조별 제출 — 2조 아티클 · 3조 케이스',meta:'임일 · IT 혁신을 통한 가치창출',detail:'10/1(목) 23:59까지 LearnUs 제출 (리포트 + 발표 PPT)\n· 2조 Stop Running So Many AI Pilots — 아티클 리포트\n· 3조 Case 1 카길 — 케이스 발표\n형식 — 아티클은 Word·HWP 2~4쪽 요약 / 케이스는 수업 중 10분 이내 발표\nLLM — 써도 되지만 그대로 제출 금지. 어디에 얼마나 썼는지 리포트에 밝힐 것\n실라버스 Session 3 (Module 2: Data & Machine Learning)\n토론 주제는 미리 올리지 않고 수업 중 담당 조 중심으로 진행합니다',due:'10/1(목) 23:59'},{type:'공지',badge:'b-blue',color:'#1d4ed8',d:'2026-10-03',name:'10/3 개천절 — 곽주영 교수 오프라인 수업 없음',meta:'곽주영 · 글로벌 경영전략과 실행',detail:'실라버스 Session 6(글로벌 마케팅): "개천절 공휴일 — 오프라인 수업은 없고, 강의는 레코딩으로 전환. 링크는 러너스에 공지"',due:'10/3(토) 1교시'},{type:'공지',badge:'b-blue',color:'#1d4ed8',d:'2026-10-03',name:'전략 10/3 개천절 대응 — 녹화강의 업로드 + 비대면 오픈',meta:'김보경 · 경영자를 위한 전략',detail:'9/22 교수님 회신\n· 9/28(월)까지 수업 영상(이론 관련)을 LearnUs에 업로드\n· 10/3(토) 오후 1시~3시, 실시간 비대면 수업을 열어둠 — 케이스·수업 관련 질문 있는 분만 자유롭게 접속\n※ 실라버스상 정규 Session 3(산업분석·Cola Wars)의 대체 방식입니다. 접속은 의무가 아닙니다.',due:'9/28(월) 업로드 · 10/3(토) 13~15시 비대면'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-03',name:'관리회계 과제 — 2장&4장 (2-14·2-17·4-13)',meta:'문두철 · 경영자를 위한 관리회계',detail:'Take-Home 4문제 중 4A-9 제외, 3문제로 축소\n· 2-14 서비스기업 개별원가계산(예정배부율)\n· 2-17 공장전체 vs 부문별 예정배부율(Job Bravo)\n· 4-13 가중평균법 종합원가계산(두 번째 공정)\n손으로 풀어 사진 촬영 후 제출 (아이패드 필기 가능)\n러너스 3주차 「과제 2장&4장」 탭',due:'10/2(금) 23:59'}],events:[]},
   {n:4,label:'4주차',fri:{d:'2026-10-16',label:'10/16(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40',tag:'과제',tc:'tg'},{c:'gbe',p:'2교시',t:'15:55–18:35',tag:'사례발표',tc:'tg'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'과제',tc:'tg'}]},sat:{d:'2026-10-17',label:'10/17(토)',slots:[{c:'gbe',p:'1교시',t:'09:30–12:10',tag:'시험',tc:'tr'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-16',name:'재무 과제1 — Strategic Capital Management Q1~Q6',meta:'한재훈 · 재무시장과 가치평가',detail:'HBS 케이스 Strategic Capital Management (Creative Computers · uBid)\n· 질문지 Q1~Q6 — 답만 쓰지 말고 계산 과정·근거를 함께\n· 형식 자유: 질문지에 타이핑하거나 손으로 써서 사진\n· 6번(정답이 없는 문제)은 방향뿐 아니라 규모·자금·위험까지\n러너스 5주차 「과제 1」 탭 · 수업 시작 전 마감\n평가 비중 — 과제 3회 합계 30%',due:'10/16(금) 13:00'},{type:'발표',badge:'b-green',color:'#16a34a',d:'2026-10-16',name:'글로벌전략 사례발표 — 사례 1 Tesla · 사례 3 KFC',meta:'곽주영 · 글로벌 경영전략과 실행',detail:'실라버스 Session 7 — 글로벌 조직관리(2): 학습·인재·AI 거버넌스\n· 사례 #1 Tesla in 2023, 인도 시장 진입 (Ivey #W34597)\n· 사례 #3 KFC in Vietnam, scale up (HBS #9-613-063)\n· 사례 #2 Breadfast 는 9/5 공지로 발표에서 제외됐습니다\n담당 조는 러너스 공지로 확인하세요 — 9/5 재배정으로 조 번호와 사례 번호가 어긋납니다\n※ 한 팀이 발표하지만 전 원우가 토론을 준비해야 합니다 — 교수님이 임의로 지목해 질문하십니다\n⚠ 다음 날 10/17 이 이 과목 기말시험입니다',due:'10/16(금) 2교시'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-16',name:'임일 조별 제출 — 4조 아티클',meta:'임일 · IT 혁신을 통한 가치창출',detail:'10/15(목) 23:59까지 LearnUs 제출 (리포트 + 발표 PPT)\n· 4조 When Using AI Leads to “Brain Fry” — 아티클 리포트 Word·HWP 2~4쪽\nLLM — 써도 되지만 그대로 제출 금지. 어디에 얼마나 썼는지 리포트에 밝힐 것\n실라버스 Session 4 (Module 3: Deep Learning & LLM)\n※ 같은 날 23:59 전 조 공통 「AI Strategy」 프로젝트 제안서 마감이 겹칩니다',due:'10/15(목) 23:59'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-15',name:'IT혁신 AI Strategy 프로젝트 제안서 — 전 조',meta:'임일 · IT 혁신을 통한 가치창출',detail:'전 조 공통 · 주제를 정해 교수님 승인을 받는 단계입니다 (완성본 아님)\n· 조원 중 한 명의 회사에서 실제로 해결할 문제 하나 — 이미 AI를 도입한 문제는 제외\n· 최종 보고서 4요소의 방향을 간단히: 문제 정의와 범위 · 데이터 · AI 도입 전략 · 기대효과(매출·비용·ROI)\n러너스 7주차 「프로젝트 제안서 (10/15까지)」 탭\n다음 단계 — 11/6(금) 최종 발표 + 보고서(10쪽 안팎)\n※ 10/2 공지: 기말시험 비중이 약 20%로 줄고 프로젝트 발표 시간·비중이 올라갑니다(세부 추후 공지)\n※ 주제·범위를 교수님과 미리 상의해도 됩니다(실라버스)',due:'10/15(목) 23:59'},{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-10-17',name:'글로벌 경영전략과 실행 — 기말시험',meta:'곽주영 · 글로벌 경영전략과 실행',detail:'⚠ 이 과목은 10/17 에 종강합니다 — Session 8 이 마지막 수업이고 그날 시험만 봅니다\n     (중간시험이 아닙니다. 다른 과목보다 한 달 이른 건 과목이 먼저 끝나기 때문입니다)\n10/17(토) 1교시 09:30~12:10 · 마지막 날은 수업 없이 시험만\n오픈북 · 시험범위 전체 · 전부 주관식 (시뮬레이션 문제 검토 중, TBA)\n통신기기 사용 불가 — 교안만 지참. 답안지 제출 후 퇴실 가능\n평가 비중 60% (사례발표 20% · 출석 20%)'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-16',name:'관리회계 10/3 대체과제 — 279쪽 읽고 1페이지 의견',meta:'문두철 · 경영자를 위한 관리회계',detail:'10/3(토) 수업 없이 과제로 대체\n· 교재 279쪽을 읽고 A4 1페이지 분량으로 본인 의견 작성(글자·줄간격 여유 있게 가능)\n· 워드·PDF로 작성해도 됩니다 — 손글씨 규칙은 장별 문제풀이에만 해당\n· 러너스 5주차 「10/3 과제 제출」 탭 (교수님 10/3 공지)',due:'10/16(금) 23:59'}],events:[]},
   {n:5,label:'5주차',fri:{d:'2026-10-23',label:'10/23(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'cvt',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-10-24',label:'10/24(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-23',name:'임일 조별 제출 — 5조 아티클 · 6조·7조 케이스',meta:'임일 · IT 혁신을 통한 가치창출',detail:'10/22(목) 23:59까지 LearnUs 제출 (리포트 + 발표 PPT)\n· 5조 Preparing Your Brand for AI Agent — 아티클 리포트\n· 6조 Case 2 GS칼텍스 — 케이스 발표\n· 7조 Case 3 라이너 — 케이스 발표\n형식 — 아티클은 Word·HWP 2~4쪽 요약 / 케이스는 수업 중 10분 이내 발표\nLLM — 써도 되지만 그대로 제출 금지. 어디에 얼마나 썼는지 리포트에 밝힐 것\n⚠ 이날 임일 교수 수업이 2교시·3교시 연속입니다 (실라버스 Session 5·6)\n   그래서 세 조 마감이 같은 날입니다',due:'10/22(목) 23:59'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-10-23',name:'관리회계 과제 — 5장 (5-10·5-15·5-19·5-29·5A-8)',meta:'문두철 · 경영자를 위한 관리회계',detail:'5장(CVP 분석) Take-Home — 강의노트 5장 p45\n손으로 풀어 사진·스캔 업로드 (태블릿 필기 가능)\n답만 옮기지 말고 식 → 대입 → 답 순서로\n러너스 7주차 「과제 5장」 탭',due:'10/23(금) 23:59'}],events:[]},
-  {n:6,label:'6주차',fri:{d:'2026-11-06',label:'11/6(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'기말시험',tc:'tr'}]},sat:{d:'2026-11-07',label:'11/7(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-06',name:'IT혁신 기말시험(객관식·오픈북) · 11/6',meta:'임일 · IT 혁신을 통한 가치창출',detail:'⚠ 실라버스(11/20 시험)와 다릅니다 — 10/16·10/23 수업에서 교수님이 「다음 시간(11/6)은 수업 없이 시험」이라고 하셨습니다\n진도가 빨리 끝나 11/6엔 강의 없이 시험만 봅니다\n형식: 객관식 + O/X 약 25~30문항 · 쉽게 낸다고 하심\n오픈북 — 인쇄 자료·노트북·태블릿 모두 가능, 단 인터넷 끄고 비행기 모드(로컬 LLM도 안 됨, 시험 중 돌아다니며 확인)\n범위: 수업에서 다룬 내용 · 건너뛴 부분은 제외 · 임베딩 포함\n  Module 3 교안 p64~96(어텐션)은 빼고 그 자리에 Transformer2 강의안(4주차, 사이트에만 올라감)\n비중은 실라버스 40%보다 낮아짐 — 정확한 %는 러너스 공지로 확인\n강의실 B204',due:'11/6(금) 3교시'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-11-06',name:'관리회계 과제 — 11장',meta:'문두철 · 경영자를 위한 관리회계',detail:'11장(책임회계) Take-Home\n러너스 8주차 「과제 11장」 탭 · 손풀이 제출\n※ 제출 문제 번호는 강의노트 11장 Take-Home 목록으로 확인하세요',due:'11/6(금) 23:59'}],events:[]},
+  {n:6,label:'6주차',fri:{d:'2026-11-06',label:'11/6(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'기말시험',tc:'tr'}]},sat:{d:'2026-11-07',label:'11/7(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40'},{c:'mac',p:'3교시',t:'15:55–18:00',tag:'30분 일찍 종료',tc:'tb'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-06',name:'IT혁신 기말시험(객관식·오픈북) · 11/6',meta:'임일 · IT 혁신을 통한 가치창출',detail:'⚠ 실라버스(11/20 시험)와 다릅니다 — 10/16·10/23 수업에서 교수님이 「다음 시간(11/6)은 수업 없이 시험」이라고 하셨습니다\n진도가 빨리 끝나 11/6엔 강의 없이 시험만 봅니다\n형식: 객관식 + O/X 약 25~30문항 · 쉽게 낸다고 하심\n오픈북 — 인쇄 자료·노트북·태블릿 모두 가능, 단 인터넷 끄고 비행기 모드(로컬 LLM도 안 됨, 시험 중 돌아다니며 확인)\n범위: 수업에서 다룬 내용 · 건너뛴 부분은 제외 · 임베딩 포함\n  Module 3 교안 p64~96(어텐션)은 빼고 그 자리에 Transformer2 강의안(4주차, 사이트에만 올라감)\n비중은 실라버스 40%보다 낮아짐 — 정확한 %는 러너스 공지로 확인\n강의실 B204',due:'11/6(금) 3교시'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-11-06',name:'관리회계 과제 — 11장',meta:'문두철 · 경영자를 위한 관리회계',detail:'11장(책임회계) Take-Home\n러너스 8주차 「과제 11장」 탭 · 손풀이 제출\n※ 제출 문제 번호는 강의노트 11장 Take-Home 목록으로 확인하세요',due:'11/6(금) 23:59'}],events:[{icon:'',name:'16기 디너 (17기 함께)',time:'11/7(토) 수업 후',detail:'16기 2학기 디너 — 17기도 함께합니다 · 이날 관리회계(3교시)는 30분 일찍(18:00경) 끝납니다 · 장소는 추후 공지'}]},
   {n:7,label:'7주차',fri:{d:'2026-11-20',label:'11/20(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'cvt',p:'3교시',t:'19:20–22:00',tag:'발표',tc:'tg'}]},sat:{d:'2026-11-21',label:'11/21(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40',tag:'개인과제',tc:'tb'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'과제',badge:'b-purple',color:'#16a34a',d:'2026-11-20',name:"CVT 'AI Strategy' 최종보고서 + 발표",meta:'임일 · IT 혁신을 통한 가치창출',detail:'⚠ 실라버스(11/6)와 다릅니다 — 10/16·10/23 수업 기준 11/20 발표\n비중이 커져 발표 10~12분 + 질의응답 · 발표 순서는 당일 발표 시작할 때 공지\n제안서 코멘트는 러너스에 올라와 있음 — 반영해서 완성 · 프로젝트 질문은 교수님께 이메일로\n팀 과제 — 발표자료와 보고서(표지·참고문헌 포함 10페이지 내외) 제출 · 비중은 실라버스 20%보다 올라감(러너스 공지로 확인)\n※ 학기말 팀원 상호평가가 최종 성적의 5%를 차지한다(무임승차 방지)',due:'11/20(금) 3교시'},{type:'과제',badge:'b-blue',color:'#16a34a',d:'2026-11-21',name:'전략 개인과제 — Recent M&A',meta:'김보경 · 경영자를 위한 전략',detail:'Session 7(M&A, AI) 주제 — 관심 있는 최근 M&A 하나를 골라 작성\nA) 최근 일어난 M&A를 기술하고 그 M&A가 왜 일어났는지 강의에서 배운 개념을 기반으로 설명\nB) 관련 자료를 바르게 인용\n평가 비중 20% · 구체적 지침은 수업 시간에 제공',due:'11/21(토) 2교시'},{type:'과제',badge:'b-green',color:'#16a34a',d:'2026-11-20',name:'관리회계 과제 — 12장',meta:'문두철 · 경영자를 위한 관리회계',detail:'12장(전략적 성과지표) Take-Home\n러너스 10주차 「과제 12장」 탭 · 손풀이 제출\n※ 제출 문제 번호는 강의노트 12장 Take-Home 목록으로 확인하세요',due:'11/20(금) 23:59'}],events:[]},
   {n:8,label:'8주차',fri:{d:'2026-11-27',label:'11/27(금)',slots:[{c:'fmv',p:'1교시',t:'13:00–15:40',tag:'기말고사',tc:'tr'},{c:'ddm',p:'2교시',t:'15:55–18:35'},{c:'ddm',p:'3교시',t:'19:20–22:00'}]},sat:{d:'2026-11-28',label:'11/28(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'str',p:'2교시',t:'13:00–15:40',tag:'기말고사',tc:'tr'},{c:'mac',p:'3교시',t:'15:55–18:35'}]},tasks:[{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-28',name:'관리회계 종합시험',meta:'문두철 · 경영자를 위한 관리회계',detail:'수업계획서 8회차 = 종합시험 · 11/28(토) 3교시 15:55~18:35\n평가 비중 50 (과제 30 · 출석 및 수업참여 20) — 중간고사는 없습니다\n범위: 1장 원가개념 · 2·4장 개별/종합원가계산 · 5장 CVP분석\n        11장 책임회계 · 12장 전략적 성과지표 · 13장 차액분석\n※ 7장 활동기준원가계산(ABC)은 진도·시험 모두 제외 — 10/24 수업 중 교수님 확인(실라버스엔 10/17=7장으로 남아 있음)\n형식: 오픈북\n교재 Garrison 원가관리회계 · 장별 강의노트와 해답(Answers) 배포됨'},{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-28',name:'전략 기말고사',meta:'김보경 · 경영자를 위한 전략',detail:'실라버스 Session 8 = 기말고사\n수업에서 다룬 강의·케이스·비디오 등을 기반으로 출제, 주관식\n시험 당일 수업시간에 강의실(경영 B204)에서 진행 — 담당교수 상의 없이 대체시험 없음\n평가 비중 40% (출석·수업참여 40% · 개인과제 20%)',due:'11/28(토) 2교시 13:00–15:40'},{type:'시험',badge:'b-red',color:'#dc2626',d:'2026-11-27',name:'재무시장 기말고사',meta:'한재훈 · 재무시장과 가치평가',detail:'강의계획서 8회차 = 기말고사, FMV 마지막 수업일 기준\n평가 비중 60% (과제 30% · 출석·참여 10%)\n범위: 일물일가의 법칙 · 현재가치와 할인율 · 채권/주식 가치평가 · 분산투자와 CAPM\n※ 정확한 시간·형식은 교수님 별도 공지 확인',due:'11/27(금) 1교시'}],events:[]},
   {n:9,label:'9주차',fri:{d:'2026-12-11',label:'12/11(금)',slots:[{c:'ddm',p:'1교시',t:'13:00–15:40'},{c:'ddm',p:'2교시',t:'15:55–18:35'}]},sat:{d:'2026-12-12',label:'12/12(토)',slots:[{c:'osc',p:'1교시',t:'09:30–12:10'},{c:'osc',p:'2교시',t:'13:00–15:40'}]},tasks:[],events:[]},
@@ -3240,29 +3310,93 @@ const COURSE_BRIEFS={"updated": "2026-10-24 17:56", "courses": [{"code": "fmv", 
     return (+m[2])+'/'+(+m[3])+'('+w+')'+(m[4]?' '+m[4]:'');}
   function md2date(s){ // '11/7' → 올해 Date
     var m=String(s||'').match(/(\d{1,2})\/(\d{1,2})/);if(!m)return null;return new Date(2026,+m[1]-1,+m[2]);}
-  function sec(title,items,fn){
-    if(!items||!items.length)return '';
-    return '<div class="cb-sec"><h4>'+title+'</h4>'+items.map(fn).join('')+'</div>';}
+  var TODAY=(function(){var d=new Date();d.setHours(0,0,0,0);return d})();
+  var IC={
+    cal:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+    exam:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>',
+    flag:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></svg>',
+    rule:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>'};
+  var DRE=/(\d{1,2})\/(\d{1,2})(\([월화수목금토일]\))?/;
+  function dtok(s){var m=String(s||'').match(DRE);return m?{md:m[1]+'/'+m[2],wd:m[3]||'',d:new Date(2026,+m[1]-1,+m[2]),raw:m[0]}:null}
+  function dleft(d){return Math.round((d-TODAY)/864e5)}
+  function ddBadge(d,hot){if(!d)return '';var n=dleft(d);
+    if(n<0)return '<span class="cb-dd done">끝남</span>';
+    return '<span class="cb-dd'+(hot&&n<=14?' hot':'')+'">'+(n===0?'D-DAY':'D-'+n)+'</span>';}
+  function more(label,parts){ // parts: [[키,값],...] 빈 값은 건너뜀
+    var b=parts.filter(function(p){return p[1]}).map(function(p){return '<p>'+(p[0]?'<span class="k">'+esc(p[0])+'</span>':'')+esc(p[1])+'</p>'}).join('');
+    return b?'<details class="cb-ev"><summary>'+label+'</summary><div>'+b+'</div></details>':'';}
+  function ev(s){return more('근거',[['',s]])}
+  function headOf(s){ // 「본문 — 덧붙임」 → [본문, 덧붙임]
+    s=String(s||'');var i=s.indexOf(' — ');if(i>0)return [s.slice(0,i),s.slice(i+3)];
+    i=s.search(/ \(|\(/);if(i>8)return [s.slice(0,i).trim(),s.slice(i).trim().replace(/^\(|\)$/g,'')];
+    return [s,''];}
+  function short(s){s=String(s||'').replace(/^Session \d+\s*/,'').split(/ — | · |\(|:/)[0].trim();return s.length>15?s.slice(0,14)+'…':s}
+  function chip(b,live){
+    var toks=[],first=null,rest=String(b.t||'');
+    rest=rest.replace(new RegExp(DRE.source,'g'),function(m){var t=dtok(m);if(!first)first=t;toks.push(t.md+t.wd);return ' '});
+    rest=rest.replace(/\d+(?:\.\d+)?%/g,function(m){toks.push(m);return ' '});
+    rest=rest.replace(/(^|\s)[=·](?=\s|$)/g,' ').replace(/\s+/g,' ').trim();
+    var n=toks.length?esc(toks.join(' · ')):esc(b.t),w=toks.length?'':' w';
+    return '<div class="cb-chip">'+(live&&first?ddBadge(first.d):'')+
+      '<div class="n'+w+'">'+n+'</div>'+(toks.length&&rest?'<div class="l">'+esc(rest)+'</div>':'')+
+      (b.s?'<div class="s" title="'+esc(b.s)+'">'+esc(b.s)+'</div>':'')+'</div>';}
+  function timeline(c){
+    var ev=[];
+    (c.progress||[]).forEach(function(p){var t=dtok(p.date);if(t)ev.push({d:t.d,md:t.md,k:'past',lb:short(p.did),full:p.did})});
+    if(c.next){var t=dtok(c.next.date);if(t)ev.push({d:t.d,md:t.md,k:'next',lb:'다음 수업',full:c.next.what})}
+    (c.tasks||[]).forEach(function(x){var t=dtok(x.due);if(t)ev.push({d:t.d,md:t.md,k:'due',lb:short(x.name),full:x.name})});
+    if(c.exam){var t=dtok(c.exam.date);if(t)ev.push({d:t.d,md:t.md,k:'exam',lb:'시험',full:c.exam.form})}
+    var rank={exam:3,due:2,next:1,past:0},by={};
+    ev.forEach(function(e){if(e.d<=TODAY&&e.k==='next')e.k='past';var g=by[e.md];
+      if(!g){by[e.md]={d:e.d,md:e.md,k:e.k,lbs:[e.lb],full:[e.full]};return}
+      if(rank[e.k]>rank[g.k])g.k=e.k;if(g.lbs.indexOf(e.lb)<0)g.lbs.push(e.lb);g.full.push(e.full)});
+    var all=Object.keys(by).map(function(k){return by[k]}).sort(function(a,b){return a.d-b.d});
+    var past=all.filter(function(e){return e.d<=TODAY}).slice(-3),fut=all.filter(function(e){return e.d>TODAY}).slice(0,5);
+    all=past.concat(fut);if(all.length<2)return '';
+    var firstFut=true;
+    return '<div class="cb-tl" aria-label="진행 흐름"><ol>'+all.map(function(e){
+      var done=e.d<=TODAY,k=done?(e.k==='exam'?'exam donex past':'past'):e.k;
+      var badge='';if(!done&&(firstFut||e.k==='exam')){badge=ddBadge(e.d,e.k!=='next');firstFut=false}
+      var lb=e.lbs.join(' · ');
+      return '<li class="'+k+'" title="'+esc(e.md+' · '+e.full.filter(Boolean).join(' / '))+'"><i class="dot"></i><b class="dt">'+esc(e.md)+'</b><span class="lb">'+esc(lb)+'</span>'+badge+'</li>'}).join('')+'</ol></div>';}
   function render(c){
+    var live=!!(c.next&&c.next.date)||(c.tasks||[]).some(function(t){var x=dtok(t.due);return x&&x.d>=TODAY});
     var h='';
     h+='<div class="cb-top"><div><h3>'+esc(c.prof)+' 교수님 · '+esc(c.ko)+'</h3>'+
-       '<div class="lu">러너스 과목명 <b>'+esc(c.learnus||'')+'</b>'+(c.slot?' · '+esc(c.slot):'')+'</div></div>'+
+       '<div class="lu">러너스 <b>'+esc(c.learnus||'')+'</b>'+(c.slot?' · '+esc(c.slot):'')+'</div></div>'+
        '<div class="cb-stamp">마지막 업데이트<b>'+stamp(c.updated)+'</b></div></div>';
-    if(c.headline)h+='<p class="cb-line">'+esc(c.headline)+'</p>';
-    if(c.big&&c.big.length)h+='<div class="cb-facts">'+c.big.map(function(b){return '<div><b>'+esc(b.t)+'</b><span>'+esc(b.s||'')+'</span></div>'}).join('')+'</div>';
-    var L='',R='';
-    if(c.next&&(c.next.date||c.next.what))L+='<div class="cb-next"><div class="when">다음 수업 '+esc(c.next.date||'')+'</div><div class="what">'+esc(c.next.what||'')+'</div>'+src(c.next.src)+'</div>';
-    if(c.exam&&(c.exam.date||c.exam.form||c.exam.scope)){
-      var e=c.exam,t=[];
-      if(e.date)t.push('<span class="d">'+esc(e.date)+'</span>');
-      if(e.form)t.push(esc(e.form));
-      L+='<div class="cb-sec"><h4>시험</h4><div class="cb-item"><div class="t">'+t.join(' ')+'</div>'+
-         (e.scope?'<div class="t">범위 · '+esc(e.scope)+'</div>':'')+src(e.src)+'</div></div>';}
-    L+=sec('과제',c.tasks,function(t){return '<div class="cb-item"><div class="t">'+(t.due?'<span class="d">'+esc(t.due)+'</span>':'')+'<b>'+esc(t.name)+'</b>'+(t.how?' — '+esc(t.how):'')+'</div>'+src(t.src)+'</div>'});
-    R+=sec('꼭 지킬 것',c.rules,function(r){return '<div class="cb-item"><div class="t">'+esc(r.t)+'</div>'+src(r.src)+'</div>'});
-    R+=sec('지금까지 진도',c.progress,function(p){return '<div class="cb-item"><div class="t"><span class="d">'+esc(p.date)+'</span>'+esc(p.did)+'</div>'+src(p.src)+'</div>'});
-    h+='<div class="cb-cols"><div>'+(L||'<p class="cb-empty">아직 정리된 내용이 없습니다.</p>')+'</div><div>'+R+'</div></div>';
-    if(c.unsure&&c.unsure.length)h+='<div class="cb-unsure"><h4>확인 중</h4><ul>'+c.unsure.map(function(u){return '<li>'+esc(u)+'</li>'}).join('')+'</ul></div>';
+    if(c.big&&c.big.length)h+='<div class="cb-chips">'+c.big.slice(0,4).map(function(b){return chip(b,live)}).join('')+'</div>';
+    h+=timeline(c);
+    var B='';
+    if(c.next&&(c.next.date||c.next.what)){var t=dtok(c.next.date);
+      B+='<div class="cb-blk"><h4>'+IC.cal+'다음 수업'+(t?ddBadge(t.d,false):'')+'</h4>'+
+        (t?'<div class="cb-big">'+esc(t.md)+'<small>'+esc((t.wd||'').replace(/[()]/g,''))+'</small></div><div class="cb-txt">'+esc(c.next.what||'')+'</div>'
+          :'<div class="cb-big w">'+esc(c.next.what||'—')+'</div>')+
+        more('근거',[['',c.next.src]])+'</div>';}
+    if(c.exam&&(c.exam.date||c.exam.form||c.exam.scope)){var e=c.exam,t=dtok(e.date);
+      var forms=String(e.form||'').split(' · '),lead=forms[0],tail=forms.slice(1).join(' · ');
+      B+='<div class="cb-blk"><h4>'+IC.exam+'시험'+(t?ddBadge(t.d,true):'')+'</h4>'+
+        (t?'<div class="cb-big">'+esc(t.md)+'<small>'+esc((t.wd+' '+e.date.replace(t.raw,'')).replace(/[()]/g,' ').replace(/\s+/g,' ').trim())+'</small></div><div class="cb-txt"><b>'+esc(lead)+'</b></div>'
+          :'<div class="cb-big w">'+esc(lead||'미정')+'</div>')+
+        more('범위·형식',[['범위',e.scope],['형식',tail],['근거',e.src]])+'</div>';}
+    if(c.tasks&&c.tasks.length){
+      var ts=c.tasks.slice().sort(function(a,b){var x=dtok(a.due),y=dtok(b.due);return (x?x.d:9e15)-(y?y.d:9e15)});
+      B+='<div class="cb-blk"><h4>'+IC.flag+'마감</h4><div>'+ts.map(function(x){var t=dtok(x.due),hd=headOf(x.name);
+        var p=t?esc(t.md):(x.due?esc(short(x.due)):'미정');
+        return '<div class="cb-due"><span class="p'+(t?'':' na')+'">'+p+'</span><span class="t" title="'+esc(x.name)+'">'+esc(hd[0])+'</span>'+
+          more('자세히',[['마감',x.due],['내용',hd[1]],['방법',x.how],['근거',x.src]])+'</div>'}).join('')+'</div></div>';}
+    h+=B?'<div class="cb-blks">'+B+'</div>':'<p class="cb-empty">아직 정리된 일정이 없습니다.</p>';
+    if(c.rules&&c.rules.length){
+      var item=function(r){var hd=headOf(r.t);return '<li><b>'+esc(hd[0])+'</b>'+more(hd[1]?'자세히':'근거',[['',hd[1]],['근거',r.src]])+'</li>'};
+      h+='<div class="cb-rules"><h4>'+IC.rule+'지킬 것</h4><ul>'+c.rules.slice(0,3).map(item).join('')+'</ul>'+
+        (c.rules.length>3?'<details class="cb-fold" style="margin-top:8px"><summary>지킬 것 '+(c.rules.length-3)+'개 더</summary><div class="cb-rules" style="margin:0"><ul>'+c.rules.slice(3).map(item).join('')+'</ul></div></details>':'')+'</div>';}
+    var F='';
+    if(c.progress&&c.progress.length)F+='<details class="cb-fold"><summary>지금까지 수업 '+c.progress.length+'회</summary><ul>'+
+      c.progress.slice().reverse().map(function(p){return '<li><b>'+esc(p.date)+'</b>'+esc(p.did)+'</li>'}).join('')+'</ul></details>';
+    if(c.unsure&&c.unsure.length)F+='<details class="cb-fold warn"><summary>확인 중 '+c.unsure.length+'건</summary><ul>'+
+      c.unsure.map(function(u){return '<li>'+esc(u)+'</li>'}).join('')+'</ul></details>';
+    if(F)h+='<div class="cb-folds">'+F+'</div>';
+    if(c.headline)h+='<p class="cb-sum"><span>한 줄로</span>'+esc(c.headline)+'</p>';
     h+='<p class="cb-note">학술국 정리 자료입니다. 교수님 공지·러너스가 바뀌면 그쪽이 우선합니다.</p>';
     return h;}
   function pickDefault(cs){
@@ -3280,7 +3414,7 @@ const COURSE_BRIEFS={"updated": "2026-10-24 17:56", "courses": [{"code": "fmv", 
     function sel(code,save){
       var c=cs.filter(function(x){return x.code===code})[0];if(!c)return;
       [].forEach.call(tabs.children,function(b){var on=b.getAttribute('data-code')===code;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1});
-      panel.innerHTML=render(c);panel.setAttribute('aria-labelledby','cbt-'+code);
+      panel.style.setProperty('--c',color(code));panel.innerHTML=render(c);panel.setAttribute('aria-labelledby','cbt-'+code);
       if(save){try{localStorage.setItem(KEY,code)}catch(e){}}}
     tabs.addEventListener('click',function(e){var b=e.target.closest('.cb-tab');if(b)sel(b.getAttribute('data-code'),true)});
     tabs.addEventListener('keydown',function(e){
